@@ -437,7 +437,7 @@ export default function AdminDashboard() {
       {isLoading ? (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full max-w-[1400px] mx-auto min-h-[520px] animate-pulse">
           {/* Column 1 — course list */}
-          <div className="flex flex-col gap-3 bg-white rounded-[28px] p-5 shadow-sm border border-gray-100">
+          <div className="flex flex-col gap-3 bg-white rounded-[28px] p-5 shadow-sm border border-gray-200">
             <div className="h-5 rounded-full bg-gray-200 w-24 mb-1" />
             <div className="h-8 rounded-2xl bg-gray-100 w-full mb-2" />
             {[1, 2, 3, 4].map(i => (
@@ -445,7 +445,7 @@ export default function AdminDashboard() {
             ))}
           </div>
           {/* Column 2 — lecturer */}
-          <div className="flex flex-col gap-3 bg-white rounded-[28px] p-5 shadow-sm border border-gray-100">
+          <div className="flex flex-col gap-3 bg-white rounded-[28px] p-5 shadow-sm border border-gray-200">
             <div className="h-5 rounded-full bg-gray-200 w-28 mb-1" />
             <div className="flex items-center gap-3 p-3 rounded-2xl bg-brand/10 mt-2">
               <div className="w-10 h-10 rounded-full bg-brand/20 shrink-0" />
@@ -456,7 +456,7 @@ export default function AdminDashboard() {
             </div>
           </div>
           {/* Column 3 — student list */}
-          <div className="flex flex-col gap-3 bg-white rounded-[28px] p-5 shadow-sm border border-gray-100">
+          <div className="flex flex-col gap-3 bg-white rounded-[28px] p-5 shadow-sm border border-gray-200">
             <div className="h-5 rounded-full bg-gray-200 w-28 mb-1" />
             <div className="h-8 rounded-2xl bg-gray-100 w-full mb-2" />
             {[1, 2, 3, 4, 5].map(i => (

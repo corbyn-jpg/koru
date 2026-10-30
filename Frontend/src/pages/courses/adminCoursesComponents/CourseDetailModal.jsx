@@ -41,7 +41,7 @@ export default function CourseDetailModal({
       >
           <div className="flex flex-col md:flex-row min-h-[600px]">
             {/* Left Column: Core Info & Main Meta */}
-            <div className="p-8 md:w-2/5 bg-gray-50/50 border-r border-gray-100 flex flex-col justify-between">
+            <div className="p-8 md:w-2/5 bg-gray-50/50 border-r border-gray-200 flex flex-col justify-between">
                 <div className="mb-10">
                     <div className="flex items-center gap-3 mb-4">
                       {isEditing ? (
@@ -82,7 +82,7 @@ export default function CourseDetailModal({
                         <select 
                           value={editForm.degree}
                           onChange={(e) => setEditForm({...editForm, degree: e.target.value})}
-                          className="w-full px-5 py-3 rounded-2xl bg-white border border-gray-100 text-[13px] font-bold outline-none appearance-none"
+                          className="w-full px-5 py-3 rounded-2xl bg-white border border-gray-200 text-[13px] font-bold outline-none appearance-none"
                         >
                           {DEGREES.map(d => <option key={d} value={d}>{d}</option>)}
                         </select>
@@ -96,7 +96,7 @@ export default function CourseDetailModal({
                 </div>
 
                 <div className="space-y-6">
-                    <div className="p-6 rounded-3xl bg-white border border-gray-100 shadow-sm">
+                    <div className="p-6 rounded-3xl bg-white border border-gray-200 shadow-sm">
                         <label className="text-[10px] font-black text-gray-400 uppercase tracking-wider block mb-4">Assigned Faculty</label>
                         <div className="flex items-center justify-between">
                           {isEditing ? (
@@ -127,7 +127,7 @@ export default function CourseDetailModal({
                         </div>
                     </div>
 
-                    <div className="p-6 rounded-3xl bg-white border border-gray-100 shadow-sm">
+                    <div className="p-6 rounded-3xl bg-white border border-gray-200 shadow-sm">
                         <label className="text-[10px] font-black text-gray-400 uppercase tracking-wider block mb-1">Registry Status</label>
                         <div className="flex items-center justify-between mt-2">
                           <span className={`text-[12px] font-black uppercase tracking-wider ${
@@ -282,7 +282,7 @@ export default function CourseDetailModal({
                       >
                         Modify system data
                       </button>
-                      <button className="flex-1 py-4 rounded-3xl border-2 border-gray-100 text-gray-400 font-black uppercase tracking-wider text-[13px] hover:bg-gray-50 transition">
+                      <button className="flex-1 py-4 rounded-3xl border-2 border-gray-200 text-gray-400 font-black uppercase tracking-wider text-[13px] hover:bg-gray-50 transition">
                         Archive
                       </button>
                     </>

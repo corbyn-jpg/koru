@@ -15,7 +15,7 @@ const MIN_LOADING_MS = 1500;
 
 function SkeletonRow() {
     return (
-        <div className="my-2 rounded-xl border border-gray-100 w-full h-12 flex flex-row items-center space-x-3 px-3">
+        <div className="my-2 rounded-xl border border-gray-200 w-full h-12 flex flex-row items-center space-x-3 px-3">
             <div className="w-9 h-9 rounded-full bg-gray-100 animate-pulse shrink-0" />
             <div className="flex-1 space-y-1.5">
                 <div className="h-3 bg-gray-100 rounded-full animate-pulse w-3/4" />
@@ -147,7 +147,7 @@ export default function TeacherCourseGlanceDisplay({ activeCourseId }) {
                 gradingTasks.map(task => (
                     <div
                         key={task.id}
-                        className="my-2 bg-white rounded-xl border border-gray-100 w-full h-12 flex flex-row items-center space-x-2 transition-colors duration-150 hover:bg-gray-50/60 hover:border-gray-200 cursor-pointer"
+                        className="my-2 bg-white rounded-xl border border-gray-200 w-full h-12 flex flex-row items-center space-x-2 transition-colors duration-150 hover:bg-gray-50/60 hover:border-gray-200 cursor-pointer"
                         onClick={() => navigate(`/courses/${activeCourseId}/assignments`)}
                     >
                         <div
@@ -181,7 +181,7 @@ export default function TeacherCourseGlanceDisplay({ activeCourseId }) {
             <SectionLabel className="mt-5">Attendance Rate</SectionLabel>
             {attendanceStats ? (
                 <div
-                    className="my-2 bg-white rounded-xl border border-gray-100 w-full h-14 flex flex-row items-center space-x-2 transition-colors duration-150 hover:bg-gray-50/60 hover:border-gray-200 cursor-pointer"
+                    className="my-2 bg-white rounded-xl border border-gray-200 w-full h-14 flex flex-row items-center space-x-2 transition-colors duration-150 hover:bg-gray-50/60 hover:border-gray-200 cursor-pointer"
                     onClick={() => navigate(`/courses/${activeCourseId}/attendance`)}
                 >
                     <div className="w-9 h-9 bg-teal-50 rounded-full ml-2 flex items-center justify-center shrink-0">

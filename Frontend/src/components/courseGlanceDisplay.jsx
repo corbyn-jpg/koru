@@ -19,7 +19,7 @@ function SectionLabel({ children, className = "" }) {
 
 function NextClassSkeleton() {
     return (
-        <div className="my-2 rounded-xl border border-gray-100 w-full h-12 flex flex-row items-center space-x-3 px-2">
+        <div className="my-2 rounded-xl border border-gray-200 w-full h-12 flex flex-row items-center space-x-3 px-2">
             <div className="w-9 h-9 rounded-full bg-gray-100 animate-pulse shrink-0" />
             <div className="flex-1 space-y-1.5">
                 <div className="h-3 bg-gray-100 rounded-full animate-pulse w-2/3" />
@@ -31,7 +31,7 @@ function NextClassSkeleton() {
 
 function AnnouncementSkeleton() {
     return (
-        <div className="my-2 rounded-xl border border-gray-100 w-full flex flex-row items-center px-3 py-3">
+        <div className="my-2 rounded-xl border border-gray-200 w-full flex flex-row items-center px-3 py-3">
             <div className="w-9 h-9 rounded-full bg-gray-100 animate-pulse shrink-0" />
             <div className="flex-1 ml-3 space-y-1.5">
                 <div className="h-3 bg-gray-100 rounded-full animate-pulse w-3/4" />

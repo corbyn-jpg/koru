@@ -85,7 +85,7 @@ export default function CourseAnnouncementsView({ activeCourseId }) {
                     {loading ? (
                         <div className="flex flex-col gap-4 w-full animate-pulse">
                             {[1, 2, 3, 4].map(i => (
-                                <div key={i} className="p-5 rounded-2xl border border-gray-100 bg-white shadow-sm flex items-center justify-between gap-4">
+                                <div key={i} className="p-5 rounded-2xl border border-gray-200 bg-white shadow-sm flex items-center justify-between gap-4">
                                     <div className="flex items-start gap-4 flex-1 pl-2">
                                         <div className="w-10 h-10 rounded-full bg-gray-100 shrink-0 mt-0.5" />
                                         <div className="flex-1 flex flex-col gap-2.5">
@@ -99,7 +99,7 @@ export default function CourseAnnouncementsView({ activeCourseId }) {
                             ))}
                         </div>
                     ) : announcements.length === 0 ? (
-                        <div className="flex items-center justify-center w-full h-48 text-gray-400 text-sm font-medium bg-white rounded-3xl border border-gray-100">
+                        <div className="flex items-center justify-center w-full h-48 text-gray-400 text-sm font-medium bg-white rounded-3xl border border-gray-200">
                             No announcements yet.
                         </div>
                     ) : announcements.map((post) => (
@@ -110,7 +110,7 @@ export default function CourseAnnouncementsView({ activeCourseId }) {
                             className={`p-5 rounded-2xl border transition cursor-pointer relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-4 group shrink-0 ${
                                 selectedId === post.id 
                                     ? "bg-brand/5 border-brand/30 shadow-md" 
-                                    : "bg-white border-gray-100 shadow-sm hover:shadow-md"
+                                    : "bg-white border-gray-200 shadow-sm hover:shadow-md"
                             }`}
                         >
 
@@ -150,7 +150,7 @@ export default function CourseAnnouncementsView({ activeCourseId }) {
                             </div>
 
                             {/* Date */}
-                            <div className="shrink-0 pl-6 md:pl-0 border-t md:border-t-0 pt-3 md:pt-0 border-gray-50 self-stretch md:self-auto flex md:flex-col items-center md:items-end justify-end">
+                            <div className="shrink-0 pl-6 md:pl-0 border-t md:border-t-0 pt-3 md:pt-0 border-gray-100 self-stretch md:self-auto flex md:flex-col items-center md:items-end justify-end">
                                 <span className="text-xs text-gray-400 font-semibold whitespace-nowrap">
                                     {post.datePosted
                                         ? new Date(post.datePosted).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
@@ -171,7 +171,7 @@ export default function CourseAnnouncementsView({ activeCourseId }) {
                             transition={{ type: "spring", damping: 30, stiffness: 250 }}
                             className={`${
                                 selectedId ? "flex" : "hidden lg:flex"
-                            } flex-1 w-full lg:w-[55%] bg-white border border-gray-100 rounded-3xl p-8 flex flex-col shadow-sm overflow-y-auto`}
+                            } flex-1 w-full lg:w-[55%] bg-white border border-gray-200 rounded-3xl p-8 flex flex-col shadow-sm overflow-y-auto`}
                         >
                             <div className="flex justify-between items-center mb-6">
                                 <span className="text-sm font-medium text-gray-400">
@@ -191,7 +191,7 @@ export default function CourseAnnouncementsView({ activeCourseId }) {
                                 {selectedAnnouncement.title}
                             </h2>
 
-                            <div className="flex items-center gap-3 mb-6 pb-6 border-b border-gray-100">
+                            <div className="flex items-center gap-3 mb-6 pb-6 border-b border-gray-200">
                                 <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-brand">
                                     <User size={20} />
                                 </div>

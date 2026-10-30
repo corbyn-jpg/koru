@@ -446,7 +446,7 @@ function AddClassManuallySection({ groupId, courseId, teachers, onAdded }) {
   };
 
   return (
-    <div className="border-t border-gray-100">
+    <div className="border-t border-gray-200">
       <button
         onClick={() => setOpen(v => !v)}
         className="w-full flex items-center gap-2 px-5 py-3 text-left hover:bg-gray-50/60 transition-colors"
@@ -703,7 +703,7 @@ export function AdminCohortsView({ courseId, course }) {
       </motion.header>
 
       {/* Auto-assign config */}
-      <motion.div variants={slideUp} className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 mb-6">
+      <motion.div variants={slideUp} className="bg-white rounded-3xl border border-gray-200 shadow-sm p-6 mb-6">
         <h3 className="text-xs font-black uppercase tracking-wider text-gray-400 mb-4">Auto-Assign Configuration</h3>
         <div className="flex flex-col sm:flex-row sm:items-end gap-4">
           <div className="flex-1">
@@ -768,10 +768,10 @@ export function AdminCohortsView({ courseId, course }) {
       <motion.div variants={slideUp} className="space-y-3">
         {loading ? (
           <div className="space-y-3 animate-pulse">
-            {[1, 2, 3].map(i => <div key={i} className="bg-white rounded-3xl border border-gray-100 shadow-sm h-20" />)}
+            {[1, 2, 3].map(i => <div key={i} className="bg-white rounded-3xl border border-gray-200 shadow-sm h-20" />)}
           </div>
         ) : cohorts.length === 0 && unassignedClasses.length === 0 && unassignedEvents.length === 0 && unassignedStudents.length === 0 ? (
-          <div className="bg-white rounded-3xl border border-gray-100 shadow-sm px-8 py-14 text-center">
+          <div className="bg-white rounded-3xl border border-gray-200 shadow-sm px-8 py-14 text-center">
             <div className="w-14 h-14 rounded-3xl bg-brand/5 flex items-center justify-center mx-auto mb-4">
               <Users size={24} className="text-brand/40" />
             </div>
@@ -813,7 +813,7 @@ export function AdminCohortsView({ courseId, course }) {
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.2 }}
-                    className="overflow-hidden border-t border-gray-100"
+                    className="overflow-hidden border-t border-gray-200"
                   >
                     <div className="flex min-h-0 divide-x divide-gray-100">
                       {/* Left: unassigned students */}
@@ -910,7 +910,7 @@ export function AdminCohortsView({ courseId, course }) {
             const studentCount = details?.students?.length ?? cohort.studentCount ?? "—";
 
             return (
-              <div key={cohort.id} className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
+              <div key={cohort.id} className="bg-white rounded-3xl border border-gray-200 shadow-sm overflow-hidden">
                 {/* Group header */}
                 <div className="flex items-center px-6 py-4 gap-4 group">
                   <button
@@ -945,7 +945,7 @@ export function AdminCohortsView({ courseId, course }) {
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.2 }}
-                      className="overflow-hidden border-t border-gray-50"
+                      className="overflow-hidden border-t border-gray-100"
                     >
                       {isLoadingDetails ? (
                         <div className="px-8 py-6 text-center text-gray-400 text-sm animate-pulse">Loading…</div>

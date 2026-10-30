@@ -41,6 +41,12 @@ export async function createGrade({ submissionId, pointsEarned, gradedBy, isRele
   return handleResponse(res);
 }
 
+// POST /api/Grade/quiz/{submissionId} – the server marks the saved quiz answers and returns the grade
+export async function gradeQuiz(submissionId) {
+  const res = await fetch(`${API_BASE}/Grade/quiz/${encodeURIComponent(submissionId)}`, { method: "POST" });
+  return handleResponse(res);
+}
+
 export async function releaseAssignmentGrades(assignmentId) {
   const res = await fetch(`${API_BASE}/Grade/assignment/${encodeURIComponent(assignmentId)}/release`, {
     method: "POST",

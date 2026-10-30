@@ -30,7 +30,7 @@ export default function StudentPerspectiveModal({ course, onClose }) {
         onClick={e => e.stopPropagation()}
       >
         {/* Header Bar */}
-        <div className="px-8 py-3 bg-gray-50 border-b border-gray-100 flex items-center justify-between shrink-0">
+        <div className="px-8 py-3 bg-gray-50 border-b border-gray-200 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-4">
             <div className="w-10 h-10 rounded-xl bg-brand text-white flex items-center justify-center font-black">
               {course.subject?.code?.[0] || "S"}
@@ -48,7 +48,7 @@ export default function StudentPerspectiveModal({ course, onClose }) {
           <div className="flex items-center gap-2">
             <button 
               onClick={onClose} 
-              className="p-2.5 bg-white border border-gray-100 rounded-xl text-gray-400 hover:text-red-500 hover:border-red-100 transition shadow-sm flex items-center gap-2"
+              className="p-2.5 bg-white border border-gray-200 rounded-xl text-gray-400 hover:text-red-500 hover:border-red-100 transition shadow-sm flex items-center gap-2"
               title="Close Preview"
             >
               <span className="text-[10px] font-black uppercase tracking-wider">Exit Preview</span>

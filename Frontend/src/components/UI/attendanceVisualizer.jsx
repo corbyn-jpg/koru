@@ -30,7 +30,7 @@ export default function AttendanceVisualizer({ sessions }) {
     const isPresent = (item) => item.status === "Present";
 
     return (
-        <div className="bg-white p-8 rounded-[40px] border border-gray-100 shadow-sm flex flex-col h-full items-center justify-between">
+        <div className="bg-white p-8 rounded-[40px] border border-gray-200 shadow-sm flex flex-col h-full items-center justify-between">
             <div className="w-full mb-6">
                 <h3 className="text-sm font-black uppercase tracking-wider text-gray-400">Streak Analysis</h3>
                 <p className="text-xs text-gray-500 mt-1 italic">Last {last10.length} sessions</p>
@@ -102,7 +102,7 @@ export default function AttendanceVisualizer({ sessions }) {
                 })}
             </div>
 
-            <div className="mt-8 flex justify-between w-full border-t border-gray-50 pt-6">
+            <div className="mt-8 flex justify-between w-full border-t border-gray-100 pt-6">
                 <div className="flex items-center gap-2">
                     <div className="w-2.5 h-2.5 rounded-full bg-brand" />
                     <span className="text-[10px] font-bold uppercase tracking-wider text-gray-600">Present</span>

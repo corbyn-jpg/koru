@@ -6,7 +6,7 @@ export default function CourseListItem({ course, onClick }) {
   return (
     <motion.div 
       onClick={onClick} 
-      className="group bg-white border border-gray-100 p-4 rounded-[20px] flex items-center justify-between hover:shadow-xl hover:border-transparent transition cursor-pointer"
+      className="group bg-white border border-gray-200 p-4 rounded-[20px] flex items-center justify-between hover:shadow-xl hover:border-transparent transition cursor-pointer"
     >
       <div className="flex items-center gap-4">
         <div className="w-11 h-11 rounded-xl bg-brand/5 text-brand flex items-center justify-center group-hover:bg-brand group-hover:text-white transition">

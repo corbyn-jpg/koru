@@ -75,8 +75,8 @@ export default function CourseAttendanceView({ activeCourseId, subject }) {
                 </motion.div>
             </div>
 
-            <motion.div variants={slideUp} className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
-                <div className="px-6 py-4 border-b border-gray-50 flex justify-between items-center">
+            <motion.div variants={slideUp} className="bg-white rounded-3xl border border-gray-200 shadow-sm overflow-hidden">
+                <div className="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
                     <h2 className="text-lg font-bold">Session History</h2>
                     <button
                         onClick={() => downloadCSV(records, subject?.name || subject?.code || activeCourseId)}
@@ -100,7 +100,7 @@ export default function CourseAttendanceView({ activeCourseId, subject }) {
                             </thead>
                             <tbody>
                                 {[1, 2, 3, 4, 5].map(i => (
-                                    <tr key={i} className="border-b border-gray-50">
+                                    <tr key={i} className="border-b border-gray-100">
                                         <td className="px-8 py-6"><div className="h-4 rounded-full bg-gray-100" style={{ width: `${60 + (i * 17) % 40}px` }} /></td>
                                         <td className="px-8 py-6"><div className="h-4 rounded-full bg-gray-100 w-20" /></td>
                                         <td className="px-8 py-6"><div className="h-4 rounded-full bg-gray-100 w-16" /></td>
@@ -126,7 +126,7 @@ export default function CourseAttendanceView({ activeCourseId, subject }) {
                         </thead>
                         <tbody>
                             {records.map((log, i) => (
-                                <tr key={i} className="border-b border-gray-50 last:border-0 hover:bg-gray-50/30 transition-colors">
+                                <tr key={i} className="border-b border-gray-100 last:border-0 hover:bg-gray-50/30 transition-colors">
                                     <td className="px-8 py-6 text-sm font-bold text-gray-900">{formatDate(log.date)}</td>
                                     <td className="px-8 py-6 text-sm text-gray-600">{log.sessionType}</td>
                                     <td className="px-8 py-6 text-sm text-gray-400">{log.time ?? "—"}</td>

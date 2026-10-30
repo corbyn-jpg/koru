@@ -248,7 +248,7 @@ export function CourseGradesView({ activeCourseId, subject }) {
                 {/* Chart + leaderboard */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-8">
                     {/* Distribution chart */}
-                    <motion.div variants={scaleIn} className="lg:col-span-2 bg-white rounded-2xl border border-gray-100 p-6 flex flex-col">
+                    <motion.div variants={scaleIn} className="lg:col-span-2 bg-white rounded-2xl border border-gray-200 p-6 flex flex-col">
                         <div className="flex items-start justify-between mb-5">
                             <div>
                                 <h3 className="text-base font-bold text-gray-900">Grade Distribution</h3>
@@ -258,7 +258,7 @@ export function CourseGradesView({ activeCourseId, subject }) {
                         </div>
 
                         {/* Grade band breakdown */}
-                        <div className="grid grid-cols-5 gap-3 mb-5 pb-5 border-b border-gray-50">
+                        <div className="grid grid-cols-5 gap-3 mb-5 pb-5 border-b border-gray-100">
                             {gradeBreakdown.map(({ label, count }) => {
                                 const pct = studentRows.length > 0 ? Math.round((count / studentRows.length) * 100) : 0;
                                 return (
@@ -296,7 +296,7 @@ export function CourseGradesView({ activeCourseId, subject }) {
                     </motion.div>
 
                     {/* Top performers */}
-                    <motion.div variants={scaleIn} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 flex flex-col">
+                    <motion.div variants={scaleIn} className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 flex flex-col">
                         <div className="mb-5">
                             <h3 className="text-base font-bold text-gray-900">Top Performers</h3>
                             <p className="text-xs text-gray-400 mt-0.5">Ranked by average grade</p>
@@ -330,10 +330,10 @@ export function CourseGradesView({ activeCourseId, subject }) {
                 <motion.div variants={slideUp} className="flex flex-row gap-5 items-start mb-8">
 
                     {/* Left: students table — shrinks when panel is open */}
-                    <div className={`bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden transition duration-300 min-w-0 ${
+                    <div className={`bg-white rounded-3xl border border-gray-200 shadow-sm overflow-hidden transition duration-300 min-w-0 ${
                         selectedStudent ? "w-[44%] shrink-0" : "w-full"
                     }`}>
-                        <div className="px-6 py-5 border-b border-gray-50 flex justify-between items-center">
+                        <div className="px-6 py-5 border-b border-gray-100 flex justify-between items-center">
                             <h2 className="text-2xl font-bold">Students List</h2>
                             <button
                                 onClick={() => setShowFilter(!showFilter)}
@@ -350,7 +350,7 @@ export function CourseGradesView({ activeCourseId, subject }) {
                                     animate={{ height: "auto", opacity: 1 }}
                                     exit={{ height: 0, opacity: 0 }}
                                     transition={{ duration: 0.2 }}
-                                    className="px-6 py-4 border-b border-gray-50 bg-gray-50/20 flex flex-col sm:flex-row gap-3 items-center overflow-hidden"
+                                    className="px-6 py-4 border-b border-gray-100 bg-gray-50/20 flex flex-col sm:flex-row gap-3 items-center overflow-hidden"
                                 >
                                     <div className="relative flex-1 w-full">
                                         <input
@@ -394,7 +394,7 @@ export function CourseGradesView({ activeCourseId, subject }) {
                         </AnimatePresence>
                         <table className="w-full text-left border-collapse">
                             <thead>
-                                <tr className="border-b border-gray-50 bg-gray-50/30">
+                                <tr className="border-b border-gray-100 bg-gray-50/30">
                                     <th className="px-5 py-4 text-xs font-bold uppercase tracking-wider text-gray-400">Student</th>
                                     <th className="px-4 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 text-center">Grade</th>
                                     {!selectedStudent && <th className="px-4 py-4 text-xs font-bold uppercase tracking-wider text-gray-400">Status</th>}
@@ -420,7 +420,7 @@ export function CourseGradesView({ activeCourseId, subject }) {
                                             <tr
                                                 key={student.id}
                                                 onClick={() => setSelectedStudent(isActive ? null : student)}
-                                                className={`border-b border-gray-50 last:border-0 transition cursor-pointer group ${
+                                                className={`border-b border-gray-100 last:border-0 transition cursor-pointer group ${
                                                     isActive
                                                         ? "bg-brand/5"
                                                         : "hover:bg-gray-50/60"
@@ -476,11 +476,11 @@ export function CourseGradesView({ activeCourseId, subject }) {
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, x: 20, transition: { duration: 0.15, ease: "easeIn" } }}
                                 transition={{ type: "spring", damping: 30, stiffness: 250 }}
-                                className="flex-1 min-w-0 bg-white border border-gray-100 rounded-3xl shadow-sm overflow-hidden flex flex-col"
+                                className="flex-1 min-w-0 bg-white border border-gray-200 rounded-3xl shadow-sm overflow-hidden flex flex-col"
                                 style={{ maxHeight: "75vh" }}
                             >
                                 {/* Header */}
-                                <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 shrink-0">
+                                <div className="flex items-center justify-between px-5 py-4 border-b border-gray-200 shrink-0">
                                     <div className="flex items-center gap-3 min-w-0">
                                         <div className="w-9 h-9 rounded-full bg-brand/8 border-2 border-brand/15 flex items-center justify-center font-black text-sm text-brand shrink-0">
                                             {selectedStudent.avatar}
@@ -500,7 +500,7 @@ export function CourseGradesView({ activeCourseId, subject }) {
                                 </div>
 
                                 {/* Grade summary */}
-                                <div className="px-5 pt-4 pb-4 border-b border-gray-100 shrink-0">
+                                <div className="px-5 pt-4 pb-4 border-b border-gray-200 shrink-0">
                                     <div className="grid grid-cols-3 gap-2 mb-3">
                                         <div className="flex flex-col items-center bg-gray-50 rounded-2xl py-3">
                                             <span className="text-xl font-black text-gray-900">{selectedStudent.avgGrade}</span>
@@ -545,11 +545,11 @@ export function CourseGradesView({ activeCourseId, subject }) {
                                                     initial={{ opacity: 0, y: 6 }}
                                                     animate={{ opacity: 1, y: 0 }}
                                                     transition={{ delay: idx * 0.04, duration: 0.2 }}
-                                                    className="bg-white border border-gray-100 rounded-xl px-3.5 py-3 hover:border-gray-200 transition-colors"
+                                                    className="bg-white border border-gray-200 rounded-xl px-3.5 py-3 hover:border-gray-200 transition-colors"
                                                 >
                                                     <div className="flex items-start justify-between gap-2">
                                                         <div className="flex items-start gap-2 min-w-0">
-                                                            <div className="w-6 h-6 rounded-md bg-gray-50 border border-gray-100 flex items-center justify-center shrink-0 mt-0.5">
+                                                            <div className="w-6 h-6 rounded-md bg-gray-50 border border-gray-200 flex items-center justify-center shrink-0 mt-0.5">
                                                                 {item.isGraded
                                                                     ? <Award size={11} className="text-gray-500" />
                                                                     : <AlertCircle size={11} className="text-gray-300" />
@@ -596,7 +596,7 @@ export function CourseGradesView({ activeCourseId, subject }) {
                                 </div>
 
                                 {/* Footer */}
-                                <div className="px-5 py-3 border-t border-gray-100 shrink-0">
+                                <div className="px-5 py-3 border-t border-gray-200 shrink-0">
                                     <p className="text-[10px] text-gray-400 text-center">Grade = Points earned ÷ Max points × 100</p>
                                 </div>
                             </motion.div>

@@ -16,7 +16,7 @@ export default function AttendanceChart({ attended = 38, total = 42, missed = 4,
     const offset = circumference - (percentage / 100) * circumference;
 
     return (
-        <div className="relative flex flex-col items-center justify-center p-8 bg-white rounded-[40px] border border-gray-100 shadow-sm hover:shadow-md transition-shadow group">
+        <div className="relative flex flex-col items-center justify-center p-8 bg-white rounded-[40px] border border-gray-200 shadow-sm hover:shadow-md transition-shadow group">
             {/* Main Ring Chart */}
             <div className="relative w-64 h-64 flex items-center justify-center animate-in fade-in zoom-in duration-700">
                 <svg className="w-full h-full -rotate-90 transform">
@@ -61,7 +61,7 @@ export default function AttendanceChart({ attended = 38, total = 42, missed = 4,
             </div>
 
             {/* Floating Stats Layout */}
-            <div className="grid grid-cols-3 gap-8 w-full mt-8 border-t border-gray-50 pt-8">
+            <div className="grid grid-cols-3 gap-8 w-full mt-8 border-t border-gray-100 pt-8">
                 <div className="flex flex-col items-center">
                     <span className="text-[10px] font-black uppercase tracking-wider text-gray-400 mb-1">{leftStat}</span>
                     <span className="text-xl font-bold text-gray-900">{leftValue ?? total}</span>

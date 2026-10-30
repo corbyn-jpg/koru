@@ -336,8 +336,8 @@ export function CourseModulesView({ activeCourseId }) {
       <div className="flex flex-col gap-5">
         {modulesLoading ? (
           [3, 2, 4].map((itemCount, i) => (
-            <div key={i} className="border border-gray-100 rounded-2xl overflow-hidden bg-white animate-pulse">
-              <div className="flex items-center justify-between px-5 py-4 bg-gray-50/80 border-b border-gray-100">
+            <div key={i} className="border border-gray-200 rounded-2xl overflow-hidden bg-white animate-pulse">
+              <div className="flex items-center justify-between px-5 py-4 bg-gray-50/80 border-b border-gray-200">
                 <div className="flex items-center gap-3">
                   <div className="w-5 h-5 rounded-md bg-gray-200" />
                   <div className="h-3 rounded-full bg-gray-200" style={{ width: `${90 + i * 45}px` }} />
@@ -407,7 +407,7 @@ export function CourseModulesView({ activeCourseId }) {
             </div>
 
             {addingItemTo === mod.id && (
-              <div className="p-4 bg-purple-50/30 border-b border-gray-100 flex flex-col gap-3">
+              <div className="p-4 bg-purple-50/30 border-b border-gray-200 flex flex-col gap-3">
                 <div className="flex items-center justify-between">
                   <h4 className="text-[10px] font-black text-brand uppercase tracking-wider">Add Section Item</h4>
                   <button onClick={() => setAddingItemTo(null)} className="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer"><X size={12} /></button>
@@ -465,7 +465,7 @@ export function CourseModulesView({ activeCourseId }) {
                   <div className="p-6 text-center text-xs text-gray-400 font-medium bg-gray-50/10">No items in this module section</div>
                 ) : (
                   mod.items.map((item) => (
-                    <div key={item.id} className="flex items-center justify-between py-3.5 px-6 border-b border-gray-100 last:border-b-0 hover:bg-gray-50/40 transition-colors group/item">
+                    <div key={item.id} className="flex items-center justify-between py-3.5 px-6 border-b border-gray-200 last:border-b-0 hover:bg-gray-50/40 transition-colors group/item">
                       <div className="flex-1 flex items-center gap-3.5 min-w-0">
                         <span className="text-gray-400 shrink-0">
                           {item.type === "attachment" && <Paperclip size={14} />}
@@ -557,7 +557,7 @@ export function CourseModulesView({ activeCourseId }) {
                 >
                   <Copy size={13} className="text-gray-400" /> Duplicate
                 </button>
-                <div className="my-1 border-t border-gray-100" />
+                <div className="my-1 border-t border-gray-200" />
                 <button
                   onClick={() => { setDeleteConfirm({ type: "module", modId: openMenu.id }); setOpenMenu(null); }}
                   className="w-full flex items-center gap-2.5 px-3.5 py-2 text-xs font-semibold text-red-500 hover:bg-red-50 transition-colors cursor-pointer"
@@ -586,7 +586,7 @@ export function CourseModulesView({ activeCourseId }) {
                 >
                   <Copy size={13} className="text-gray-400" /> Duplicate
                 </button>
-                <div className="my-1 border-t border-gray-100" />
+                <div className="my-1 border-t border-gray-200" />
                 <button
                   onClick={() => { setDeleteConfirm({ type: "item", modId: openMenu.modId, itemId: openMenu.id }); setOpenMenu(null); }}
                   className="w-full flex items-center gap-2.5 px-3.5 py-2 text-xs font-semibold text-red-500 hover:bg-red-50 transition-colors cursor-pointer"
@@ -602,7 +602,7 @@ export function CourseModulesView({ activeCourseId }) {
       {/* Delete confirmation modal */}
       {deleteConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/25 backdrop-blur-[2px]">
-          <div className="bg-white rounded-2xl p-6 shadow-xl max-w-sm w-full mx-4 border border-gray-100">
+          <div className="bg-white rounded-2xl p-6 shadow-xl max-w-sm w-full mx-4 border border-gray-200">
             <h3 className="text-base font-black text-gray-900 mb-1">
               {deleteConfirm.type === "module" ? "Delete section?" : "Delete item?"}
             </h3>

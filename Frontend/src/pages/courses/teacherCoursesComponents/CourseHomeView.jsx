@@ -218,7 +218,7 @@ export function CourseHomeView({ subject, course, loading }) {
             ))}
           </div>
           {/* Lecturer skeleton */}
-          <div className="flex gap-4 pt-8 border-t border-gray-100 mt-4">
+          <div className="flex gap-4 pt-8 border-t border-gray-200 mt-4">
             {[1, 2].map(i => (
               <div key={i} className="flex items-center gap-4 bg-gray-50 rounded-2xl p-4 flex-1">
                 <div className="w-16 h-16 rounded-full bg-gray-200 shrink-0" />
@@ -245,7 +245,7 @@ export function CourseHomeView({ subject, course, loading }) {
 
           {/* Cover Image Toggle & Upload Controls */}
           {isEditing && (
-            <div className="flex flex-wrap items-center gap-3 p-4 bg-gray-50 border border-gray-100 rounded-2xl select-none">
+            <div className="flex flex-wrap items-center gap-3 p-4 bg-gray-50 border border-gray-200 rounded-2xl select-none">
               <span className="text-xs font-bold text-gray-700 flex items-center gap-1.5">
                 <ImageIcon size={14} className="text-gray-500" />
                 <span>Cover Image Settings:</span>
@@ -296,13 +296,13 @@ export function CourseHomeView({ subject, course, loading }) {
           </div>
 
           {/* Lecturers Grid - Centered & Revamped */}
-          <section className="w-full pt-16 pb-12 border-t border-gray-100 flex flex-col items-center mt-12">
+          <section className="w-full pt-16 pb-12 border-t border-gray-200 flex flex-col items-center mt-12">
             <h4 className="text-[12px] font-black uppercase tracking-wider text-gray-400 mb-8 text-center select-none">
               Lecturer{lecturers.length > 1 ? "s" : ""}
             </h4>
             <div className="flex flex-wrap justify-center gap-8 w-full max-w-4xl">
               {lecturers.map(lecturer => (
-                <div key={lecturer.id} className="flex items-center gap-4 bg-gray-50/50 hover:bg-gray-50 border border-gray-100 p-4 rounded-2xl transition shadow-2xs min-w-[280px]">
+                <div key={lecturer.id} className="flex items-center gap-4 bg-gray-50/50 hover:bg-gray-50 border border-gray-200 p-4 rounded-2xl transition shadow-2xs min-w-[280px]">
                   {/* Profile Image / Initials Fallback */}
                   {lecturer.profileImageUrl ? (
                     <img 

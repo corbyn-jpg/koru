@@ -335,7 +335,7 @@ export default function TeacherAssistant() {
     <div className="flex flex-col overflow-hidden transition duration-300 md:h-[calc(100vh-32px)] md:w-full md:bg-white/55 md:border md:border-white/20 md:rounded-[28px] md:shadow-lg max-md:h-screen max-md:w-screen max-md:-ml-4 max-md:-mr-4 max-md:-mt-4 max-md:bg-transparent text-slate-900">
 
       {/* ── Top header bar ─────────────────────────────────────────────────── */}
-      <div className="flex items-center justify-between pr-4 border-b border-gray-100/60 bg-white/30 shrink-0">
+      <div className="flex items-center justify-between pr-4 border-b border-gray-200 bg-white/30 shrink-0">
         <div className="flex items-center gap-1 flex-1">
           <button
             onClick={() => setSidebarOpen((o) => !o)}
@@ -377,7 +377,7 @@ export default function TeacherAssistant() {
               animate={{ width: 248, opacity: 1 }}
               exit={{ width: 0, opacity: 0 }}
               transition={{ duration: 0.22, ease: "easeInOut" }}
-              className="shrink-0 bg-white border-r border-gray-100 flex flex-col overflow-hidden z-10"
+              className="shrink-0 bg-white border-r border-gray-200 flex flex-col overflow-hidden z-10"
             >
               {/* New conversation */}
               <div className="p-3 pb-2">
@@ -435,7 +435,7 @@ export default function TeacherAssistant() {
               </div>
 
               {/* Role badge footer */}
-              <div className="p-3 border-t border-gray-100 shrink-0">
+              <div className="p-3 border-t border-gray-200 shrink-0">
                 <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold ${badgeClass}`}>
                   <RoleIcon className="w-3 h-3" />
                   {roleLabel}
@@ -558,7 +558,7 @@ export default function TeacherAssistant() {
                           {!isUser && (
                             <button
                               onClick={() => handleCopy(msg.content, idx)}
-                              className="absolute -bottom-2.5 left-2 p-1.5 rounded-lg bg-white border border-gray-100 shadow-sm text-gray-400 hover:text-brand opacity-0 group-hover:opacity-100 transition cursor-pointer"
+                              className="absolute -bottom-2.5 left-2 p-1.5 rounded-lg bg-white border border-gray-200 shadow-sm text-gray-400 hover:text-brand opacity-0 group-hover:opacity-100 transition cursor-pointer"
                               aria-label="Copy response"
                             >
                               {copiedIndex === idx

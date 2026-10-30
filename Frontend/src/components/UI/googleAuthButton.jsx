@@ -120,7 +120,7 @@ export default function GoogleAuthButton({
         <span className="h-px flex-1 bg-slate-200" />
       </div>
       {!isReady ? (
-        <div className="flex w-full h-[50px] items-center justify-center gap-3 rounded-2xl border border-slate-100 bg-white px-4 animate-pulse">
+        <div className="flex w-full h-[50px] items-center justify-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 animate-pulse">
           <div className="w-5 h-5 rounded bg-gray-200 shrink-0" />
           <div className="h-4 rounded-full bg-gray-200 w-36" />
         </div>

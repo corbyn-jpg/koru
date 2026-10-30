@@ -47,7 +47,7 @@ const defaultSettings = {
 function ToggleRow({ icon, title, description, checked, onChange }) {
   return (
     <label
-      className="flex min-h-[56px] items-center justify-between gap-4 rounded-2xl border p-5 border-gray-100 bg-gray-50/40 hover:bg-gray-50 transition-colors duration-200 cursor-pointer shadow-3xs"
+      className="flex min-h-[56px] items-center justify-between gap-4 rounded-2xl border p-5 border-gray-200 bg-gray-50/40 hover:bg-gray-50 transition-colors duration-200 cursor-pointer shadow-3xs"
     >
       <div className="flex items-center gap-4">
         <span className="rounded-xl bg-brand/5 p-2.5 text-brand shrink-0">{icon}</span>
@@ -293,7 +293,7 @@ export default function SettingsPage() {
             max-md:h-full max-md:w-64 max-md:bg-white/80 max-md:backdrop-blur-md max-md:border-r max-md:border-gray-200/50"
         >
           {/* Settings Sidebar Header Info */}
-          <div className="px-6 pt-6 pb-5 border-b border-gray-100 flex flex-col gap-2 shrink-0 select-none">
+          <div className="px-6 pt-6 pb-5 border-b border-gray-200 flex flex-col gap-2 shrink-0 select-none">
             <div className="flex items-center gap-2">
               <span className="px-2 py-0.5 rounded-lg bg-brand/10 text-brand font-black text-[9px] uppercase tracking-wider shadow-sm">
                 System
@@ -375,7 +375,7 @@ export default function SettingsPage() {
         {/* Right Section: Main Content Area: Floating Island Card */}
         <div className="flex-1 flex flex-col overflow-hidden transition duration-300 md:bg-white/75 md:backdrop-blur-xl md:border md:border-white/20 md:rounded-[28px] md:shadow-lg max-md:bg-white">
           {/* Header Top Bar */}
-          <div className="h-14 border-b border-gray-100 bg-white/60 backdrop-blur-md flex items-center justify-between px-8 z-10 shrink-0 select-none">
+          <div className="h-14 border-b border-gray-200 bg-white/60 backdrop-blur-md flex items-center justify-between px-8 z-10 shrink-0 select-none">
             <div className="flex items-center gap-3">
               <span className="px-2.5 py-0.5 rounded-lg text-[10px] font-black text-white bg-brand shadow-sm">
                 System Settings
@@ -400,7 +400,7 @@ export default function SettingsPage() {
                   {activeTab === "profile" && (
                     <>
                       <form onSubmit={handleProfileSave} className={pageClasses.card}>
-                        <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
+                        <div className="mb-6 flex items-center gap-3 border-b border-gray-200 pb-3">
                           <span className="rounded-xl bg-brand/5 p-2 text-brand"><UserRound size={20} /></span>
                           <h2 className="text-xl font-extrabold tracking-tight text-gray-900">User Information</h2>
                         </div>
@@ -438,7 +438,7 @@ export default function SettingsPage() {
                           )}
                         </div>
 
-                        <div className="mt-6 border-t border-gray-100 pt-5">
+                        <div className="mt-6 border-t border-gray-200 pt-5">
                           <span className={pageClasses.label}>Profile Picture</span>
                           <div className="mt-3 flex flex-wrap gap-2.5">
                             {avatarOptions.map((url, i) => (
@@ -469,7 +469,7 @@ export default function SettingsPage() {
 
                       {/* Notification Preferences */}
                       <div className={pageClasses.card}>
-                        <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
+                        <div className="mb-6 flex items-center gap-3 border-b border-gray-200 pb-3">
                           <span className="rounded-xl bg-brand/5 p-2 text-brand"><Bell size={20} /></span>
                           <h2 className="text-xl font-extrabold tracking-tight text-gray-900">Notification Preferences</h2>
                         </div>
@@ -505,7 +505,7 @@ export default function SettingsPage() {
                       </div>
 
                       <div className={pageClasses.card}>
-                        <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
+                        <div className="mb-6 flex items-center gap-3 border-b border-gray-200 pb-3">
                           <span className="rounded-xl bg-red-50 p-2 text-red-600"><LogOut size={20} /></span>
                           <h2 className="text-xl font-extrabold tracking-tight text-gray-900">Session Management</h2>
                         </div>
@@ -527,7 +527,7 @@ export default function SettingsPage() {
                   {activeTab === "security" && (
                     <>
                       <form onSubmit={handlePasswordSave} className={pageClasses.card}>
-                        <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
+                        <div className="mb-6 flex items-center gap-3 border-b border-gray-200 pb-3">
                           <span className="rounded-xl bg-brand/5 p-2 text-brand"><KeyRound size={20} /></span>
                           <h2 className="text-xl font-extrabold tracking-tight text-gray-900">Change Password</h2>
                         </div>
@@ -549,7 +549,7 @@ export default function SettingsPage() {
 
                       {/* Multi-Factor Authentication */}
                       <div className={pageClasses.card}>
-                        <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
+                        <div className="mb-6 flex items-center gap-3 border-b border-gray-200 pb-3">
                           <span className="rounded-xl bg-brand/5 p-2 text-brand"><ShieldCheck size={20} /></span>
                           <h2 className="text-xl font-extrabold tracking-tight text-gray-900">Multi-Factor Authentication</h2>
                         </div>
@@ -636,7 +636,7 @@ export default function SettingsPage() {
 
                       {/* POPIA: people can ask for a copy of the personal information we hold */}
                       <div className={pageClasses.card}>
-                        <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
+                        <div className="mb-6 flex items-center gap-3 border-b border-gray-200 pb-3">
                           <span className="rounded-xl bg-brand/5 p-2 text-brand"><Download size={20} /></span>
                           <h2 className="text-xl font-extrabold tracking-tight text-gray-900">Your Data</h2>
                         </div>
@@ -686,7 +686,7 @@ export default function SettingsPage() {
                   {activeTab === "accessibility" && (
                     <>
                       <div className={pageClasses.card}>
-                        <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
+                        <div className="mb-6 flex items-center gap-3 border-b border-gray-200 pb-3">
                           <span className="rounded-xl bg-brand/5 p-2 text-brand"><Type size={20} /></span>
                           <h2 className="text-xl font-extrabold tracking-tight text-gray-900">Reading Settings</h2>
                         </div>
@@ -717,7 +717,7 @@ export default function SettingsPage() {
                       </div>
 
                       <div className={pageClasses.card}>
-                        <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
+                        <div className="mb-6 flex items-center gap-3 border-b border-gray-200 pb-3">
                           <span className="rounded-xl bg-brand/5 p-2 text-brand"><Volume2 size={20} /></span>
                           <h2 className="text-xl font-extrabold tracking-tight text-gray-900">Text to Speech</h2>
                         </div>
@@ -740,7 +740,7 @@ export default function SettingsPage() {
 
                       {/* Visual Style Preferences */}
                       <div className={pageClasses.card}>
-                        <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
+                        <div className="mb-6 flex items-center gap-3 border-b border-gray-200 pb-3">
                           <span className="rounded-xl bg-brand/5 p-2 text-brand"><Palette size={20} /></span>
                           <h2 className="text-xl font-extrabold tracking-tight text-gray-900">Visual Theme & Style</h2>
                         </div>
@@ -764,7 +764,7 @@ export default function SettingsPage() {
                       </div>
 
                       <div className={pageClasses.card}>
-                        <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
+                        <div className="mb-6 flex items-center gap-3 border-b border-gray-200 pb-3">
                           <span className="rounded-xl bg-brand/5 p-2 text-brand"><Sparkles size={20} /></span>
                           <h2 className="text-xl font-extrabold tracking-tight text-gray-900">Accessibility Compliance</h2>
                         </div>

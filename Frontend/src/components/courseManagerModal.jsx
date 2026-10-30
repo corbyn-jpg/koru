@@ -27,7 +27,7 @@ export default function CourseManagerModal({ isOpen, onClose }) {
               className="bg-white rounded-[32px] shadow-2xl w-full max-w-md overflow-hidden flex flex-col max-h-[80vh]"
             >
               {/* Header */}
-              <div className="p-6 pb-4 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+              <div className="p-6 pb-4 border-b border-gray-200 flex justify-between items-center bg-gray-50/50">
                 <div>
                   <h2 className="text-xl font-bold text-gray-900 tracking-tight">Manage Courses</h2>
                   <p className="text-xs text-gray-500 font-medium mt-1">Control visibility on your sidebar dashboard</p>
@@ -55,7 +55,7 @@ export default function CourseManagerModal({ isOpen, onClose }) {
                         key={course.id}
                         className={`flex items-center justify-between p-4 rounded-2xl border transition duration-200 ${
                             isHidden
-                            ? "bg-gray-50 border-gray-100 opacity-60"
+                            ? "bg-gray-50 border-gray-200 opacity-60"
                             : "bg-white border-gray-200 shadow-sm"
                         }`}
                         >

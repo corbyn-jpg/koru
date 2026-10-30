@@ -68,7 +68,7 @@ export default function TeacherCourses() {
 
             <div className="flex-1 flex flex-col overflow-hidden transition duration-300 md:bg-white/85 md:border md:border-white/20 md:rounded-[28px] md:shadow-lg max-md:bg-white">
                 {course && (
-                    <div className="h-14 border-b border-gray-100 bg-white/80 flex items-center justify-between px-8 z-10 shrink-0 select-none">
+                    <div className="h-14 border-b border-gray-200 bg-white/80 flex items-center justify-between px-8 z-10 shrink-0 select-none">
                         <div className="flex items-center gap-3">
                             <span className="px-2.5 py-0.5 rounded-lg text-[10px] font-black text-white shadow-sm uppercase shrink-0" style={{ backgroundColor: course.color }}>
                                 {course.code}{course.number}

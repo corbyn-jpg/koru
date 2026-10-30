@@ -55,7 +55,7 @@ export function SendNotificationModal({ lecturers, onClose, onSend }) {
         className="bg-white rounded-[32px] shadow-2xl w-full max-w-2xl flex flex-col max-h-[90vh] overflow-hidden"
       >
         {/* Header */}
-        <div className="p-8 border-b border-gray-100 flex items-center justify-between bg-gradient-to-r from-brand/5 to-transparent">
+        <div className="p-8 border-b border-gray-200 flex items-center justify-between bg-gradient-to-r from-brand/5 to-transparent">
           <div>
             <h3 className="text-2xl font-bold font-['Gabarito'] text-gray-900">Send Notification</h3>
             <p className="text-sm text-gray-500 mt-1">Schedule a meeting or send a notice to lecturers' calendars.</p>
@@ -141,7 +141,7 @@ export function SendNotificationModal({ lecturers, onClose, onSend }) {
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl border transition ${
                       selectedIds.includes(l.id)
                         ? "bg-brand/5 border-brand shadow-sm"
-                        : "bg-white border-gray-100 hover:border-gray-300"
+                        : "bg-white border-gray-200 hover:border-gray-300"
                     }`}
                   >
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
@@ -164,7 +164,7 @@ export function SendNotificationModal({ lecturers, onClose, onSend }) {
         </div>
 
         {/* Footer */}
-        <div className="p-8 border-t border-gray-50 flex items-center justify-between bg-gray-50/50">
+        <div className="p-8 border-t border-gray-100 flex items-center justify-between bg-gray-50/50">
            <button 
             onClick={onClose}
             className="px-6 py-3 rounded-2xl font-bold text-gray-500 hover:bg-gray-100 transition-colors"

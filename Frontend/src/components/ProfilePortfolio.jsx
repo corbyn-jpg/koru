@@ -20,7 +20,7 @@ export default function ProfilePortfolio({
 }) {
   return (
     <section className={PANEL_CLASS}>
-      <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
+      <div className="mb-6 flex items-center gap-3 border-b border-gray-200 pb-3">
         <span className="rounded-xl bg-brand/5 p-2 text-brand">
           <Presentation size={20} />
         </span>
@@ -171,7 +171,7 @@ export default function ProfilePortfolio({
                     </span>
                   ) : null}
                 </div>
-                <div className="pt-2 border-t border-gray-100 flex justify-end">
+                <div className="pt-2 border-t border-gray-200 flex justify-end">
                   <button
                     type="button"
                     onClick={() =>
@@ -194,7 +194,7 @@ export default function ProfilePortfolio({
                 </h3>
                 <p className="mt-2 text-sm font-medium leading-relaxed text-gray-600 flex-1">{project.description}</p>
                 {isProjectAssetUrl(project.projectUrl) ? (
-                  <div className="mt-4 pt-4 border-t border-gray-100">
+                  <div className="mt-4 pt-4 border-t border-gray-200">
                     <a
                       href={project.projectUrl}
                       target="_blank"

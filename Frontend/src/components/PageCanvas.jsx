@@ -299,7 +299,7 @@ const PageCanvas = forwardRef(({
                             <>
                                 <div className="fixed inset-0 z-20" onClick={() => setShowEmbedMenu(false)} />
                                 <div className="absolute z-30 bg-white border border-gray-200 p-4 rounded-3xl shadow-2xl mt-1.5 flex flex-col gap-3 min-w-[320px] left-0 md:left-auto md:right-0">
-                                    <div className="flex items-center justify-between border-b border-gray-100 pb-1.5 mb-0.5">
+                                    <div className="flex items-center justify-between border-b border-gray-200 pb-1.5 mb-0.5">
                                         <span className="text-[10px] font-black text-gray-400 uppercase tracking-wider">Media Embed Suite</span>
                                         <button onClick={() => setShowEmbedMenu(false)} className="p-1 text-gray-400 hover:text-gray-600 cursor-pointer"><X size={12} /></button>
                                     </div>
@@ -394,7 +394,7 @@ const PageCanvas = forwardRef(({
                     <div key={section.id} className="relative">
                         {/* Section reorder / remove controls — edit mode only */}
                         {isEditing && (
-                            <div className="flex items-center gap-1 mb-2 pb-1.5 border-b border-gray-100 select-none">
+                            <div className="flex items-center gap-1 mb-2 pb-1.5 border-b border-gray-200 select-none">
                                 <span className="text-[9px] font-black uppercase tracking-wider text-gray-300 mr-auto select-none">
                                     {section.type === "text" ? "Text" : "Embed"}
                                 </span>

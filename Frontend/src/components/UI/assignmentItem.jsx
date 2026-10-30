@@ -27,7 +27,7 @@ export default function AssignmentItem({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
       className={`w-full border rounded-2xl px-4 py-3.5 flex items-center gap-3 transition duration-300 cursor-pointer
-        ${completed ? "bg-gray-50 border-gray-100 opacity-50" : "bg-white border-gray-200 hover:shadow-md"}`}
+        ${completed ? "bg-gray-50 border-gray-200 opacity-50" : "bg-white border-gray-200 hover:shadow-md"}`}
     >
       {/* Icon */}
       <div

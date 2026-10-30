@@ -191,7 +191,7 @@ export default function CohortManagerModal({ course, onClose }) {
         className="bg-white rounded-[40px] w-[90vw] max-w-[1500px] h-[90vh] shadow-3xl overflow-hidden flex flex-col relative"
       >
         {/* Header */}
-        <div className="p-8 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
+        <div className="p-8 border-b border-gray-200 flex items-center justify-between bg-gray-50/50">
           <div>
             <div className="flex items-center gap-2 mb-1">
               <div className="w-1.5 h-4 bg-brand rounded-full"></div>
@@ -205,7 +205,7 @@ export default function CohortManagerModal({ course, onClose }) {
           </div>
           <button 
             onClick={onClose} 
-            className="p-3 bg-white rounded-2xl border border-gray-100 text-gray-400 hover:text-red-500 hover:bg-red-50 hover:border-red-100 transition shadow-sm"
+            className="p-3 bg-white rounded-2xl border border-gray-200 text-gray-400 hover:text-red-500 hover:bg-red-50 hover:border-red-100 transition shadow-sm"
           >
             <X size={20} />
           </button>
@@ -214,12 +214,12 @@ export default function CohortManagerModal({ course, onClose }) {
         {isLoading ? (
           <div className="flex-1 flex flex-col lg:flex-row overflow-hidden gap-0 animate-pulse">
             {/* Left panel skeleton */}
-            <div className="lg:w-3/5 border-r border-gray-100 p-8 space-y-6 overflow-y-auto">
-              <div className="bg-white rounded-3xl border border-gray-100 p-6 space-y-4">
+            <div className="lg:w-3/5 border-r border-gray-200 p-8 space-y-6 overflow-y-auto">
+              <div className="bg-white rounded-3xl border border-gray-200 p-6 space-y-4">
                 <div className="h-3 rounded-full bg-gray-200 w-32" />
                 {[1, 2, 3].map(i => <div key={i} className="h-12 rounded-2xl bg-gray-100" />)}
               </div>
-              <div className="bg-white rounded-3xl border border-gray-100 p-6 space-y-4">
+              <div className="bg-white rounded-3xl border border-gray-200 p-6 space-y-4">
                 <div className="h-3 rounded-full bg-gray-200 w-40" />
                 {[1, 2].map(i => <div key={i} className="h-20 rounded-2xl bg-gray-100" />)}
               </div>
@@ -241,9 +241,9 @@ export default function CohortManagerModal({ course, onClose }) {
         ) : (
           <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
             {/* Left Panel: Cohort Select and Timetabling */}
-            <div className="lg:w-3/5 border-r border-gray-100 flex flex-col h-full bg-gray-50/20 overflow-y-auto p-8 space-y-8">
+            <div className="lg:w-3/5 border-r border-gray-200 flex flex-col h-full bg-gray-50/20 overflow-y-auto p-8 space-y-8">
               {/* Cohorts Picker */}
-              <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm space-y-4">
+              <div className="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-4">
                 <div className="flex justify-between items-center">
                   <h3 className="text-xs font-black uppercase tracking-wider text-gray-400 flex items-center gap-2">
                     <Users size={14} /> Active Cohorts ({cohorts.length})
@@ -275,7 +275,7 @@ export default function CohortManagerModal({ course, onClose }) {
                         className={`p-4 rounded-2xl cursor-pointer border transition flex items-center justify-between group ${
                           isSelected 
                             ? "bg-brand/5 border-brand text-brand" 
-                            : "bg-white border-gray-100 hover:border-gray-300"
+                            : "bg-white border-gray-200 hover:border-gray-300"
                         }`}
                       >
                         <div className="flex-1">
@@ -308,7 +308,7 @@ export default function CohortManagerModal({ course, onClose }) {
               {selectedCohort ? (
                 <div className="flex-1 grid grid-cols-1 md:grid-cols-12 gap-8">
                   {/* Scheduled Slots */}
-                  <div className="md:col-span-7 bg-white p-6 rounded-3xl border border-gray-100 shadow-sm flex flex-col">
+                  <div className="md:col-span-7 bg-white p-6 rounded-3xl border border-gray-200 shadow-sm flex flex-col">
                     <h3 className="text-xs font-black uppercase tracking-wider text-gray-400 flex items-center gap-2 mb-4">
                       <Calendar size={14} /> Timetable for {selectedCohort.name}
                     </h3>
@@ -317,10 +317,10 @@ export default function CohortManagerModal({ course, onClose }) {
                       {cohortSchedules.map((slot) => (
                         <div 
                           key={slot.id} 
-                          className="p-3.5 bg-gray-50 border border-gray-100 rounded-2xl flex items-center justify-between group hover:border-gray-200 transition"
+                          className="p-3.5 bg-gray-50 border border-gray-200 rounded-2xl flex items-center justify-between group hover:border-gray-200 transition"
                         >
                           <div className="flex items-center gap-3.5">
-                            <div className="w-10 h-10 rounded-xl bg-white border border-gray-100 flex flex-col items-center justify-center font-black text-[10px] text-brand shadow-sm">
+                            <div className="w-10 h-10 rounded-xl bg-white border border-gray-200 flex flex-col items-center justify-center font-black text-[10px] text-brand shadow-sm">
                               {slot.dayOfWeek?.slice(0, 3)}
                             </div>
                             <div>
@@ -357,7 +357,7 @@ export default function CohortManagerModal({ course, onClose }) {
                   </div>
 
                   {/* Add Class Form */}
-                  <div className="md:col-span-5 bg-white p-6 rounded-3xl border border-gray-100 shadow-sm flex flex-col">
+                  <div className="md:col-span-5 bg-white p-6 rounded-3xl border border-gray-200 shadow-sm flex flex-col">
                     <h3 className="text-xs font-black uppercase tracking-wider text-gray-400 flex items-center gap-2 mb-4">
                       <Plus size={14} /> Schedule Session
                     </h3>
@@ -418,7 +418,7 @@ export default function CohortManagerModal({ course, onClose }) {
                   </div>
                 </div>
               ) : (
-                <div className="flex-1 flex flex-col items-center justify-center text-center p-12 bg-white rounded-3xl border border-gray-100 shadow-sm space-y-3">
+                <div className="flex-1 flex flex-col items-center justify-center text-center p-12 bg-white rounded-3xl border border-gray-200 shadow-sm space-y-3">
                   <Users size={32} className="text-gray-300" />
                   <p className="text-[13px] font-black text-gray-400 uppercase tracking-wider">No Cohort Selected</p>
                   <p className="text-[11px] text-gray-400 max-w-sm">
@@ -431,7 +431,7 @@ export default function CohortManagerModal({ course, onClose }) {
             {/* Right Panel: Cohort Roster & Routing */}
             <div className="lg:w-2/5 flex flex-col h-full overflow-hidden bg-white">
               {/* Filter / Summary */}
-              <div className="p-8 border-b border-gray-100 space-y-4">
+              <div className="p-8 border-b border-gray-200 space-y-4">
                 <h3 className="text-xs font-black uppercase tracking-wider text-brand flex items-center gap-2">
                   <UserPlus size={14} /> Course Enrollment Roster ({students.length})
                 </h3>
@@ -445,7 +445,7 @@ export default function CohortManagerModal({ course, onClose }) {
                 {students.map((student) => (
                   <div 
                     key={student.studentId}
-                    className="p-4 rounded-2xl bg-gray-50/50 border border-gray-100 flex items-center justify-between hover:border-gray-200 transition"
+                    className="p-4 rounded-2xl bg-gray-50/50 border border-gray-200 flex items-center justify-between hover:border-gray-200 transition"
                   >
                     <div className="space-y-0.5">
                       <h4 className="text-[13px] font-black text-gray-800">{student.studentName}</h4>

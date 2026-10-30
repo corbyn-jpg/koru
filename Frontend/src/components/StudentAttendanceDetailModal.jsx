@@ -88,7 +88,7 @@ export default function StudentAttendanceDetailModal({
                 onClick={e => e.stopPropagation()}
             >
                 {/* Header */}
-                <div className="px-8 pt-8 pb-6 border-b border-gray-100 flex items-start justify-between bg-gray-50/50">
+                <div className="px-8 pt-8 pb-6 border-b border-gray-200 flex items-start justify-between bg-gray-50/50">
                     <div className="flex items-center gap-4">
                         <div className="w-14 h-14 rounded-full bg-brand/10 border-2 border-brand/25 flex items-center justify-center font-black text-lg text-brand shadow-sm select-none">
                             {student.avatar}
@@ -108,7 +108,7 @@ export default function StudentAttendanceDetailModal({
                 </div>
 
                 {/* Stats Summary Panel */}
-                <div className="px-8 py-6 border-b border-gray-100 bg-white grid grid-cols-4 gap-4">
+                <div className="px-8 py-6 border-b border-gray-200 bg-white grid grid-cols-4 gap-4">
                     <div className="bg-gray-50 rounded-2xl p-4 text-center">
                         <span className="text-[10px] uppercase font-black tracking-wider text-gray-400 block mb-1">Presence Rate</span>
                         <span className={`text-2xl font-black italic ${
@@ -156,7 +156,7 @@ export default function StudentAttendanceDetailModal({
                                 return (
                                     <div
                                         key={record.id}
-                                        className="flex items-center justify-between p-4 rounded-2xl border border-gray-100 bg-white hover:border-brand/10 hover:shadow-sm transition duration-200"
+                                        className="flex items-center justify-between p-4 rounded-2xl border border-gray-200 bg-white hover:border-brand/10 hover:shadow-sm transition duration-200"
                                     >
                                         {/* Date and Session Type */}
                                         <div className="flex-1 min-w-0 pr-4">

@@ -167,18 +167,18 @@ export default function CreateCoursePage() {
         <div className="flex flex-col xl:flex-row gap-8">
           {/* Left column */}
           <div className="flex-1 space-y-6">
-            <div className="p-8 bg-white border border-gray-100 rounded-3xl space-y-5">
+            <div className="p-8 bg-white border border-gray-200 rounded-3xl space-y-5">
               <div className="h-5 rounded-full bg-gray-200 w-44 mb-2" />
               {[1, 2, 3, 4].map(i => <div key={i} className="h-14 rounded-2xl bg-gray-100" />)}
             </div>
-            <div className="p-8 bg-white border border-gray-100 rounded-3xl space-y-5">
+            <div className="p-8 bg-white border border-gray-200 rounded-3xl space-y-5">
               <div className="h-5 rounded-full bg-gray-200 w-36 mb-2" />
               {[1, 2].map(i => <div key={i} className="h-14 rounded-2xl bg-gray-100" />)}
             </div>
           </div>
           {/* Right column */}
           <div className="xl:w-[420px] space-y-6">
-            <div className="p-8 bg-white border border-gray-100 rounded-3xl space-y-5">
+            <div className="p-8 bg-white border border-gray-200 rounded-3xl space-y-5">
               <div className="h-5 rounded-full bg-gray-200 w-36 mb-2" />
               {[1, 2, 3].map(i => <div key={i} className="h-14 rounded-2xl bg-gray-100" />)}
             </div>
@@ -221,7 +221,7 @@ export default function CreateCoursePage() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
-            className="w-full max-w-2xl mx-auto py-16 px-10 bg-white rounded-3xl border border-gray-100 shadow-2xl flex flex-col items-center text-center gap-6 mt-12"
+            className="w-full max-w-2xl mx-auto py-16 px-10 bg-white rounded-3xl border border-gray-200 shadow-2xl flex flex-col items-center text-center gap-6 mt-12"
           >
             <div className="w-20 h-20 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-600 animate-bounce">
               <Check size={40} strokeWidth={3} />
@@ -240,8 +240,8 @@ export default function CreateCoursePage() {
             {/* Left Column: Course Parameters */}
             <div className="flex-1 space-y-6">
               
-              <div className="p-8 bg-white border border-gray-100 shadow-md rounded-3xl space-y-6">
-                <div className="flex items-center gap-2 pb-4 border-b border-gray-100">
+              <div className="p-8 bg-white border border-gray-200 shadow-md rounded-3xl space-y-6">
+                <div className="flex items-center gap-2 pb-4 border-b border-gray-200">
                   <BookOpen className="text-brand" size={20} />
                   <h3 className="text-lg font-black text-gray-900 uppercase tracking-tight">Course Definition</h3>
                 </div>
@@ -321,8 +321,8 @@ export default function CreateCoursePage() {
               </div>
 
               {/* Offer Details */}
-              <div className="p-8 bg-white border border-gray-100 shadow-md rounded-3xl space-y-6">
-                <div className="flex items-center gap-2 pb-4 border-b border-gray-100">
+              <div className="p-8 bg-white border border-gray-200 shadow-md rounded-3xl space-y-6">
+                <div className="flex items-center gap-2 pb-4 border-b border-gray-200">
                   <Calendar className="text-brand" size={20} />
                   <h3 className="text-lg font-black text-gray-900 uppercase tracking-tight">Academic Offer Details</h3>
                 </div>
@@ -377,8 +377,8 @@ export default function CreateCoursePage() {
             {/* Right Column: Student Enrolment List */}
             <div className="w-full xl:w-[500px] shrink-0">
               
-              <div className="p-8 bg-white border border-gray-100 shadow-md rounded-3xl flex flex-col h-[600px]">
-                <div className="flex items-center justify-between pb-4 border-b border-gray-100 shrink-0">
+              <div className="p-8 bg-white border border-gray-200 shadow-md rounded-3xl flex flex-col h-[600px]">
+                <div className="flex items-center justify-between pb-4 border-b border-gray-200 shrink-0">
                   <div className="flex items-center gap-2">
                     <Users className="text-brand" size={20} />
                     <h3 className="text-lg font-black text-gray-900 uppercase tracking-tight">Enrol Students</h3>
@@ -405,14 +405,14 @@ export default function CreateCoursePage() {
                   <button 
                     type="button" 
                     onClick={handleSelectAllFiltered}
-                    className="flex-1 py-2 border border-gray-100 hover:bg-gray-50 text-[10px] font-bold uppercase tracking-wider text-gray-600 rounded-xl cursor-pointer transition"
+                    className="flex-1 py-2 border border-gray-200 hover:bg-gray-50 text-[10px] font-bold uppercase tracking-wider text-gray-600 rounded-xl cursor-pointer transition"
                   >
                     Select All Search
                   </button>
                   <button 
                     type="button" 
                     onClick={handleDeselectAllFiltered}
-                    className="flex-1 py-2 border border-gray-100 hover:bg-gray-50 text-[10px] font-bold uppercase tracking-wider text-gray-600 rounded-xl cursor-pointer transition"
+                    className="flex-1 py-2 border border-gray-200 hover:bg-gray-50 text-[10px] font-bold uppercase tracking-wider text-gray-600 rounded-xl cursor-pointer transition"
                   >
                     Clear Search
                   </button>
@@ -434,7 +434,7 @@ export default function CreateCoursePage() {
                           className={`flex items-center justify-between p-3 rounded-2xl border transition cursor-pointer select-none group
                             ${isSelected 
                               ? "bg-brand/5 border-brand/20" 
-                              : "bg-transparent border-gray-100/50 hover:bg-gray-50/60"
+                              : "bg-transparent border-gray-200 hover:bg-gray-50/60"
                             }`}
                         >
                           <div className="flex items-center gap-3 min-w-0">
@@ -481,7 +481,7 @@ export default function CreateCoursePage() {
 
       {/* Error & Form Actions Panel */}
       {!submitSuccess && (
-        <div className="w-full max-w-full mt-6 bg-white border border-gray-100 rounded-3xl p-6 shadow-md flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="w-full max-w-full mt-6 bg-white border border-gray-200 rounded-3xl p-6 shadow-md flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex-1">
             {errorMessage ? (
               <p className="text-xs font-semibold text-red-500 flex items-center gap-2">
@@ -499,7 +499,7 @@ export default function CreateCoursePage() {
             <button 
               type="button"
               onClick={() => navigate("/courses")}
-              className="flex-1 md:flex-none px-6 py-3 border-2 border-gray-100 text-gray-400 font-bold uppercase tracking-wider text-[11px] hover:bg-gray-50 rounded-2xl cursor-pointer transition"
+              className="flex-1 md:flex-none px-6 py-3 border-2 border-gray-200 text-gray-400 font-bold uppercase tracking-wider text-[11px] hover:bg-gray-50 rounded-2xl cursor-pointer transition"
             >
               Cancel
             </button>

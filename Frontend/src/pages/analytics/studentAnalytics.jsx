@@ -246,7 +246,7 @@ export default function StudentAnalytics() {
       >
 
         {/* ─── KPI Row ─── */}
-        <motion.div variants={fadeUp} className="flex flex-row divide-x divide-gray-100 bg-white rounded-2xl border border-gray-100 shadow-sm px-6 py-5">
+        <motion.div variants={fadeUp} className="flex flex-row divide-x divide-gray-100 bg-white rounded-2xl border border-gray-200 shadow-sm px-6 py-5">
           {[
             {
               label: "Overall Average",
@@ -275,7 +275,7 @@ export default function StudentAnalytics() {
           <div className="flex flex-col gap-6">
 
             {/* ─── Grade Trend Chart ─── */}
-            <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+            <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
               <div className="flex justify-between items-center mb-4">
                 <div>
                   <h2 className="text-base font-bold text-gray-900">Grade Trend</h2>
@@ -304,7 +304,7 @@ export default function StudentAnalytics() {
                   return (
                     <div
                       key={course.id}
-                      className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex items-center gap-4 hover:border-gray-200 transition-colors"
+                      className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5 flex items-center gap-4 hover:border-gray-200 transition-colors"
                     >
                       <div className="relative shrink-0">
                         <ProgressRing percent={pct} color={course.color || "#3C0078"} />
@@ -327,8 +327,8 @@ export default function StudentAnalytics() {
             </motion.div>
 
             {/* ─── Recent Grades Table ─── */}
-            <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-              <div className="px-6 py-5 border-b border-gray-50 flex justify-between items-center">
+            <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+              <div className="px-6 py-5 border-b border-gray-100 flex justify-between items-center">
                 <h2 className="text-base font-bold text-gray-900">Recent Grades</h2>
                 <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
                   Last {recentGrades.length} assignments
@@ -348,7 +348,7 @@ export default function StudentAnalytics() {
                   {recentGrades.map(g => {
                     const pct = g.pointsEarned != null ? Math.round((g.pointsEarned / g.maxPoints) * 100) : 0;
                     return (
-                      <tr key={g.id} className="border-b border-gray-50 last:border-0 hover:bg-gray-50/50 transition-colors">
+                      <tr key={g.id} className="border-b border-gray-100 last:border-0 hover:bg-gray-50/50 transition-colors">
                         <td className="px-6 py-4">
                           <span className="font-semibold text-sm text-gray-900">{g.assignment}</span>
                         </td>
@@ -389,21 +389,21 @@ export default function StudentAnalytics() {
           <div className="flex flex-col gap-5">
 
             {/* Top Course */}
-            <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+            <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
               <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-3">Top Course</p>
               <div className="flex items-baseline gap-2 mb-1">
                 <span className="text-3xl font-black text-gray-900">{highestCourse.average}%</span>
                 <span className="text-sm text-gray-400 font-medium">{highestCourse.label}</span>
               </div>
               <p className="text-sm font-medium text-gray-600">{highestCourse.subjectName}</p>
-              <div className="mt-4 pt-4 border-t border-gray-50 flex items-center gap-2 text-xs text-gray-400">
+              <div className="mt-4 pt-4 border-t border-gray-100 flex items-center gap-2 text-xs text-gray-400">
                 <Award size={14} className="text-amber-400 shrink-0" />
                 <span>Your highest performing course</span>
               </div>
             </motion.div>
 
             {/* Submission Breakdown */}
-            <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+            <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
               <h3 className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-4">Submission Breakdown</h3>
               <div className="space-y-3">
                 {[
@@ -428,7 +428,7 @@ export default function StudentAnalytics() {
             </motion.div>
 
             {/* Upcoming Deadlines */}
-            <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+            <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
               <h3 className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-4">Upcoming Deadlines</h3>
               <div className="space-y-2">
                 {upcomingAssignments.length === 0 ? (
@@ -441,7 +441,7 @@ export default function StudentAnalytics() {
                     return (
                       <div
                         key={a.id}
-                        className={`rounded-xl border p-4 flex items-center gap-3 ${urgent ? "border-amber-200 bg-amber-50/40" : "border-gray-100"}`}
+                        className={`rounded-xl border p-4 flex items-center gap-3 ${urgent ? "border-amber-200 bg-amber-50/40" : "border-gray-200"}`}
                       >
                         <span className={`shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-xl ${urgent ? "bg-amber-100" : "bg-gray-50"}`}>
                           {urgent
@@ -466,7 +466,7 @@ export default function StudentAnalytics() {
             </motion.div>
 
             {/* Recent Feedback */}
-            <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+            <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
               <h3 className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-4">Recent Feedback</h3>
               <div className="space-y-2">
                 {feedback.length === 0 ? (
@@ -476,7 +476,7 @@ export default function StudentAnalytics() {
                     <motion.div
                       key={fb.id}
                       layout
-                      className="rounded-xl border border-gray-100 p-4 hover:border-gray-200 transition-colors cursor-pointer"
+                      className="rounded-xl border border-gray-200 p-4 hover:border-gray-200 transition-colors cursor-pointer"
                       onClick={() => setExpandedFeedback(expandedFeedback === fb.id ? null : fb.id)}
                     >
                       <div className="flex items-start justify-between gap-3">

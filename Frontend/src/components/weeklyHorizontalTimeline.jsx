@@ -552,7 +552,7 @@ export default function WeeklyHorizontalTimeline({ onModalToggle }) {
               initial={{ opacity: 0, scale: 0.95, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
-              className="bg-white rounded-[28px] max-w-md w-full shadow-2xl overflow-hidden border border-slate-100 flex flex-col z-[10000]"
+              className="bg-white rounded-[28px] max-w-md w-full shadow-2xl overflow-hidden border border-slate-200 flex flex-col z-[10000]"
             >
 
 
@@ -683,7 +683,7 @@ export default function WeeklyHorizontalTimeline({ onModalToggle }) {
                   </AnimatePresence>
 
                   {/* Submit Button */}
-                  <div className="flex justify-end gap-2 border-t border-slate-100 pt-4 mt-2">
+                  <div className="flex justify-end gap-2 border-t border-slate-200 pt-4 mt-2">
                     <button
                       type="button"
                       onClick={closeCreateModal}
@@ -716,7 +716,7 @@ export default function WeeklyHorizontalTimeline({ onModalToggle }) {
               initial={{ opacity: 0, scale: 0.95, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 10 }}
-              className="bg-white rounded-[24px] max-w-md w-full shadow-2xl overflow-hidden border border-slate-100"
+              className="bg-white rounded-[24px] max-w-md w-full shadow-2xl overflow-hidden border border-slate-200"
             >
 
 
@@ -741,14 +741,14 @@ export default function WeeklyHorizontalTimeline({ onModalToggle }) {
                   <Calendar className="w-3.5 h-3.5" /> Due: {new Date(selectedAssignment.dueDate).toLocaleString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}
                 </p>
 
-                <div className="my-5 p-4 bg-slate-50 border border-slate-100 rounded-2xl">
+                <div className="my-5 p-4 bg-slate-50 border border-slate-200 rounded-2xl">
                   <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Description</p>
                   <p className="text-sm text-slate-600 mt-1.5 leading-relaxed font-medium">
                     {selectedAssignment.description || "No description provided."}
                   </p>
                 </div>
 
-                <div className="flex items-center justify-between border-t border-slate-100 pt-4 mt-6">
+                <div className="flex items-center justify-between border-t border-slate-200 pt-4 mt-6">
                   <span className="text-xs font-bold text-slate-500 flex items-center gap-1">
                     Max Marks: <span className="text-purple-600">{selectedAssignment.maxPoints || 100}</span>
                   </span>
@@ -782,7 +782,7 @@ export default function WeeklyHorizontalTimeline({ onModalToggle }) {
               initial={{ opacity: 0, scale: 0.95, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 10 }}
-              className="bg-white rounded-[24px] max-w-md w-full shadow-2xl overflow-hidden border border-slate-100"
+              className="bg-white rounded-[24px] max-w-md w-full shadow-2xl overflow-hidden border border-slate-200"
             >
 
 
@@ -833,11 +833,11 @@ export default function WeeklyHorizontalTimeline({ onModalToggle }) {
                   </div>
                 </div>
 
-                <div className="my-4 p-4 bg-slate-50 border border-slate-100 rounded-2xl text-xs text-slate-500 font-medium">
+                <div className="my-4 p-4 bg-slate-50 border border-slate-200 rounded-2xl text-xs text-slate-500 font-medium">
                   {selectedClass.description?.includes("|") ? selectedClass.description.split("|")[0] : selectedClass.description || "Class session details."}
                 </div>
 
-                <div className="flex justify-end gap-2 border-t border-slate-100 pt-4 mt-6">
+                <div className="flex justify-end gap-2 border-t border-slate-200 pt-4 mt-6">
                   <button
                     onClick={() => setSelectedClass(null)}
                     className="px-4 py-2 border border-slate-200 text-slate-500 hover:bg-slate-50 text-xs font-bold rounded-xl cursor-pointer transition"

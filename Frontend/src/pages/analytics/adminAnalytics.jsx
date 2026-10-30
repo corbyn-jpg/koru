@@ -266,7 +266,7 @@ export default function AdminAnalytics() {
       >
 
         {/* ── KPI Row ── */}
-        <motion.div variants={fadeUp} className="flex flex-row divide-x divide-gray-100 bg-white rounded-2xl border border-gray-100 shadow-sm px-6 py-5">
+        <motion.div variants={fadeUp} className="flex flex-row divide-x divide-gray-100 bg-white rounded-2xl border border-gray-200 shadow-sm px-6 py-5">
           {[
             { label: "Total Lecturers", value: loading ? "—" : lecturers.length, sub: "teaching staff" },
             { label: "Total Students", value: loading ? "—" : students.length, sub: "enrolled platform-wide" },
@@ -285,8 +285,8 @@ export default function AdminAnalytics() {
         <div className="grid grid-cols-1 xl:grid-cols-[1fr_360px] gap-6">
 
           {/* Courses per Lecturer table */}
-          <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-            <div className="px-6 py-5 border-b border-gray-50 flex justify-between items-center">
+          <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+            <div className="px-6 py-5 border-b border-gray-100 flex justify-between items-center">
               <h2 className="text-base font-bold text-gray-900">Courses per Lecturer</h2>
               <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
                 {lecturers.length} lecturers
@@ -318,7 +318,7 @@ export default function AdminAnalytics() {
                 </thead>
                 <tbody>
                   {coursesPerLecturer.map(l => (
-                    <tr key={l.id} className="border-b border-gray-50 last:border-0 hover:bg-gray-50/50 transition-colors">
+                    <tr key={l.id} className="border-b border-gray-100 last:border-0 hover:bg-gray-50/50 transition-colors">
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
                           <div className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center font-bold text-xs text-gray-600 shrink-0">
@@ -369,7 +369,7 @@ export default function AdminAnalytics() {
           <motion.div variants={fadeUp} className="flex flex-col gap-4">
 
             {/* Platform at a Glance */}
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+            <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
               <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-4">Platform at a Glance</p>
               <div className="space-y-0">
                 {[
@@ -380,7 +380,7 @@ export default function AdminAnalytics() {
                     value: loading || courses.length === 0 ? "—" : (enrollments.length / courses.length).toFixed(1),
                   },
                 ].map(stat => (
-                  <div key={stat.label} className="flex items-center justify-between py-3 border-b border-gray-50 last:border-0">
+                  <div key={stat.label} className="flex items-center justify-between py-3 border-b border-gray-100 last:border-0">
                     <span className="text-sm text-gray-500">{stat.label}</span>
                     <span className="text-base font-black text-gray-900">{stat.value}</span>
                   </div>
@@ -389,7 +389,7 @@ export default function AdminAnalytics() {
             </div>
 
             {/* User Breakdown */}
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+            <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
               <h3 className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-1">User Breakdown</h3>
               <div className="space-y-0">
                 {[
@@ -398,7 +398,7 @@ export default function AdminAnalytics() {
                   { label: "Admins", value: loading ? "—" : users.filter(u => u.role?.toLowerCase() === "admin").length },
                   { label: "Total Users", value: loading ? "—" : users.length, highlight: true },
                 ].map(item => (
-                  <div key={item.label} className="flex items-center justify-between py-3 border-b border-gray-50 last:border-0">
+                  <div key={item.label} className="flex items-center justify-between py-3 border-b border-gray-100 last:border-0">
                     <span className="text-sm text-gray-500">{item.label}</span>
                     <span className={`text-base font-black ${item.highlight ? "text-brand" : "text-gray-900"}`}>
                       {item.value}
@@ -415,7 +415,7 @@ export default function AdminAnalytics() {
         <motion.div variants={fadeUp} className="flex flex-col gap-6">
 
           {/* Section header + lecturer picker */}
-          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm px-6 py-5">
+          <div className="bg-white rounded-2xl border border-gray-200 shadow-sm px-6 py-5">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div className="flex items-center gap-4">
                 <AnimatePresence mode="wait">
@@ -495,7 +495,7 @@ export default function AdminAnalytics() {
                 className="flex flex-col gap-6"
               >
                 {/* KPI row */}
-                <div className="flex flex-row divide-x divide-gray-100 bg-white rounded-2xl border border-gray-100 shadow-sm px-6 py-5">
+                <div className="flex flex-row divide-x divide-gray-100 bg-white rounded-2xl border border-gray-200 shadow-sm px-6 py-5">
                   {[
                     { label: "Class Average", value: `${classAvg}%`, sub: `across ${teacherCourses.length} course${teacherCourses.length !== 1 ? "s" : ""}` },
                     { label: "Total Students", value: studentRoster.length, sub: "enrolled" },
@@ -532,7 +532,7 @@ export default function AdminAnalytics() {
                             ? "2nd Year"
                             : "1st Year";
                         return (
-                          <div key={course.id} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 hover:border-gray-200 transition-colors">
+                          <div key={course.id} className="bg-white rounded-2xl border border-gray-200 shadow-sm p-5 hover:border-gray-200 transition-colors">
                             <div className="flex items-center gap-3 mb-3">
                               <div className="relative shrink-0">
                                 <ProgressRing percent={courseAvg} color={course.color} />
@@ -557,8 +557,8 @@ export default function AdminAnalytics() {
                 )}
 
                 {/* Grading Progress Table */}
-                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-                  <div className="px-6 py-5 border-b border-gray-50 flex justify-between items-center">
+                <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+                  <div className="px-6 py-5 border-b border-gray-100 flex justify-between items-center">
                     <h3 className="text-base font-bold text-gray-900">Grading Progress</h3>
                     <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
                       {assignmentsWithStats.length} assignments
@@ -584,7 +584,7 @@ export default function AdminAnalytics() {
                           const done = a.graded === a.totalSubmissions && a.totalSubmissions > 0;
                           const noGrades = a.avgScore === null;
                           return (
-                            <tr key={a.id} className="border-b border-gray-50 last:border-0 hover:bg-gray-50/50 transition-colors">
+                            <tr key={a.id} className="border-b border-gray-100 last:border-0 hover:bg-gray-50/50 transition-colors">
                               <td className="px-6 py-4">
                                 <span className="font-semibold text-sm text-gray-900">{a.title}</span>
                               </td>
@@ -630,8 +630,8 @@ export default function AdminAnalytics() {
                 </div>
 
                 {/* Student Roster */}
-                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-                  <div className="px-6 py-5 border-b border-gray-50 flex justify-between items-center">
+                <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+                  <div className="px-6 py-5 border-b border-gray-100 flex justify-between items-center">
                     <h3 className="text-base font-bold text-gray-900">Student Performance</h3>
                     <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
                       {studentRoster.length} students
@@ -651,7 +651,7 @@ export default function AdminAnalytics() {
                       </thead>
                       <tbody>
                         {studentRoster.map(s => (
-                          <tr key={s.id} className="border-b border-gray-50 last:border-0 hover:bg-gray-50/50 transition-colors">
+                          <tr key={s.id} className="border-b border-gray-100 last:border-0 hover:bg-gray-50/50 transition-colors">
                             <td className="px-6 py-4">
                               <div className="flex items-center gap-3">
                                 <div className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center font-bold text-xs text-gray-600 shrink-0">

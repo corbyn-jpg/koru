@@ -129,7 +129,7 @@ export default function CourseSecondaryNav({ activeCourseId, hideNav, onDeleteCo
         >
             {/* Course Header Info */}
             {course && (
-                <div className="px-6 pt-6 pb-5 border-b border-gray-100 shrink-0">
+                <div className="px-6 pt-6 pb-5 border-b border-gray-200 shrink-0">
                     <h3 className="text-sm font-black text-gray-900 leading-tight">{course.subjectName}</h3>
                     <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mt-1">{course.code} {course.number}</p>
                 </div>
@@ -199,7 +199,7 @@ export default function CourseSecondaryNav({ activeCourseId, hideNav, onDeleteCo
 
             {/* Teacher controls footer */}
             {isTeacher && (
-                <div className="p-4 border-t border-gray-100 flex flex-col gap-3 bg-gray-50/50 shrink-0">
+                <div className="p-4 border-t border-gray-200 flex flex-col gap-3 bg-gray-50/50 shrink-0">
                     <div className="flex flex-col gap-1 px-2">
                         <span className="text-[9px] font-black text-gray-400 uppercase tracking-wider leading-none">
                             Course Controls
@@ -225,7 +225,7 @@ export default function CourseSecondaryNav({ activeCourseId, hideNav, onDeleteCo
 
             {/* Admin controls footer */}
             {isAdmin && (
-                <div className="p-4 border-t border-gray-100 bg-gray-50/50 shrink-0 space-y-2.5">
+                <div className="p-4 border-t border-gray-200 bg-gray-50/50 shrink-0 space-y-2.5">
                     <span className="text-[9px] font-black text-gray-400 uppercase tracking-wider px-2 block">
                         Admin Controls
                     </span>

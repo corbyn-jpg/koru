@@ -8,7 +8,7 @@ const PANEL_CLASS =
 export default function ProfileExperience({ experienceGroups, editMode, updateProfile }) {
   return (
     <section className={PANEL_CLASS}>
-      <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
+      <div className="mb-6 flex items-center gap-3 border-b border-gray-200 pb-3">
         <span className="rounded-xl bg-brand/5 p-2 text-brand">
           <Briefcase size={20} />
         </span>
@@ -41,7 +41,7 @@ export default function ProfileExperience({ experienceGroups, editMode, updatePr
       ) : (
         <div className="grid gap-6 md:grid-cols-2">
           {experienceGroups.map((group) => (
-            <div key={group.key} className="rounded-[22px] border border-gray-100 bg-gray-50/20 p-5 shadow-3xs">
+            <div key={group.key} className="rounded-[22px] border border-gray-200 bg-gray-50/20 p-5 shadow-3xs">
               <ChipListEditor
                 title={group.label}
                 items={group.items}

@@ -14,7 +14,7 @@ export default function AnnouncementsItem({
   return (
     <div
       onClick={onClick}
-      className="my-2 bg-white rounded-xl border border-gray-100 w-full flex flex-row items-center px-3 py-3 transition-colors duration-150 hover:bg-gray-50/60 hover:border-gray-200 cursor-pointer relative overflow-hidden"
+      className="my-2 bg-white rounded-xl border border-gray-200 w-full flex flex-row items-center px-3 py-3 transition-colors duration-150 hover:bg-gray-50/60 hover:border-gray-200 cursor-pointer relative overflow-hidden"
     >
       <div
         className="w-9 h-9 rounded-full flex items-center justify-center shrink-0"

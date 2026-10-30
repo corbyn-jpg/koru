@@ -81,7 +81,7 @@ export default function CourseAssignmentsView({ subject, activeCourseId }) {
             {loading ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-pulse">
                     {[1, 2, 3, 4, 5, 6].map(i => (
-                        <div key={i} className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm flex flex-col justify-between">
+                        <div key={i} className="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm flex flex-col justify-between">
                             <div>
                                 <div className="flex justify-between items-start mb-4 gap-4">
                                     <div className="h-6 rounded-full bg-gray-200 flex-1" style={{ maxWidth: `${55 + (i * 13) % 30}%` }} />
@@ -92,7 +92,7 @@ export default function CourseAssignmentsView({ subject, activeCourseId }) {
                                     <div className="h-3 rounded-full bg-gray-100 w-4/5" />
                                 </div>
                             </div>
-                            <div className="space-y-4 pt-6 border-t border-gray-50">
+                            <div className="space-y-4 pt-6 border-t border-gray-100">
                                 <div className="flex justify-between items-center">
                                     <div className="h-3 rounded-full bg-gray-100 w-14" />
                                     <div className="h-3 rounded-full bg-gray-100 w-12" />
@@ -107,13 +107,13 @@ export default function CourseAssignmentsView({ subject, activeCourseId }) {
                     ))}
                 </div>
             ) : assignments.length === 0 ? (
-                <div className="text-gray-500 text-center py-20 font-medium bg-gray-50 rounded-3xl border border-gray-100">
+                <div className="text-gray-500 text-center py-20 font-medium bg-gray-50 rounded-3xl border border-gray-200">
                     No active assignments for this module yet.
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 font-sans">
                     {assignments.map((item, index) => (
-                        <motion.div key={item.id} variants={slideUp} className={`bg-white p-6 rounded-3xl border border-gray-100 shadow-sm relative overflow-hidden group hover:shadow-xl transition duration-300 flex flex-col justify-between ${item.isClosed || item.isSubmitted || item.isGraded ? 'opacity-60 bg-gray-50' : 'opacity-100'}`}>
+                        <motion.div key={item.id} variants={slideUp} className={`bg-white p-6 rounded-3xl border border-gray-200 shadow-sm relative overflow-hidden group hover:shadow-xl transition duration-300 flex flex-col justify-between ${item.isClosed || item.isSubmitted || item.isGraded ? 'opacity-60 bg-gray-50' : 'opacity-100'}`}>
                             <div>
                                 <div className="flex justify-between items-start mb-4">
                                     <h2 className="text-xl font-bold text-gray-900 group-hover:text-brand transition-colors leading-tight pr-4">{item.title}</h2>
@@ -121,7 +121,7 @@ export default function CourseAssignmentsView({ subject, activeCourseId }) {
                                 </div>
                                 <p className="text-sm text-gray-500 line-clamp-2 leading-relaxed mb-6">{item.description}</p>
                             </div>
-                            <div className="space-y-4 pt-6 border-t border-gray-50">
+                            <div className="space-y-4 pt-6 border-t border-gray-100">
                                 <div className="flex justify-between items-center text-xs">
                                     <span className="text-gray-400 uppercase font-bold tracking-wider">Weight:</span>
                                     <span className="text-gray-900 font-bold">{item.maxPoints} pts</span>

@@ -72,8 +72,8 @@ export default function CourseModulesView({ activeCourseId }) {
       <div className="flex flex-col gap-5">
         {modulesLoading ? (
           [3, 2, 4].map((itemCount, i) => (
-            <div key={i} className="border border-gray-100 rounded-2xl overflow-hidden bg-white animate-pulse">
-              <div className="flex items-center gap-3 px-5 py-4 bg-gray-50/80 border-b border-gray-100">
+            <div key={i} className="border border-gray-200 rounded-2xl overflow-hidden bg-white animate-pulse">
+              <div className="flex items-center gap-3 px-5 py-4 bg-gray-50/80 border-b border-gray-200">
                 <div className="w-5 h-5 rounded-md bg-gray-200 shrink-0" />
                 <div className="h-3 rounded-full bg-gray-200" style={{ width: `${90 + i * 45}px` }} />
               </div>
@@ -88,8 +88,8 @@ export default function CourseModulesView({ activeCourseId }) {
             </div>
           ))
         ) : modules.length === 0 ? (
-          <div className="bg-white border border-gray-100 rounded-2xl px-8 py-16 text-center">
-            <div className="w-12 h-12 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center mx-auto mb-4">
+          <div className="bg-white border border-gray-200 rounded-2xl px-8 py-16 text-center">
+            <div className="w-12 h-12 rounded-2xl bg-gray-50 border border-gray-200 flex items-center justify-center mx-auto mb-4">
               <FileText size={20} className="text-gray-300" />
             </div>
             <p className="text-gray-500 font-semibold mb-1">No modules yet</p>
@@ -130,7 +130,7 @@ export default function CourseModulesView({ activeCourseId }) {
                   mod.items.map((item) => (
                     <div 
                       key={item.id}
-                      className="flex items-center justify-between py-3.5 px-6 border-b border-gray-100 last:border-b-0 hover:bg-gray-50/40 transition-colors"
+                      className="flex items-center justify-between py-3.5 px-6 border-b border-gray-200 last:border-b-0 hover:bg-gray-50/40 transition-colors"
                     >
                       <div className="flex items-center gap-3.5 min-w-0">
                         {/* Icon based on type */}

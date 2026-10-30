@@ -12,7 +12,7 @@ const LABEL_CLASS =
 export default function ProfileEducation({ profile, editMode, updateProfile }) {
   return (
     <section className={PANEL_CLASS}>
-      <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
+      <div className="mb-6 flex items-center gap-3 border-b border-gray-200 pb-3">
         <span className="rounded-xl bg-brand/5 p-2 text-brand">
           <GraduationCap size={20} />
         </span>
@@ -30,7 +30,7 @@ export default function ProfileEducation({ profile, editMode, updateProfile }) {
             </p>
           )}
 
-          <div className="mt-5 pt-4 border-t border-gray-100">
+          <div className="mt-5 pt-4 border-t border-gray-200">
             <p className="text-[11px] font-black uppercase tracking-wider text-gray-500 mb-3">Relevant Modules</p>
             <div className="flex flex-wrap gap-1.5">
               {profile.education.modules && profile.education.modules.filter(Boolean).length > 0 ? (
@@ -71,7 +71,7 @@ export default function ProfileEducation({ profile, editMode, updateProfile }) {
             </div>
           </div>
 
-          <div className="mt-2 pt-4 border-t border-gray-100">
+          <div className="mt-2 pt-4 border-t border-gray-200">
             <ChipListEditor
               title="Relevant Modules"
               items={profile.education.modules}

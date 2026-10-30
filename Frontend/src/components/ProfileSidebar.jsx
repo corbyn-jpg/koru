@@ -26,7 +26,7 @@ export default function ProfileSidebar({
     <aside className="flex flex-col gap-6">
       {/* Header & Identity */}
       <section className={PANEL_CLASS}>
-        <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
+        <div className="mb-6 flex items-center gap-3 border-b border-gray-200 pb-3">
           <span className="rounded-xl bg-brand/5 p-2 text-brand">
             <UserRound size={20} />
           </span>
@@ -143,14 +143,14 @@ export default function ProfileSidebar({
 
       {/* Share & Visibility */}
       <section className={PANEL_CLASS}>
-        <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
+        <div className="mb-6 flex items-center gap-3 border-b border-gray-200 pb-3">
           <span className="rounded-xl bg-brand/5 p-2 text-brand">
             <LinkIcon size={20} />
           </span>
           <h2 className="text-xl font-extrabold tracking-tight text-gray-900">Share &amp; Visibility</h2>
         </div>
 
-        <label className="mb-4 flex cursor-pointer items-center justify-between gap-3 rounded-2xl border border-gray-100 bg-gray-50/40 p-4 hover:bg-gray-50 transition-colors duration-200 shadow-3xs">
+        <label className="mb-4 flex cursor-pointer items-center justify-between gap-3 rounded-2xl border border-gray-200 bg-gray-50/40 p-4 hover:bg-gray-50 transition-colors duration-200 shadow-3xs">
           <div className="flex flex-col">
             <span className="text-sm font-extrabold text-gray-900 tracking-tight">Public Profile Visibility</span>
             <span className="text-[11px] text-gray-500 font-medium">Allow search engines and recruiters to find you</span>
@@ -167,7 +167,7 @@ export default function ProfileSidebar({
           {privacySectionConfig.map(([key, label]) => (
             <label
               key={key}
-              className="flex cursor-pointer items-center justify-between rounded-xl border border-gray-100 bg-gray-50/20 px-3.5 py-2.5 text-sm hover:bg-gray-50 transition-colors duration-200"
+              className="flex cursor-pointer items-center justify-between rounded-xl border border-gray-200 bg-gray-50/20 px-3.5 py-2.5 text-sm hover:bg-gray-50 transition-colors duration-200"
             >
               <span className="text-xs font-bold text-gray-700">{label}</span>
               <input
@@ -209,7 +209,7 @@ export default function ProfileSidebar({
 
       {/* External Portfolios */}
       <section className={PANEL_CLASS}>
-        <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
+        <div className="mb-6 flex items-center gap-3 border-b border-gray-200 pb-3">
           <span className="rounded-xl bg-brand/5 p-2 text-brand">
             <ExternalLink size={20} />
           </span>

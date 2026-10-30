@@ -102,7 +102,7 @@ function SkeletonEvent() {
         <div className="w-3 h-3 rounded-full bg-gray-100 animate-pulse mt-1" />
         <div className="w-0.5 h-14 bg-gray-100 animate-pulse mt-1" />
       </div>
-      <div className="flex-1 rounded-2xl border border-gray-100 p-3 mb-1 space-y-2">
+      <div className="flex-1 rounded-2xl border border-gray-200 p-3 mb-1 space-y-2">
         <div className="h-3 bg-gray-100 rounded-full animate-pulse w-2/3" />
         <div className="h-2.5 bg-gray-100 rounded-full animate-pulse w-1/3" />
         <div className="h-2.5 bg-gray-100 rounded-full animate-pulse w-1/2" />
@@ -178,7 +178,7 @@ export default function TodayTimeline() {
   const nextIdx = getNextEventIndex(events, now);
 
   return (
-    <div className="w-full h-full flex flex-col bg-white/70 border border-gray-100 rounded-3xl p-4">
+    <div className="w-full h-full flex flex-col bg-white/70 border border-gray-200 rounded-3xl p-4">
       <div className="flex items-center justify-between mt-5 mb-1">
         <h2 className="text-2xl font-['Gabarito']">Today</h2>
       </div>

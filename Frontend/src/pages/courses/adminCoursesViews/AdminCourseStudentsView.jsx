@@ -158,7 +158,7 @@ export function AdminCourseStudentsView({ courseId }) {
         <motion.div
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-6 bg-white rounded-3xl border border-gray-100 shadow-sm p-6"
+          className="mb-6 bg-white rounded-3xl border border-gray-200 shadow-sm p-6"
         >
           <h3 className="text-xs font-black uppercase tracking-wider text-gray-400 mb-4">Add Student to Course</h3>
           <div className="relative mb-3">
@@ -208,17 +208,17 @@ export function AdminCourseStudentsView({ courseId }) {
           placeholder="Search enrolled students..."
           value={search}
           onChange={e => setSearch(e.target.value)}
-          className="w-full pl-10 pr-4 py-3 bg-white border border-gray-100 rounded-2xl text-sm font-medium text-gray-900 outline-none shadow-sm focus:ring-2 focus:ring-brand/10"
+          className="w-full pl-10 pr-4 py-3 bg-white border border-gray-200 rounded-2xl text-sm font-medium text-gray-900 outline-none shadow-sm focus:ring-2 focus:ring-brand/10"
         />
       </motion.div>
 
       {/* Student list */}
-      <motion.div variants={slideUp} className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
+      <motion.div variants={slideUp} className="bg-white rounded-3xl border border-gray-200 shadow-sm overflow-hidden">
         {loading ? (
           <div className="animate-pulse">
             <table className="w-full text-left">
               <thead>
-                <tr className="bg-gray-50/50 border-b border-gray-100">
+                <tr className="bg-gray-50/50 border-b border-gray-200">
                   <th className="px-6 py-4"><div className="h-2.5 rounded-full bg-gray-200 w-16" /></th>
                   <th className="px-6 py-4"><div className="h-2.5 rounded-full bg-gray-200 w-12" /></th>
                   <th className="px-6 py-4"><div className="h-2.5 rounded-full bg-gray-200 w-14" /></th>
@@ -227,7 +227,7 @@ export function AdminCourseStudentsView({ courseId }) {
               </thead>
               <tbody>
                 {[1, 2, 3, 4, 5].map(i => (
-                  <tr key={i} className="border-b border-gray-50">
+                  <tr key={i} className="border-b border-gray-100">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
                         <div className="w-9 h-9 rounded-full bg-gray-100 shrink-0" />
@@ -250,7 +250,7 @@ export function AdminCourseStudentsView({ courseId }) {
         ) : (
           <table className="w-full text-left">
             <thead>
-              <tr className="bg-gray-50/50 border-b border-gray-100">
+              <tr className="bg-gray-50/50 border-b border-gray-200">
                 <th className="px-6 py-4 text-[10px] font-black uppercase tracking-wider text-gray-400">Student</th>
                 <th className="px-6 py-4 text-[10px] font-black uppercase tracking-wider text-gray-400">Group</th>
                 <th className="px-6 py-4 text-[10px] font-black uppercase tracking-wider text-gray-400">Status</th>
@@ -266,7 +266,7 @@ export function AdminCourseStudentsView({ courseId }) {
                 const assignedCohortId = studentCohortMap[studentId] || "";
 
                 return (
-                  <tr key={enrollment.id} className="border-b border-gray-50 last:border-0 hover:bg-gray-50/50 transition-colors group">
+                  <tr key={enrollment.id} className="border-b border-gray-100 last:border-0 hover:bg-gray-50/50 transition-colors group">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
                         <div className="w-9 h-9 rounded-full bg-brand/5 border border-brand/10 flex items-center justify-center text-brand font-black text-xs shrink-0">

@@ -340,7 +340,7 @@ export default function AppSidebar() {
               max-md:left-[76px] max-md:top-0 max-md:h-screen max-md:w-72 max-md:bg-white/95 max-md:border-r max-md:border-gray-200/50 max-md:shadow-2xl"
           >
             {/* Header */}
-            <div className="px-5 pb-4 border-b border-gray-100 flex flex-col gap-1">
+            <div className="px-5 pb-4 border-b border-gray-200 flex flex-col gap-1">
               <h3 className="text-base font-extrabold tracking-tight !text-gray-900">
                 My Courses
               </h3>
@@ -371,7 +371,7 @@ export default function AppSidebar() {
                       className={`flex items-center gap-3 p-3 rounded-2xl border transition duration-200 group select-none
                         ${isActiveCourse(course.id)
                           ? "bg-brand/5 border-brand/20"
-                          : "bg-transparent border-gray-100/50 hover:bg-gray-50/80 hover:border-gray-200"
+                          : "bg-transparent border-gray-200 hover:bg-gray-50/80 hover:border-gray-200"
                         }`}
                     >
                       {/* Dynamic Colored Badge */}
@@ -404,7 +404,7 @@ export default function AppSidebar() {
             </div>
 
             {/* Footer / Actions */}
-            <div className="p-4 border-t border-gray-100 flex flex-col gap-2 bg-gray-50/50">
+            <div className="p-4 border-t border-gray-200 flex flex-col gap-2 bg-gray-50/50">
               <button
                 onClick={() => {
                   setModalOpen(true);

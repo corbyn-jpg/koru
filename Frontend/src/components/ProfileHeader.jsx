@@ -12,7 +12,7 @@ export default function ProfileHeader({ profile, roleLabel }) {
             className="h-20 w-20 rounded-2xl border border-gray-200/60 object-cover shadow-3xs"
           />
         ) : (
-          <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-brand/5 to-brand/10 text-brand border border-gray-100 shadow-3xs">
+          <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-brand/5 to-brand/10 text-brand border border-gray-200 shadow-3xs">
             <UserRound size={26} />
           </div>
         )}

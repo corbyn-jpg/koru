@@ -73,9 +73,9 @@ function CreateAssignmentDrawer({ onClose, onSave, initialData, cohorts = [], de
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: "100%", opacity: 0 }}
             transition={{ type: "spring", damping: 28, stiffness: 220 }}
-            className="w-full max-w-xl bg-white border border-gray-100 rounded-[32px] shadow-sm flex flex-col overflow-hidden h-full shrink-0"
+            className="w-full max-w-xl bg-white border border-gray-200 rounded-[32px] shadow-sm flex flex-col overflow-hidden h-full shrink-0"
         >
-            <div className="flex justify-between items-center px-8 py-6 border-b border-gray-100 shrink-0">
+            <div className="flex justify-between items-center px-8 py-6 border-b border-gray-200 shrink-0">
                 <div>
                     <h2 className="text-2xl font-bold text-gray-900">{isEditing ? "Edit Assignment" : "Create Assignment"}</h2>
                     <p className="text-sm text-gray-400 mt-1">Fill in the details below</p>
@@ -126,7 +126,7 @@ function CreateAssignmentDrawer({ onClose, onSave, initialData, cohorts = [], de
                                         key={t.id}
                                         onClick={() => handleChange("type", t.id)}
                                         className={`flex flex-col items-center gap-2 p-3 rounded-2xl border-2 text-center transition ${
-                                            form.type === t.id ? "border-brand bg-brand/5" : "border-gray-100 hover:border-gray-200 bg-gray-50"
+                                            form.type === t.id ? "border-brand bg-brand/5" : "border-gray-200 hover:border-gray-200 bg-gray-50"
                                         }`}
                                     >
                                         <span className={`inline-flex items-center justify-center w-9 h-9 rounded-xl ${t.bg}`}>
@@ -204,15 +204,15 @@ function CreateAssignmentDrawer({ onClose, onSave, initialData, cohorts = [], de
                         <div className="bg-gray-50 rounded-[28px] p-6 space-y-4">
                             <div>
                                 <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-2 block">Opens</label>
-                                <input type="datetime-local" value={form.openDate} onChange={e => handleChange("openDate", e.target.value)} className="w-full bg-white rounded-2xl px-5 py-3 text-gray-900 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-brand/20 border border-gray-100 transition" />
+                                <input type="datetime-local" value={form.openDate} onChange={e => handleChange("openDate", e.target.value)} className="w-full bg-white rounded-2xl px-5 py-3 text-gray-900 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-brand/20 border border-gray-200 transition" />
                             </div>
                             <div>
                                 <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-2 block">Due Date</label>
-                                <input type="datetime-local" value={form.dueDate} onChange={e => handleChange("dueDate", e.target.value)} className="w-full bg-white rounded-2xl px-5 py-3 text-gray-900 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-brand/20 border border-gray-100 transition" />
+                                <input type="datetime-local" value={form.dueDate} onChange={e => handleChange("dueDate", e.target.value)} className="w-full bg-white rounded-2xl px-5 py-3 text-gray-900 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-brand/20 border border-gray-200 transition" />
                             </div>
                             <div>
                                 <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-2 block">Closes</label>
-                                <input type="datetime-local" value={form.closeDate} onChange={e => handleChange("closeDate", e.target.value)} className="w-full bg-white rounded-2xl px-5 py-3 text-gray-900 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-brand/20 border border-gray-100 transition" />
+                                <input type="datetime-local" value={form.closeDate} onChange={e => handleChange("closeDate", e.target.value)} className="w-full bg-white rounded-2xl px-5 py-3 text-gray-900 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-brand/20 border border-gray-200 transition" />
                             </div>
                         </div>
                     </div>
@@ -232,7 +232,7 @@ function CreateAssignmentDrawer({ onClose, onSave, initialData, cohorts = [], de
                                         className={`flex items-center gap-3 p-4 rounded-2xl border-2 text-left transition ${
                                             form.externalToolName === tool.name
                                                 ? "border-[#6366F1] bg-[#6366F1]/5"
-                                                : "border-gray-100 hover:border-gray-200 bg-gray-50"
+                                                : "border-gray-200 hover:border-gray-200 bg-gray-50"
                                         }`}
                                     >
                                         <span
@@ -282,7 +282,7 @@ function CreateAssignmentDrawer({ onClose, onSave, initialData, cohorts = [], de
                                                 placeholder="Question text..."
                                                 value={q.question}
                                                 onChange={e => updateQuestion(qi, "question", e.target.value)}
-                                                className="flex-1 bg-white rounded-xl px-4 py-2 text-sm text-gray-900 font-medium focus:outline-none focus:ring-2 focus:ring-ember/20 border border-gray-100"
+                                                className="flex-1 bg-white rounded-xl px-4 py-2 text-sm text-gray-900 font-medium focus:outline-none focus:ring-2 focus:ring-ember/20 border border-gray-200"
                                             />
                                             <button onClick={() => removeQuestion(qi)} className="p-1.5 rounded-lg text-gray-300 hover:text-red-500 hover:bg-red-50 transition">
                                                 <Trash2 size={14} />
@@ -297,7 +297,7 @@ function CreateAssignmentDrawer({ onClose, onSave, initialData, cohorts = [], de
                                                         placeholder={`Option ${oi + 1}...`}
                                                         value={opt}
                                                         onChange={e => updateOption(qi, oi, e.target.value)}
-                                                        className="flex-1 bg-white rounded-xl px-4 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-brand/10 border border-gray-100"
+                                                        className="flex-1 bg-white rounded-xl px-4 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-brand/10 border border-gray-200"
                                                     />
                                                 </div>
                                             ))}
@@ -310,7 +310,7 @@ function CreateAssignmentDrawer({ onClose, onSave, initialData, cohorts = [], de
                     )}
                 </div>
 
-                <div className="px-8 py-5 border-t border-gray-100 flex gap-3 shrink-0">
+                <div className="px-8 py-5 border-t border-gray-200 flex gap-3 shrink-0">
                     <button onClick={onClose} className="flex-1 py-4 rounded-2xl border-2 border-gray-200 text-gray-700 font-bold text-xs uppercase tracking-wider hover:bg-gray-50 transition">
                         Cancel
                     </button>
@@ -381,17 +381,17 @@ function SubmissionFileViewer({ submission }) {
     }, [submission.id, fileUrl, isImage, isPdf]);
 
     if (!fileUrl) return (
-        <div className="flex items-center justify-center h-64 bg-gray-50 rounded-3xl border border-gray-100 text-gray-400 text-sm font-medium">
+        <div className="flex items-center justify-center h-64 bg-gray-50 rounded-3xl border border-gray-200 text-gray-400 text-sm font-medium">
             No file submitted
         </div>
     );
 
     if (fileLoading) return (
-        <div className="h-64 rounded-3xl bg-gray-100 animate-pulse border border-gray-100" />
+        <div className="h-64 rounded-3xl bg-gray-100 animate-pulse border border-gray-200" />
     );
 
     if (fileError) return (
-        <div className="flex flex-col items-center justify-center h-64 bg-gray-50 rounded-3xl border border-gray-100 gap-3">
+        <div className="flex flex-col items-center justify-center h-64 bg-gray-50 rounded-3xl border border-gray-200 gap-3">
             <FileText size={28} className="text-gray-300" />
             <p className="text-sm text-gray-400 font-medium">Unable to load file preview</p>
             <a href={fileUrl} target="_blank" rel="noreferrer" className="text-xs text-brand font-bold hover:underline">Try opening directly</a>
@@ -399,24 +399,24 @@ function SubmissionFileViewer({ submission }) {
     );
 
     if (isPdf) return (
-        <iframe src={blobUrl} className="w-full h-[600px] rounded-3xl border border-gray-100" title="Submission PDF" />
+        <iframe src={blobUrl} className="w-full h-[600px] rounded-3xl border border-gray-200" title="Submission PDF" />
     );
     if (isImage) return (
-        <div className="flex items-center justify-center bg-gray-50 rounded-3xl border border-gray-100 p-4 min-h-[300px]">
+        <div className="flex items-center justify-center bg-gray-50 rounded-3xl border border-gray-200 p-4 min-h-[300px]">
             <img src={blobUrl} alt="Submission" className="max-w-full max-h-[550px] rounded-2xl object-contain" />
         </div>
     );
     if (isVideo) return (
-        <video src={blobUrl} controls className="w-full rounded-3xl border border-gray-100 max-h-[500px]" />
+        <video src={blobUrl} controls className="w-full rounded-3xl border border-gray-200 max-h-[500px]" />
     );
     if (isAudio) return (
-        <div className="flex items-center justify-center bg-gray-50 rounded-3xl border border-gray-100 p-8">
+        <div className="flex items-center justify-center bg-gray-50 rounded-3xl border border-gray-200 p-8">
             <audio src={blobUrl} controls className="w-full" />
         </div>
     );
 
     return (
-        <div className="flex flex-col items-center justify-center h-64 bg-gray-50 rounded-3xl border border-gray-100 gap-3">
+        <div className="flex flex-col items-center justify-center h-64 bg-gray-50 rounded-3xl border border-gray-200 gap-3">
             <FileText size={28} className="text-gray-300" />
             <p className="text-sm text-gray-500 font-medium">{fileExt.toUpperCase()} file</p>
             <a href={blobUrl} target="_blank" rel="noreferrer" className="px-4 py-2 rounded-xl bg-brand/5 text-brand text-xs font-bold hover:bg-brand/10 transition-colors">
@@ -600,14 +600,14 @@ function TeacherSubmissionReview({
                 <div className="flex items-center justify-center flex-1 text-gray-400 font-medium">Loading submissions...</div>
             ) : visibleSubmissions.length === 0 ? (
                 <div className="flex-1 flex items-center justify-center px-8 pb-8">
-                    <div className="text-center py-20 w-full bg-gray-50 rounded-[40px] border border-gray-100 text-gray-400 font-medium">
+                    <div className="text-center py-20 w-full bg-gray-50 rounded-[40px] border border-gray-200 text-gray-400 font-medium">
                         No submissions found for this group.
                     </div>
                 </div>
             ) : (
-                <div className="flex-1 flex overflow-hidden border-t border-gray-100 mt-2">
+                <div className="flex-1 flex overflow-hidden border-t border-gray-200 mt-2">
                     {/* Left — Student list */}
-                    <div className="w-[340px] shrink-0 overflow-y-auto border-r border-gray-100 bg-gray-50/30">
+                    <div className="w-[340px] shrink-0 overflow-y-auto border-r border-gray-200 bg-gray-50/30">
                         <div className="p-4 space-y-1">
                             {visibleSubmissions.map(sub => {
                                 const studentName = sub.student ? `${sub.student.firstName} ${sub.student.lastName}` : sub.studentId;
@@ -706,7 +706,7 @@ function TeacherSubmissionReview({
                                         const pct = maxPts && !isNaN(ptsVal) ? Math.round((ptsVal / maxPts) * 100) : null;
 
                                         return (
-                                            <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6">
+                                            <div className="bg-white rounded-3xl border border-gray-200 shadow-sm p-6">
                                                 <h3 className="text-[10px] font-black uppercase tracking-wider text-gray-400 mb-4">Grade</h3>
                                                 {existingGrade && !gs.editing ? (
                                                     <div className="flex items-center justify-between">
@@ -814,7 +814,7 @@ function AssignmentPreviewDrawer({ assignment, onClose }) {
                 className="fixed right-0 top-0 bottom-0 z-[101] w-full max-w-xl bg-white shadow-2xl flex flex-col overflow-hidden"
                 style={{ borderRadius: "40px 0 0 40px" }}
             >
-                <div className="flex justify-between items-center px-10 py-8 border-b border-gray-100 shrink-0">
+                <div className="flex justify-between items-center px-10 py-8 border-b border-gray-200 shrink-0">
                     <div>
                         <div className="flex items-center gap-3 mb-1">
                             <h2 className="text-2xl font-bold text-gray-900">Assignment Preview</h2>
@@ -952,7 +952,7 @@ function AssignmentPreviewDrawer({ assignment, onClose }) {
                     )}
                 </div>
 
-                <div className="px-10 py-6 border-t border-gray-100 shrink-0">
+                <div className="px-10 py-6 border-t border-gray-200 shrink-0">
                     <button onClick={onClose} className="w-full py-4 rounded-2xl border-2 border-gray-200 text-gray-700 font-bold text-xs uppercase tracking-wider hover:bg-gray-50 transition">
                         Close Preview
                     </button>
@@ -993,10 +993,10 @@ function AssignmentGroupRow({ group, onTogglePublish, onDelete, onEdit, onClose,
                         exit={{ opacity: 0, height: 0 }}
                         className="overflow-hidden"
                     >
-                        <div className="mt-3 bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
+                        <div className="mt-3 bg-white rounded-3xl border border-gray-200 shadow-sm overflow-hidden">
                             <table className="w-full text-left border-collapse">
                                 <thead>
-                                    <tr className="border-b border-gray-50 bg-gray-50/30">
+                                    <tr className="border-b border-gray-100 bg-gray-50/30">
                                         <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400">Assignment</th>
                                         <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400">Due</th>
                                         <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-gray-400 text-center">Submissions</th>
@@ -1011,7 +1011,7 @@ function AssignmentGroupRow({ group, onTogglePublish, onDelete, onEdit, onClose,
                                         const submissionPct = item.totalStudents > 0 ? Math.round((item.submissions / item.totalStudents) * 100) : 0;
 
                                         return (
-                                            <motion.tr key={item.id} layout className="border-b border-gray-50 last:border-0 hover:bg-gray-50/50 transition group">
+                                            <motion.tr key={item.id} layout className="border-b border-gray-100 last:border-0 hover:bg-gray-50/50 transition group">
                                                 <td className="px-6 py-3.5">
                                                     <div className="flex items-center gap-3">
                                                         <span className={`shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-xl ${typeInfo?.bg || "bg-gray-100"}`}>
@@ -1046,16 +1046,16 @@ function AssignmentGroupRow({ group, onTogglePublish, onDelete, onEdit, onClose,
                                                 </td>
                                                 <td className="px-6 py-3.5">
                                                     <div className="flex items-center justify-end gap-2">
-                                                        <button onClick={() => onPreview(item)} className="px-3 py-1.5 rounded-lg border border-gray-100 text-[9px] font-black uppercase tracking-[0.15em] text-gray-400 hover:bg-gray-100 transition whitespace-nowrap shadow-sm">
+                                                        <button onClick={() => onPreview(item)} className="px-3 py-1.5 rounded-lg border border-gray-200 text-[9px] font-black uppercase tracking-[0.15em] text-gray-400 hover:bg-gray-100 transition whitespace-nowrap shadow-sm">
                                                             Preview
                                                         </button>
-                                                        <button onClick={() => onView(item)} className="px-3 py-1.5 rounded-lg border border-gray-100 text-[9px] font-black uppercase tracking-[0.15em] text-gray-400 group-hover:bg-brand group-hover:text-white group-hover:border-brand transition whitespace-nowrap shadow-sm">
+                                                        <button onClick={() => onView(item)} className="px-3 py-1.5 rounded-lg border border-gray-200 text-[9px] font-black uppercase tracking-[0.15em] text-gray-400 group-hover:bg-brand group-hover:text-white group-hover:border-brand transition whitespace-nowrap shadow-sm">
                                                             Review
                                                         </button>
                                                         <button
                                                             onClick={() => onClose(group.id, item.id)}
                                                             className={`px-3 py-1.5 rounded-lg border text-[9px] font-black uppercase tracking-[0.15em] transition whitespace-nowrap shadow-sm ${
-                                                                item.isClosed ? "border-red-100 text-red-500 hover:bg-red-50" : "border-gray-100 text-gray-400 hover:bg-red-50 hover:text-red-500 hover:border-red-100"
+                                                                item.isClosed ? "border-red-100 text-red-500 hover:bg-red-50" : "border-gray-200 text-gray-400 hover:bg-red-50 hover:text-red-500 hover:border-red-100"
                                                             }`}
                                                             title={item.isClosed ? "Click to reopen" : "Click to close"}
                                                         >
@@ -1256,7 +1256,7 @@ export function CourseAssignmentsView({ subject, activeCourseId }) {
                         { label: "Open", value: loading ? "..." : openCount, accent: true },
                         { label: "Closed", value: loading ? "..." : totalAssignments - openCount, accent: false },
                     ].map((stat) => (
-                        <div key={stat.label} className={`rounded-[28px] px-7 py-6 flex flex-col gap-1 ${stat.accent ? "bg-brand text-white" : "bg-white border border-gray-100 shadow-sm"}`}>
+                        <div key={stat.label} className={`rounded-[28px] px-7 py-6 flex flex-col gap-1 ${stat.accent ? "bg-brand text-white" : "bg-white border border-gray-200 shadow-sm"}`}>
                             <span className={`text-[10px] font-black uppercase tracking-wider ${stat.accent ? "text-white/60" : "text-gray-400"}`}>{stat.label}</span>
                             <span className={`text-4xl font-black italic ${stat.accent ? "text-white" : "text-gray-900"}`}>{stat.value}</span>
                         </div>
@@ -1276,7 +1276,7 @@ export function CourseAssignmentsView({ subject, activeCourseId }) {
                                     whileHover={{ y: -3 }}
                                     whileTap={{ scale: 0.97 }}
                                     onClick={() => setActiveTypeFilter(isActive ? "all" : t.id)}
-                                    className={`flex-1 min-w-[130px] flex flex-col items-start gap-3 p-5 rounded-[24px] border-2 text-left transition ${isActive ? "border-brand bg-brand/5 shadow-md" : "border-gray-100 bg-white hover:border-gray-200 hover:shadow-sm"}`}
+                                    className={`flex-1 min-w-[130px] flex flex-col items-start gap-3 p-5 rounded-[24px] border-2 text-left transition ${isActive ? "border-brand bg-brand/5 shadow-md" : "border-gray-200 bg-white hover:border-gray-200 hover:shadow-sm"}`}
                                 >
                                     <span className={`inline-flex items-center justify-center w-10 h-10 rounded-2xl ${t.bg}`}>
                                         <Icon size={20} style={{ color: t.color }} />
@@ -1306,7 +1306,7 @@ export function CourseAssignmentsView({ subject, activeCourseId }) {
                         <h2 className="text-sm font-black uppercase tracking-wider text-gray-400">Assignment Groups</h2>
                     </div>
                     {filteredGroups.length === 0 ? (
-                        <div className="text-center py-20 bg-gray-50 rounded-[40px] border border-gray-100 text-gray-400 font-medium">
+                        <div className="text-center py-20 bg-gray-50 rounded-[40px] border border-gray-200 text-gray-400 font-medium">
                             No assignments match this filter.
                         </div>
                     ) : (

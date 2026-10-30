@@ -10,7 +10,7 @@ const PANEL_CLASS =
 export default function ProfileLinks({ linkEntries }) {
   return (
     <section className={PANEL_CLASS}>
-      <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
+      <div className="mb-6 flex items-center gap-3 border-b border-gray-200 pb-3">
         <span className="rounded-xl bg-brand/5 p-2 text-brand">
           <LinkIcon size={20} />
         </span>

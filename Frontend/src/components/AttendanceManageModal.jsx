@@ -95,7 +95,7 @@ export default function AttendanceManageModal({ courseId, teacherId, sessionType
                 onClick={e => e.stopPropagation()}
             >
                 {/* Header */}
-                <div className="px-7 pt-7 pb-5 border-b border-gray-100">
+                <div className="px-7 pt-7 pb-5 border-b border-gray-200">
                     <p className="text-[10px] font-black uppercase tracking-wider text-brand mb-1">
                         {sessionType} · {courseName}
                     </p>

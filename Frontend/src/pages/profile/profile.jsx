@@ -352,7 +352,7 @@ export default function Profile({ publicRoute = false }) {
             max-md:h-full max-md:w-64 max-md:bg-white/80 max-md:backdrop-blur-md max-md:border-r max-md:border-gray-200/50"
         >
           {/* Profile Sidebar Header Info */}
-          <div className="px-6 pt-6 pb-5 border-b border-gray-100 flex flex-col gap-2 shrink-0 select-none">
+          <div className="px-6 pt-6 pb-5 border-b border-gray-200 flex flex-col gap-2 shrink-0 select-none">
             <div className="flex items-center gap-2">
               <span className="px-2 py-0.5 rounded-lg bg-brand/10 text-brand font-black text-[9px] uppercase tracking-wider shadow-sm">
                 {roleLabel}
@@ -436,7 +436,7 @@ export default function Profile({ publicRoute = false }) {
         {/* Right Section: Main Content Area: Floating Island Card */}
         <div className="flex-1 flex flex-col overflow-hidden transition duration-300 md:bg-white/75 md:backdrop-blur-xl md:border md:border-white/20 md:rounded-[28px] md:shadow-lg max-md:bg-white">
           {/* Header Top Bar */}
-          <div className="h-14 border-b border-gray-100 bg-white/60 backdrop-blur-md flex items-center justify-between px-8 z-10 shrink-0 select-none">
+          <div className="h-14 border-b border-gray-200 bg-white/60 backdrop-blur-md flex items-center justify-between px-8 z-10 shrink-0 select-none">
             <div className="flex items-center gap-3">
               <span className="px-2.5 py-0.5 rounded-lg text-[10px] font-black text-white bg-brand shadow-sm">
                 University Portfolio
@@ -511,7 +511,7 @@ export default function Profile({ publicRoute = false }) {
 
                       {editMode && (
                         <div className={pageClasses.card}>
-                          <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
+                          <div className="mb-6 flex items-center gap-3 border-b border-gray-200 pb-3">
                             <span className="rounded-xl bg-brand/5 p-2 text-brand"><UserRound size={20} /></span>
                             <h2 className="text-xl font-extrabold tracking-tight text-gray-900">Edit Profile Identity</h2>
                           </div>
@@ -652,7 +652,7 @@ export default function Profile({ publicRoute = false }) {
 
                       {editMode && (
                         <div className={pageClasses.card}>
-                          <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
+                          <div className="mb-6 flex items-center gap-3 border-b border-gray-200 pb-3">
                             <span className="rounded-xl bg-brand/5 p-2 text-brand"><Palette size={20} /></span>
                             <h2 className="text-xl font-extrabold tracking-tight text-gray-900">Manage Platform Links</h2>
                           </div>
@@ -677,7 +677,7 @@ export default function Profile({ publicRoute = false }) {
 
                   {activeTab === "visibility" && !publicRoute && (
                     <div className={pageClasses.card}>
-                      <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
+                      <div className="mb-6 flex items-center gap-3 border-b border-gray-200 pb-3">
                         <span className="rounded-xl bg-brand/5 p-2 text-brand"><Eye size={20} /></span>
                         <h2 className="text-xl font-extrabold tracking-tight text-gray-900">Privacy &amp; Visibility Checklist</h2>
                       </div>
@@ -686,7 +686,7 @@ export default function Profile({ publicRoute = false }) {
                         Control which sections are displayed to recruiters on your public dashboard.
                       </p>
                       
-                      <label className="mb-4 flex cursor-pointer items-center justify-between gap-3 rounded-2xl border border-gray-100 bg-gray-50/40 p-4 hover:bg-gray-50 transition-colors duration-200 shadow-3xs">
+                      <label className="mb-4 flex cursor-pointer items-center justify-between gap-3 rounded-2xl border border-gray-200 bg-gray-50/40 p-4 hover:bg-gray-50 transition-colors duration-200 shadow-3xs">
                         <div className="flex flex-col">
                           <span className="text-sm font-extrabold text-gray-900 tracking-tight">Public Profile Visibility</span>
                           <span className="text-[11px] text-gray-500 font-medium">Allow search engines and recruiters to find you</span>
@@ -703,7 +703,7 @@ export default function Profile({ publicRoute = false }) {
                         {PRIVACY_SECTION_CONFIG.map(([key, label]) => (
                           <label
                             key={key}
-                            className="flex cursor-pointer items-center justify-between rounded-xl border border-gray-100 bg-gray-50/20 px-3.5 py-2.5 text-sm hover:bg-gray-50 transition-colors duration-200"
+                            className="flex cursor-pointer items-center justify-between rounded-xl border border-gray-200 bg-gray-50/20 px-3.5 py-2.5 text-sm hover:bg-gray-50 transition-colors duration-200"
                           >
                             <span className="text-xs font-bold text-gray-700">{label}</span>
                             <input
@@ -717,7 +717,7 @@ export default function Profile({ publicRoute = false }) {
                       </div>
 
                       {editMode && (
-                        <div className="mt-4 pt-4 border-t border-gray-100">
+                        <div className="mt-4 pt-4 border-t border-gray-200">
                           <label className={pageClasses.label}>Vanity URL slug</label>
                           <input
                             value={profile.vanityUrlSlug}

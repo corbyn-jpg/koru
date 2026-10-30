@@ -37,7 +37,7 @@ export default function TimelineEventExpanded({
 
           <div className="h-3" />
 
-          <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+          <div className="flex items-center justify-between pt-3 border-t border-gray-200">
             <div className="flex items-center gap-3">
               <div className={`w-9 h-9 rounded-full flex items-center justify-center ${isPast ? "bg-gray-100" : "bg-brand/10"}`}>
                 <MdPersonOutline className={`w-5 h-5 ${isPast ? "text-gray-400" : "text-brand"}`} />
@@ -56,7 +56,7 @@ export default function TimelineEventExpanded({
 
           {/* Attendance actions */}
           {!isPast && (onManageAttendance || onCheckIn) && (
-            <div className="mt-3 pt-3 border-t border-gray-100">
+            <div className="mt-3 pt-3 border-t border-gray-200">
               {onManageAttendance && (
                 <button
                   onClick={e => { e.stopPropagation(); onManageAttendance(); }}

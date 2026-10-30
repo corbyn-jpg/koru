@@ -114,7 +114,7 @@ function expandClassToCalendarEvents(cls, weeksForward = 20, weeksBack = 26) {
 function SlotChip({ cls, conflict }) {
   return (
     <div className={`rounded-xl px-3 py-2 border text-[10px] ${
-      conflict ? "bg-red-50 border-red-200" : "bg-white border-gray-100"
+      conflict ? "bg-red-50 border-red-200" : "bg-white border-gray-200"
     }`}>
       {cls.name && <span className={`font-black uppercase tracking-wider ${conflict ? "text-red-500" : "text-brand"}`}>{cls.name} · </span>}
       {cls.courseName && <span className="font-semibold text-gray-700">{cls.courseName}</span>}
@@ -215,7 +215,7 @@ export default function AdminCalendar() {
     <div className="flex flex-col h-full overflow-hidden">
       {/* ── Timetable control panel ───────────────────────────── */}
       <div className="shrink-0 px-4 pt-4 pb-3">
-        <div className="bg-white/80 backdrop-blur-sm rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
+        <div className="bg-white/80 backdrop-blur-sm rounded-3xl border border-gray-200 shadow-sm overflow-hidden">
         {/* Panel header (always visible) */}
         <div className="flex items-center justify-between px-6 py-3">
           <div className="flex items-center gap-3">

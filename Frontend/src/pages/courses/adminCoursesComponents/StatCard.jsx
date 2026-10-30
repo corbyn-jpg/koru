@@ -9,7 +9,7 @@ export default function StatCard({ label, value, icon: Icon, trend, accent = fal
   return (
     <motion.div 
       initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-      className={`rounded-[24px] p-6 flex flex-col justify-between gap-4 transition hover:shadow-lg ${accent ? "bg-brand text-white shadow-lg shadow-brand/20" : "bg-white border border-gray-100 shadow-sm"}`}
+      className={`rounded-[24px] p-6 flex flex-col justify-between gap-4 transition hover:shadow-lg ${accent ? "bg-brand text-white shadow-lg shadow-brand/20" : "bg-white border border-gray-200 shadow-sm"}`}
     >
       <div className="flex justify-between items-start">
         <span className={`inline-flex items-center justify-center w-10 h-10 rounded-xl ${accent ? "bg-white/10" : "bg-brand/5"}`}>

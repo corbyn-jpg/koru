@@ -17,7 +17,7 @@ import {
   updateSubmission,
 } from "../../services/submissionService.jsx";
 import { uploadFileToCloudinary } from "../../services/cloudinaryService.js";
-import { getStudentGrades, createGrade, updateGrade } from "../../services/gradeService.js";
+import { getStudentGrades, gradeQuiz } from "../../services/gradeService.js";
 import { useAuth } from "../../contexts/AuthContext";
 
 // ─────────────────────────────────────────────
@@ -99,7 +99,7 @@ function FilePreviewModal({ file, onClose }) {
           className="bg-white rounded-3xl shadow-2xl w-full max-w-3xl max-h-[85vh] flex flex-col overflow-hidden"
         >
           {/* Header */}
-          <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 shrink-0">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 shrink-0">
             <div className="flex items-center gap-3 min-w-0">
               <FileText size={18} className="text-[#64748b] shrink-0" />
               <p className="font-bold text-gray-900 truncate text-sm">{file.name}</p>
@@ -363,25 +363,12 @@ export default function AssignmentDetail({ assignmentId, activeCourseId }) {
         setExistingSubmission(created);
       }
 
-      // Auto-grade quiz submissions
+      // Quizzes are marked on the server from the saved answers, so a student can't post their own score
       if (isQuiz && quizQuestions.length > 0) {
-        const maxPts = assignment.points ?? quizQuestions.length;
-        let correct = 0;
-        quizQuestions.forEach((q, qi) => {
-          if (quizAnswers[qi] === q.correctAnswer) correct++;
-        });
-        const pointsEarned = Math.round((correct / quizQuestions.length) * maxPts * 10) / 10;
         try {
-          if (existingGrade) {
-            await updateGrade(existingGrade.id, { submissionId, pointsEarned, gradedBy: user.userId });
-            setExistingGrade(prev => ({ ...prev, pointsEarned, isReleased: true }));
-          } else {
-            // isReleased: true so quiz grades are immediately visible to the student
-            const saved = await createGrade({ submissionId, pointsEarned, gradedBy: user.userId, isReleased: true });
-            setExistingGrade(saved);
-          }
+          setExistingGrade(await gradeQuiz(submissionId));
         } catch (gradeErr) {
-          console.error("Auto-grade failed:", gradeErr);
+          console.error("Quiz marking failed:", gradeErr);
         }
       }
 
@@ -456,7 +443,7 @@ export default function AssignmentDetail({ assignmentId, activeCourseId }) {
               </div>
             </div>
             {/* Description block */}
-            <div className="p-6 bg-white rounded-3xl border border-gray-100 space-y-3">
+            <div className="p-6 bg-white rounded-3xl border border-gray-200 space-y-3">
               <div className="h-4 rounded-full bg-gray-200 w-32 mb-4" />
               {[90, 75, 85, 60, 80].map((w, i) => (
                 <div key={i} className="h-4 rounded-full bg-gray-100" style={{ width: `${w}%` }} />
@@ -481,7 +468,7 @@ export default function AssignmentDetail({ assignmentId, activeCourseId }) {
               {/* Info strip – Due | Points | Status */}
               <div className="flex flex-wrap gap-3">
                 {/* Due date */}
-                <div className="flex items-center gap-2.5 px-5 py-3 rounded-2xl bg-white border border-gray-100 shadow-sm">
+                <div className="flex items-center gap-2.5 px-5 py-3 rounded-2xl bg-white border border-gray-200 shadow-sm">
                   <Calendar size={18} className="text-[#64748b]" />
                   <div className="flex flex-col">
                     <span className="text-[10px] font-black uppercase tracking-wider text-gray-400">Due</span>
@@ -493,13 +480,13 @@ export default function AssignmentDetail({ assignmentId, activeCourseId }) {
 
                 {/* Days left badge */}
                 {daysLeft && (
-                  <div className="flex items-center px-5 py-3 rounded-2xl bg-white border border-gray-100 shadow-sm">
+                  <div className="flex items-center px-5 py-3 rounded-2xl bg-white border border-gray-200 shadow-sm">
                     <span className="text-sm font-bold text-gray-600">{daysLeft.label}</span>
                   </div>
                 )}
 
                 {/* Points */}
-                <div className="flex items-center gap-2.5 px-5 py-3 rounded-2xl bg-white border border-gray-100 shadow-sm">
+                <div className="flex items-center gap-2.5 px-5 py-3 rounded-2xl bg-white border border-gray-200 shadow-sm">
                   <InfoCircle size={18} className="text-[#78716c]" />
                   <div className="flex flex-col">
                     <span className="text-[10px] font-black uppercase tracking-wider text-gray-400">Points</span>
@@ -511,7 +498,7 @@ export default function AssignmentDetail({ assignmentId, activeCourseId }) {
 
                 {/* Submission status */}
                 {!loadingSubmission && (
-                  <div className="flex items-center gap-2 px-5 py-3 rounded-2xl border bg-white border-gray-100 shadow-sm">
+                  <div className="flex items-center gap-2 px-5 py-3 rounded-2xl border bg-white border-gray-200 shadow-sm">
                     {isSubmitted
                       ? <CheckCircle size={18} className="text-gray-600" />
                       : <CloseCircle size={18} className="text-gray-400" />}
@@ -526,7 +513,7 @@ export default function AssignmentDetail({ assignmentId, activeCourseId }) {
             {/* ── Description Card ── */}
             <motion.div
               variants={slideUp}
-              className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6"
+              className="bg-white rounded-3xl border border-gray-200 shadow-sm p-6"
             >
               <h2 className="text-[10px] font-black uppercase tracking-wider text-[#64748b] mb-5">
                 Assignment Brief
@@ -545,7 +532,7 @@ export default function AssignmentDetail({ assignmentId, activeCourseId }) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.4, ease: "easeOut" }}
-                  className="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm"
+                  className="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm"
                 >
                   <h2 className="text-[10px] font-black uppercase tracking-wider text-gray-600 mb-5">
                     Your Submission
@@ -589,7 +576,7 @@ export default function AssignmentDetail({ assignmentId, activeCourseId }) {
             {isClosed ? (
               <motion.div
                 variants={slideUp}
-                className="bg-white border border-gray-100 rounded-3xl p-6 text-center shadow-sm"
+                className="bg-white border border-gray-200 rounded-3xl p-6 text-center shadow-sm"
               >
                 <p className="text-gray-900 font-bold text-lg mb-1">Assignment Closed</p>
                 <p className="text-gray-500 text-sm">This assignment has been closed by your lecturer. No more submissions are accepted.</p>
@@ -597,13 +584,13 @@ export default function AssignmentDetail({ assignmentId, activeCourseId }) {
             ) : isSubmitted && !canResubmit ? (
               <motion.div
                 variants={slideUp}
-                className="bg-white border border-gray-100 rounded-3xl p-6 text-center shadow-sm"
+                className="bg-white border border-gray-200 rounded-3xl p-6 text-center shadow-sm"
               >
                 <p className="text-gray-600 font-medium">Only one submission is allowed for this assignment.</p>
               </motion.div>
             ) : isQuiz ? (
               /* Quiz submission area */
-              <motion.div variants={slideUp} className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6">
+              <motion.div variants={slideUp} className="bg-white rounded-3xl border border-gray-200 shadow-sm p-6">
                 {/* Results view – shown when already submitted and not retaking */}
                 {isSubmitted && !quizStarted && quizResults ? (
                   <div>
@@ -696,7 +683,7 @@ export default function AssignmentDetail({ assignmentId, activeCourseId }) {
                               <label key={oi} className={`flex items-center gap-3 px-4 py-3 rounded-2xl cursor-pointer transition ${
                                 quizAnswers[qi] === oi
                                   ? "bg-[#64748b]/10 border-2 border-[#64748b]"
-                                  : "bg-white border-2 border-gray-100 hover:border-gray-200"
+                                  : "bg-white border-2 border-gray-200 hover:border-gray-200"
                               }`}>
                                 <input
                                   type="radio"
@@ -738,7 +725,7 @@ export default function AssignmentDetail({ assignmentId, activeCourseId }) {
             ) : (
               <motion.div
                 variants={slideUp}
-                className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6"
+                className="bg-white rounded-3xl border border-gray-200 shadow-sm p-6"
               >
                 <h2 className="text-[10px] font-black uppercase tracking-wider text-[#64748b] mb-2">
                   {isSubmitted ? "Resubmit Work" : "Submit Your Work"}

@@ -117,12 +117,12 @@ export function AdminGradeActivityView({ courseId }) {
         <p className="text-gray-500 mt-1 text-sm">{grades.length} graded submissions</p>
       </motion.header>
 
-      <motion.div variants={slideUp} className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
+      <motion.div variants={slideUp} className="bg-white rounded-3xl border border-gray-200 shadow-sm overflow-hidden">
         {loading ? (
           <div className="animate-pulse">
             <table className="w-full text-left">
               <thead>
-                <tr className="bg-gray-50/50 border-b border-gray-100">
+                <tr className="bg-gray-50/50 border-b border-gray-200">
                   {["w-20", "w-16", "w-24", "w-16", "w-16", "w-16"].map((w, i) => (
                     <th key={i} className="px-6 py-4"><div className={`h-2.5 rounded-full bg-gray-200 ${w}`} /></th>
                   ))}
@@ -130,7 +130,7 @@ export function AdminGradeActivityView({ courseId }) {
               </thead>
               <tbody>
                 {[1, 2, 3, 4, 5].map(i => (
-                  <tr key={i} className="border-b border-gray-50">
+                  <tr key={i} className="border-b border-gray-100">
                     <td className="px-6 py-4"><div className="h-3 rounded-full bg-gray-100 w-28" /></td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2.5">
@@ -161,7 +161,7 @@ export function AdminGradeActivityView({ courseId }) {
         ) : (
           <table className="w-full text-left">
             <thead>
-              <tr className="bg-gray-50/50 border-b border-gray-100">
+              <tr className="bg-gray-50/50 border-b border-gray-200">
                 {SORT_OPTIONS.map(opt => (
                   <th
                     key={opt.key}
@@ -189,7 +189,7 @@ export function AdminGradeActivityView({ courseId }) {
                   : "?";
 
                 return (
-                  <tr key={grade.id} className="border-b border-gray-50 last:border-0 hover:bg-gray-50/40 transition-colors">
+                  <tr key={grade.id} className="border-b border-gray-100 last:border-0 hover:bg-gray-50/40 transition-colors">
                     {/* Date */}
                     <td className="px-6 py-4">
                       <span className="text-xs text-gray-500">{formatDate(grade.gradedAt)}</span>

@@ -52,7 +52,7 @@ function formatDueDate(raw) {
 
 function SkeletonTodo() {
   return (
-    <div className="rounded-2xl border border-gray-100 px-4 py-3.5 flex items-center gap-3">
+    <div className="rounded-2xl border border-gray-200 px-4 py-3.5 flex items-center gap-3">
       <div className="w-10 h-10 rounded-xl bg-gray-100 animate-pulse shrink-0" />
       <div className="flex-1 space-y-2">
         <div className="h-3.5 bg-gray-100 rounded-full animate-pulse w-3/4" />
@@ -161,7 +161,7 @@ export default function TeacherTodoProgress() {
   }, [todos]);
 
   return (
-    <div className="w-full h-full flex flex-col bg-white/70 border border-gray-100 rounded-3xl p-4">
+    <div className="w-full h-full flex flex-col bg-white/70 border border-gray-200 rounded-3xl p-4">
       <div className="flex items-center justify-between mt-5 mb-1">
         <h2 className="text-2xl font-['Gabarito']">To Do</h2>
         <button
@@ -250,7 +250,7 @@ export default function TeacherTodoProgress() {
                   exit={{ opacity: 0, x: 20 }}
                   transition={{ duration: 0.3, ease: "easeOut" }}
                   className={`w-full border rounded-2xl px-4 py-3.5 flex items-center gap-3 transition duration-300 cursor-pointer
-                    ${todo.isCompleted ? "bg-gray-50/60 border-gray-100 opacity-40" : "bg-white/80 border-gray-100 hover:border-gray-200"}`}
+                    ${todo.isCompleted ? "bg-gray-50/60 border-gray-200 opacity-40" : "bg-white/80 border-gray-200 hover:border-gray-200"}`}
                 >
                   <div className="relative shrink-0">
                     <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${todo.isCompleted ? "bg-gray-100" : colors.icon}`}>

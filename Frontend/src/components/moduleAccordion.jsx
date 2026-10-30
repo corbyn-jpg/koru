@@ -143,7 +143,7 @@ export default function ModuleAccordion() {
   };
 
   return (
-    <div className="flex flex-col gap-1 overflow-hidden bg-white/50 border border-1 border-gray-100 shadow-xl rounded-3xl min-w-[220px] max-h-[80vh] overflow-y-auto py-4 scrollbar-hide">
+    <div className="flex flex-col gap-1 overflow-hidden bg-white/50 border border-1 border-gray-200 shadow-xl rounded-3xl min-w-[220px] max-h-[80vh] overflow-y-auto py-4 scrollbar-hide">
       {items.map((item) => (
         <AccordionItem
           key={item.id}
@@ -207,7 +207,7 @@ export default function ModuleAccordion() {
       ))}
 
       {isTeacher && (
-        <div className="mt-4 px-4 border-t border-gray-100 pt-4">
+        <div className="mt-4 px-4 border-t border-gray-200 pt-4">
           {isAddingSection ? (
             <div className="flex flex-col gap-2">
               <input

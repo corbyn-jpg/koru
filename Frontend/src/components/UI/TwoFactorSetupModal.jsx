@@ -76,7 +76,7 @@ export default function TwoFactorSetupModal({ userId, onSuccess, onClose }) {
         className="relative w-full max-w-md rounded-[28px] bg-white shadow-2xl overflow-hidden"
       >
         {/* Header */}
-        <div className="flex items-center justify-between gap-3 px-6 pt-6 pb-4 border-b border-gray-100">
+        <div className="flex items-center justify-between gap-3 px-6 pt-6 pb-4 border-b border-gray-200">
           <div className="flex items-center gap-3">
             <span className="rounded-xl bg-primary/10 p-2 text-primary">
               <ShieldCheck size={20} />

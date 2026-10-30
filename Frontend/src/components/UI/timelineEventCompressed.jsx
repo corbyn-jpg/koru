@@ -20,7 +20,7 @@ export default function TimelineEventCompressed({
     >
       <p className={`text-sm font-medium mb-2.5 ml-0.5 ${isPast ? "text-gray-300" : "text-gray-500"}`}>{timeRange}</p>
 
-      <div className={`border rounded-2xl px-5 py-4 transition-shadow duration-200 ${isPast ? "bg-gray-20 border-gray-50 hover:shadow-md" : "bg-white border-gray-200 hover:shadow-md"}`}>
+      <div className={`border rounded-2xl px-5 py-4 transition-shadow duration-200 ${isPast ? "bg-gray-20 border-gray-100 hover:shadow-md" : "bg-white border-gray-200 hover:shadow-md"}`}>
         <div className="flex items-center justify-between">
           <div className="flex-1 min-w-0 pr-3">
             <h3 className="text-base font-semibold text-black/30 leading-tight font-['Gabarito']">{title}</h3>
@@ -40,7 +40,7 @@ export default function TimelineEventCompressed({
 
         {/* Attendance actions */}
         {!isPast && (onManageAttendance || onCheckIn) && (
-          <div className="mt-3 pt-3 border-t border-gray-100">
+          <div className="mt-3 pt-3 border-t border-gray-200">
             {onManageAttendance && (
               <button
                 onClick={e => { e.stopPropagation(); onManageAttendance(); }}

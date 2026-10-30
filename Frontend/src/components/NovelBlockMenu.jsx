@@ -402,7 +402,7 @@ export default function NovelBlockMenu() {
                                         {c.label}
                                     </button>
                                 ))}
-                                <div className="border-t border-gray-100 my-1" />
+                                <div className="border-t border-gray-200 my-1" />
                                 <div className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-gray-400">Background</div>
                                 {BG_COLORS.map((c) => (
                                     <button
@@ -418,7 +418,7 @@ export default function NovelBlockMenu() {
                         )}
                     </div>
 
-                    <div className="border-t border-gray-100 my-1" />
+                    <div className="border-t border-gray-200 my-1" />
 
                     {/* Copy */}
                     <button
@@ -438,7 +438,7 @@ export default function NovelBlockMenu() {
                         <CopyPlus size={14} className="text-gray-500" /> Duplicate
                     </button>
 
-                    <div className="border-t border-gray-100 my-1" />
+                    <div className="border-t border-gray-200 my-1" />
 
                     {/* Delete */}
                     <button

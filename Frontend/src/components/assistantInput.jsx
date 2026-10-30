@@ -165,7 +165,7 @@ export default function AssistantInput({ onSend, disabled = false, role = "teach
         </div>
 
         {/* Bottom action bar */}
-        <div className="flex items-center justify-between pt-2 border-t border-gray-100/80">
+        <div className="flex items-center justify-between pt-2 border-t border-gray-200">
 
           {/* Left: attachment + tools */}
           <div className="flex items-center gap-1">
@@ -202,7 +202,7 @@ export default function AssistantInput({ onSend, disabled = false, role = "teach
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 8, scale: 0.97 }}
                     transition={{ duration: 0.15, ease: "easeOut" }}
-                    className="absolute bottom-full left-0 mb-2 w-68 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden z-50 py-1.5"
+                    className="absolute bottom-full left-0 mb-2 w-68 bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden z-50 py-1.5"
                     style={{ width: "272px" }}
                   >
                     <p className="px-4 pt-2 pb-1 text-[10px] font-bold text-gray-400 uppercase tracking-wider">

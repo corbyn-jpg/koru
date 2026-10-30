@@ -84,10 +84,10 @@ export default function CourseGradesView({ subject, activeCourseId }) {
                 <h1 className="text-3xl font-semibold tracking-tight text-gray-900">Grades</h1>
                 <p className="text-gray-500 mt-2">{subject?.code || ""} | Academic Performance Overview</p>
             </motion.header>
-            <motion.div variants={slideUp} className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
+            <motion.div variants={slideUp} className="bg-white rounded-3xl border border-gray-200 shadow-sm overflow-hidden">
                 <table className="w-full text-left border-collapse">
                     <thead>
-                        <tr className="border-b border-gray-50 bg-gray-50/50">
+                        <tr className="border-b border-gray-100 bg-gray-50/50">
                             <th className="px-6 py-3 text-xs font-bold uppercase tracking-wider text-gray-400">Assignment Name</th>
                             <th className="px-6 py-3 text-xs font-bold uppercase tracking-wider text-gray-400">Points</th>
                             <th className="px-6 py-3 text-xs font-bold uppercase tracking-wider text-gray-400">Status</th>
@@ -98,7 +98,7 @@ export default function CourseGradesView({ subject, activeCourseId }) {
                         {loading ? (
                             <>
                                 {[1, 2, 3, 4, 5].map(i => (
-                                    <tr key={i} className="border-b border-gray-50 animate-pulse">
+                                    <tr key={i} className="border-b border-gray-100 animate-pulse">
                                         <td className="px-6 py-3.5">
                                             <div className="h-4 rounded-full bg-gray-200 mb-1.5" style={{ width: `${55 + (i * 19) % 40}%` }} />
                                             <div className="h-3 rounded-full bg-gray-100 w-20" />
@@ -113,7 +113,7 @@ export default function CourseGradesView({ subject, activeCourseId }) {
                             <tr><td colSpan="4" className="text-center py-6 text-gray-500">No grades found.</td></tr>
                         ) : (
                             gradesData.map((item) => (
-                                <motion.tr key={item.id} variants={slideUp} className="border-b border-gray-50 last:border-0 hover:bg-gray-50/30 transition-colors">
+                                <motion.tr key={item.id} variants={slideUp} className="border-b border-gray-100 last:border-0 hover:bg-gray-50/30 transition-colors">
                                     <td className="px-6 py-3.5">
                                         <div className="font-medium text-gray-900 text-sm">{item.name}</div>
                                         <div className="text-xs text-gray-400 mt-0.5">{item.date}</div>

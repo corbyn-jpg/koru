@@ -181,7 +181,7 @@ export default function CalendarTimelineView({ events = [], weeks = [], loading 
   return (
     <div>
       {/* Week nav */}
-      <div className="flex items-center justify-between px-1 py-3 border-b border-gray-100">
+      <div className="flex items-center justify-between px-1 py-3 border-b border-gray-200">
         <div className="flex items-center gap-2">
           <button onClick={() => setWeekIdx(i => Math.max(0, i-1))} disabled={weekIdx === 0}
             className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-400 text-base border-none cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed transition-colors">‹</button>

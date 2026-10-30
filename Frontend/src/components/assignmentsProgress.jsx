@@ -11,7 +11,7 @@ const MIN_LOADING_MS = 1500;
 
 function SkeletonAssignment() {
   return (
-    <div className="rounded-2xl border border-gray-100 p-4 flex items-center gap-3">
+    <div className="rounded-2xl border border-gray-200 p-4 flex items-center gap-3">
       <div className="w-10 h-10 rounded-xl bg-gray-100 animate-pulse shrink-0" />
       <div className="flex-1 space-y-2">
         <div className="h-3 bg-gray-100 rounded-full animate-pulse w-3/4" />
@@ -121,7 +121,7 @@ export default function AssignmentsProgress() {
   );
 
   return (
-    <div className="w-full h-full flex flex-col bg-white/70 border border-gray-100 rounded-3xl p-4">
+    <div className="w-full h-full flex flex-col bg-white/70 border border-gray-200 rounded-3xl p-4">
       <div className="flex items-center justify-between mt-5 mb-5">
         <h2 className="text-2xl font-['Gabarito']">Assignments</h2>
       </div>

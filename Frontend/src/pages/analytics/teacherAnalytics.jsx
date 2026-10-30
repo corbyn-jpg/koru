@@ -256,7 +256,7 @@ export default function TeacherAnalytics() {
       >
 
         {/* ─── Filter Bar ─── */}
-        <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-100 shadow-sm px-6 py-4">
+        <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-200 shadow-sm px-6 py-4">
           <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
             <FilterSelect
               label="Year"
@@ -276,7 +276,7 @@ export default function TeacherAnalytics() {
               options={["All", ...YEAR_LEVELS]}
               onChange={v => { setSelectedYearLevel(v); setSelectedCourseId("all"); }}
             />
-            <div className="ml-auto flex items-center gap-3 pl-6 border-l border-gray-100">
+            <div className="ml-auto flex items-center gap-3 pl-6 border-l border-gray-200">
               <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Course</span>
               <select
                 value={selectedCourseId}
@@ -293,7 +293,7 @@ export default function TeacherAnalytics() {
         </motion.div>
 
         {/* ─── KPI Row ─── */}
-        <motion.div variants={fadeUp} className="flex flex-row divide-x divide-gray-100 bg-white rounded-2xl border border-gray-100 shadow-sm px-6 py-5">
+        <motion.div variants={fadeUp} className="flex flex-row divide-x divide-gray-100 bg-white rounded-2xl border border-gray-200 shadow-sm px-6 py-5">
           {[
             {
               label: "Class Average",
@@ -330,7 +330,7 @@ export default function TeacherAnalytics() {
                     <div
                       key={course.id}
                       onClick={() => setSelectedCourseId(isSelected ? "all" : course.id)}
-                      className={`bg-white rounded-2xl border shadow-sm p-5 cursor-pointer transition ${isSelected ? "border-brand" : "border-gray-100 hover:border-gray-200"}`}
+                      className={`bg-white rounded-2xl border shadow-sm p-5 cursor-pointer transition ${isSelected ? "border-brand" : "border-gray-200 hover:border-gray-200"}`}
                     >
                       <div className="flex items-center gap-3 mb-3">
                         <div className="relative shrink-0">
@@ -355,8 +355,8 @@ export default function TeacherAnalytics() {
             </motion.div>
 
             {/* Grading Progress Table */}
-            <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-              <div className="px-6 py-5 border-b border-gray-50 flex justify-between items-center">
+            <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+              <div className="px-6 py-5 border-b border-gray-100 flex justify-between items-center">
                 <h2 className="text-base font-bold text-gray-900">Grading Progress</h2>
                 <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
                   {filteredAssignments.length} assignments
@@ -379,7 +379,7 @@ export default function TeacherAnalytics() {
                     const done = a.graded === a.totalSubmissions && a.totalSubmissions > 0;
                     const noGrades = a.avgScore === null;
                     return (
-                      <tr key={a.id} className="border-b border-gray-50 last:border-0 hover:bg-gray-50/50 transition-colors">
+                      <tr key={a.id} className="border-b border-gray-100 last:border-0 hover:bg-gray-50/50 transition-colors">
                         <td className="px-6 py-4">
                           <span className="font-semibold text-sm text-gray-900">{a.title}</span>
                         </td>
@@ -422,8 +422,8 @@ export default function TeacherAnalytics() {
             </motion.div>
 
             {/* Student Roster */}
-            <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-              <div className="px-6 py-5 border-b border-gray-50 flex justify-between items-center">
+            <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+              <div className="px-6 py-5 border-b border-gray-100 flex justify-between items-center">
                 <h2 className="text-base font-bold text-gray-900">Student Performance</h2>
                 <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
                   {studentRoster.length} students
@@ -440,7 +440,7 @@ export default function TeacherAnalytics() {
                 </thead>
                 <tbody>
                   {studentRoster.map(s => (
-                    <tr key={s.id} className="border-b border-gray-50 last:border-0 hover:bg-gray-50/50 transition-colors">
+                    <tr key={s.id} className="border-b border-gray-100 last:border-0 hover:bg-gray-50/50 transition-colors">
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
                           <div className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center font-bold text-xs text-gray-600 shrink-0">
@@ -486,7 +486,7 @@ export default function TeacherAnalytics() {
           <div className="flex flex-col gap-5">
 
             {/* Class Summary */}
-            <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+            <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
               <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-3">Class Summary</p>
               <div className="flex items-baseline gap-2 mb-1">
                 <span className="text-3xl font-black text-gray-900">{classAvg}%</span>
@@ -495,14 +495,14 @@ export default function TeacherAnalytics() {
               <p className="text-xs text-gray-400">
                 {filteredCourses.length} course{filteredCourses.length !== 1 ? "s" : ""} · {totalStudents} students
               </p>
-              <div className="mt-4 pt-4 border-t border-gray-50 flex items-center gap-2 text-xs text-gray-400">
+              <div className="mt-4 pt-4 border-t border-gray-100 flex items-center gap-2 text-xs text-gray-400">
                 <Award size={14} className="text-amber-400 shrink-0" />
                 <span>{studentRoster.filter(s => s.status === "Excellent").length} students performing excellently</span>
               </div>
             </motion.div>
 
             {/* Grade Distribution — real SA bands */}
-            <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+            <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
               <h3 className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-4">Grade Distribution</h3>
               <div className="space-y-2.5">
                 {gradeDistribution.map(b => {
@@ -510,7 +510,7 @@ export default function TeacherAnalytics() {
                   return (
                     <div key={b.range} className="flex items-center gap-3">
                       <span className="text-xs font-semibold text-gray-500 w-14 text-right">{b.range}</span>
-                      <div className="flex-1 h-4 bg-gray-50 rounded-md overflow-hidden border border-gray-100">
+                      <div className="flex-1 h-4 bg-gray-50 rounded-md overflow-hidden border border-gray-200">
                         <motion.div
                           initial={{ width: 0 }}
                           animate={{ width: `${(b.count / maxCount) * 100}%` }}
@@ -526,13 +526,13 @@ export default function TeacherAnalytics() {
             </motion.div>
 
             {/* Grading Queue */}
-            <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+            <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
               <h3 className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-4">Grading Queue</h3>
               <div className="space-y-2">
                 {filteredAssignments.filter(a => a.graded < a.totalSubmissions).map(a => {
                   const remaining = a.totalSubmissions - a.graded;
                   return (
-                    <div key={a.id} className="rounded-xl border border-gray-100 p-3.5 flex items-center gap-3 hover:border-gray-200 transition-colors">
+                    <div key={a.id} className="rounded-xl border border-gray-200 p-3.5 flex items-center gap-3 hover:border-gray-200 transition-colors">
                       <span className="shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-xl bg-amber-50">
                         <FileText size={15} className="text-amber-600" />
                       </span>
@@ -556,7 +556,7 @@ export default function TeacherAnalytics() {
             </motion.div>
 
             {/* At-Risk Students */}
-            <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+            <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
               <h3 className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-4">At-Risk Students</h3>
               <div className="space-y-2">
                 {studentRoster
@@ -568,7 +568,7 @@ export default function TeacherAnalytics() {
                         s.status === "Critical" ? "border-red-100 bg-red-50/30" : "border-amber-100 bg-amber-50/30"
                       }`}
                     >
-                      <div className="w-9 h-9 rounded-full bg-white border border-gray-100 flex items-center justify-center font-bold text-[10px] text-gray-600 shrink-0">
+                      <div className="w-9 h-9 rounded-full bg-white border border-gray-200 flex items-center justify-center font-bold text-[10px] text-gray-600 shrink-0">
                         {s.avatar}
                       </div>
                       <div className="flex-1 min-w-0">

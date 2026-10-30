@@ -194,7 +194,7 @@ export default function Login({ role = "student" }) {
             <div className="absolute top-4 left-4 z-20">
               <Link
                 to="/"
-                className="group inline-flex items-center gap-1.5 rounded-full bg-white/90 hover:bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-xs hover:shadow-sm border border-slate-100/50 transition duration-200"
+                className="group inline-flex items-center gap-1.5 rounded-full bg-white/90 hover:bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-xs hover:shadow-sm border border-slate-200 transition duration-200"
               >
                 <ArrowLeft size={12} className="transition group-hover:-translate-x-0.5" />
                 <span>Back</span>

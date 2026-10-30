@@ -14,7 +14,7 @@ export function ColumnCard({ children, isSelected, onClick, className = "" }) {
       className={`w-full text-left rounded-2xl px-4 py-3.5 flex items-center gap-3 transition duration-200 cursor-pointer border
         ${isSelected
           ? "bg-brand text-white border-brand"
-          : "bg-white/80 border-gray-100 hover:border-gray-200"
+          : "bg-white/80 border-gray-200 hover:border-gray-200"
         } ${className}`}
     >
       {children}

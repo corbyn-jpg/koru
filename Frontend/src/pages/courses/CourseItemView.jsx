@@ -196,7 +196,7 @@ export default function CourseItemView({ activeCourseId, activeItemId, isStudent
             )}
             {!pageLoading && (<>
             {/* Top Editor controls and Toggles */}
-            <div className="flex items-center justify-between border-b border-gray-100 pb-4 mb-6 shrink-0">
+            <div className="flex items-center justify-between border-b border-gray-200 pb-4 mb-6 shrink-0">
                 <div className="flex items-center gap-2">
                     <button
                         onClick={() => navigate(`/courses/${activeCourseId}/modules${window.location.search}`)}
@@ -255,7 +255,7 @@ export default function CourseItemView({ activeCourseId, activeItemId, isStudent
                         type="text"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
-                        className="text-3xl font-black outline-none border-b border-gray-100 focus:border-brand/40 pb-2 mb-6 w-full text-gray-900 transition-colors placeholder:text-gray-300"
+                        className="text-3xl font-black outline-none border-b border-gray-200 focus:border-brand/40 pb-2 mb-6 w-full text-gray-900 transition-colors placeholder:text-gray-300"
                         placeholder="Page Title"
                     />
                 ) : (
@@ -271,7 +271,7 @@ export default function CourseItemView({ activeCourseId, activeItemId, isStudent
             </div>
 
             {/* Premium Bottom Navigation Footer (Canvas-style Prev / Next) */}
-            <div className="flex items-center justify-between border-t border-gray-100 pt-6 mt-8 shrink-0 pb-12 select-none">
+            <div className="flex items-center justify-between border-t border-gray-200 pt-6 mt-8 shrink-0 pb-12 select-none">
                 {prevItem ? (
                     <button
                         onClick={() => handleItemNavigation(prevItem)}

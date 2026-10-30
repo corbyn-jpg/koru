@@ -12,7 +12,7 @@ const MIN_LOADING_MS = 1500;
 
 function SkeletonRow() {
     return (
-        <div className="my-2 rounded-xl border border-gray-100 w-full h-12 flex flex-row items-center space-x-3 px-2">
+        <div className="my-2 rounded-xl border border-gray-200 w-full h-12 flex flex-row items-center space-x-3 px-2">
             <div className="w-9 h-9 rounded-full bg-gray-100 animate-pulse shrink-0" />
             <div className="flex-1 space-y-1.5">
                 <div className="h-3 bg-gray-100 rounded-full animate-pulse w-3/4" />
@@ -86,7 +86,7 @@ export default function ToDoItem({ activeCourseId }) {
             {todos.map((todo, idx) => (
                 <div
                     key={idx}
-                    className="my-2 bg-white rounded-xl border border-gray-100 w-full h-12 flex flex-row items-center space-x-2 transition-colors duration-150 hover:bg-gray-50/60 hover:border-gray-200 cursor-pointer"
+                    className="my-2 bg-white rounded-xl border border-gray-200 w-full h-12 flex flex-row items-center space-x-2 transition-colors duration-150 hover:bg-gray-50/60 hover:border-gray-200 cursor-pointer"
                     onClick={() => navigate(`/courses/${todo.courseId}/assignments/${todo.id}`)}
                 >
                     <div

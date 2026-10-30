@@ -159,7 +159,7 @@ export function AdminCourseOverviewView({ course, onSaved }) {
       </motion.header>
 
       {/* Stats strip */}
-      <motion.div variants={slideUp} className="grid grid-cols-3 divide-x divide-gray-100 bg-white border border-gray-100 rounded-3xl mb-5 overflow-hidden">
+      <motion.div variants={slideUp} className="grid grid-cols-3 divide-x divide-gray-100 bg-white border border-gray-200 rounded-3xl mb-5 overflow-hidden">
         {[
           { label: "Enrolled", value: studentCount ?? "—", icon: Users },
           { label: "Groups", value: cohortCount ?? "—", icon: GraduationCap },
@@ -179,7 +179,7 @@ export function AdminCourseOverviewView({ course, onSaved }) {
 
       {/* Enrollment fill bar */}
       {studentCount !== null && (
-        <motion.div variants={slideUp} className="mb-5 bg-white border border-gray-100 rounded-3xl px-6 py-4">
+        <motion.div variants={slideUp} className="mb-5 bg-white border border-gray-200 rounded-3xl px-6 py-4">
           <div className="flex items-center justify-between mb-2.5">
             <p className="text-xs font-bold text-gray-500">Enrollment Capacity</p>
             <p className="text-xs font-bold text-gray-900 tabular-nums">{studentCount} / {form.capacity} · {enrollFill}%</p>
@@ -197,8 +197,8 @@ export function AdminCourseOverviewView({ course, onSaved }) {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Left: Course Settings */}
-        <motion.div variants={scaleIn} className="bg-white border border-gray-100 rounded-3xl overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-100">
+        <motion.div variants={scaleIn} className="bg-white border border-gray-200 rounded-3xl overflow-hidden">
+          <div className="px-6 py-4 border-b border-gray-200">
             <h3 className="text-[10px] font-black uppercase tracking-wider text-gray-400">Course Settings</h3>
           </div>
           <div className="px-6 py-5 space-y-4">
@@ -286,7 +286,7 @@ export function AdminCourseOverviewView({ course, onSaved }) {
             </div>
 
             {/* Visibility toggle */}
-            <div className="flex items-center justify-between pt-3 mt-1 border-t border-gray-100">
+            <div className="flex items-center justify-between pt-3 mt-1 border-t border-gray-200">
               <div>
                 <p className="text-sm font-bold text-gray-800">Course Visibility</p>
                 <p className="text-xs text-gray-400 mt-0.5">
@@ -309,8 +309,8 @@ export function AdminCourseOverviewView({ course, onSaved }) {
         {/* Right: Lecturers + Subject */}
         <motion.div variants={scaleIn} className="space-y-4">
           {/* Lecturers card */}
-          <div className="bg-white border border-gray-100 rounded-3xl overflow-hidden">
-            <div className="px-6 py-4 border-b border-gray-100">
+          <div className="bg-white border border-gray-200 rounded-3xl overflow-hidden">
+            <div className="px-6 py-4 border-b border-gray-200">
               <h3 className="text-[10px] font-black uppercase tracking-wider text-gray-400">Lecturers</h3>
             </div>
             <div className="px-6 py-5 flex flex-col gap-2">
@@ -338,8 +338,8 @@ export function AdminCourseOverviewView({ course, onSaved }) {
           </div>
 
           {/* Subject info */}
-          <div className="bg-white border border-gray-100 rounded-3xl overflow-hidden">
-            <div className="px-6 py-4 border-b border-gray-100">
+          <div className="bg-white border border-gray-200 rounded-3xl overflow-hidden">
+            <div className="px-6 py-4 border-b border-gray-200">
               <h3 className="text-[10px] font-black uppercase tracking-wider text-gray-400">Subject</h3>
             </div>
             <div className="px-6 py-5 space-y-3.5">
@@ -362,7 +362,7 @@ export function AdminCourseOverviewView({ course, onSaved }) {
                 </span>
               </div>
               {course.subject?.description && (
-                <p className="text-xs text-gray-400 leading-relaxed pt-3 border-t border-gray-100">
+                <p className="text-xs text-gray-400 leading-relaxed pt-3 border-t border-gray-200">
                   {course.subject.description}
                 </p>
               )}

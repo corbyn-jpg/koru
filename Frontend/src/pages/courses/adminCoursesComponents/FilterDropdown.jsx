@@ -9,7 +9,7 @@ export default function FilterDropdown({ label, options, value, onChange }) {
     <div className="relative group">
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-3 px-6 py-3.5 bg-white border border-gray-100 rounded-[20px] shadow-sm hover:border-brand/20 transition min-w-[170px]"
+        className="flex items-center gap-3 px-6 py-3.5 bg-white border border-gray-200 rounded-[20px] shadow-sm hover:border-brand/20 transition min-w-[170px]"
       >
         <div className="flex-1 text-left">
           <span className="text-[10px] font-black text-gray-400 uppercase tracking-wider block leading-none mb-1">{label}</span>
@@ -26,7 +26,7 @@ export default function FilterDropdown({ label, options, value, onChange }) {
               initial={{ opacity: 0, y: 10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.95 }}
-              className="absolute top-full left-0 mt-2 w-full bg-white border border-gray-100 rounded-[24px] shadow-2xl z-[110] overflow-hidden p-2"
+              className="absolute top-full left-0 mt-2 w-full bg-white border border-gray-200 rounded-[24px] shadow-2xl z-[110] overflow-hidden p-2"
             >
               {options.map((opt) => (
                 <button
