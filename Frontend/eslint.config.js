@@ -26,4 +26,11 @@ export default defineConfig([
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
     },
   },
+  // Jest test files run in Node with Jest's globals (describe, it, expect, jest)
+  {
+    files: ['tests/**/*.{js,jsx}'],
+    languageOptions: {
+      globals: { ...globals.jest, ...globals.node },
+    },
+  },
 ])

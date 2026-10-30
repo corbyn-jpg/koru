@@ -32,32 +32,64 @@ The application was developed as a native desktop experience using Electron, all
 
 - Deliver a complete Minimum Viable Product within the client's R250,000 budget and  a 12-week development timeline.
 
-# How to run Kuro
-## Backend (ASP.NET Core)
-1. Open a terminal in the `Backend` folder.
+# How to run Koru
 
-2. Run:
-  
-       cd backend/LearnOnline
+You'll need the [.NET 10 SDK](https://dotnet.microsoft.com/download) and Node.js 22+.
+
+## Backend (ASP.NET Core)
+1. Create your local config file. It's git-ignored, so it never gets committed:
+
+       cd Backend/LearnOnline
+       cp appsettings.example.json appsettings.json
+
+2. Fill in `appsettings.json`:
+
+   | Key | What it is | Where to get it |
+   |---|---|---|
+   | `ConnectionStrings:LearnOnlineDb` | PostgreSQL connection string | Ask the team for the shared database details |
+   | `GoogleAuth:ClientId` | Google OAuth client ID for "Sign in with Google" | Google Cloud Console → Credentials |
+   | `Groq:ApiKey` | API key for the teacher AI assistant (optional) | [console.groq.com](https://console.groq.com) |
+
+   The Groq key can also be set as a `GROQ_API_KEY` environment variable instead.
+
+3. Run the API:
 
        dotnet watch run
-       
-       dotnet run
-3. The API will be available at the URL shown in the terminal.
+
+   It starts on `http://localhost:5299`. Swagger docs are at `http://localhost:5299/swagger`.
 
 
 ## Frontend (React + Vite)
-1. Open a terminal in the `Frontend` folder. 
+1. Open a terminal in the `Frontend` folder and install dependencies:
 
-        cd frontend
-
-2. Install dependencies:
-
+       cd Frontend
        npm install
+
+2. Create a `Frontend/.env` file (git-ignored) with:
+
+       VITE_API_BASE_URL=http://localhost:5299/api
+       VITE_CLOUDINARY_CLOUD_NAME=your-cloud-name
+       VITE_CLOUDINARY_UPLOAD_PRESET=your-unsigned-upload-preset
+
+   Cloudinary handles file uploads (profile pictures, assignment files). Without it, uploads will fail.
+
 3. Start the dev server:
 
-        npm run dev
-4. Open the local URL (shown in the terminal) in your browser.
+       npm run dev
+
+   Or run it as the desktop app with `npm run electron:dev`.
+
+4. Open `http://localhost:5200` in your browser.
+
+## Tests
+
+From the repo root:
+
+    npm run test:backend
+
+From `Frontend`:
+
+    npm test
 
 
 ## **Summary of Client Requirements** 

@@ -12,3 +12,9 @@ node_modules
 *.user
 *.suo
 .vs/
+
+# User-uploaded files (created at runtime)
+Backend/LearnOnline/wwwroot/uploads/
+
+# Editor backups
+*.bak

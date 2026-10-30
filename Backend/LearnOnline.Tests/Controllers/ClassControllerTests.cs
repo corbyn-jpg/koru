@@ -23,17 +23,22 @@ public class ClassControllerTests
     }
 
     [Fact]
-    public async Task GetAll_IncludesNavs()
+    public async Task GetAll_IncludesCourseName()
     {
         var (db, course, timetable) = Seed();
+        course.Name = "Interactive Development";
         db.Classes.Add(TestData.MakeClass(timetable.Id, course.Id));
         await db.SaveChangesAsync();
 
         var controller = new ClassController(db);
         var result = await controller.GetAll();
 
-        result.Value!.Single().Course.Should().NotBeNull();
-        result.Value!.Single().Timetable.Should().NotBeNull();
+        // GetAll returns an anonymous shape, so read its properties via reflection
+        var ok = result.Result.Should().BeOfType<OkObjectResult>().Subject;
+        var item = ((IEnumerable<object>)ok.Value!).Should().ContainSingle().Subject;
+        object? Prop(string name) => item.GetType().GetProperty(name)!.GetValue(item);
+        Prop("CourseName").Should().Be("Interactive Development");
+        Prop("TimetableId").Should().Be(timetable.Id);
     }
 
     [Fact]
