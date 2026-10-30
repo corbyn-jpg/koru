@@ -8,7 +8,7 @@ import CalendarTimelineView from "./UI/CalendarTimelineView";
 import CalendarDayView from "./UI/CalendarDayView";
 import AddTaskModal from "./UI/AddTaskModal";
 
-import { getAllEvents, createEvent, updateEvent, deleteEvent } from "../../services/eventService";
+import { createEvent, updateEvent, deleteEvent } from "../../services/eventService";
 import { classService } from "../../services/classService";
 import { useAuth } from "../../contexts/AuthContext";
 import { useCalendar, mapBackendEventToCalendar } from "../../contexts/CalendarContext";

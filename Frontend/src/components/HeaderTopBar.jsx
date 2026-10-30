@@ -5,7 +5,7 @@ import { useCourses } from "../contexts/CoursesContext";
 
 export default function HeaderTopBar({ children }) {
   const location = useLocation();
-  const { user: session, role } = useAuth();
+  const { role } = useAuth();
   const { visibleCourses } = useCourses();
   
   const path = location.pathname;

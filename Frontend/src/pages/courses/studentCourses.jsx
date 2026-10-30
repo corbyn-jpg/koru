@@ -76,7 +76,6 @@ export default function StudentCourses() {
     const isItemDetailPage = pathParts[2] === "items" && pathParts.length === 4;
     const activeItemId = isItemDetailPage ? pathParts[3] : null;
 
-    const isHomePage = !isGradesPage && !isAnnouncementsPage && !isAssignmentsPage && !isAttendancePage && !isModulesPage && !isNotesPage && !isAssignmentDetailPage && !isItemDetailPage;
 
     // Determine active subpage label for the top breadcrumb bar
     const activeSubpageLabel = useMemo(() => {

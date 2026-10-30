@@ -286,6 +286,9 @@ export default function NovelBlockMenu() {
 
     const handleBgColor = useCallback((color) => {
         if (!editor || !hoveredBlock) return;
+        // shortcut: the colour is painted on the DOM node only, so it isn't saved with the page;
+        // persisting it needs a Tiptap highlight/background mark.
+        /* eslint-disable react-hooks/immutability -- hoveredBlock is a DOM element, not React data */
         if (color) {
             hoveredBlock.style.backgroundColor = color;
             hoveredBlock.style.borderRadius = "8px";
@@ -295,6 +298,7 @@ export default function NovelBlockMenu() {
             hoveredBlock.style.borderRadius = "";
             hoveredBlock.style.padding = "";
         }
+        /* eslint-enable react-hooks/immutability */
         setMenuOpen(false);
         setSubMenu(null);
     }, [editor, hoveredBlock]);

@@ -8,7 +8,7 @@ import { getStudentGrades } from "../../../services/gradeService";
 import { useAuth } from "../../../contexts/AuthContext";
 import { staggerContainer, slideUp } from "./constants";
 
-export default function CourseAssignmentsView({ subject, activeCourseId }) {
+export default function CourseAssignmentsView({ activeCourseId }) {
     const navigate = useNavigate();
     const { user } = useAuth();
     const [assignments, setAssignments] = React.useState([]);
@@ -112,7 +112,7 @@ export default function CourseAssignmentsView({ subject, activeCourseId }) {
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 font-sans">
-                    {assignments.map((item, index) => (
+                    {assignments.map((item) => (
                         <motion.div key={item.id} variants={slideUp} className={`bg-white p-6 rounded-3xl border border-gray-100 shadow-sm relative overflow-hidden group hover:shadow-xl transition-all duration-300 flex flex-col justify-between ${item.isClosed || item.isSubmitted || item.isGraded ? 'opacity-60 bg-gray-50' : 'opacity-100'}`}>
                             <div>
                                 <div className="flex justify-between items-start mb-4">

@@ -613,7 +613,6 @@ function TeacherSubmissionReview({
                                 const studentName = sub.student ? `${sub.student.firstName} ${sub.student.lastName}` : sub.studentId;
                                 const isSelected = selectedSub?.id === sub.id;
                                 const existingGrade = grades[sub.id];
-                                const isQuiz = isQuizAnswer(sub);
 
                                 return (
                                     <button
@@ -962,7 +961,7 @@ function AssignmentPreviewDrawer({ assignment, onClose }) {
     );
 }
 
-function AssignmentGroupRow({ group, onTogglePublish, onDelete, onEdit, onClose, onView, onPreview }) {
+function AssignmentGroupRow({ group, onDelete, onEdit, onClose, onView, onPreview }) {
     const [expanded, setExpanded] = React.useState(true);
 
     return (
@@ -1082,7 +1081,7 @@ function AssignmentGroupRow({ group, onTogglePublish, onDelete, onEdit, onClose,
     );
 }
 
-export function CourseAssignmentsView({ subject, activeCourseId }) {
+export function CourseAssignmentsView({ activeCourseId }) {
     const [assignments, setAssignments] = React.useState([]);
     const [submissionCounts, setSubmissionCounts] = React.useState({});
     const [enrollmentCount, setEnrollmentCount] = React.useState(0);
@@ -1090,7 +1089,6 @@ export function CourseAssignmentsView({ subject, activeCourseId }) {
     const [showDrawer, setShowDrawer] = React.useState(false);
     const [editingAssignment, setEditingAssignment] = React.useState(null);
     const [activeTypeFilter, setActiveTypeFilter] = React.useState("all");
-    const [saving, setSaving] = React.useState(false);
     const [reviewingAssignment, setReviewingAssignment] = React.useState(null);
     const [previewingAssignment, setPreviewingAssignment] = React.useState(null);
 
@@ -1175,7 +1173,6 @@ export function CourseAssignmentsView({ subject, activeCourseId }) {
     };
 
     const handleSave = async (formData) => {
-        setSaving(true);
         try {
             const payload = {
                 title: formData.title,
@@ -1204,7 +1201,6 @@ export function CourseAssignmentsView({ subject, activeCourseId }) {
         } catch (err) {
             console.error("Save failed:", err);
         } finally {
-            setSaving(false);
         }
     };
 
@@ -1314,7 +1310,6 @@ export function CourseAssignmentsView({ subject, activeCourseId }) {
                             <AssignmentGroupRow
                                 key={group.id}
                                 group={group}
-                                onTogglePublish={() => {}}
                                 onDelete={handleDelete}
                                 onEdit={handleEdit}
                                 onClose={handleClose}

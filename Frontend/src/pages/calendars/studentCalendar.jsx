@@ -133,7 +133,7 @@ const viewVariants = {
 export default function StudentCalendar({ onDeleteClassEvent } = {}) {
   const { user } = useAuth();
   // Pre-loaded data — already fetching before the user opened this page
-  const { events, setEvents, tasks, loading } = useCalendar();
+  const { events, setEvents, loading } = useCalendar();
 
   // Inject recurring class slot events for each course the student is enrolled in.
   // When embedded inside AdminCalendar (signalled by the onDeleteClassEvent prop),

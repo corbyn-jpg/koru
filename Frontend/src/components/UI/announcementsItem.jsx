@@ -8,7 +8,6 @@ export default function AnnouncementsItem({
   message = "Hi everyone, a quick reminder...",
   time = "11:23AM",
   isRead = true,
-  color = BRAND,
   onClick
 }) {
   return (

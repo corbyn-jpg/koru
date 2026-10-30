@@ -57,7 +57,7 @@ export default function CalendarViewSelector({ activeView, onChange }) {
       role="tablist"
       aria-label="Calendar view"
     >
-      {VIEWS.map(({ id, label, Icon }) => {
+      {VIEWS.map(({ id, label }) => {
         const isActive = activeView === id;
         return (
           <button

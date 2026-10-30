@@ -80,6 +80,12 @@ export default function CalendarDayView({ events = [], tasks = [], weeks = [] })
   // Flatten all dates in the month into a navigable list
   const allDates = weeks.flat(); // [{ date, day }, ...]
   const [dateIdx, setDateIdx] = useState(0);
+  // Ticked-off tasks (kept locally for now). Hooks must run before the early return below.
+  const [doneTasks, setDoneTasks] = useState([]);
+  const toggleTask = (id) =>
+    setDoneTasks((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+    );
 
   const selected = allDates[dateIdx];
   if (!selected) return <p className="text-gray-400 text-sm pt-8">No dates available.</p>;
@@ -96,23 +102,17 @@ export default function CalendarDayView({ events = [], tasks = [], weeks = [] })
 
   // Overlap guard: push events down so cards never visually collide
   let prevBottom = -Infinity;
-  const dayEvents = raw.map((evt) => {
+  const dayEvents = [];
+  for (const evt of raw) {
     const y = Math.max(evt._y, prevBottom + 10);
     prevBottom = y + CARD_H;
-    return { ...evt, y };
-  });
+    dayEvents.push({ ...evt, y });
+  }
 
   const trackH = Math.max(
     TOTAL_HOURS * TRACK_H_PER_HOUR,
     prevBottom + 20
   );
-
-  // Task toggle state (local — backend will handle persistence later)
-  const [doneTasks, setDoneTasks] = useState([]);
-  const toggleTask = (id) =>
-    setDoneTasks((prev) =>
-      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
-    );
 
   return (
     <div>
