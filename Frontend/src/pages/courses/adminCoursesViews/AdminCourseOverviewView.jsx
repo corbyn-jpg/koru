@@ -163,7 +163,7 @@ export function AdminCourseOverviewView({ course, onSaved }) {
           { label: "Enrolled", value: studentCount ?? "—", icon: Users },
           { label: "Groups", value: cohortCount ?? "—", icon: GraduationCap },
           { label: "Capacity", value: form.capacity, icon: BookOpen },
-        ].map(({ label, value }) => (
+        ].map(({ label, value, icon: Icon }) => (
           <div key={label} className="px-6 py-5 flex items-center gap-4">
             <div className="w-9 h-9 rounded-2xl bg-[#3C0078]/6 flex items-center justify-center shrink-0">
               <Icon className="w-4 h-4 text-[#3C0078]" />
