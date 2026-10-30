@@ -81,7 +81,7 @@ export default function CourseAttendanceView({ activeCourseId, subject }) {
                     <button
                         onClick={() => downloadCSV(records, subject?.name || subject?.code || activeCourseId)}
                         disabled={records.length === 0}
-                        className="text-sm font-semibold text-[#3C0078] hover:underline flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
+                        className="text-sm font-semibold text-brand hover:underline flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
                     >
                         <Download size={15} /> Download Report
                     </button>
@@ -118,10 +118,10 @@ export default function CourseAttendanceView({ activeCourseId, subject }) {
                     <table className="w-full text-left">
                         <thead>
                             <tr className="bg-gray-50/50">
-                                <th className="px-8 py-4 text-[10px] font-black uppercase tracking-widest text-gray-400">Date</th>
-                                <th className="px-8 py-4 text-[10px] font-black uppercase tracking-widest text-gray-400">Session Type</th>
-                                <th className="px-8 py-4 text-[10px] font-black uppercase tracking-widest text-gray-400">Time</th>
-                                <th className="px-8 py-4 text-[10px] font-black uppercase tracking-widest text-gray-400 text-right">Status</th>
+                                <th className="px-8 py-4 text-[10px] font-black uppercase tracking-wider text-gray-400">Date</th>
+                                <th className="px-8 py-4 text-[10px] font-black uppercase tracking-wider text-gray-400">Session Type</th>
+                                <th className="px-8 py-4 text-[10px] font-black uppercase tracking-wider text-gray-400">Time</th>
+                                <th className="px-8 py-4 text-[10px] font-black uppercase tracking-wider text-gray-400 text-right">Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -132,7 +132,7 @@ export default function CourseAttendanceView({ activeCourseId, subject }) {
                                     <td className="px-8 py-6 text-sm text-gray-400">{log.time ?? "—"}</td>
                                     <td className="px-8 py-6 text-right">
                                         <div className="flex items-center justify-end gap-2">
-                                            <span className={`text-xs font-bold uppercase tracking-widest ${
+                                            <span className={`text-xs font-bold uppercase tracking-wider ${
                                                 log.status === "Present" ? "text-green-600" :
                                                 log.status === "Late"    ? "text-orange-400" : "text-red-500"
                                             }`}>{log.status}</span>

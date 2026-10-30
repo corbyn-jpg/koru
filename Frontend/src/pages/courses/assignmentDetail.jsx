@@ -171,7 +171,7 @@ function UploadZone({ file, onFileSelect, onFileClear, disabled }) {
         onDragLeave={() => setDragging(false)}
         onDrop={handleDrop}
         onClick={() => !disabled && !file && inputRef.current?.click()}
-        className={`relative border-2 border-dashed rounded-3xl p-6 flex flex-col items-center justify-center gap-4 transition-all duration-200
+        className={`relative border-2 border-dashed rounded-3xl p-6 flex flex-col items-center justify-center gap-4 transition duration-200
           ${disabled ? "opacity-50 cursor-not-allowed" : file ? "cursor-default" : "cursor-pointer"}
           ${dragging ? "border-[#64748b] bg-[#64748b]/5 scale-[1.01]" : file ? "border-green-300 bg-green-50/50" : "border-gray-200 bg-gray-50/50 hover:border-[#64748b]/40 hover:bg-[#64748b]/3"}`}
       >
@@ -484,7 +484,7 @@ export default function AssignmentDetail({ assignmentId, activeCourseId }) {
                 <div className="flex items-center gap-2.5 px-5 py-3 rounded-2xl bg-white border border-gray-100 shadow-sm">
                   <Calendar size={18} className="text-[#64748b]" />
                   <div className="flex flex-col">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Due</span>
+                    <span className="text-[10px] font-black uppercase tracking-wider text-gray-400">Due</span>
                     <span className="text-sm font-bold text-gray-900 leading-tight">
                       {formatDueDate(assignment.dueDate)}
                     </span>
@@ -502,7 +502,7 @@ export default function AssignmentDetail({ assignmentId, activeCourseId }) {
                 <div className="flex items-center gap-2.5 px-5 py-3 rounded-2xl bg-white border border-gray-100 shadow-sm">
                   <InfoCircle size={18} className="text-[#78716c]" />
                   <div className="flex flex-col">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Points</span>
+                    <span className="text-[10px] font-black uppercase tracking-wider text-gray-400">Points</span>
                     <span className="text-sm font-bold text-gray-900 leading-tight">
                       {assignment.maxPoints ?? "—"}
                     </span>
@@ -528,7 +528,7 @@ export default function AssignmentDetail({ assignmentId, activeCourseId }) {
               variants={slideUp}
               className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6"
             >
-              <h2 className="text-[10px] font-black uppercase tracking-[0.25em] text-[#64748b] mb-5">
+              <h2 className="text-[10px] font-black uppercase tracking-wider text-[#64748b] mb-5">
                 Assignment Brief
               </h2>
               <p className="text-gray-600 leading-relaxed text-base whitespace-pre-wrap">
@@ -547,7 +547,7 @@ export default function AssignmentDetail({ assignmentId, activeCourseId }) {
                   transition={{ duration: 0.4, ease: "easeOut" }}
                   className="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm"
                 >
-                  <h2 className="text-[10px] font-black uppercase tracking-[0.25em] text-gray-600 mb-5">
+                  <h2 className="text-[10px] font-black uppercase tracking-wider text-gray-600 mb-5">
                     Your Submission
                   </h2>
                   <div className="flex items-center gap-4">
@@ -572,11 +572,11 @@ export default function AssignmentDetail({ assignmentId, activeCourseId }) {
                     </div>
                     <div className="flex items-center gap-2 shrink-0">
                       {existingGrade && (
-                        <span className="px-4 py-1.5 rounded-full bg-blue-100 text-blue-700 text-xs font-bold uppercase tracking-widest">
+                        <span className="px-4 py-1.5 rounded-full bg-blue-100 text-blue-700 text-xs font-bold uppercase tracking-wider">
                           Grade: {existingGrade.pointsEarned ?? "—"} / {assignment?.maxPoints ?? "—"}
                         </span>
                       )}
-                      <span className="px-4 py-1.5 rounded-full bg-green-100 text-green-700 text-xs font-bold uppercase tracking-widest">
+                      <span className="px-4 py-1.5 rounded-full bg-green-100 text-green-700 text-xs font-bold uppercase tracking-wider">
                         {existingSubmission?.status || "Submitted"}
                       </span>
                     </div>
@@ -607,7 +607,7 @@ export default function AssignmentDetail({ assignmentId, activeCourseId }) {
                 {/* Results view – shown when already submitted and not retaking */}
                 {isSubmitted && !quizStarted && quizResults ? (
                   <div>
-                    <h2 className="text-[10px] font-black uppercase tracking-[0.25em] text-[#78716c] mb-6">Quiz Results</h2>
+                    <h2 className="text-[10px] font-black uppercase tracking-wider text-[#78716c] mb-6">Quiz Results</h2>
                     {/* Score summary */}
                     <div className="flex items-center gap-6 mb-6 p-4 bg-gray-50 rounded-2xl">
                       <div className={`w-20 h-20 rounded-3xl flex flex-col items-center justify-center font-black italic shrink-0 ${
@@ -663,7 +663,7 @@ export default function AssignmentDetail({ assignmentId, activeCourseId }) {
                     <div className="flex justify-end">
                       <button
                         onClick={() => { setQuizStarted(true); setQuizAnswers({}); }}
-                        className="px-8 py-3.5 rounded-2xl bg-[#78716c] text-white font-bold text-sm uppercase tracking-widest hover:bg-[#e0722a] transition-all"
+                        className="px-8 py-3.5 rounded-2xl bg-[#78716c] text-white font-bold text-sm uppercase tracking-wider hover:bg-[#e0722a] transition"
                       >
                         Retake Quiz
                       </button>
@@ -672,12 +672,12 @@ export default function AssignmentDetail({ assignmentId, activeCourseId }) {
                 ) : !quizStarted && !isSubmitted ? (
                   /* Pre-start screen */
                   <div>
-                    <h2 className="text-[10px] font-black uppercase tracking-[0.25em] text-[#78716c] mb-6">Quiz</h2>
+                    <h2 className="text-[10px] font-black uppercase tracking-wider text-[#78716c] mb-6">Quiz</h2>
                     <div className="flex flex-col items-center gap-6 py-6">
                       <p className="text-gray-500 text-sm">{quizQuestions.length} question{quizQuestions.length !== 1 ? "s" : ""} — select the correct answer for each</p>
                       <button
                         onClick={() => setQuizStarted(true)}
-                        className="px-10 py-4 rounded-2xl bg-[#78716c] text-white font-bold text-sm uppercase tracking-widest hover:bg-[#e0722a] transition-all shadow-lg shadow-[#78716c]/20"
+                        className="px-10 py-4 rounded-2xl bg-[#78716c] text-white font-bold text-sm uppercase tracking-wider hover:bg-[#e0722a] transition shadow-lg shadow-[#78716c]/20"
                       >
                         Start Quiz
                       </button>
@@ -686,14 +686,14 @@ export default function AssignmentDetail({ assignmentId, activeCourseId }) {
                 ) : (
                   /* Active quiz */
                   <div>
-                    <h2 className="text-[10px] font-black uppercase tracking-[0.25em] text-[#78716c] mb-6">Quiz</h2>
+                    <h2 className="text-[10px] font-black uppercase tracking-wider text-[#78716c] mb-6">Quiz</h2>
                     <div className="space-y-6">
                       {quizQuestions.map((q, qi) => (
                         <div key={qi} className="bg-gray-50 rounded-2xl p-4">
                           <p className="font-semibold text-gray-900 mb-4">{qi + 1}. {q.question}</p>
                           <div className="space-y-2">
                             {q.options.map((opt, oi) => (
-                              <label key={oi} className={`flex items-center gap-3 px-4 py-3 rounded-2xl cursor-pointer transition-all ${
+                              <label key={oi} className={`flex items-center gap-3 px-4 py-3 rounded-2xl cursor-pointer transition ${
                                 quizAnswers[qi] === oi
                                   ? "bg-[#64748b]/10 border-2 border-[#64748b]"
                                   : "bg-white border-2 border-gray-100 hover:border-gray-200"
@@ -722,7 +722,7 @@ export default function AssignmentDetail({ assignmentId, activeCourseId }) {
                         <button
                           onClick={handleSubmit}
                           disabled={submitting || Object.keys(quizAnswers).length < quizQuestions.length}
-                          className={`flex items-center gap-2.5 px-8 py-3.5 rounded-2xl text-sm font-bold uppercase tracking-widest text-white transition-all shadow-sm ${
+                          className={`flex items-center gap-2.5 px-8 py-3.5 rounded-2xl text-sm font-bold uppercase tracking-wider text-white transition shadow-sm ${
                             submitting || Object.keys(quizAnswers).length < quizQuestions.length
                               ? "bg-gray-200 text-gray-400 cursor-not-allowed shadow-none"
                               : "bg-[#64748b] hover:bg-[#475569] shadow-[#64748b]/20"
@@ -740,7 +740,7 @@ export default function AssignmentDetail({ assignmentId, activeCourseId }) {
                 variants={slideUp}
                 className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6"
               >
-                <h2 className="text-[10px] font-black uppercase tracking-[0.25em] text-[#64748b] mb-2">
+                <h2 className="text-[10px] font-black uppercase tracking-wider text-[#64748b] mb-2">
                   {isSubmitted ? "Resubmit Work" : "Submit Your Work"}
                 </h2>
                 {isPastDue && !isSubmitted && (
@@ -763,7 +763,7 @@ export default function AssignmentDetail({ assignmentId, activeCourseId }) {
 
                 {/* Comment / notes field */}
                 <div className="mt-6">
-                  <label className="block text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2">
+                  <label className="block text-[10px] font-black uppercase tracking-wider text-gray-400 mb-2">
                     Submission Comments (optional)
                   </label>
                   <textarea
@@ -800,7 +800,7 @@ export default function AssignmentDetail({ assignmentId, activeCourseId }) {
                   <button
                     onClick={handleSubmit}
                     disabled={!file || submitting}
-                    className={`flex items-center gap-2.5 px-8 py-3.5 rounded-2xl text-sm font-bold uppercase tracking-widest text-white transition-all shadow-sm
+                    className={`flex items-center gap-2.5 px-8 py-3.5 rounded-2xl text-sm font-bold uppercase tracking-wider text-white transition shadow-sm
                       ${!file || submitting
                         ? "bg-gray-200 text-gray-400 cursor-not-allowed shadow-none"
                         : "bg-[#64748b] hover:bg-[#475569] shadow-[#64748b]/20"}`}

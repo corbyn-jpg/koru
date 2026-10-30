@@ -164,7 +164,7 @@ export function CourseNotesView({ activeCourseId }) {
                         {notes.map(note => (
                             <div
                                 key={note.id}
-                                className={`group w-full text-left p-4 rounded-2xl transition-colors flex items-start justify-between gap-2 cursor-pointer ${activeNote?.id === note.id ? 'bg-[#3C0078] text-white' : 'bg-gray-50 hover:bg-gray-100 text-gray-800'}`}
+                                className={`group w-full text-left p-4 rounded-2xl transition-colors flex items-start justify-between gap-2 cursor-pointer ${activeNote?.id === note.id ? 'bg-brand text-white' : 'bg-gray-50 hover:bg-gray-100 text-gray-800'}`}
                                 onClick={() => setActiveNote(note)}
                             >
                                 <div className="min-w-0">
@@ -184,7 +184,7 @@ export function CourseNotesView({ activeCourseId }) {
                                             console.error("Failed to delete note:", err);
                                         }
                                     }}
-                                    className={`shrink-0 p-1 rounded-lg transition-all ${activeNote?.id === note.id ? 'text-white/60 hover:text-white hover:bg-white/10' : 'text-transparent group-hover:text-gray-400 hover:!text-red-500 hover:!bg-red-50'}`}
+                                    className={`shrink-0 p-1 rounded-lg transition ${activeNote?.id === note.id ? 'text-white/60 hover:text-white hover:bg-white/10' : 'text-transparent group-hover:text-gray-400 hover:!text-red-500 hover:!bg-red-50'}`}
                                     title="Delete note"
                                 >
                                     <Trash2 size={14} />
@@ -357,7 +357,7 @@ export function CourseNotesView({ activeCourseId }) {
                                     <NovelBlockMenu />
 
                                     {/* Slash command menu */}
-                                    <EditorCommand className="z-50 h-auto max-h-[330px] overflow-y-auto rounded-xl border border-gray-200 bg-white px-1 py-2 shadow-xl transition-all">
+                                    <EditorCommand className="z-50 h-auto max-h-[330px] overflow-y-auto rounded-xl border border-gray-200 bg-white px-1 py-2 shadow-xl transition">
                                         <EditorCommandEmpty className="px-2 text-gray-500">No results</EditorCommandEmpty>
                                         <EditorCommandList>
                                             {suggestionItems.map((item) => (

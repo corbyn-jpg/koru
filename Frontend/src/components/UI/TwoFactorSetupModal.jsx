@@ -146,7 +146,7 @@ export default function TwoFactorSetupModal({ userId, onSuccess, onClose }) {
                   value={code}
                   onChange={handleCodeInput}
                   placeholder="000000"
-                  className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-center text-xl font-mono tracking-[0.5em] text-gray-900 focus:border-primary/40 focus:ring-4 focus:ring-primary/10 outline-none transition-all"
+                  className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-center text-xl font-mono tracking-[0.5em] text-gray-900 focus:border-primary/40 focus:ring-4 focus:ring-primary/10 outline-none transition"
                 />
 
                 <AnimatePresence mode="wait">
@@ -166,7 +166,7 @@ export default function TwoFactorSetupModal({ userId, onSuccess, onClose }) {
                 <button
                   type="submit"
                   disabled={code.length < 6 || verifying}
-                  className="flex items-center justify-center gap-2 rounded-xl bg-primary hover:bg-primary-dark px-4 py-3 text-sm font-black text-white shadow-md shadow-primary/15 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex items-center justify-center gap-2 rounded-xl bg-primary hover:bg-primary-dark px-4 py-3 text-sm font-black text-white shadow-md shadow-primary/15 transition disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {verifying ? (
                     <><Loader2 size={16} className="animate-spin" /> Verifying…</>

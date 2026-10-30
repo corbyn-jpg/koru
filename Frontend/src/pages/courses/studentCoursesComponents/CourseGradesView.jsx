@@ -132,9 +132,9 @@ export default function CourseGradesView({ subject, activeCourseId }) {
                 </table>
             </motion.div>
             <motion.div variants={slideUp} className="mt-6 flex justify-end">
-                <div className="bg-[#3C0078] text-white px-6 py-4 rounded-3xl shadow-lg shadow-[#3C0078]/25 flex items-center gap-12">
+                <div className="bg-brand text-white px-6 py-4 rounded-3xl shadow-lg shadow-brand/25 flex items-center gap-12">
                     <div className="flex flex-col">
-                        <span className="text-[10px] uppercase font-bold tracking-[0.2em] opacity-80">Current Average</span>
+                        <span className="text-[10px] uppercase font-bold tracking-wider opacity-80">Current Average</span>
                         <span className="text-2xl font-bold italic">{avgGrade}</span>
                     </div>
                 </div>

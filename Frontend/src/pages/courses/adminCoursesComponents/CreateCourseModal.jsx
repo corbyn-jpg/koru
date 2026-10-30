@@ -8,13 +8,13 @@ const YEARS = [CURRENT_YEAR - 1, CURRENT_YEAR, CURRENT_YEAR + 1].map(String);
 function SelectField({ label, value, onChange, children, disabled }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{label}</label>
+      <label className="text-[10px] font-black text-gray-400 uppercase tracking-wider">{label}</label>
       <div className="relative">
         <select
           value={value}
           onChange={onChange}
           disabled={disabled}
-          className="w-full appearance-none text-sm border border-gray-200 rounded-xl px-4 py-3 pr-9 outline-none focus:border-[#3C0078] focus:ring-2 focus:ring-[#3C0078]/10 transition-all bg-white disabled:opacity-50 disabled:cursor-not-allowed font-medium text-gray-800"
+          className="w-full appearance-none text-sm border border-gray-200 rounded-xl px-4 py-3 pr-9 outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition bg-white disabled:opacity-50 disabled:cursor-not-allowed font-medium text-gray-800"
         >
           {children}
         </select>
@@ -27,13 +27,13 @@ function SelectField({ label, value, onChange, children, disabled }) {
 function TextField({ label, value, onChange, placeholder, mono }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{label}</label>
+      <label className="text-[10px] font-black text-gray-400 uppercase tracking-wider">{label}</label>
       <input
         type="text"
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className={`text-sm border border-gray-200 rounded-xl px-4 py-3 outline-none focus:border-[#3C0078] focus:ring-2 focus:ring-[#3C0078]/10 transition-all font-medium text-gray-800 ${mono ? "uppercase tracking-wider" : ""}`}
+        className={`text-sm border border-gray-200 rounded-xl px-4 py-3 outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition font-medium text-gray-800 ${mono ? "uppercase tracking-wider" : ""}`}
       />
     </div>
   );
@@ -128,14 +128,14 @@ export default function CreateCourseModal({ show, onClose, form, setForm, teache
 
         {/* Capacity */}
         <div className="flex flex-col gap-1.5">
-          <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Capacity</label>
+          <label className="text-[10px] font-black text-gray-400 uppercase tracking-wider">Capacity</label>
           <input
             type="number"
             min={1}
             max={500}
             value={form.capacity}
             onChange={(e) => setForm({ ...form, capacity: e.target.value })}
-            className="text-sm border border-gray-200 rounded-xl px-4 py-3 outline-none focus:border-[#3C0078] focus:ring-2 focus:ring-[#3C0078]/10 transition-all font-medium text-gray-800"
+            className="text-sm border border-gray-200 rounded-xl px-4 py-3 outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition font-medium text-gray-800"
           />
         </div>
 
@@ -150,7 +150,7 @@ export default function CreateCourseModal({ show, onClose, form, setForm, teache
           <button
             onClick={onCreate}
             disabled={!canCreate}
-            className="flex-[2] px-4 py-3 text-sm font-bold text-white bg-[#3C0078] rounded-2xl hover:bg-[#2a0055] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            className="flex-[2] px-4 py-3 text-sm font-bold text-white bg-brand rounded-2xl hover:bg-brand-deep transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
             Create Course
           </button>

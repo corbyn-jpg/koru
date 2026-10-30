@@ -1,8 +1,10 @@
+import { notify } from "../../../components/UI/feedback";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CheckCircle } from "@solar-icons/react";
 import { Plus, ChevronDown, ChevronRight, Loader, X, Paperclip, FileText, ExternalLink, Link as LinkIcon, EyeOff, MoreVertical, Copy, Pencil, Trash2 } from "lucide-react";
-import { getCourseModules, createModule, updateModule, deleteModule, createModuleItem, updateModuleItem, deleteModuleItem } from "../../../services/moduleService";
+import { getCourseModules, createModule, updateModule, deleteModule, createModuleItem, updateModuleItem, deleteModuleItem, openModuleItemUrl } from "../../../services/moduleService";
+import { uploadFileToCloudinary } from "../../../services/cloudinaryService";
 
 export function CourseModulesView({ activeCourseId }) {
   const navigate = useNavigate();
@@ -32,6 +34,8 @@ export function CourseModulesView({ activeCourseId }) {
   const [newItemLabel, setNewItemLabel] = useState("");
   const [newItemType, setNewItemType] = useState("document");
   const [isNewItemExternal, setIsNewItemExternal] = useState(true);
+  const [newItemUrl, setNewItemUrl] = useState("");
+  const [uploadingAttachment, setUploadingAttachment] = useState(false);
 
   const [editingItemId, setEditingItemId] = useState(null);
   const [editingItemModuleId, setEditingItemModuleId] = useState(null);
@@ -166,6 +170,10 @@ export function CourseModulesView({ activeCourseId }) {
 
   const handleAddItem = async (modId) => {
     if (!newItemLabel.trim()) return;
+    if (newItemType !== "document" && !/^https?:\/\//i.test(newItemUrl.trim())) {
+      notify(newItemType === "link" ? "Add the link address, starting with https://" : "Choose a file to upload first.");
+      return;
+    }
     try {
       const created = await createModuleItem({
         moduleId: modId,
@@ -173,17 +181,36 @@ export function CourseModulesView({ activeCourseId }) {
         type: newItemType,
         isPublished: true,
         isExternal: newItemType === "link" ? isNewItemExternal : false,
+        content: newItemType === "document" ? null : newItemUrl.trim(),
       });
       setModules(prev => prev.map(mod => {
         if (mod.id === modId) return { ...mod, items: [...(mod.items ?? []), created] };
         return mod;
       }));
       setNewItemLabel("");
+      setNewItemUrl("");
       setAddingItemTo(null);
       if (created.type === "document") navigate(`/courses/${activeCourseId}/items/${created.id}`);
     } catch (err) {
-      console.error("Failed to create module item:", err);
+      notify("Couldn't add the item: " + err.message);
     }
+  };
+
+  const handleAttachmentPick = async (file) => {
+    if (!file) return;
+    setUploadingAttachment(true);
+    try {
+      setNewItemUrl(await uploadFileToCloudinary(file));
+      if (!newItemLabel.trim()) setNewItemLabel(file.name);
+    } catch (err) {
+      notify("Upload failed: " + err.message);
+    } finally {
+      setUploadingAttachment(false);
+    }
+  };
+
+  const openItem = (item) => {
+    if (!openModuleItemUrl(item)) notify("This item has no link or file attached yet.");
   };
 
   const handleRenameItem = async (modId, itemId) => {
@@ -269,18 +296,18 @@ export function CourseModulesView({ activeCourseId }) {
       <div className="flex items-center justify-between gap-3 shrink-0 px-1">
         <h2 className="text-lg font-black tracking-tight text-gray-900">Course Modules Manager</h2>
         <div className="flex items-center gap-3">
-          <button onClick={() => setIsAddingModule(true)} className="flex items-center gap-1.5 px-4 py-2 text-xs font-bold bg-[#3C0078] hover:bg-[#2A0054] text-white rounded-xl transition-all cursor-pointer shadow-sm hover:shadow">
+          <button onClick={() => setIsAddingModule(true)} className="flex items-center gap-1.5 px-4 py-2 text-xs font-bold bg-brand hover:bg-brand-deep text-white rounded-xl transition cursor-pointer shadow-sm hover:shadow">
             <Plus size={14} /> <span>Add Section</span>
           </button>
-          <button onClick={toggleAll} className="flex items-center justify-center px-4 py-2 text-xs font-bold border border-gray-200 bg-white hover:bg-gray-50 text-gray-700 rounded-xl transition-all cursor-pointer">
+          <button onClick={toggleAll} className="flex items-center justify-center px-4 py-2 text-xs font-bold border border-gray-200 bg-white hover:bg-gray-50 text-gray-700 rounded-xl transition cursor-pointer">
             {areAllCollapsed ? "Expand all" : "Collapse all"}
           </button>
         </div>
       </div>
 
       {isAddingModule && (
-        <div className="border border-purple-200/50 bg-[#3C0078]/3 p-5 rounded-2xl flex flex-col gap-3">
-          <h4 className="text-xs font-extrabold text-[#3C0078] uppercase tracking-wider">Create New Module Section</h4>
+        <div className="border border-purple-200/50 bg-brand/3 p-5 rounded-2xl flex flex-col gap-3">
+          <h4 className="text-xs font-extrabold text-brand uppercase tracking-wider">Create New Module Section</h4>
           <div className="flex gap-3">
             <input
               autoFocus
@@ -288,13 +315,13 @@ export function CourseModulesView({ activeCourseId }) {
               placeholder="e.g. Week 2: Design Systems..."
               value={newModuleTitle}
               onChange={(e) => setNewModuleTitle(e.target.value)}
-              className="flex-1 bg-white border border-gray-200 rounded-xl px-4 py-2 text-xs outline-none focus:border-[#3C0078]/40 transition-colors"
+              className="flex-1 bg-white border border-gray-200 rounded-xl px-4 py-2 text-xs outline-none focus:border-brand/40 transition-colors"
               onKeyDown={(e) => {
                 if (e.key === "Enter") handleAddModule();
                 if (e.key === "Escape") { setIsAddingModule(false); setCreateModuleError(""); }
               }}
             />
-            <button onClick={handleAddModule} disabled={isCreatingModule} className="flex items-center gap-1.5 px-5 py-2 bg-[#3C0078] hover:bg-[#2A0054] disabled:opacity-60 disabled:cursor-not-allowed text-white text-xs font-bold rounded-xl transition-all cursor-pointer shadow-sm">
+            <button onClick={handleAddModule} disabled={isCreatingModule} className="flex items-center gap-1.5 px-5 py-2 bg-brand hover:bg-brand-deep disabled:opacity-60 disabled:cursor-not-allowed text-white text-xs font-bold rounded-xl transition cursor-pointer shadow-sm">
               {isCreatingModule && <Loader size={12} className="animate-spin" />}
               {isCreatingModule ? "Creating..." : "Add Section"}
             </button>
@@ -366,12 +393,12 @@ export function CourseModulesView({ activeCourseId }) {
                 <div onClick={(e) => handleToggleModulePublish(mod.id, e)} title={mod.isPublished ? "Published (click to unpublish)" : "Draft (click to publish)"} className="flex items-center justify-center shrink-0 cursor-pointer">
                   {mod.isPublished ? <CheckCircle size={15} className="text-green-500 hover:scale-110 transition-transform" /> : <EyeOff size={15} className="text-gray-400 hover:scale-110 transition-transform" />}
                 </div>
-                <button onClick={() => setAddingItemTo(mod.id)} className="flex items-center gap-1 py-1.5 px-3 rounded-lg text-[10px] font-black uppercase tracking-wider bg-purple-50 text-[#3C0078] border border-purple-100 hover:bg-[#3C0078]/5 transition-all cursor-pointer">
+                <button onClick={() => setAddingItemTo(mod.id)} className="flex items-center gap-1 py-1.5 px-3 rounded-lg text-[10px] font-black uppercase tracking-wider bg-purple-50 text-brand border border-purple-100 hover:bg-brand/5 transition cursor-pointer">
                   <Plus size={11} /> <span>Add Item</span>
                 </button>
                 <button
                   onClick={(e) => openModuleMenu(e, mod.id)}
-                  className="p-1.5 text-gray-400 hover:text-gray-700 rounded-lg hover:bg-gray-100 transition-all cursor-pointer"
+                  className="p-1.5 text-gray-400 hover:text-gray-700 rounded-lg hover:bg-gray-100 transition cursor-pointer"
                   title="More options"
                 >
                   <MoreVertical size={15} />
@@ -382,7 +409,7 @@ export function CourseModulesView({ activeCourseId }) {
             {addingItemTo === mod.id && (
               <div className="p-4 bg-purple-50/30 border-b border-gray-100 flex flex-col gap-3">
                 <div className="flex items-center justify-between">
-                  <h4 className="text-[10px] font-black text-[#3C0078] uppercase tracking-wider">Add Section Item</h4>
+                  <h4 className="text-[10px] font-black text-brand uppercase tracking-wider">Add Section Item</h4>
                   <button onClick={() => setAddingItemTo(null)} className="p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-md cursor-pointer"><X size={12} /></button>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -392,22 +419,41 @@ export function CourseModulesView({ activeCourseId }) {
                     placeholder="Item title..."
                     value={newItemLabel}
                     onChange={(e) => setNewItemLabel(e.target.value)}
-                    className="md:col-span-2 bg-white border border-gray-200 rounded-xl px-3 py-1.5 text-xs outline-none focus:border-[#3C0078]/40 transition-colors"
+                    className="md:col-span-2 bg-white border border-gray-200 rounded-xl px-3 py-1.5 text-xs outline-none focus:border-brand/40 transition-colors"
                   />
-                  <select value={newItemType} onChange={(e) => setNewItemType(e.target.value)} className="bg-white border border-gray-200 rounded-xl px-3 py-1.5 text-xs outline-none cursor-pointer focus:border-[#3C0078]/40">
+                  <select value={newItemType} onChange={(e) => setNewItemType(e.target.value)} className="bg-white border border-gray-200 rounded-xl px-3 py-1.5 text-xs outline-none cursor-pointer focus:border-brand/40">
                     <option value="document">Document</option>
                     <option value="link">Link</option>
                     <option value="attachment">Attachment</option>
                   </select>
                 </div>
                 {newItemType === "link" && (
+                  <input
+                    type="url"
+                    placeholder="https://…"
+                    value={newItemUrl}
+                    onChange={(e) => setNewItemUrl(e.target.value)}
+                    aria-label="Link address"
+                    className="w-full bg-white border border-gray-200 rounded-xl px-3 py-1.5 text-xs outline-none focus:border-brand/40 transition-colors"
+                  />
+                )}
+                {newItemType === "attachment" && (
+                  <label className="flex items-center gap-2 text-xs text-gray-600 cursor-pointer">
+                    <Paperclip size={14} />
+                    <span className="truncate">
+                      {uploadingAttachment ? "Uploading…" : newItemUrl ? "File uploaded. Choose another to replace it" : "Choose a file to upload"}
+                    </span>
+                    <input type="file" className="sr-only" disabled={uploadingAttachment} onChange={(e) => handleAttachmentPick(e.target.files?.[0])} />
+                  </label>
+                )}
+                {newItemType === "link" && (
                   <div className="flex items-center gap-2 mt-1">
-                    <input type="checkbox" id="isExternal" checked={isNewItemExternal} onChange={(e) => setIsNewItemExternal(e.target.checked)} className="rounded border-gray-300 text-[#3C0078] focus:ring-[#3C0078]" />
+                    <input type="checkbox" id="isExternal" checked={isNewItemExternal} onChange={(e) => setIsNewItemExternal(e.target.checked)} className="rounded border-gray-300 text-brand focus:ring-brand" />
                     <label htmlFor="isExternal" className="text-[10px] font-bold text-gray-500 cursor-pointer">Open in New Window (External Link)</label>
                   </div>
                 )}
                 <div className="flex justify-end gap-2 mt-2">
-                  <button onClick={() => handleAddItem(mod.id)} className="px-4 py-1.5 bg-[#3C0078] text-white text-[10px] font-bold uppercase tracking-wider rounded-lg hover:bg-[#2A0054] transition-all cursor-pointer">Add Item</button>
+                  <button onClick={() => handleAddItem(mod.id)} className="px-4 py-1.5 bg-brand text-white text-[10px] font-bold uppercase tracking-wider rounded-lg hover:bg-brand-deep transition cursor-pointer">Add Item</button>
                   <button onClick={() => setAddingItemTo(null)} className="px-3 py-1.5 bg-white border border-gray-200 text-gray-500 text-[10px] font-bold uppercase tracking-wider rounded-lg hover:bg-gray-50 cursor-pointer">Cancel</button>
                 </div>
               </div>
@@ -446,16 +492,16 @@ export function CourseModulesView({ activeCourseId }) {
                         ) : (
                           <div className="flex items-center gap-2 min-w-0">
                             {item.type === "link" ? (
-                              <a href="#" onClick={(e) => { e.preventDefault(); alert(`Opening link: ${item.label}`); }} className="text-xs font-bold !text-blue-600 hover:underline flex items-center gap-1.5 min-w-0">
+                              <a href="#" onClick={(e) => { e.preventDefault(); openItem(item); }} className="text-xs font-bold !text-blue-600 hover:underline flex items-center gap-1.5 min-w-0">
                                 <span className="truncate">{item.label}</span>
                                 {item.isExternal && <ExternalLink size={11} className="shrink-0" />}
                               </a>
                             ) : item.type === "document" ? (
-                              <span className="text-xs font-bold text-gray-700 hover:text-[#3C0078] hover:underline truncate cursor-pointer" onClick={() => navigate(`/courses/${activeCourseId}/items/${item.id}`)}>
+                              <span className="text-xs font-bold text-gray-700 hover:text-brand hover:underline truncate cursor-pointer" onClick={() => navigate(`/courses/${activeCourseId}/items/${item.id}`)}>
                                 {item.label}
                               </span>
                             ) : (
-                              <span className="text-xs font-bold text-gray-700 truncate cursor-pointer hover:text-gray-900" onClick={() => alert(`Downloading attachment: ${item.label}`)}>
+                              <span className="text-xs font-bold text-gray-700 truncate cursor-pointer hover:text-gray-900" onClick={() => openItem(item)}>
                                 {item.label}
                               </span>
                             )}
@@ -469,7 +515,7 @@ export function CourseModulesView({ activeCourseId }) {
                         </div>
                         <button
                           onClick={(e) => openItemMenu(e, mod.id, item.id)}
-                          className="p-1 text-gray-400 hover:text-gray-700 rounded hover:bg-gray-100 transition-all opacity-0 group-hover/item:opacity-100 cursor-pointer shrink-0"
+                          className="p-1 text-gray-400 hover:text-gray-700 rounded hover:bg-gray-100 transition opacity-0 group-hover/item:opacity-100 cursor-pointer shrink-0"
                           title="More options"
                         >
                           <MoreVertical size={13} />

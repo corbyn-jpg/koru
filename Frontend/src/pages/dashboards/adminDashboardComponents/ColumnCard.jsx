@@ -11,9 +11,9 @@ export function ColumnCard({ children, isSelected, onClick, className = "" }) {
       tabIndex={0}
       role="button"
       onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") onClick?.(); }}
-      className={`w-full text-left rounded-2xl px-4 py-3.5 flex items-center gap-3 transition-all duration-200 cursor-pointer border
+      className={`w-full text-left rounded-2xl px-4 py-3.5 flex items-center gap-3 transition duration-200 cursor-pointer border
         ${isSelected
-          ? "bg-[#3C0078] text-white border-[#3C0078]"
+          ? "bg-brand text-white border-brand"
           : "bg-white/80 border-gray-100 hover:border-gray-200"
         } ${className}`}
     >

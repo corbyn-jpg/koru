@@ -162,3 +162,12 @@ export async function savePageContent(pageId, pageType, contentPayload) {
   }
   return updateModuleContent(pageId, content);
 }
+
+// Link and attachment items keep their URL in `content`. Opens it in a new tab and
+// returns false when the item has no address yet, so the caller can explain why.
+export function openModuleItemUrl(item) {
+  const url = item?.content?.trim();
+  if (!url || !/^https?:\/\//i.test(url)) return false;
+  window.open(url, "_blank", "noopener,noreferrer");
+  return true;
+}

@@ -26,16 +26,16 @@ export default function AssignmentItem({
       initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className={`w-full border rounded-2xl px-4 py-3.5 flex items-center gap-3 transition-all duration-300 cursor-pointer
+      className={`w-full border rounded-2xl px-4 py-3.5 flex items-center gap-3 transition duration-300 cursor-pointer
         ${completed ? "bg-gray-50 border-gray-100 opacity-50" : "bg-white border-gray-200 hover:shadow-md"}`}
     >
       {/* Icon */}
       <div
         className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0
-          ${completed ? "bg-gray-100" : "bg-[#3C0078]/8"}`}
+          ${completed ? "bg-gray-100" : "bg-brand/8"}`}
       >
         <MdEditNote
-          className={`w-5 h-5 ${completed ? "text-gray-400" : "text-[#3C0078]"}`}
+          className={`w-5 h-5 ${completed ? "text-gray-400" : "text-brand"}`}
         />
       </div>
 
@@ -51,7 +51,7 @@ export default function AssignmentItem({
           <span><span className="font-bold text-gray-500">DUE</span> {dueDate}</span>
           <span className="font-bold text-black">{courseCode}</span>
           {uiState && !completed && (
-              <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-widest ${getUiStateColor(uiState)}`}>{uiState}</span>
+              <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${getUiStateColor(uiState)}`}>{uiState}</span>
           )}
         </p>
       </div>
@@ -59,7 +59,7 @@ export default function AssignmentItem({
       {/* Actions */}
       {completed ? (
         <div
-          className="w-7 h-7 rounded-lg border-2 border-[#3C0078] bg-[#3C0078] flex items-center justify-center shrink-0"
+          className="w-7 h-7 rounded-lg border-2 border-brand bg-brand flex items-center justify-center shrink-0"
           aria-label="Completed"
         >
           <motion.svg
@@ -83,7 +83,7 @@ export default function AssignmentItem({
                     navigate(`/courses/${courseId}/assignments/${assignmentId}`);
                 }
             }}
-            className="px-4 py-2 bg-[#3C0078] rounded-xl text-[10px] font-bold uppercase tracking-widest text-white hover:bg-gray-800 transition-all shadow-sm shrink-0"
+            className="px-4 py-2 bg-brand rounded-xl text-[10px] font-bold uppercase tracking-wider text-white hover:bg-gray-800 transition shadow-sm shrink-0"
         >
             {uiState === 'Closed' ? 'View' : 'Submit'}
         </button>

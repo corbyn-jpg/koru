@@ -30,7 +30,7 @@ function ProgressRing({ percent, size = 56, stroke = 5, color = "#3C0078" }) {
       <circle
         cx={size / 2} cy={size / 2} r={r} fill="none" stroke={color} strokeWidth={stroke}
         strokeDasharray={circ} strokeDashoffset={offset} strokeLinecap="round"
-        className="transition-all duration-700"
+        className="transition duration-700"
       />
     </svg>
   );
@@ -274,7 +274,7 @@ export default function AdminAnalytics() {
             { label: "Total Enrolments", value: loading ? "—" : enrollments.length, sub: "across all courses" },
           ].map((kpi, i) => (
             <div key={i} className={`flex flex-col gap-1 flex-1 ${i === 0 ? "pr-6" : "px-6"}`}>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400">{kpi.label}</p>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">{kpi.label}</p>
               <p className="text-2xl font-black leading-none text-gray-900">{kpi.value}</p>
               <p className="text-xs text-gray-400 truncate mt-0.5">{kpi.sub}</p>
             </div>
@@ -288,7 +288,7 @@ export default function AdminAnalytics() {
           <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
             <div className="px-6 py-5 border-b border-gray-50 flex justify-between items-center">
               <h2 className="text-base font-bold text-gray-900">Courses per Lecturer</h2>
-              <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
                 {lecturers.length} lecturers
               </span>
             </div>
@@ -311,9 +311,9 @@ export default function AdminAnalytics() {
               <table className="w-full text-left">
                 <thead>
                   <tr className="bg-gray-50/50">
-                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400">Lecturer</th>
-                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400 text-center">Courses</th>
-                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400">Course Codes</th>
+                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-wider text-gray-400">Lecturer</th>
+                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-wider text-gray-400 text-center">Courses</th>
+                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-wider text-gray-400">Course Codes</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -370,7 +370,7 @@ export default function AdminAnalytics() {
 
             {/* Platform at a Glance */}
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-4">Platform at a Glance</p>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-4">Platform at a Glance</p>
               <div className="space-y-0">
                 {[
                   { label: "Avg Courses / Lecturer", value: loading ? "—" : avgCoursesPerLecturer },
@@ -390,7 +390,7 @@ export default function AdminAnalytics() {
 
             {/* User Breakdown */}
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-              <h3 className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-1">User Breakdown</h3>
+              <h3 className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-1">User Breakdown</h3>
               <div className="space-y-0">
                 {[
                   { label: "Students", value: loading ? "—" : students.length },
@@ -400,7 +400,7 @@ export default function AdminAnalytics() {
                 ].map(item => (
                   <div key={item.label} className="flex items-center justify-between py-3 border-b border-gray-50 last:border-0">
                     <span className="text-sm text-gray-500">{item.label}</span>
-                    <span className={`text-base font-black ${item.highlight ? "text-[#3C0078]" : "text-gray-900"}`}>
+                    <span className={`text-base font-black ${item.highlight ? "text-brand" : "text-gray-900"}`}>
                       {item.value}
                     </span>
                   </div>
@@ -449,7 +449,7 @@ export default function AdminAnalytics() {
                 <select
                   value={selectedTeacherId}
                   onChange={e => setSelectedTeacherId(e.target.value)}
-                  className="appearance-none rounded-full border border-gray-200 bg-white px-5 py-2.5 pr-10 text-sm font-semibold text-gray-700 outline-none focus:border-[#3C0078] focus:ring-2 focus:ring-[#3C0078]/20 transition-all cursor-pointer min-w-[220px]"
+                  className="appearance-none rounded-full border border-gray-200 bg-white px-5 py-2.5 pr-10 text-sm font-semibold text-gray-700 outline-none focus:border-brand focus:ring-2 focus:ring-brand/20 transition cursor-pointer min-w-[220px]"
                 >
                   <option value="">— Select a Lecturer —</option>
                   {lecturers.map(l => (
@@ -503,7 +503,7 @@ export default function AdminAnalytics() {
                     { label: "Pending to Grade", value: pendingGrading, sub: "submissions" },
                   ].map((kpi, i) => (
                     <div key={i} className={`flex flex-col gap-1 flex-1 ${i === 0 ? "pr-6" : "px-6"}`}>
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400">{kpi.label}</p>
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">{kpi.label}</p>
                       <p className="text-2xl font-black leading-none text-gray-900">{kpi.value}</p>
                       <p className="text-xs text-gray-400 truncate mt-0.5">{kpi.sub}</p>
                     </div>
@@ -513,7 +513,7 @@ export default function AdminAnalytics() {
                 {/* Course averages */}
                 {teacherCourses.length > 0 && (
                   <div>
-                    <h3 className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3">Course Averages</h3>
+                    <h3 className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-3">Course Averages</h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                       {teacherCourses.map(course => {
                         const avg = gradedAssignments.filter(a => a.courseId === course.id);
@@ -560,7 +560,7 @@ export default function AdminAnalytics() {
                 <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
                   <div className="px-6 py-5 border-b border-gray-50 flex justify-between items-center">
                     <h3 className="text-base font-bold text-gray-900">Grading Progress</h3>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
                       {assignmentsWithStats.length} assignments
                     </span>
                   </div>
@@ -570,12 +570,12 @@ export default function AdminAnalytics() {
                     <table className="w-full text-left">
                       <thead>
                         <tr className="bg-gray-50/50">
-                          <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400">Assignment</th>
-                          <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400">Course</th>
-                          <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400 text-center">Graded</th>
-                          <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400 text-center">Avg Score</th>
-                          <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400">Due Date</th>
-                          <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400">Status</th>
+                          <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-wider text-gray-400">Assignment</th>
+                          <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-wider text-gray-400">Course</th>
+                          <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-wider text-gray-400 text-center">Graded</th>
+                          <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-wider text-gray-400 text-center">Avg Score</th>
+                          <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-wider text-gray-400">Due Date</th>
+                          <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-wider text-gray-400">Status</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -596,7 +596,7 @@ export default function AdminAnalytics() {
                                   <span className="text-sm font-bold text-gray-900">{a.graded}/{a.totalSubmissions}</span>
                                   <div className="w-12 h-1 bg-gray-100 rounded-full overflow-hidden">
                                     <div
-                                      className={`h-full rounded-full transition-all ${done ? "bg-green-500" : pct > 50 ? "bg-amber-400" : "bg-red-400"}`}
+                                      className={`h-full rounded-full transition-[width] ${done ? "bg-green-500" : pct > 50 ? "bg-amber-400" : "bg-red-400"}`}
                                       style={{ width: `${pct}%` }}
                                     />
                                   </div>
@@ -613,7 +613,7 @@ export default function AdminAnalytics() {
                                   : "—"}
                               </td>
                               <td className="px-6 py-4">
-                                <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${
+                                <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
                                   done ? "bg-green-50 text-green-600" :
                                   noGrades ? "bg-gray-100 text-gray-400" :
                                   "bg-amber-50 text-amber-600"
@@ -633,7 +633,7 @@ export default function AdminAnalytics() {
                 <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
                   <div className="px-6 py-5 border-b border-gray-50 flex justify-between items-center">
                     <h3 className="text-base font-bold text-gray-900">Student Performance</h3>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
                       {studentRoster.length} students
                     </span>
                   </div>
@@ -643,10 +643,10 @@ export default function AdminAnalytics() {
                     <table className="w-full text-left">
                       <thead>
                         <tr className="bg-gray-50/50">
-                          <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400">Student</th>
-                          <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400 text-center">Avg Grade</th>
-                          <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400 text-center">Submitted</th>
-                          <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400">Status</th>
+                          <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-wider text-gray-400">Student</th>
+                          <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-wider text-gray-400 text-center">Avg Grade</th>
+                          <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-wider text-gray-400 text-center">Submitted</th>
+                          <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-wider text-gray-400">Status</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -676,7 +676,7 @@ export default function AdminAnalytics() {
                             </td>
                             <td className="px-6 py-4 text-center text-sm font-bold text-gray-700">{s.submissions}</td>
                             <td className="px-6 py-4">
-                              <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${
+                              <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
                                 s.status === "Excellent" ? "bg-green-50 text-green-600" :
                                 s.status === "Good" ? "bg-blue-50 text-blue-600" :
                                 "bg-amber-50 text-amber-600"

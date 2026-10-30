@@ -105,16 +105,16 @@ export default function AdminCourses() {
     }, [loadFullCourses]);
 
     return (
-        <div className="flex overflow-hidden gap-4 transition-all duration-300 md:h-[calc(100vh-32px)] md:w-full max-md:h-screen max-md:w-screen max-md:-ml-4 max-md:-mr-4 max-md:-mt-4 bg-transparent">
+        <div className="flex overflow-hidden gap-4 transition duration-300 md:h-[calc(100vh-32px)] md:w-full max-md:h-screen max-md:w-screen max-md:-ml-4 max-md:-mr-4 max-md:-mt-4 bg-transparent">
                 <CourseSecondaryNav
                     activeCourseId={activeCourseId || visibleCourses[0]?.id}
                     onDeleteCourse={handleCourseDeleted}
                 />
 
-                <div className="flex-1 flex flex-col overflow-hidden transition-all duration-300 md:bg-white/75 md:backdrop-blur-xl md:border md:border-white/20 md:rounded-[28px] md:shadow-lg max-md:bg-white">
+                <div className="flex-1 flex flex-col overflow-hidden transition duration-300 md:bg-white/85 md:border md:border-white/20 md:rounded-[28px] md:shadow-lg max-md:bg-white">
                     {/* Breadcrumb bar */}
                     {ctxCourse && (
-                        <div className="h-14 border-b border-gray-100 bg-white/60 backdrop-blur-md flex items-center justify-between px-8 z-10 shrink-0 select-none">
+                        <div className="h-14 border-b border-gray-100 bg-white/80 flex items-center justify-between px-8 z-10 shrink-0 select-none">
                             <div className="flex items-center gap-3">
                                 <span
                                     className="px-2.5 py-0.5 rounded-lg text-[10px] font-black text-white shadow-sm uppercase shrink-0"

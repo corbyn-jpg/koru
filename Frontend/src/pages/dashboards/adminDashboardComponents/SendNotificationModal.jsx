@@ -1,3 +1,4 @@
+import { notify } from "../../../components/UI/feedback";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { X, User, Bell, Calendar, Clock } from "lucide-react";
@@ -23,7 +24,7 @@ export function SendNotificationModal({ lecturers, onClose, onSend }) {
 
   const handleSend = () => {
     if (!title || !startTime || !endTime || selectedIds.length === 0) {
-      alert("Please fill in all fields and select at least one lecturer.");
+      notify("Please fill in all fields and select at least one lecturer.");
       return;
     }
     onSend({
@@ -54,7 +55,7 @@ export function SendNotificationModal({ lecturers, onClose, onSend }) {
         className="bg-white rounded-[32px] shadow-2xl w-full max-w-2xl flex flex-col max-h-[90vh] overflow-hidden"
       >
         {/* Header */}
-        <div className="p-8 border-b border-gray-100 flex items-center justify-between bg-gradient-to-r from-[#3C0078]/5 to-transparent">
+        <div className="p-8 border-b border-gray-100 flex items-center justify-between bg-gradient-to-r from-brand/5 to-transparent">
           <div>
             <h3 className="text-2xl font-bold font-['Gabarito'] text-gray-900">Send Notification</h3>
             <p className="text-sm text-gray-500 mt-1">Schedule a meeting or send a notice to lecturers' calendars.</p>
@@ -74,7 +75,7 @@ export function SendNotificationModal({ lecturers, onClose, onSend }) {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="e.g. Faculty Meeting"
-                className="w-full px-4 py-3 rounded-2xl bg-gray-50 border border-transparent focus:bg-white focus:border-[#3C0078] outline-none transition-all text-sm font-semibold"
+                className="w-full px-4 py-3 rounded-2xl bg-gray-50 border border-transparent focus:bg-white focus:border-brand outline-none transition text-sm font-semibold"
               />
             </div>
 
@@ -87,7 +88,7 @@ export function SendNotificationModal({ lecturers, onClose, onSend }) {
                      type="datetime-local"
                      value={startTime}
                      onChange={(e) => setStartTime(e.target.value)}
-                     className="w-full pl-11 pr-4 py-3 rounded-2xl bg-gray-50 border border-transparent focus:bg-white focus:border-[#3C0078] outline-none transition-all text-sm font-semibold"
+                     className="w-full pl-11 pr-4 py-3 rounded-2xl bg-gray-50 border border-transparent focus:bg-white focus:border-brand outline-none transition text-sm font-semibold"
                    />
                 </div>
               </div>
@@ -99,7 +100,7 @@ export function SendNotificationModal({ lecturers, onClose, onSend }) {
                      type="datetime-local"
                      value={endTime}
                      onChange={(e) => setEndTime(e.target.value)}
-                     className="w-full pl-11 pr-4 py-3 rounded-2xl bg-gray-50 border border-transparent focus:bg-white focus:border-[#3C0078] outline-none transition-all text-sm font-semibold"
+                     className="w-full pl-11 pr-4 py-3 rounded-2xl bg-gray-50 border border-transparent focus:bg-white focus:border-brand outline-none transition text-sm font-semibold"
                    />
                 </div>
               </div>
@@ -112,7 +113,7 @@ export function SendNotificationModal({ lecturers, onClose, onSend }) {
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Details about the meeting..."
                 rows={3}
-                className="w-full px-4 py-3 rounded-2xl bg-gray-50 border border-transparent focus:bg-white focus:border-[#3C0078] outline-none transition-all text-sm font-semibold resize-none"
+                className="w-full px-4 py-3 rounded-2xl bg-gray-50 border border-transparent focus:bg-white focus:border-brand outline-none transition text-sm font-semibold resize-none"
               />
             </div>
           </div>
@@ -129,7 +130,7 @@ export function SendNotificationModal({ lecturers, onClose, onSend }) {
                     if (selectedIds.length === lecturers.length) setSelectedIds([]);
                     else setSelectedIds(lecturers.map(l => l.id));
                   }}
-                  className="text-[10px] font-bold text-[#3C0078] uppercase mb-1 hover:underline ml-1"
+                  className="text-[10px] font-bold text-brand uppercase mb-1 hover:underline ml-1"
                 >
                   {selectedIds.length === lecturers.length ? "Deselect All" : "Select All"}
                 </button>
@@ -137,22 +138,22 @@ export function SendNotificationModal({ lecturers, onClose, onSend }) {
                   <button
                     key={l.id}
                     onClick={() => toggleLecturer(l.id)}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl border transition-all ${
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl border transition ${
                       selectedIds.includes(l.id)
-                        ? "bg-[#3C0078]/5 border-[#3C0078] shadow-sm"
+                        ? "bg-brand/5 border-brand shadow-sm"
                         : "bg-white border-gray-100 hover:border-gray-300"
                     }`}
                   >
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
-                      selectedIds.includes(l.id) ? "bg-[#3C0078] text-white" : "bg-gray-100 text-gray-500"
+                      selectedIds.includes(l.id) ? "bg-brand text-white" : "bg-gray-100 text-gray-500"
                     }`}>
                       <User className="w-4 h-4" />
                     </div>
-                    <span className={`text-sm font-bold ${selectedIds.includes(l.id) ? "text-[#3C0078]" : "text-gray-700"}`}>
+                    <span className={`text-sm font-bold ${selectedIds.includes(l.id) ? "text-brand" : "text-gray-700"}`}>
                       {l.name}
                     </span>
                     {selectedIds.includes(l.id) && (
-                      <div className="ml-auto w-5 h-5 rounded-full bg-[#3C0078] flex items-center justify-center">
+                      <div className="ml-auto w-5 h-5 rounded-full bg-brand flex items-center justify-center">
                         <div className="w-1.5 h-1.5 rounded-full bg-white" />
                       </div>
                     )}
@@ -172,7 +173,7 @@ export function SendNotificationModal({ lecturers, onClose, onSend }) {
            </button>
            <button
              onClick={handleSend}
-             className="px-8 py-3 rounded-2xl bg-[#3C0078] text-white font-bold flex items-center gap-2 shadow-lg shadow-[#3C0078]/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
+             className="px-8 py-3 rounded-2xl bg-brand text-white font-bold flex items-center gap-2 shadow-lg shadow-brand/20 hover:scale-[1.02] active:scale-[0.98] transition"
            >
              <Bell className="w-4 h-4" />
              Send Notification

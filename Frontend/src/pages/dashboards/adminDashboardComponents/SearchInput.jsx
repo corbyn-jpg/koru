@@ -10,7 +10,7 @@ export function SearchInput({ value, onChange, placeholder = "Search..." }) {
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-xl bg-gray-50 outline-none focus:border-[#3C0078]/30 focus:bg-white transition-colors"
+        className="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-xl bg-gray-50 outline-none focus:border-brand/30 focus:bg-white transition-colors"
       />
     </div>
   );

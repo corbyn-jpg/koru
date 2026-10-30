@@ -339,7 +339,7 @@ export default function CalendarTimelineView({ events = [], weeks = [], loading 
                           <div className="group/pill relative min-w-0 flex-1">
                             {/* Hover Tooltip — styled exactly like month view */}
                             {hasTooltipDetails && (
-                              <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-50 w-52 bg-purple-800 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] p-3 pointer-events-none opacity-0 group-hover/pill:opacity-100 translate-y-1.5 group-hover/pill:translate-y-0 transition-all duration-200 ease-out">
+                              <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-50 w-52 bg-purple-800 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] p-3 pointer-events-none opacity-0 group-hover/pill:opacity-100 translate-y-1.5 group-hover/pill:translate-y-0 transition duration-200 ease-out">
                                 {/* Title row with icon */}
                                 <div className="flex items-center gap-2 mb-2.5">
                                   <div className="w-8 h-8 rounded-xl border border-gray-200 bg-gray-50 flex items-center justify-center shrink-0 text-gray-500">
@@ -383,7 +383,7 @@ export default function CalendarTimelineView({ events = [], weeks = [], loading 
 
                             {/* Event pill — styled exactly like month view */}
                             <div className={[
-                              "flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-medium transition-all duration-150 shadow-xs hover:-translate-y-px hover:shadow-md border border-gray-200",
+                              "flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-medium transition duration-150 shadow-xs hover:-translate-y-px hover:shadow-md border border-gray-200",
                               evt.type === "task"
                                 ? "bg-amber-50 text-gray-800 hover:bg-amber-100"
                                 : "bg-white text-black hover:bg-purple-100",

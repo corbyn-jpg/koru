@@ -182,7 +182,7 @@ export default function CreateCoursePage() {
               <div className="h-5 rounded-full bg-gray-200 w-36 mb-2" />
               {[1, 2, 3].map(i => <div key={i} className="h-14 rounded-2xl bg-gray-100" />)}
             </div>
-            <div className="h-14 rounded-3xl bg-[#3C0078]/10" />
+            <div className="h-14 rounded-3xl bg-brand/10" />
           </div>
         </div>
       </div>
@@ -197,19 +197,19 @@ export default function CreateCoursePage() {
         <div className="flex flex-col gap-2">
           <button 
             onClick={() => navigate("/courses")}
-            className="flex items-center gap-2 text-xs font-bold text-[#3C0078]/80 hover:text-[#3C0078] transition-colors cursor-pointer select-none"
+            className="flex items-center gap-2 text-xs font-bold text-brand/80 hover:text-brand transition-colors cursor-pointer select-none"
           >
             <ArrowLeft size={14} />
             <span>Back to Course Registry</span>
           </button>
           <div className="flex items-center gap-2.5 mt-2">
-             <div className="w-1.5 h-6 bg-[#3C0078] rounded-full" />
+             <div className="w-1.5 h-6 bg-brand rounded-full" />
              <h1 className="text-4xl font-black tracking-tighter text-gray-900 leading-none">
-               Create New <span className="text-[#3C0078]">Course offering</span>
+               Create New <span className="text-brand">Course offering</span>
              </h1>
           </div>
         </div>
-        <div className="hidden md:flex items-center gap-2 px-4 py-2 rounded-2xl bg-[#3C0078]/5 text-[#3C0078] border border-[#3C0078]/10 text-xs font-bold">
+        <div className="hidden md:flex items-center gap-2 px-4 py-2 rounded-2xl bg-brand/5 text-brand border border-brand/10 text-xs font-bold">
           <Sparkles size={14} className="animate-pulse" />
           <span>System Administrator Mode</span>
         </div>
@@ -232,7 +232,7 @@ export default function CreateCoursePage() {
                 The catalog subject and course offering have been created in the database. Redirecting to registry...
               </p>
             </div>
-            <Loader2 className="w-6 h-6 text-[#3C0078] animate-spin mt-4" />
+            <Loader2 className="w-6 h-6 text-brand animate-spin mt-4" />
           </motion.div>
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col xl:flex-row gap-8">
@@ -242,13 +242,13 @@ export default function CreateCoursePage() {
               
               <div className="p-8 bg-white border border-gray-100 shadow-md rounded-3xl space-y-6">
                 <div className="flex items-center gap-2 pb-4 border-b border-gray-100">
-                  <BookOpen className="text-[#3C0078]" size={20} />
+                  <BookOpen className="text-brand" size={20} />
                   <h3 className="text-lg font-black text-gray-900 uppercase tracking-tight">Course Definition</h3>
                 </div>
 
                 {/* Course Name */}
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block">
+                  <label className="text-[10px] font-black text-gray-400 uppercase tracking-wider block">
                     Course Name <span className="text-red-500">*</span>
                   </label>
                   <input 
@@ -257,7 +257,7 @@ export default function CreateCoursePage() {
                     placeholder="e.g. User Interface Design 300"
                     value={subjectName}
                     onChange={(e) => setSubjectName(e.target.value)}
-                    className="w-full bg-gray-50 border border-transparent hover:border-gray-200 focus:border-[#3C0078]/20 focus:bg-white px-6 py-4 rounded-2xl text-[14px] font-bold text-gray-900 transition-all outline-none"
+                    className="w-full bg-gray-50 border border-transparent hover:border-gray-200 focus:border-brand/20 focus:bg-white px-6 py-4 rounded-2xl text-[14px] font-bold text-gray-900 transition outline-none"
                   />
                 </div>
 
@@ -265,7 +265,7 @@ export default function CreateCoursePage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Subject Code */}
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block">
+                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-wider block">
                       Course Code <span className="text-red-500">*</span>
                     </label>
                     <input 
@@ -274,13 +274,13 @@ export default function CreateCoursePage() {
                       placeholder="e.g. UI300"
                       value={subjectCode}
                       onChange={(e) => setSubjectCode(e.target.value)}
-                      className="w-full bg-gray-50 border border-transparent hover:border-gray-200 focus:border-[#3C0078]/20 focus:bg-white px-6 py-4 rounded-2xl text-[14px] font-bold text-gray-900 transition-all outline-none uppercase"
+                      className="w-full bg-gray-50 border border-transparent hover:border-gray-200 focus:border-brand/20 focus:bg-white px-6 py-4 rounded-2xl text-[14px] font-bold text-gray-900 transition outline-none uppercase"
                     />
                   </div>
 
                   {/* Lecturer Assignment */}
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block">
+                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-wider block">
                       Lecturer <span className="text-red-500">*</span>
                     </label>
                     <div className="relative">
@@ -288,7 +288,7 @@ export default function CreateCoursePage() {
                         required
                         value={selectedTeacherId}
                         onChange={(e) => setSelectedTeacherId(e.target.value)}
-                        className="w-full bg-gray-50 border border-transparent hover:border-gray-200 focus:border-[#3C0078]/20 focus:bg-white px-6 py-4 rounded-2xl text-[14px] font-bold text-gray-900 transition-all outline-none appearance-none cursor-pointer"
+                        className="w-full bg-gray-50 border border-transparent hover:border-gray-200 focus:border-brand/20 focus:bg-white px-6 py-4 rounded-2xl text-[14px] font-bold text-gray-900 transition outline-none appearance-none cursor-pointer"
                       >
                         {teachers.length === 0 ? (
                           <option disabled value="">No Teachers Available</option>
@@ -307,7 +307,7 @@ export default function CreateCoursePage() {
 
                 {/* Description */}
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block">
+                  <label className="text-[10px] font-black text-gray-400 uppercase tracking-wider block">
                     Description
                   </label>
                   <textarea 
@@ -315,7 +315,7 @@ export default function CreateCoursePage() {
                     placeholder="Enter academic summary, prerequisites, or learning outcomes..."
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    className="w-full bg-gray-50 border border-transparent hover:border-gray-200 focus:border-[#3C0078]/20 focus:bg-white px-6 py-4 rounded-2xl text-[14px] font-semibold text-gray-800 transition-all outline-none resize-none leading-relaxed"
+                    className="w-full bg-gray-50 border border-transparent hover:border-gray-200 focus:border-brand/20 focus:bg-white px-6 py-4 rounded-2xl text-[14px] font-semibold text-gray-800 transition outline-none resize-none leading-relaxed"
                   />
                 </div>
               </div>
@@ -323,30 +323,30 @@ export default function CreateCoursePage() {
               {/* Offer Details */}
               <div className="p-8 bg-white border border-gray-100 shadow-md rounded-3xl space-y-6">
                 <div className="flex items-center gap-2 pb-4 border-b border-gray-100">
-                  <Calendar className="text-[#3C0078]" size={20} />
+                  <Calendar className="text-brand" size={20} />
                   <h3 className="text-lg font-black text-gray-900 uppercase tracking-tight">Academic Offer Details</h3>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {/* Academic Year */}
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block">Academic Year</label>
+                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-wider block">Academic Year</label>
                     <input 
                       type="number"
                       value={year}
                       onChange={(e) => setYear(parseInt(e.target.value) || new Date().getFullYear())}
-                      className="w-full bg-gray-50 border border-transparent hover:border-gray-200 focus:border-[#3C0078]/20 focus:bg-white px-6 py-4 rounded-2xl text-[14px] font-bold text-gray-900 transition-all outline-none"
+                      className="w-full bg-gray-50 border border-transparent hover:border-gray-200 focus:border-brand/20 focus:bg-white px-6 py-4 rounded-2xl text-[14px] font-bold text-gray-900 transition outline-none"
                     />
                   </div>
 
                   {/* Semester / Term */}
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block">Active Semester</label>
+                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-wider block">Active Semester</label>
                     <div className="relative">
                       <select 
                         value={term}
                         onChange={(e) => setTerm(e.target.value)}
-                        className="w-full bg-gray-50 border border-transparent hover:border-gray-200 focus:border-[#3C0078]/20 focus:bg-white px-6 py-4 rounded-2xl text-[14px] font-bold text-gray-900 transition-all outline-none appearance-none cursor-pointer"
+                        className="w-full bg-gray-50 border border-transparent hover:border-gray-200 focus:border-brand/20 focus:bg-white px-6 py-4 rounded-2xl text-[14px] font-bold text-gray-900 transition outline-none appearance-none cursor-pointer"
                       >
                         <option>Term 1</option>
                         <option>Term 2</option>
@@ -361,12 +361,12 @@ export default function CreateCoursePage() {
 
                   {/* Capacity */}
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest block">Capacity (Max Students)</label>
+                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-wider block">Capacity (Max Students)</label>
                     <input 
                       type="number"
                       value={capacity}
                       onChange={(e) => setCapacity(parseInt(e.target.value) || 0)}
-                      className="w-full bg-gray-50 border border-transparent hover:border-gray-200 focus:border-[#3C0078]/20 focus:bg-white px-6 py-4 rounded-2xl text-[14px] font-bold text-gray-900 transition-all outline-none"
+                      className="w-full bg-gray-50 border border-transparent hover:border-gray-200 focus:border-brand/20 focus:bg-white px-6 py-4 rounded-2xl text-[14px] font-bold text-gray-900 transition outline-none"
                     />
                   </div>
                 </div>
@@ -380,10 +380,10 @@ export default function CreateCoursePage() {
               <div className="p-8 bg-white border border-gray-100 shadow-md rounded-3xl flex flex-col h-[600px]">
                 <div className="flex items-center justify-between pb-4 border-b border-gray-100 shrink-0">
                   <div className="flex items-center gap-2">
-                    <Users className="text-[#3C0078]" size={20} />
+                    <Users className="text-brand" size={20} />
                     <h3 className="text-lg font-black text-gray-900 uppercase tracking-tight">Enrol Students</h3>
                   </div>
-                  <span className="px-3 py-1 bg-[#3C0078]/5 rounded-xl text-[11px] font-black text-[#3C0078]">
+                  <span className="px-3 py-1 bg-brand/5 rounded-xl text-[11px] font-black text-brand">
                     Selected: {selectedStudentIds.length}
                   </span>
                 </div>
@@ -396,7 +396,7 @@ export default function CreateCoursePage() {
                     placeholder="Search student database..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-transparent focus:border-[#3C0078]/20 focus:bg-white rounded-xl text-xs font-semibold text-gray-900 outline-none transition-all"
+                    className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-transparent focus:border-brand/20 focus:bg-white rounded-xl text-xs font-semibold text-gray-900 outline-none transition"
                   />
                 </div>
 
@@ -405,14 +405,14 @@ export default function CreateCoursePage() {
                   <button 
                     type="button" 
                     onClick={handleSelectAllFiltered}
-                    className="flex-1 py-2 border border-gray-100 hover:bg-gray-50 text-[10px] font-bold uppercase tracking-wider text-gray-600 rounded-xl cursor-pointer transition-all"
+                    className="flex-1 py-2 border border-gray-100 hover:bg-gray-50 text-[10px] font-bold uppercase tracking-wider text-gray-600 rounded-xl cursor-pointer transition"
                   >
                     Select All Search
                   </button>
                   <button 
                     type="button" 
                     onClick={handleDeselectAllFiltered}
-                    className="flex-1 py-2 border border-gray-100 hover:bg-gray-50 text-[10px] font-bold uppercase tracking-wider text-gray-600 rounded-xl cursor-pointer transition-all"
+                    className="flex-1 py-2 border border-gray-100 hover:bg-gray-50 text-[10px] font-bold uppercase tracking-wider text-gray-600 rounded-xl cursor-pointer transition"
                   >
                     Clear Search
                   </button>
@@ -431,9 +431,9 @@ export default function CreateCoursePage() {
                         <div 
                           key={student.id}
                           onClick={() => handleToggleStudent(student.id)}
-                          className={`flex items-center justify-between p-3 rounded-2xl border transition-all cursor-pointer select-none group
+                          className={`flex items-center justify-between p-3 rounded-2xl border transition cursor-pointer select-none group
                             ${isSelected 
-                              ? "bg-[#3C0078]/5 border-[#3C0078]/20" 
+                              ? "bg-brand/5 border-brand/20" 
                               : "bg-transparent border-gray-100/50 hover:bg-gray-50/60"
                             }`}
                         >
@@ -441,8 +441,8 @@ export default function CreateCoursePage() {
                             {/* Initials Badge */}
                             <div className={`w-9 h-9 rounded-xl flex items-center justify-center font-bold text-xs shrink-0
                               ${isSelected 
-                                ? "bg-[#3C0078] text-white" 
-                                : "bg-gray-100 text-gray-500 group-hover:bg-[#3C0078]/10 group-hover:text-[#3C0078]"
+                                ? "bg-brand text-white" 
+                                : "bg-gray-100 text-gray-500 group-hover:bg-brand/10 group-hover:text-brand"
                               }`}
                             >
                               {student.firstName[0]}{student.lastName[0]}
@@ -458,9 +458,9 @@ export default function CreateCoursePage() {
                           </div>
                           
                           {/* Checkbox indicator */}
-                          <div className={`w-5 h-5 rounded-lg border flex items-center justify-center shrink-0 transition-all
+                          <div className={`w-5 h-5 rounded-lg border flex items-center justify-center shrink-0 transition
                             ${isSelected 
-                              ? "bg-[#3C0078] border-[#3C0078] text-white" 
+                              ? "bg-brand border-brand text-white" 
                               : "border-gray-200 group-hover:border-gray-300 bg-white"
                             }`}
                           >
@@ -499,14 +499,14 @@ export default function CreateCoursePage() {
             <button 
               type="button"
               onClick={() => navigate("/courses")}
-              className="flex-1 md:flex-none px-6 py-3 border-2 border-gray-100 text-gray-400 font-bold uppercase tracking-widest text-[11px] hover:bg-gray-50 rounded-2xl cursor-pointer transition-all"
+              className="flex-1 md:flex-none px-6 py-3 border-2 border-gray-100 text-gray-400 font-bold uppercase tracking-wider text-[11px] hover:bg-gray-50 rounded-2xl cursor-pointer transition"
             >
               Cancel
             </button>
             <button 
               onClick={handleSubmit}
               disabled={isSubmitting || !subjectName.trim() || !subjectCode.trim() || !selectedTeacherId}
-              className="flex-1 md:flex-none px-10 py-3 bg-[#3C0078] text-white font-black uppercase tracking-widest text-[11px] shadow-lg shadow-[#3C0078]/25 hover:scale-[1.03] active:scale-[0.98] transition-all disabled:opacity-50 disabled:hover:scale-100 rounded-2xl cursor-pointer flex items-center justify-center gap-2"
+              className="flex-1 md:flex-none px-10 py-3 bg-brand text-white font-black uppercase tracking-wider text-[11px] shadow-lg shadow-brand/25 hover:scale-[1.03] active:scale-[0.98] transition disabled:opacity-50 disabled:hover:scale-100 rounded-2xl cursor-pointer flex items-center justify-center gap-2"
             >
               {isSubmitting ? (
                 <>

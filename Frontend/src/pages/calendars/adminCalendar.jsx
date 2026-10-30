@@ -1,3 +1,4 @@
+import { notify } from "../../components/UI/feedback";
 import React, { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -115,7 +116,7 @@ function SlotChip({ cls, conflict }) {
     <div className={`rounded-xl px-3 py-2 border text-[10px] ${
       conflict ? "bg-red-50 border-red-200" : "bg-white border-gray-100"
     }`}>
-      {cls.name && <span className={`font-black uppercase tracking-wider ${conflict ? "text-red-500" : "text-[#3C0078]"}`}>{cls.name} · </span>}
+      {cls.name && <span className={`font-black uppercase tracking-wider ${conflict ? "text-red-500" : "text-brand"}`}>{cls.name} · </span>}
       {cls.courseName && <span className="font-semibold text-gray-700">{cls.courseName}</span>}
       <div className="flex flex-wrap gap-x-2 mt-0.5 text-gray-400">
         {cls.startTime && <span className="flex items-center gap-0.5"><Clock size={8} />{formatTime(cls.startTime)}</span>}
@@ -155,7 +156,7 @@ export default function AdminCalendar() {
       setClasses(prev => prev.filter(c => c.id !== classId));
       setEvents(prev => prev.filter(e => !e.id.startsWith(`cls-gen-${classId}-`)));
     } catch (err) {
-      alert("Failed to delete: " + err.message);
+      notify("Failed to delete: " + err.message);
     }
   };
 
@@ -199,10 +200,10 @@ export default function AdminCalendar() {
         setRecentlyGeneratedIds(ids);
         loadClasses();
       } else {
-        alert("Failed to generate timetable.");
+        notify("Failed to generate timetable.");
       }
     } catch (err) {
-      alert("Error: " + err.message);
+      notify("Error: " + err.message);
     } finally {
       setGenerating(false);
     }
@@ -251,7 +252,7 @@ export default function AdminCalendar() {
             <button
               onClick={handleGenerate}
               disabled={generating}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#3C0078] text-white text-[11px] font-bold hover:bg-[#2a0055] transition-colors disabled:opacity-50"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-brand text-white text-[11px] font-bold hover:bg-brand-deep transition-colors disabled:opacity-50"
             >
               <Zap size={12} />
               {generating ? "Generating…" : "Generate Timetable"}
@@ -280,7 +281,7 @@ export default function AdminCalendar() {
                 {/* Conflicts */}
                 {conflicts.length > 0 && (
                   <div>
-                    <div className="text-[9px] font-black uppercase tracking-widest text-red-500 mb-2 flex items-center gap-1.5">
+                    <div className="text-[9px] font-black uppercase tracking-wider text-red-500 mb-2 flex items-center gap-1.5">
                       <AlertTriangle size={10} /> Teacher Conflicts
                     </div>
                     <div className="space-y-2">
@@ -303,7 +304,7 @@ export default function AdminCalendar() {
                 {/* Unscheduled */}
                 {unscheduled.length > 0 && (
                   <div>
-                    <div className="text-[9px] font-black uppercase tracking-widest text-amber-500 mb-2 flex items-center gap-1.5">
+                    <div className="text-[9px] font-black uppercase tracking-wider text-amber-500 mb-2 flex items-center gap-1.5">
                       <Clock size={10} /> Unscheduled Slots
                     </div>
                     <div className="flex flex-wrap gap-2">
@@ -321,7 +322,7 @@ export default function AdminCalendar() {
                 {/* Recently generated */}
                 {recentlyGeneratedIds.size > 0 && (
                   <div>
-                    <div className="text-[9px] font-black uppercase tracking-widest text-green-600 mb-2 flex items-center gap-1.5">
+                    <div className="text-[9px] font-black uppercase tracking-wider text-green-600 mb-2 flex items-center gap-1.5">
                       <Sparkles size={10} /> Just Generated · {recentlyGeneratedIds.size} slot{recentlyGeneratedIds.size !== 1 ? "s" : ""} scheduled
                     </div>
                     <div className="flex flex-wrap gap-2">

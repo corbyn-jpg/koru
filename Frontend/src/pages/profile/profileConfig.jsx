@@ -51,4 +51,4 @@ export const PANEL_CLASS =
   "rounded-[28px] border border-white/60 bg-white/85 p-6 shadow-[0_16px_40px_rgba(15,23,42,0.08)] backdrop-blur-md transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_44px_rgba(15,23,42,0.12)]";
 
 export const INPUT_CLASS =
-  "rounded-2xl border border-slate-300 bg-white/90 px-4 py-2.5 transition focus:border-[#3C0078] focus:outline-none focus:ring-2 focus:ring-[#3C0078]/20";
+  "rounded-2xl border border-slate-300 bg-white/90 px-4 py-2.5 transition focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20";

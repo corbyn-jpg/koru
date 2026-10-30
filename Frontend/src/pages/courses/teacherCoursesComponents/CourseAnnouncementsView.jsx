@@ -84,7 +84,7 @@ export function CourseAnnouncementsView({ activeCourseId }) {
                 {!isAdding && (
                     <button
                         onClick={() => setIsAdding(true)}
-                        className="bg-[#3C0078] text-white px-6 py-2.5 rounded-2xl font-bold text-xs uppercase tracking-widest flex items-center gap-2 shadow-lg shadow-[#3C0078]/20 self-start sm:self-auto"
+                        className="bg-brand text-white px-6 py-2.5 rounded-2xl font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg shadow-brand/20 self-start sm:self-auto"
                     >
                         <Plus size={16} />
                         Create Announcement
@@ -99,7 +99,7 @@ export function CourseAnnouncementsView({ activeCourseId }) {
                         initial={{ opacity: 0, y: -16, height: 0 }}
                         animate={{ opacity: 1, y: 0, height: "auto" }}
                         exit={{ opacity: 0, y: -16, height: 0, transition: { duration: 0.18, ease: "easeIn" } }}
-                        className="bg-white p-6 rounded-3xl border-2 border-dashed border-[#3C0078]/20 shadow-sm mb-6 overflow-hidden shrink-0"
+                        className="bg-white p-6 rounded-3xl border-2 border-dashed border-brand/20 shadow-sm mb-6 overflow-hidden shrink-0"
                     >
                         <div className="flex justify-between items-center mb-6">
                             <h3 className="text-lg font-bold text-gray-900 italic">Drafting New Announcement</h3>
@@ -110,21 +110,21 @@ export function CourseAnnouncementsView({ activeCourseId }) {
 
                         <div className="flex flex-col gap-6 mb-6">
                             <div>
-                                <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2 block">Announcement Title</label>
+                                <label className="text-[10px] font-black uppercase tracking-wider text-gray-400 mb-2 block">Announcement Title</label>
                                 <input
                                     type="text"
                                     placeholder="What's the update about?"
-                                    className="w-full bg-gray-50 border-none rounded-2xl px-5 py-3.5 text-gray-900 font-medium focus:ring-2 focus:ring-[#3C0078]/20 transition-all"
+                                    className="w-full bg-gray-50 border-none rounded-2xl px-5 py-3.5 text-gray-900 font-medium focus:ring-2 focus:ring-brand/20 transition"
                                     value={newAnnouncement.title}
                                     onChange={e => setNewAnnouncement({ ...newAnnouncement, title: e.target.value })}
                                 />
                             </div>
                             <div>
-                                <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2 block">Announcement Message</label>
+                                <label className="text-[10px] font-black uppercase tracking-wider text-gray-400 mb-2 block">Announcement Message</label>
                                 <textarea
                                     rows={5}
                                     placeholder="Write your announcement details here..."
-                                    className="w-full bg-gray-50 border-none rounded-2xl px-5 py-4 text-gray-900 font-medium focus:ring-2 focus:ring-[#3C0078]/20 transition-all resize-none leading-relaxed"
+                                    className="w-full bg-gray-50 border-none rounded-2xl px-5 py-4 text-gray-900 font-medium focus:ring-2 focus:ring-brand/20 transition resize-none leading-relaxed"
                                     value={newAnnouncement.preview}
                                     onChange={e => setNewAnnouncement({ ...newAnnouncement, preview: e.target.value })}
                                 />
@@ -135,7 +135,7 @@ export function CourseAnnouncementsView({ activeCourseId }) {
                             <button
                                 onClick={handlePost}
                                 disabled={posting}
-                                className="bg-[#3C0078] text-white px-8 py-3 rounded-2xl font-bold text-xs uppercase tracking-widest hover:bg-[#2A0054] transition-all shadow-lg shadow-[#3C0078]/20 disabled:opacity-50"
+                                className="bg-brand text-white px-8 py-3 rounded-2xl font-bold text-xs uppercase tracking-wider hover:bg-brand-deep transition shadow-lg shadow-brand/20 disabled:opacity-50"
                             >
                                 {posting ? "Posting…" : "Post Announcement"}
                             </button>
@@ -150,7 +150,7 @@ export function CourseAnnouncementsView({ activeCourseId }) {
                 <div
                     className={`${
                         selectedId ? "hidden lg:flex" : "flex"
-                    } flex-col gap-4 overflow-y-auto pr-2 transition-all duration-300 ${
+                    } flex-col gap-4 overflow-y-auto pr-2 transition duration-300 ${
                         selectedId ? "w-full lg:w-[45%] lg:shrink-0" : "w-full"
                     }`}
                 >
@@ -170,9 +170,9 @@ export function CourseAnnouncementsView({ activeCourseId }) {
                             key={post.id}
                             onClick={() => setSelectedId(post.id)}
                             variants={slideUp}
-                            className={`p-5 rounded-2xl border transition-all cursor-pointer relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-4 group shrink-0 ${
+                            className={`p-5 rounded-2xl border transition cursor-pointer relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-4 group shrink-0 ${
                                 selectedId === post.id
-                                    ? "bg-[#3C0078]/5 border-[#3C0078]/30 shadow-md"
+                                    ? "bg-brand/5 border-brand/30 shadow-md"
                                     : "bg-white border-gray-100 shadow-sm hover:shadow-md"
                             }`}
                         >
@@ -187,13 +187,13 @@ export function CourseAnnouncementsView({ activeCourseId }) {
                                     <Bell size={20} />
                                 </div>
                                 <div className="flex-1 min-w-0">
-                                    <h2 className="text-lg font-bold text-gray-800 leading-snug group-hover:text-[#3C0078] transition-colors">
+                                    <h2 className="text-lg font-bold text-gray-800 leading-snug group-hover:text-brand transition-colors">
                                         {post.title}
                                     </h2>
                                     <p className="text-gray-500 text-sm leading-relaxed line-clamp-1 mt-0.5">
                                         {post.preview}
                                     </p>
-                                    <p className="text-[10px] font-black uppercase tracking-widest text-[#3C0078] mt-1.5 opacity-70">
+                                    <p className="text-[10px] font-black uppercase tracking-wider text-brand mt-1.5 opacity-70">
                                         Posted by {post.lecturerName || post.lecturer?.name || post.lecturer || "Lecturer"}
                                     </p>
                                 </div>
@@ -207,7 +207,7 @@ export function CourseAnnouncementsView({ activeCourseId }) {
                                 </span>
                                 <button
                                     onClick={e => handleDelete(post.id, e)}
-                                    className="opacity-0 group-hover:opacity-100 p-1 text-gray-300 hover:text-red-500 transition-all"
+                                    className="opacity-0 group-hover:opacity-100 p-1 text-gray-300 hover:text-red-500 transition"
                                     title="Delete announcement"
                                 >
                                     <Trash2 size={13} />
@@ -255,12 +255,12 @@ export function CourseAnnouncementsView({ activeCourseId }) {
                             </h2>
 
                             <div className="flex items-center gap-3 mb-6 pb-6 border-b border-gray-100">
-                                <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-[#3C0078]">
+                                <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-brand">
                                     <User size={20} />
                                 </div>
                                 <div>
-                                    <p className="text-xs font-black uppercase tracking-widest text-gray-400">Published By</p>
-                                    <p className="font-bold text-[#3C0078]">
+                                    <p className="text-xs font-black uppercase tracking-wider text-gray-400">Published By</p>
+                                    <p className="font-bold text-brand">
                                         {selectedAnnouncement.lecturerName || selectedAnnouncement.lecturer?.name || selectedAnnouncement.lecturer || "Lecturer"}
                                     </p>
                                 </div>

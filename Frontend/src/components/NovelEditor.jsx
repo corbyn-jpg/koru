@@ -189,7 +189,7 @@ export default function NovelEditor({
                 {editable && <NovelBlockMenu />}
 
                 {showSlashCommands && (
-                    <EditorCommand className="z-50 h-auto max-h-[330px] overflow-y-auto rounded-xl border border-gray-200 bg-white px-1 py-2 shadow-xl transition-all">
+                    <EditorCommand className="z-50 h-auto max-h-[330px] overflow-y-auto rounded-xl border border-gray-200 bg-white px-1 py-2 shadow-xl transition">
                         <EditorCommandEmpty className="px-2 text-gray-500">No results</EditorCommandEmpty>
                         <EditorCommandList>
                             {DEFAULT_SUGGESTION_ITEMS.map((item) => (

@@ -1,3 +1,4 @@
+import { notify, confirmAction } from "../../../components/UI/feedback";
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -49,10 +50,10 @@ function NameField({ value, onChange }) {
         {QUICK_NAMES.map(n => (
           <button
             key={n} type="button" onClick={() => onChange(n)}
-            className={`px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all ${
+            className={`px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider transition ${
               value === n
-                ? "bg-[#3C0078] text-white"
-                : "bg-gray-100 text-gray-500 hover:bg-[#3C0078]/10 hover:text-[#3C0078]"
+                ? "bg-brand text-white"
+                : "bg-gray-100 text-gray-500 hover:bg-brand/10 hover:text-brand"
             }`}
           >{n}</button>
         ))}
@@ -60,7 +61,7 @@ function NameField({ value, onChange }) {
       <input
         type="text" placeholder="Custom name…" value={value}
         onChange={e => onChange(e.target.value)}
-        className="w-full px-3 py-2 rounded-xl bg-gray-50 text-xs text-gray-800 outline-none focus:ring-2 focus:ring-[#3C0078]/20 placeholder:text-gray-400"
+        className="w-full px-3 py-2 rounded-xl bg-gray-50 text-xs text-gray-800 outline-none focus:ring-2 focus:ring-brand/20 placeholder:text-gray-400"
       />
     </div>
   );
@@ -139,7 +140,7 @@ function ClassSlotCard({ slot, onEdit, onDelete, deleting }) {
         {(onEdit || onDelete) && (
           <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity shrink-0 pt-0.5">
             {onEdit && (
-              <button onClick={onEdit} className="p-1 rounded-lg text-gray-400 hover:text-[#3C0078] hover:bg-[#3C0078]/5 transition-colors">
+              <button onClick={onEdit} className="p-1 rounded-lg text-gray-400 hover:text-brand hover:bg-brand/5 transition-colors">
                 <Pencil size={11} />
               </button>
             )}
@@ -190,38 +191,38 @@ function SlotForm({ form, setForm, teachers, onSave, onCancel, saving, otherSlot
   const conflict = isScheduled ? detectSlotConflict(form, otherSlots, editingId) : null;
 
   return (
-    <div className="bg-white border border-[#3C0078]/15 rounded-2xl p-3 space-y-2.5">
+    <div className="bg-white border border-brand/15 rounded-2xl p-3 space-y-2.5">
       <NameField value={form.name} onChange={v => setForm(f => ({ ...f, name: v }))} />
       <div className="grid grid-cols-2 gap-2">
         {!isScheduled && (
           <div>
-            <label className="text-[9px] font-black uppercase tracking-widest text-gray-400 block mb-1">Hours</label>
+            <label className="text-[9px] font-black uppercase tracking-wider text-gray-400 block mb-1">Hours</label>
             <input type="number" min={0.5} max={8} step={0.5} value={form.durationHours}
               onChange={e => setForm(f => ({ ...f, durationHours: e.target.value }))}
-              className="w-full px-2.5 py-1.5 rounded-xl bg-gray-50 text-xs font-semibold text-gray-800 outline-none focus:ring-2 focus:ring-[#3C0078]/20"
+              className="w-full px-2.5 py-1.5 rounded-xl bg-gray-50 text-xs font-semibold text-gray-800 outline-none focus:ring-2 focus:ring-brand/20"
             />
           </div>
         )}
         <div>
-          <label className="text-[9px] font-black uppercase tracking-widest text-gray-400 block mb-1">Room</label>
+          <label className="text-[9px] font-black uppercase tracking-wider text-gray-400 block mb-1">Room</label>
           <input type="text" placeholder="e.g. Room 201" value={form.room}
             onChange={e => setForm(f => ({ ...f, room: e.target.value }))}
-            className="w-full px-2.5 py-1.5 rounded-xl bg-gray-50 text-xs text-gray-800 outline-none focus:ring-2 focus:ring-[#3C0078]/20 placeholder:text-gray-400"
+            className="w-full px-2.5 py-1.5 rounded-xl bg-gray-50 text-xs text-gray-800 outline-none focus:ring-2 focus:ring-brand/20 placeholder:text-gray-400"
           />
         </div>
         <div>
-          <label className="text-[9px] font-black uppercase tracking-widest text-gray-400 block mb-1">Lecturer</label>
+          <label className="text-[9px] font-black uppercase tracking-wider text-gray-400 block mb-1">Lecturer</label>
           <select value={form.teacherId} onChange={e => setForm(f => ({ ...f, teacherId: e.target.value }))}
-            className="w-full px-2.5 py-1.5 rounded-xl bg-gray-50 text-xs text-gray-800 outline-none focus:ring-2 focus:ring-[#3C0078]/20"
+            className="w-full px-2.5 py-1.5 rounded-xl bg-gray-50 text-xs text-gray-800 outline-none focus:ring-2 focus:ring-brand/20"
           >
             <option value="">No preference</option>
             {teachers.map(t => <option key={t.id} value={t.id}>{t.firstName} {t.lastName}</option>)}
           </select>
         </div>
         <div className={isScheduled ? "col-span-2" : ""}>
-          <label className="text-[9px] font-black uppercase tracking-widest text-gray-400 block mb-1">Day</label>
+          <label className="text-[9px] font-black uppercase tracking-wider text-gray-400 block mb-1">Day</label>
           <select value={form.dayOfWeek} onChange={e => setForm(f => ({ ...f, dayOfWeek: e.target.value }))}
-            className="w-full px-2.5 py-1.5 rounded-xl bg-gray-50 text-xs text-gray-800 outline-none focus:ring-2 focus:ring-[#3C0078]/20"
+            className="w-full px-2.5 py-1.5 rounded-xl bg-gray-50 text-xs text-gray-800 outline-none focus:ring-2 focus:ring-brand/20"
           >
             <option value="">Any day</option>
             {DAYS.map(d => <option key={d} value={d}>{d}</option>)}
@@ -230,17 +231,17 @@ function SlotForm({ form, setForm, teachers, onSave, onCancel, saving, otherSlot
         {isScheduled && (
           <>
             <div>
-              <label className="text-[9px] font-black uppercase tracking-widest text-gray-400 block mb-1">Start Time</label>
+              <label className="text-[9px] font-black uppercase tracking-wider text-gray-400 block mb-1">Start Time</label>
               <input type="time" value={form.startTime}
                 onChange={e => setForm(f => ({ ...f, startTime: e.target.value }))}
-                className="w-full px-2.5 py-1.5 rounded-xl bg-gray-50 text-xs text-gray-800 outline-none focus:ring-2 focus:ring-[#3C0078]/20"
+                className="w-full px-2.5 py-1.5 rounded-xl bg-gray-50 text-xs text-gray-800 outline-none focus:ring-2 focus:ring-brand/20"
               />
             </div>
             <div>
-              <label className="text-[9px] font-black uppercase tracking-widest text-gray-400 block mb-1">End Time</label>
+              <label className="text-[9px] font-black uppercase tracking-wider text-gray-400 block mb-1">End Time</label>
               <input type="time" value={form.endTime}
                 onChange={e => setForm(f => ({ ...f, endTime: e.target.value }))}
-                className="w-full px-2.5 py-1.5 rounded-xl bg-gray-50 text-xs text-gray-800 outline-none focus:ring-2 focus:ring-[#3C0078]/20"
+                className="w-full px-2.5 py-1.5 rounded-xl bg-gray-50 text-xs text-gray-800 outline-none focus:ring-2 focus:ring-brand/20"
               />
             </div>
           </>
@@ -254,7 +255,7 @@ function SlotForm({ form, setForm, teachers, onSave, onCancel, saving, otherSlot
       )}
       <div className="flex gap-2 pt-0.5">
         <button onClick={onSave} disabled={saving || !!conflict}
-          className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#3C0078] text-white text-[11px] font-bold hover:bg-[#2a0055] transition-colors disabled:opacity-50"
+          className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-brand text-white text-[11px] font-bold hover:bg-brand-deep transition-colors disabled:opacity-50"
         >
           <Check size={11} />{saving ? "Saving…" : "Save"}
         </button>
@@ -335,7 +336,7 @@ function ClassesSection({ groupId, courseId, teachers, refreshKey, onChanged }) 
       setEditingId(null);
       setForm(DEFAULT_SLOT_FORM);
     } catch (err) {
-      alert("Failed to save: " + err.message);
+      notify("Failed to save: " + err.message);
     } finally {
       setSaving(false);
     }
@@ -349,7 +350,7 @@ function ClassesSection({ groupId, courseId, teachers, refreshKey, onChanged }) 
       onChanged?.();
       if (editingId === id) setEditingId(null);
     } catch (err) {
-      alert("Failed to delete: " + err.message);
+      notify("Failed to delete: " + err.message);
     } finally {
       setDeletingId(null);
     }
@@ -358,12 +359,12 @@ function ClassesSection({ groupId, courseId, teachers, refreshKey, onChanged }) 
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">
+        <span className="text-[10px] font-black uppercase tracking-wider text-gray-400">
           Classes · {slots.length} per week
         </span>
         {!addOpen && !editingId && (
           <button onClick={openAdd}
-            className="flex items-center gap-1 px-2 py-1 rounded-lg text-[10px] font-bold text-[#3C0078] bg-[#3C0078]/5 hover:bg-[#3C0078]/10 transition-colors"
+            className="flex items-center gap-1 px-2 py-1 rounded-lg text-[10px] font-bold text-brand bg-brand/5 hover:bg-brand/10 transition-colors"
           >
             <Plus size={10} /> Add slot
           </button>
@@ -438,7 +439,7 @@ function AddClassManuallySection({ groupId, courseId, teachers, onAdded }) {
       setOpen(false);
       setForm(DEFAULT_MANUAL_FORM);
     } catch (err) {
-      alert("Failed to add class: " + err.message);
+      notify("Failed to add class: " + err.message);
     } finally {
       setSaving(false);
     }
@@ -487,47 +488,47 @@ function AddClassManuallySection({ groupId, courseId, teachers, onAdded }) {
 
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="text-[9px] font-black uppercase tracking-widest text-gray-400 block mb-1">Lecturer</label>
+                  <label className="text-[9px] font-black uppercase tracking-wider text-gray-400 block mb-1">Lecturer</label>
                   <select value={form.teacherId} onChange={e => setForm(f => ({ ...f, teacherId: e.target.value }))}
-                    className="w-full px-2.5 py-1.5 rounded-xl bg-gray-50 text-xs text-gray-800 outline-none focus:ring-2 focus:ring-[#3C0078]/20"
+                    className="w-full px-2.5 py-1.5 rounded-xl bg-gray-50 text-xs text-gray-800 outline-none focus:ring-2 focus:ring-brand/20"
                   >
                     <option value="">Select lecturer</option>
                     {teachers.map(t => <option key={t.id} value={t.id}>{t.firstName} {t.lastName}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="text-[9px] font-black uppercase tracking-widest text-gray-400 block mb-1">Room</label>
+                  <label className="text-[9px] font-black uppercase tracking-wider text-gray-400 block mb-1">Room</label>
                   <input type="text" placeholder="e.g. Room 201" value={form.room}
                     onChange={e => setForm(f => ({ ...f, room: e.target.value }))}
-                    className="w-full px-2.5 py-1.5 rounded-xl bg-gray-50 text-xs text-gray-800 outline-none focus:ring-2 focus:ring-[#3C0078]/20 placeholder:text-gray-400"
+                    className="w-full px-2.5 py-1.5 rounded-xl bg-gray-50 text-xs text-gray-800 outline-none focus:ring-2 focus:ring-brand/20 placeholder:text-gray-400"
                   />
                 </div>
                 <div>
-                  <label className="text-[9px] font-black uppercase tracking-widest text-gray-400 block mb-1">Day <span className="text-red-400">*</span></label>
+                  <label className="text-[9px] font-black uppercase tracking-wider text-gray-400 block mb-1">Day <span className="text-red-400">*</span></label>
                   <select value={form.dayOfWeek} onChange={e => setForm(f => ({ ...f, dayOfWeek: e.target.value }))}
-                    className="w-full px-2.5 py-1.5 rounded-xl bg-gray-50 text-xs text-gray-800 outline-none focus:ring-2 focus:ring-[#3C0078]/20"
+                    className="w-full px-2.5 py-1.5 rounded-xl bg-gray-50 text-xs text-gray-800 outline-none focus:ring-2 focus:ring-brand/20"
                   >
                     <option value="">Select day</option>
                     {DAYS.map(d => <option key={d} value={d}>{d}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="text-[9px] font-black uppercase tracking-widest text-gray-400 block mb-1">Start <span className="text-red-400">*</span></label>
+                  <label className="text-[9px] font-black uppercase tracking-wider text-gray-400 block mb-1">Start <span className="text-red-400">*</span></label>
                   <input type="time" value={form.startTime} onChange={e => setForm(f => ({ ...f, startTime: e.target.value }))}
-                    className="w-full px-2.5 py-1.5 rounded-xl bg-gray-50 text-xs text-gray-800 outline-none focus:ring-2 focus:ring-[#3C0078]/20"
+                    className="w-full px-2.5 py-1.5 rounded-xl bg-gray-50 text-xs text-gray-800 outline-none focus:ring-2 focus:ring-brand/20"
                   />
                 </div>
                 <div>
-                  <label className="text-[9px] font-black uppercase tracking-widest text-gray-400 block mb-1">End <span className="text-red-400">*</span></label>
+                  <label className="text-[9px] font-black uppercase tracking-wider text-gray-400 block mb-1">End <span className="text-red-400">*</span></label>
                   <input type="time" value={form.endTime} onChange={e => setForm(f => ({ ...f, endTime: e.target.value }))}
-                    className="w-full px-2.5 py-1.5 rounded-xl bg-gray-50 text-xs text-gray-800 outline-none focus:ring-2 focus:ring-[#3C0078]/20"
+                    className="w-full px-2.5 py-1.5 rounded-xl bg-gray-50 text-xs text-gray-800 outline-none focus:ring-2 focus:ring-brand/20"
                   />
                 </div>
               </div>
 
               <div className="flex gap-2">
                 <button onClick={handleSave} disabled={saving || !canSave}
-                  className="flex items-center gap-1 px-4 py-2 rounded-xl bg-[#3C0078] text-white text-xs font-bold hover:bg-[#2a0055] transition-colors disabled:opacity-50"
+                  className="flex items-center gap-1 px-4 py-2 rounded-xl bg-brand text-white text-xs font-bold hover:bg-brand-deep transition-colors disabled:opacity-50"
                 >
                   <Check size={12} />{saving ? "Adding…" : "Add Class"}
                 </button>
@@ -624,8 +625,8 @@ export function AdminCohortsView({ courseId, course }) {
 
   const handleAutoAssign = async () => {
     if (enrolledCount === 0 || groupCount === 0) return;
-    if (cohorts.length > 0 && !window.confirm(
-      `This will delete ${cohorts.length} existing group${cohorts.length !== 1 ? "s" : ""} and reassign all ${enrolledCount} students into ${groupCount} new group${groupCount !== 1 ? "s" : ""}. Continue?`
+    if (cohorts.length > 0 && !await confirmAction(
+      `This will delete ${cohorts.length} existing group${cohorts.length !== 1 ? "s" : ""} and reassign all ${enrolledCount} students into ${groupCount} new group${groupCount !== 1 ? "s" : ""}. Continue?`, { confirmLabel: "Replace groups" }
     )) return;
     setAssigning(true);
     setAssignStep("Clearing existing groups…");
@@ -642,7 +643,7 @@ export function AdminCohortsView({ courseId, course }) {
       await load();
       setCohortDetails({});
     } catch (err) {
-      alert("Auto-assign failed: " + err.message);
+      notify("Auto-assign failed: " + err.message);
     } finally {
       setAssigning(false);
       setAssignStep("");
@@ -666,14 +667,14 @@ export function AdminCohortsView({ courseId, course }) {
   };
 
   const handleDelete = async (cohortId, name) => {
-    if (!window.confirm(`Delete group "${name}"? Students will be unassigned.`)) return;
+    if (!await confirmAction(`Delete group "${name}"? Students will be unassigned.`)) return;
     setDeletingId(cohortId);
     try {
       await deleteClassGroup(cohortId);
       setCohorts(prev => prev.filter(c => c.id !== cohortId));
       if (expandedId === cohortId) setExpandedId(null);
     } catch (err) {
-      alert("Failed to delete group: " + err.message);
+      notify("Failed to delete group: " + err.message);
     } finally {
       setDeletingId(null);
     }
@@ -686,7 +687,7 @@ export function AdminCohortsView({ courseId, course }) {
       await load();
       bumpRefresh("unassigned");
     } catch (err) {
-      alert("Import failed: " + err.message);
+      notify("Import failed: " + err.message);
     } finally {
       setImporting(false);
     }
@@ -703,28 +704,28 @@ export function AdminCohortsView({ courseId, course }) {
 
       {/* Auto-assign config */}
       <motion.div variants={slideUp} className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 mb-6">
-        <h3 className="text-xs font-black uppercase tracking-widest text-gray-400 mb-4">Auto-Assign Configuration</h3>
+        <h3 className="text-xs font-black uppercase tracking-wider text-gray-400 mb-4">Auto-Assign Configuration</h3>
         <div className="flex flex-col sm:flex-row sm:items-end gap-4">
           <div className="flex-1">
-            <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 block mb-2">Max students per group</label>
+            <label className="text-[10px] font-black uppercase tracking-wider text-gray-400 block mb-2">Max students per group</label>
             <input
               type="number" min={1} max={200} value={maxPerGroup}
               onChange={e => setMaxPerGroup(Math.max(1, parseInt(e.target.value) || 1))}
-              className="w-full px-4 py-3 bg-gray-50 rounded-2xl text-sm font-semibold text-gray-900 outline-none focus:ring-2 focus:ring-[#3C0078]/10"
+              className="w-full px-4 py-3 bg-gray-50 rounded-2xl text-sm font-semibold text-gray-900 outline-none focus:ring-2 focus:ring-brand/10"
             />
           </div>
           <div className="flex flex-col gap-2 sm:items-end">
             {enrolledCount > 0 && groupCount > 0 ? (
               <p className="text-sm font-semibold text-gray-600">
-                <span className="text-[#3C0078] font-black">{enrolledCount}</span> →{" "}
-                <span className="text-[#3C0078] font-black">{groupCount}</span> group{groupCount !== 1 ? "s" : ""} of ~<span className="text-[#3C0078] font-black">{maxPerGroup}</span>
+                <span className="text-brand font-black">{enrolledCount}</span> →{" "}
+                <span className="text-brand font-black">{groupCount}</span> group{groupCount !== 1 ? "s" : ""} of ~<span className="text-brand font-black">{maxPerGroup}</span>
               </p>
             ) : enrolledCount === 0 ? (
               <p className="text-sm text-gray-400">No enrolled students yet</p>
             ) : null}
             <button
               onClick={handleAutoAssign} disabled={assigning || enrolledCount === 0}
-              className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#3C0078] text-white text-sm font-bold shadow-lg shadow-[#3C0078]/20 hover:bg-[#2a0055] transition-all disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+              className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-brand text-white text-sm font-bold shadow-lg shadow-brand/20 hover:bg-brand-deep transition disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
             >
               <Shuffle size={15} />
               {assigning ? assignStep || "Working…" : cohorts.length > 0 ? "Reassign Groups" : "Auto-Assign Groups"}
@@ -745,7 +746,7 @@ export function AdminCohortsView({ courseId, course }) {
           <div className="flex items-start gap-3">
             <Calendar size={16} className="text-blue-500 shrink-0 mt-0.5" />
             <div>
-              <p className="text-xs font-black text-blue-800 uppercase tracking-widest mb-0.5">
+              <p className="text-xs font-black text-blue-800 uppercase tracking-wider mb-0.5">
                 {unassignedEvents.length} Calendar Event{unassignedEvents.length !== 1 ? "s" : ""} Found
               </p>
               <p className="text-[11px] text-blue-600">
@@ -756,7 +757,7 @@ export function AdminCohortsView({ courseId, course }) {
           <button
             onClick={handleImportFromEvents}
             disabled={importing}
-            className="shrink-0 px-4 py-2.5 rounded-2xl bg-blue-600 text-white text-[11px] font-black uppercase tracking-wider hover:bg-blue-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+            className="shrink-0 px-4 py-2.5 rounded-2xl bg-blue-600 text-white text-[11px] font-black uppercase tracking-wider hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
           >
             {importing ? "Converting…" : "Convert to Slots"}
           </button>
@@ -771,8 +772,8 @@ export function AdminCohortsView({ courseId, course }) {
           </div>
         ) : cohorts.length === 0 && unassignedClasses.length === 0 && unassignedEvents.length === 0 && unassignedStudents.length === 0 ? (
           <div className="bg-white rounded-3xl border border-gray-100 shadow-sm px-8 py-14 text-center">
-            <div className="w-14 h-14 rounded-3xl bg-[#3C0078]/5 flex items-center justify-center mx-auto mb-4">
-              <Users size={24} className="text-[#3C0078]/40" />
+            <div className="w-14 h-14 rounded-3xl bg-brand/5 flex items-center justify-center mx-auto mb-4">
+              <Users size={24} className="text-brand/40" />
             </div>
             <p className="text-gray-500 font-semibold mb-1">No groups yet</p>
             <p className="text-xs text-gray-400">Set a max per group above and click Auto-Assign to get started.</p>
@@ -785,7 +786,7 @@ export function AdminCohortsView({ courseId, course }) {
               <div className="flex items-center px-6 py-4 gap-4">
                 <button
                   onClick={() => setUnassignedExpanded(v => !v)}
-                  className="w-9 h-9 rounded-2xl bg-gray-50 hover:bg-gray-100 flex items-center justify-center text-gray-400 transition-all shrink-0"
+                  className="w-9 h-9 rounded-2xl bg-gray-50 hover:bg-gray-100 flex items-center justify-center text-gray-400 transition shrink-0"
                 >
                   {unassignedExpanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
                 </button>
@@ -819,7 +820,7 @@ export function AdminCohortsView({ courseId, course }) {
                       <div className="flex-1 min-w-0 px-5 py-4">
                         <div className="flex items-center gap-2 mb-3">
                           <div className="w-1.5 h-1.5 rounded-full bg-gray-300 shrink-0" />
-                          <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">
+                          <span className="text-[10px] font-black uppercase tracking-wider text-gray-400">
                             Students · {unassignedStudents.length}
                           </span>
                         </div>
@@ -857,7 +858,7 @@ export function AdminCohortsView({ courseId, course }) {
                           <div className="px-5 pb-4">
                             <div className="flex items-center gap-2 mb-3">
                               <div className="w-1.5 h-1.5 rounded-full bg-blue-300 shrink-0" />
-                              <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">
+                              <span className="text-[10px] font-black uppercase tracking-wider text-gray-400">
                                 Calendar Events · {unassignedEvents.length}
                               </span>
                             </div>
@@ -914,12 +915,12 @@ export function AdminCohortsView({ courseId, course }) {
                 <div className="flex items-center px-6 py-4 gap-4 group">
                   <button
                     onClick={() => handleExpand(cohort.id)}
-                    className="w-9 h-9 rounded-2xl bg-gray-50 hover:bg-[#3C0078]/5 flex items-center justify-center text-gray-400 hover:text-[#3C0078] transition-all shrink-0"
+                    className="w-9 h-9 rounded-2xl bg-gray-50 hover:bg-brand/5 flex items-center justify-center text-gray-400 hover:text-brand transition shrink-0"
                   >
                     {isExpanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
                   </button>
-                  <div className="w-10 h-10 rounded-2xl bg-[#3C0078]/5 border border-[#3C0078]/10 flex items-center justify-center shrink-0">
-                    <Users size={18} className="text-[#3C0078]" />
+                  <div className="w-10 h-10 rounded-2xl bg-brand/5 border border-brand/10 flex items-center justify-center shrink-0">
+                    <Users size={18} className="text-brand" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-bold text-gray-900">{cohort.name}</p>
@@ -930,7 +931,7 @@ export function AdminCohortsView({ courseId, course }) {
                   <button
                     onClick={() => handleDelete(cohort.id, cohort.name)}
                     disabled={deletingId === cohort.id}
-                    className="p-2 rounded-xl text-gray-300 hover:text-red-500 hover:bg-red-50 opacity-0 group-hover:opacity-100 transition-all disabled:opacity-50"
+                    className="p-2 rounded-xl text-gray-300 hover:text-red-500 hover:bg-red-50 opacity-0 group-hover:opacity-100 transition disabled:opacity-50"
                   >
                     {deletingId === cohort.id ? <span className="text-xs">…</span> : <Trash2 size={15} />}
                   </button>
@@ -956,7 +957,7 @@ export function AdminCohortsView({ courseId, course }) {
                             <div className="flex-1 min-w-0 px-5 py-4">
                               <div className="flex items-center gap-2 mb-3">
                                 <div className="w-1.5 h-1.5 rounded-full bg-gray-300 shrink-0" />
-                                <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">
+                                <span className="text-[10px] font-black uppercase tracking-wider text-gray-400">
                                   Students · {details?.students?.length ?? 0}
                                 </span>
                               </div>
@@ -966,7 +967,7 @@ export function AdminCohortsView({ courseId, course }) {
                                 <div className="space-y-1.5 max-h-64 overflow-y-auto pr-1">
                                   {details.students.map(s => (
                                     <div key={s.id || s.studentId} className="flex items-center gap-2 p-2 rounded-xl bg-gray-50/80">
-                                      <div className="w-7 h-7 rounded-full bg-[#3C0078]/5 border border-[#3C0078]/10 flex items-center justify-center text-[#3C0078] font-black text-[10px] shrink-0">
+                                      <div className="w-7 h-7 rounded-full bg-brand/5 border border-brand/10 flex items-center justify-center text-brand font-black text-[10px] shrink-0">
                                         {(s.firstName || s.student?.firstName)?.[0]}
                                         {(s.lastName || s.student?.lastName)?.[0]}
                                       </div>

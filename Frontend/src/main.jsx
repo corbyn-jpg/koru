@@ -5,6 +5,9 @@ import App from './App.jsx'
 import { AuthProvider } from './contexts/AuthContext'
 import { CoursesProvider } from './contexts/CoursesContext'
 import { CalendarProvider } from './contexts/CalendarContext'
+import { installApiAuth } from './services/apiAuth'
+
+installApiAuth()
 
 // Mount the React app into the #root div defined in index.html
 // StrictMode enables extra development warnings for common mistakes

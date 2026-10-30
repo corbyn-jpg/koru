@@ -97,7 +97,7 @@ export default function RouteSpeechAnnouncer() {
       <button
         type="button"
         onClick={readCurrentPage}
-        className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-[#3C0078] px-4 py-2 font-semibold text-white shadow-lg transition hover:bg-[#2f005f]"
+        className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-brand px-4 py-2 font-semibold text-white shadow-lg transition hover:bg-[#2f005f]"
         aria-label="Read this page aloud"
       >
         <Volume2 size={18} />

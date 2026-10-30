@@ -1,22 +1,24 @@
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
+import { MotionConfig } from "framer-motion";
 import { useAuth } from "./contexts/AuthContext";
 
-// Page components – rendered based on the current route
-import Dashboard from "./pages/dashboard";
-import ClickSpark from "./components/UI/clickSpark";
 import RouteSpeechAnnouncer from "./components/UI/routeSpeechAnnouncer";
-import CalendarPage from "./pages/calendar";
-import Courses from './pages/courses'
-import Onboarding from "./pages/onboarding";
-import Login from "./pages/login";
-import SettingsPage from "./pages/settings";
 import ProtectedRoute from "./components/ProtectedRoute";
-import TeacherAssistant from "./pages/Assistant/teacherAssistant";
-import Profile from "./pages/profile/profile";
-import AnalyticsPage from "./pages/analytics";
-import AdminCourses from "./pages/courses/adminCourses";
 import AppSidebar from "./components/AppSidebar";
+import { FeedbackHost } from "./components/UI/feedback";
+
+// Pages load on demand so the first screen doesn't wait for every role's code
+const Dashboard = lazy(() => import("./pages/dashboard"));
+const CalendarPage = lazy(() => import("./pages/calendar"));
+const Courses = lazy(() => import("./pages/courses"));
+const Onboarding = lazy(() => import("./pages/onboarding"));
+const Login = lazy(() => import("./pages/login"));
+const SettingsPage = lazy(() => import("./pages/settings"));
+const TeacherAssistant = lazy(() => import("./pages/Assistant/teacherAssistant"));
+const Profile = lazy(() => import("./pages/profile/profile"));
+const AnalyticsPage = lazy(() => import("./pages/analytics"));
+const AdminCourses = lazy(() => import("./pages/courses/adminCourses"));
 
 // Root application component – sets up routing and the shared layout
 function App() {
@@ -33,46 +35,46 @@ function App() {
   }, [role]);
 
   return (
-    <HashRouter>
-      <RouteSpeechAnnouncer />
-      <ClickSpark
-        sparkColor="#3C0078"
-        sparkSize={10}
-        sparkRadius={15}
-        sparkCount={8}
-        duration={400}
-      >
+    // reducedMotion="user" makes every framer-motion animation respect the OS "reduce motion" setting
+    <MotionConfig reducedMotion="user">
+      <HashRouter>
+        <RouteSpeechAnnouncer />
+
         {/* Unified left sidebar – rendered once, visible on all protected routes */}
         <AppSidebar />
 
         {/* Main content area – offset for the floating 80px sidebar (16px margin + 80px width + 16px gap) */}
-        <main className={isIframeMode ? "" : "py-4 pl-[112px] pr-4 min-h-screen transition-all duration-300"}>
-          <Routes>
-            {/* Public routes – landing & role-specific login portals */}
-            <Route path="/" element={<Onboarding />} />
-            <Route path="/student/login" element={<Login role="student" />} />
-            <Route path="/teacher/login" element={<Login role="teacher" />} />
-            <Route path="/admin/login" element={<Login role="admin" />} />
+        <main className={isIframeMode ? "" : "py-4 pl-[112px] pr-4 min-h-screen"}>
+          <Suspense fallback={null}>
+            <Routes>
+              {/* Public routes – landing & role-specific login portals */}
+              <Route path="/" element={<Onboarding />} />
+              <Route path="/student/login" element={<Login role="student" />} />
+              <Route path="/teacher/login" element={<Login role="teacher" />} />
+              <Route path="/admin/login" element={<Login role="admin" />} />
 
-            {/* Protected routes – require authentication */}
-            <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-            <Route path="/calendar" element={<ProtectedRoute><CalendarPage /></ProtectedRoute>} />
-            <Route path="/courses/*" element={<ProtectedRoute><Courses /></ProtectedRoute>} />
-            <Route path="/settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
-            <Route path="/teacherassistant" element={<ProtectedRoute allowedRoles={["teacher", "admin", "student"]}><TeacherAssistant /></ProtectedRoute>} />
-            <Route path="/analytics" element={<ProtectedRoute><AnalyticsPage /></ProtectedRoute>} />
-            <Route path="/admin/courses" element={<ProtectedRoute allowedRoles={["admin"]}><AdminCourses /></ProtectedRoute>} />
+              {/* Protected routes – require authentication */}
+              <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+              <Route path="/calendar" element={<ProtectedRoute><CalendarPage /></ProtectedRoute>} />
+              <Route path="/courses/*" element={<ProtectedRoute><Courses /></ProtectedRoute>} />
+              <Route path="/settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
+              <Route path="/teacherassistant" element={<ProtectedRoute allowedRoles={["teacher", "admin", "student"]}><TeacherAssistant /></ProtectedRoute>} />
+              <Route path="/analytics" element={<ProtectedRoute><AnalyticsPage /></ProtectedRoute>} />
+              <Route path="/admin/courses" element={<ProtectedRoute allowedRoles={["admin"]}><AdminCourses /></ProtectedRoute>} />
 
-            {/* Profile routes*/}
-            <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-            <Route path="/profile/:slug" element={<Profile publicRoute />} />
+              {/* Profile routes*/}
+              <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+              <Route path="/profile/:slug" element={<Profile publicRoute />} />
 
-            {/* Catch-all – redirect unknown paths to landing */}
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
+              {/* Catch-all – redirect unknown paths to landing */}
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </Suspense>
         </main>
-      </ClickSpark>
-    </HashRouter>
+
+        <FeedbackHost />
+      </HashRouter>
+    </MotionConfig>
   );
 }
 

@@ -79,7 +79,7 @@ function SidebarNavItem({
       {isActive && (
         <motion.div
           layoutId="active-sidebar-pill"
-          className="absolute inset-0 bg-[#3C0078] rounded-[20px] -z-10 shadow-md shadow-[#3C0078]/25"
+          className="absolute inset-0 bg-brand rounded-[20px] -z-10 shadow-md shadow-brand/25"
           transition={{
             type: "spring",
             stiffness: 380,
@@ -94,10 +94,10 @@ function SidebarNavItem({
     </>
   );
 
-  const baseClassName = `relative flex flex-col items-center justify-center w-full py-3.5 px-1.5 transition-all duration-200 group select-none cursor-pointer rounded-2xl
+  const baseClassName = `relative flex flex-col items-center justify-center w-full py-3.5 px-1.5 transition duration-200 group select-none cursor-pointer rounded-2xl
     ${isActive
       ? "!text-white"
-      : "!text-gray-500 hover:!text-[#3C0078]"
+      : "!text-gray-500 hover:!text-brand"
     }`;
 
   return (
@@ -233,9 +233,9 @@ export default function AppSidebar() {
 
   const sidebarContent = (
     <motion.aside
-      className={`fixed z-50 flex flex-col items-center justify-between transition-all duration-300
-        md:left-4 md:top-4 md:bottom-4 md:w-20 md:bg-white/70 md:backdrop-blur-xl md:border md:border-white/20 md:rounded-[32px] md:shadow-xl md:py-5
-        max-md:left-0 max-md:top-0 max-md:h-screen max-md:w-[76px] max-md:bg-white/90 max-md:backdrop-blur-2xl max-md:border-r max-md:border-gray-200/50 max-md:py-3
+      className={`fixed z-50 flex flex-col items-center justify-between transition duration-300
+        md:left-4 md:top-4 md:bottom-4 md:w-20 md:bg-white/85 md:border md:border-white/20 md:rounded-[32px] md:shadow-xl md:py-5
+        max-md:left-0 max-md:top-0 max-md:h-screen max-md:w-[76px] max-md:bg-white/90 max-md:border-r max-md:border-gray-200/50 max-md:py-3
         ${mobileOpen ? "max-md:translate-x-0" : "max-md:-translate-x-full"}
         max-md:shadow-2xl`}
       variants={sidebarVariants}
@@ -301,7 +301,7 @@ export default function AppSidebar() {
     <>
       {/* ── Mobile hamburger button ── */}
       <button
-        className="fixed top-4 left-4 z-[60] md:hidden w-10 h-10 rounded-2xl bg-white/80 backdrop-blur-xl border border-gray-200/50 shadow-lg flex items-center justify-center text-gray-600 hover:text-[#3C0078] transition-colors"
+        className="fixed top-4 left-4 z-[60] md:hidden w-10 h-10 rounded-2xl bg-white/80 border border-gray-200/50 shadow-lg flex items-center justify-center text-gray-600 hover:text-brand transition-colors"
         onClick={() => setMobileOpen(!mobileOpen)}
         aria-label={mobileOpen ? "Close menu" : "Open menu"}
       >
@@ -335,9 +335,9 @@ export default function AppSidebar() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="fixed z-40 flex flex-col pt-6 overflow-hidden transition-all duration-300
-              md:left-[104px] md:top-4 md:bottom-4 md:w-72 md:bg-white/80 md:backdrop-blur-2xl md:border md:border-white/20 md:rounded-[28px] md:shadow-2xl
-              max-md:left-[76px] max-md:top-0 max-md:h-screen max-md:w-72 max-md:bg-white/95 max-md:backdrop-blur-2xl max-md:border-r max-md:border-gray-200/50 max-md:shadow-2xl"
+            className="fixed z-40 flex flex-col pt-6 overflow-hidden transition duration-300
+              md:left-[104px] md:top-4 md:bottom-4 md:w-72 md:bg-white/80 md:border md:border-white/20 md:rounded-[28px] md:shadow-2xl
+              max-md:left-[76px] max-md:top-0 max-md:h-screen max-md:w-72 max-md:bg-white/95 max-md:border-r max-md:border-gray-200/50 max-md:shadow-2xl"
           >
             {/* Header */}
             <div className="px-5 pb-4 border-b border-gray-100 flex flex-col gap-1">
@@ -368,9 +368,9 @@ export default function AppSidebar() {
                         setShowCourseNav(false);
                         closeMobile();
                       }}
-                      className={`flex items-center gap-3 p-3 rounded-2xl border transition-all duration-200 group select-none
+                      className={`flex items-center gap-3 p-3 rounded-2xl border transition duration-200 group select-none
                         ${isActiveCourse(course.id)
-                          ? "bg-[#3C0078]/5 border-[#3C0078]/20"
+                          ? "bg-brand/5 border-brand/20"
                           : "bg-transparent border-gray-100/50 hover:bg-gray-50/80 hover:border-gray-200"
                         }`}
                     >
@@ -385,7 +385,7 @@ export default function AppSidebar() {
 
                       {/* Course info */}
                       <div className="flex-1 min-w-0">
-                        <h4 className="text-xs font-bold !text-gray-900 truncate group-hover:text-[#3C0078] transition-colors">
+                        <h4 className="text-xs font-bold !text-gray-900 truncate group-hover:text-brand transition-colors">
                           {course.subjectName}
                         </h4>
                         <p className="text-[10px] text-gray-500 truncate mt-0.5">
@@ -395,7 +395,7 @@ export default function AppSidebar() {
 
                       {/* Indicator dot */}
                       <div className={`w-1.5 h-1.5 rounded-full shrink-0 transition-colors
-                        ${isActiveCourse(course.id) ? "bg-[#3C0078]" : "bg-transparent group-hover:bg-gray-300"}`}
+                        ${isActiveCourse(course.id) ? "bg-brand" : "bg-transparent group-hover:bg-gray-300"}`}
                       />
                     </Link>
                   </motion.div>
@@ -410,7 +410,7 @@ export default function AppSidebar() {
                   setModalOpen(true);
                   setShowCourseNav(false);
                 }}
-                className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl text-xs font-semibold border border-gray-200 bg-white hover:bg-gray-50 !text-gray-700 transition-all cursor-pointer shadow-xs"
+                className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl text-xs font-semibold border border-gray-200 bg-white hover:bg-gray-50 !text-gray-700 transition cursor-pointer shadow-xs"
               >
                 <Eye size={16} />
                 <span>Manage Courses</span>

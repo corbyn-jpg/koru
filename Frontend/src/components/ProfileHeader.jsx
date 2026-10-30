@@ -12,14 +12,14 @@ export default function ProfileHeader({ profile, roleLabel }) {
             className="h-20 w-20 rounded-2xl border border-gray-200/60 object-cover shadow-3xs"
           />
         ) : (
-          <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-[#3C0078]/5 to-[#3C0078]/10 text-[#3C0078] border border-gray-100 shadow-3xs">
+          <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-brand/5 to-brand/10 text-brand border border-gray-100 shadow-3xs">
             <UserRound size={26} />
           </div>
         )}
 
         <div className="flex-1 min-w-0">
           <h2 className="text-3xl font-extrabold tracking-tight text-gray-900">{profile.header.fullName || "Name Not Set"}</h2>
-          <p className="mt-1.5 text-sm font-extrabold text-[#3C0078] tracking-tight">{profile.header.headline || "Headline Not Set"}</p>
+          <p className="mt-1.5 text-sm font-extrabold text-brand tracking-tight">{profile.header.headline || "Headline Not Set"}</p>
           <div className="mt-2.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-bold text-gray-400 uppercase tracking-wider">
             <span>{profile.header.major || "No Faculty"}</span>
             {profile.header.degree && (
@@ -51,7 +51,7 @@ export default function ProfileHeader({ profile, roleLabel }) {
         {profile.badges.map((badge, index) => (
           <span
             key={`badge-${index}`}
-            className="rounded-full border border-purple-100 bg-purple-50/50 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-[#3C0078] shadow-3xs"
+            className="rounded-full border border-purple-100 bg-purple-50/50 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-brand shadow-3xs"
           >
             {badge}
           </span>

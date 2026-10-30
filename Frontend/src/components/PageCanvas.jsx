@@ -290,7 +290,7 @@ const PageCanvas = forwardRef(({
                         <button
                             onClick={() => setShowEmbedMenu(!showEmbedMenu)}
                             disabled={uploading}
-                            className="flex items-center gap-1 py-1 px-3 rounded-lg text-[10px] font-black uppercase tracking-wider bg-purple-50 text-[#3C0078] border border-purple-100 hover:bg-purple-100 cursor-pointer shadow-3xs disabled:opacity-60 disabled:cursor-not-allowed"
+                            className="flex items-center gap-1 py-1 px-3 rounded-lg text-[10px] font-black uppercase tracking-wider bg-purple-50 text-brand border border-purple-100 hover:bg-purple-100 cursor-pointer shadow-3xs disabled:opacity-60 disabled:cursor-not-allowed"
                         >
                             <Plus size={11} />
                             <span>{uploading ? "Uploading…" : "Insert Embed"}</span>
@@ -300,7 +300,7 @@ const PageCanvas = forwardRef(({
                                 <div className="fixed inset-0 z-20" onClick={() => setShowEmbedMenu(false)} />
                                 <div className="absolute z-30 bg-white border border-gray-200 p-4 rounded-3xl shadow-2xl mt-1.5 flex flex-col gap-3 min-w-[320px] left-0 md:left-auto md:right-0">
                                     <div className="flex items-center justify-between border-b border-gray-100 pb-1.5 mb-0.5">
-                                        <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Media Embed Suite</span>
+                                        <span className="text-[10px] font-black text-gray-400 uppercase tracking-wider">Media Embed Suite</span>
                                         <button onClick={() => setShowEmbedMenu(false)} className="p-1 text-gray-400 hover:text-gray-600 cursor-pointer"><X size={12} /></button>
                                     </div>
 
@@ -310,7 +310,7 @@ const PageCanvas = forwardRef(({
                                         <button
                                             onClick={() => fileInputRef.current?.click()}
                                             disabled={uploading}
-                                            className="flex items-center justify-center gap-2 py-2 px-3 border-2 border-dashed border-[#3C0078]/20 rounded-xl text-[10px] font-bold text-[#3C0078] hover:bg-[#3C0078]/5 transition-colors cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                                            className="flex items-center justify-center gap-2 py-2 px-3 border-2 border-dashed border-brand/20 rounded-xl text-[10px] font-bold text-brand hover:bg-brand/5 transition-colors cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                                         >
                                             <Paperclip size={12} />
                                             {uploading ? "Uploading…" : "Upload from device"}
@@ -321,16 +321,16 @@ const PageCanvas = forwardRef(({
                                                 placeholder="Or paste image URL..."
                                                 value={imageUrl}
                                                 onChange={(e) => setImageUrl(e.target.value)}
-                                                className="flex-1 bg-white border border-gray-200 rounded-xl px-3 py-1.5 text-xs outline-none focus:border-[#3C0078]/40"
+                                                className="flex-1 bg-white border border-gray-200 rounded-xl px-3 py-1.5 text-xs outline-none focus:border-brand/40"
                                             />
-                                            <button onClick={() => handleInsertImage(imageUrl)} className="px-3 py-1.5 bg-[#3C0078] text-white text-[10px] font-bold uppercase rounded-lg cursor-pointer">Add</button>
+                                            <button onClick={() => handleInsertImage(imageUrl)} className="px-3 py-1.5 bg-brand text-white text-[10px] font-bold uppercase rounded-lg cursor-pointer">Add</button>
                                         </div>
                                         <div className="flex flex-wrap gap-1.5 mt-1">
                                             {IMAGE_PRESETS.map((p, idx) => (
                                                 <button
                                                     key={p.label}
                                                     onClick={() => handleInsertImage(p.url)}
-                                                    className="text-[9px] font-bold px-2 py-1 bg-gray-100 text-gray-600 hover:bg-[#3C0078]/5 hover:text-[#3C0078] rounded-md transition-colors text-left truncate max-w-[140px] cursor-pointer"
+                                                    className="text-[9px] font-bold px-2 py-1 bg-gray-100 text-gray-600 hover:bg-brand/5 hover:text-brand rounded-md transition-colors text-left truncate max-w-[140px] cursor-pointer"
                                                     title={p.label}
                                                 >
                                                     Preset {idx + 1}
@@ -350,9 +350,9 @@ const PageCanvas = forwardRef(({
                                                 placeholder="Paste video URL..."
                                                 value={youtubeUrl}
                                                 onChange={(e) => setYoutubeUrl(e.target.value)}
-                                                className="flex-1 bg-white border border-gray-200 rounded-xl px-3 py-1.5 text-xs outline-none focus:border-[#3C0078]/40"
+                                                className="flex-1 bg-white border border-gray-200 rounded-xl px-3 py-1.5 text-xs outline-none focus:border-brand/40"
                                             />
-                                            <button onClick={() => handleInsertVideo(youtubeUrl)} className="px-3 py-1.5 bg-[#3C0078] text-white text-[10px] font-bold uppercase rounded-lg cursor-pointer">Embed</button>
+                                            <button onClick={() => handleInsertVideo(youtubeUrl)} className="px-3 py-1.5 bg-brand text-white text-[10px] font-bold uppercase rounded-lg cursor-pointer">Embed</button>
                                         </div>
                                     </div>
 
@@ -366,9 +366,9 @@ const PageCanvas = forwardRef(({
                                             rows={2}
                                             value={codeSnippet}
                                             onChange={(e) => setCodeSnippet(e.target.value)}
-                                            className="bg-white border border-gray-200 rounded-xl p-2 text-xs outline-none focus:border-[#3C0078]/40 font-mono resize-none"
+                                            className="bg-white border border-gray-200 rounded-xl p-2 text-xs outline-none focus:border-brand/40 font-mono resize-none"
                                         />
-                                        <button onClick={handleInsertCode} className="py-1 px-3 bg-[#3C0078] text-white text-[10px] font-bold uppercase rounded-lg self-end mt-1 cursor-pointer">Insert Block</button>
+                                        <button onClick={handleInsertCode} className="py-1 px-3 bg-brand text-white text-[10px] font-bold uppercase rounded-lg self-end mt-1 cursor-pointer">Insert Block</button>
                                     </div>
 
                                     <div className="h-px bg-gray-100 my-1" />
@@ -376,7 +376,7 @@ const PageCanvas = forwardRef(({
                                     {/* Styled Notice Box */}
                                     <button
                                         onClick={handleInsertCallout}
-                                        className="flex items-center justify-center gap-2 p-2 bg-[#3C0078]/3 border border-[#3C0078]/10 text-[#3C0078] hover:bg-[#3C0078]/8 rounded-xl font-bold text-[10px] uppercase tracking-wider transition-colors cursor-pointer"
+                                        className="flex items-center justify-center gap-2 p-2 bg-brand/3 border border-brand/10 text-brand hover:bg-brand/8 rounded-xl font-bold text-[10px] uppercase tracking-wider transition-colors cursor-pointer"
                                     >
                                         <AlertCircle size={13} />
                                         <span>Insert Styled Alert Callout</span>
@@ -395,7 +395,7 @@ const PageCanvas = forwardRef(({
                         {/* Section reorder / remove controls — edit mode only */}
                         {isEditing && (
                             <div className="flex items-center gap-1 mb-2 pb-1.5 border-b border-gray-100 select-none">
-                                <span className="text-[9px] font-black uppercase tracking-widest text-gray-300 mr-auto select-none">
+                                <span className="text-[9px] font-black uppercase tracking-wider text-gray-300 mr-auto select-none">
                                     {section.type === "text" ? "Text" : "Embed"}
                                 </span>
                                 <button
@@ -460,7 +460,7 @@ const PageCanvas = forwardRef(({
                 {isEditing && (
                     <button
                         onClick={addTextSection}
-                        className="flex items-center gap-2 self-start text-[11px] font-bold text-[#3C0078]/60 hover:text-[#3C0078] border border-dashed border-[#3C0078]/20 hover:border-[#3C0078]/40 rounded-xl px-4 py-2.5 transition-all hover:bg-[#3C0078]/5 cursor-pointer"
+                        className="flex items-center gap-2 self-start text-[11px] font-bold text-brand/60 hover:text-brand border border-dashed border-brand/20 hover:border-brand/40 rounded-xl px-4 py-2.5 transition hover:bg-brand/5 cursor-pointer"
                     >
                         <Plus size={13} />
                         Add text section

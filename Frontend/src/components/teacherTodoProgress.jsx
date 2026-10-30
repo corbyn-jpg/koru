@@ -14,20 +14,20 @@ const MIN_LOADING_MS = 1500;
 
 const theme = {
   teacher: {
-    icon: "bg-[#3C0078]/8",
-    iconText: "text-[#3C0078]",
-    checkbox: "border-[#3C0078] bg-[#3C0078]",
-    checkboxHover: "hover:border-[#3C0078]",
-    badge: "bg-[#3C0078]/10 text-[#3C0078]",
-    dot: "bg-[#3C0078]",
+    icon: "bg-brand/8",
+    iconText: "text-brand",
+    checkbox: "border-brand bg-brand",
+    checkboxHover: "hover:border-brand",
+    badge: "bg-brand/10 text-brand",
+    dot: "bg-brand",
   },
   admin: {
-    icon: "bg-[#FF8731]/10",
-    iconText: "text-[#FF8731]",
-    checkbox: "border-[#FF8731] bg-[#FF8731]",
-    checkboxHover: "hover:border-[#FF8731]",
-    badge: "bg-[#FF8731]/10 text-[#FF8731]",
-    dot: "bg-[#FF8731]",
+    icon: "bg-ember/10",
+    iconText: "text-ember",
+    checkbox: "border-ember bg-ember",
+    checkboxHover: "hover:border-ember",
+    badge: "bg-ember/10 text-ember",
+    dot: "bg-ember",
   },
   shared: {
     icon: "bg-emerald-50",
@@ -188,26 +188,26 @@ export default function TeacherTodoProgress() {
                 value={newTitle}
                 onChange={(e) => setNewTitle(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleAdd()}
-                className="w-full text-sm border border-gray-200 rounded-lg px-3 py-2 outline-none focus:border-[#3C0078] transition-colors"
+                className="w-full text-sm border border-gray-200 rounded-lg px-3 py-2 outline-none focus:border-brand transition-colors"
               />
               <input
                 type="datetime-local"
                 value={newDue}
                 onChange={(e) => setNewDue(e.target.value)}
-                className="w-full text-sm border border-gray-200 rounded-lg px-3 py-2 outline-none focus:border-[#3C0078] transition-colors"
+                className="w-full text-sm border border-gray-200 rounded-lg px-3 py-2 outline-none focus:border-brand transition-colors"
               />
               <div className="flex rounded-lg border border-gray-200 overflow-hidden text-xs font-semibold">
                 <button
                   type="button"
                   onClick={() => setShareMode(false)}
-                  className={`flex-1 py-2 transition-colors ${!shareMode ? "bg-[#3C0078] text-white" : "bg-white text-gray-500 hover:bg-gray-50"}`}
+                  className={`flex-1 py-2 transition-colors ${!shareMode ? "bg-brand text-white" : "bg-white text-gray-500 hover:bg-gray-50"}`}
                 >
                   Just me
                 </button>
                 <button
                   type="button"
                   onClick={() => setShareMode(true)}
-                  className={`flex-1 py-2 border-l border-gray-200 transition-colors ${shareMode ? "bg-[#3C0078] text-white" : "bg-white text-gray-500 hover:bg-gray-50"}`}
+                  className={`flex-1 py-2 border-l border-gray-200 transition-colors ${shareMode ? "bg-brand text-white" : "bg-white text-gray-500 hover:bg-gray-50"}`}
                 >
                   Share with co-lecturers
                 </button>
@@ -223,7 +223,7 @@ export default function TeacherTodoProgress() {
                 <button
                   type="button"
                   onClick={handleAdd}
-                  className="px-4 py-1.5 text-xs font-bold text-white bg-[#3C0078] rounded-lg hover:bg-[#2a0055] transition-colors"
+                  className="px-4 py-1.5 text-xs font-bold text-white bg-brand rounded-lg hover:bg-brand-deep transition-colors"
                 >
                   Add
                 </button>
@@ -249,7 +249,7 @@ export default function TeacherTodoProgress() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, x: 20 }}
                   transition={{ duration: 0.3, ease: "easeOut" }}
-                  className={`w-full border rounded-2xl px-4 py-3.5 flex items-center gap-3 transition-all duration-300 cursor-pointer
+                  className={`w-full border rounded-2xl px-4 py-3.5 flex items-center gap-3 transition duration-300 cursor-pointer
                     ${todo.isCompleted ? "bg-gray-50/60 border-gray-100 opacity-40" : "bg-white/80 border-gray-100 hover:border-gray-200"}`}
                 >
                   <div className="relative shrink-0">
@@ -277,7 +277,7 @@ export default function TeacherTodoProgress() {
 
                   <button
                     onClick={(e) => { e.stopPropagation(); handleToggle(todo.id); }}
-                    className={`w-7 h-7 rounded-lg border-2 flex items-center justify-center shrink-0 transition-all duration-200
+                    className={`w-7 h-7 rounded-lg border-2 flex items-center justify-center shrink-0 transition duration-200
                       ${todo.isCompleted ? colors.checkbox : `border-gray-300 ${colors.checkboxHover}`}`}
                     aria-label={`Toggle ${todo.title}`}
                   >
@@ -316,11 +316,11 @@ export default function TeacherTodoProgress() {
         ) : (
           <>
             <div className="p-4 flex flex-col items-center">
-              <span className="text-[10px] font-black uppercase tracking-widest text-[#3C0078] opacity-60 mb-2">To-do</span>
+              <span className="text-[10px] font-black uppercase tracking-wider text-brand opacity-60 mb-2">To-do</span>
               <ProgressRing percentage={progress} size={110} strokeWidth={8} />
             </div>
             <div className="p-4 flex flex-col items-center">
-              <span className="text-[10px] font-black uppercase tracking-widest text-[#3C0078] opacity-60 mb-2">Graded</span>
+              <span className="text-[10px] font-black uppercase tracking-wider text-brand opacity-60 mb-2">Graded</span>
               <ProgressRing percentage={gradingProgress} size={110} strokeWidth={8} />
             </div>
           </>

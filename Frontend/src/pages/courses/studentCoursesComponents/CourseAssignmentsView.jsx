@@ -113,32 +113,32 @@ export default function CourseAssignmentsView({ subject, activeCourseId }) {
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 font-sans">
                     {assignments.map((item, index) => (
-                        <motion.div key={item.id} variants={slideUp} className={`bg-white p-6 rounded-3xl border border-gray-100 shadow-sm relative overflow-hidden group hover:shadow-xl transition-all duration-300 flex flex-col justify-between ${item.isClosed || item.isSubmitted || item.isGraded ? 'opacity-60 bg-gray-50' : 'opacity-100'}`}>
+                        <motion.div key={item.id} variants={slideUp} className={`bg-white p-6 rounded-3xl border border-gray-100 shadow-sm relative overflow-hidden group hover:shadow-xl transition duration-300 flex flex-col justify-between ${item.isClosed || item.isSubmitted || item.isGraded ? 'opacity-60 bg-gray-50' : 'opacity-100'}`}>
                             <div>
                                 <div className="flex justify-between items-start mb-4">
-                                    <h2 className="text-xl font-bold text-gray-900 group-hover:text-[#3C0078] transition-colors leading-tight pr-4">{item.title}</h2>
-                                    <span className={`text-[10px] font-bold uppercase tracking-widest whitespace-nowrap mt-1 ${item.color}`}>{item.status}</span>
+                                    <h2 className="text-xl font-bold text-gray-900 group-hover:text-brand transition-colors leading-tight pr-4">{item.title}</h2>
+                                    <span className={`text-[10px] font-bold uppercase tracking-wider whitespace-nowrap mt-1 ${item.color}`}>{item.status}</span>
                                 </div>
                                 <p className="text-sm text-gray-500 line-clamp-2 leading-relaxed mb-6">{item.description}</p>
                             </div>
                             <div className="space-y-4 pt-6 border-t border-gray-50">
                                 <div className="flex justify-between items-center text-xs">
-                                    <span className="text-gray-400 uppercase font-bold tracking-widest">Weight:</span>
+                                    <span className="text-gray-400 uppercase font-bold tracking-wider">Weight:</span>
                                     <span className="text-gray-900 font-bold">{item.maxPoints} pts</span>
                                 </div>
                                 <div className="flex justify-between items-center text-xs">
-                                    <span className="text-gray-400 uppercase font-bold tracking-widest">Due Date:</span>
+                                    <span className="text-gray-400 uppercase font-bold tracking-wider">Due Date:</span>
                                     <span className="text-gray-900 font-bold">{new Date(item.dueDate).toLocaleDateString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}</span>
                                 </div>
                                 {item.isGraded && (
                                     <div className="flex justify-between items-center text-xs">
-                                        <span className="text-gray-400 uppercase font-bold tracking-widest">Grade:</span>
+                                        <span className="text-gray-400 uppercase font-bold tracking-wider">Grade:</span>
                                         <span className="text-purple-600 font-bold">{item.gradePercent}%</span>
                                     </div>
                                 )}
                                 <button
                                     onClick={() => navigate(`/courses/${activeCourseId}/assignments/${item.id}`)}
-                                    className={`w-full mt-2 py-3 rounded-2xl text-xs font-bold uppercase tracking-widest text-white transition-all flex items-center justify-center gap-2 shadow-sm ${item.isClosed || item.isSubmitted || item.isGraded ? 'bg-gray-800 hover:bg-black' : 'bg-[#3C0078] hover:bg-[#2A0054]'}`}>
+                                    className={`w-full mt-2 py-3 rounded-2xl text-xs font-bold uppercase tracking-wider text-white transition flex items-center justify-center gap-2 shadow-sm ${item.isClosed || item.isSubmitted || item.isGraded ? 'bg-gray-800 hover:bg-black' : 'bg-brand hover:bg-brand-deep'}`}>
                                     {(!item.isClosed && !item.isSubmitted && !item.isGraded) && <Upload size={16} />}
                                     {item.isGraded ? "View Grade" : item.isClosed ? "View" : item.isSubmitted ? "View Submission" : "View & Submit"}
                                 </button>

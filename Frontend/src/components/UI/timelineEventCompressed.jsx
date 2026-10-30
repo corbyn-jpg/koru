@@ -28,7 +28,7 @@ export default function TimelineEventCompressed({
           </div>
 
           <div className="flex flex-col items-end gap-2 shrink-0">
-            <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${isPast ? "text-gray-400 bg-gray-100" : "text-[#3C0078] bg-[#3C0078]/8"}`}>
+            <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${isPast ? "text-gray-400 bg-gray-100" : "text-brand bg-brand/8"}`}>
               {location}
             </span>
             <div className={`flex items-center gap-1 px-2.5 py-1 rounded-full ${isPast ? "bg-gray-100" : "bg-blue-100"}`}>
@@ -44,7 +44,7 @@ export default function TimelineEventCompressed({
             {onManageAttendance && (
               <button
                 onClick={e => { e.stopPropagation(); onManageAttendance(); }}
-                className="w-full py-2 rounded-xl bg-[#3C0078]/8 text-[#3C0078] text-[10px] font-black uppercase tracking-widest hover:bg-[#3C0078] hover:text-white transition-colors"
+                className="w-full py-2 rounded-xl bg-brand/8 text-brand text-[10px] font-black uppercase tracking-wider hover:bg-brand hover:text-white transition-colors"
               >
                 Manage Attendance
               </button>
@@ -52,7 +52,7 @@ export default function TimelineEventCompressed({
             {onCheckIn && (
               <button
                 onClick={e => { e.stopPropagation(); onCheckIn(); }}
-                className="w-full py-2 rounded-xl bg-[#3C0078]/8 text-[#3C0078] text-[10px] font-black uppercase tracking-widest hover:bg-[#3C0078] hover:text-white transition-colors"
+                className="w-full py-2 rounded-xl bg-brand/8 text-brand text-[10px] font-black uppercase tracking-wider hover:bg-brand hover:text-white transition-colors"
               >
                 Check In Now
               </button>

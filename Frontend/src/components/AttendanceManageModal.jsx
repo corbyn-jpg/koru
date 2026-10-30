@@ -96,7 +96,7 @@ export default function AttendanceManageModal({ courseId, teacherId, sessionType
             >
                 {/* Header */}
                 <div className="px-7 pt-7 pb-5 border-b border-gray-100">
-                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#3C0078] mb-1">
+                    <p className="text-[10px] font-black uppercase tracking-wider text-brand mb-1">
                         {sessionType} · {courseName}
                     </p>
                     <div className="flex items-center justify-between">
@@ -113,13 +113,13 @@ export default function AttendanceManageModal({ courseId, teacherId, sessionType
                     {/* Session settings */}
                     <div className="flex gap-3">
                         <div className="flex-1">
-                            <label className="text-[9px] font-black uppercase tracking-widest text-gray-400 block mb-1.5">
+                            <label className="text-[9px] font-black uppercase tracking-wider text-gray-400 block mb-1.5">
                                 Late After
                             </label>
                             <select
                                 value={lateAfterMin}
                                 onChange={e => saveLate(e.target.value)}
-                                className="w-full text-xs font-semibold bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5 focus:outline-none focus:border-[#3C0078] transition-colors"
+                                className="w-full text-xs font-semibold bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5 focus:outline-none focus:border-brand transition-colors"
                             >
                                 <option value="">No threshold</option>
                                 <option value="5">5 minutes</option>
@@ -130,13 +130,13 @@ export default function AttendanceManageModal({ courseId, teacherId, sessionType
                             </select>
                         </div>
                         <div className="flex-1">
-                            <label className="text-[9px] font-black uppercase tracking-widest text-gray-400 block mb-1.5">
+                            <label className="text-[9px] font-black uppercase tracking-wider text-gray-400 block mb-1.5">
                                 Auto-Close
                             </label>
                             <select
                                 value={autoCloseMin}
                                 onChange={e => saveAutoClose(e.target.value)}
-                                className="w-full text-xs font-semibold bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5 focus:outline-none focus:border-[#3C0078] transition-colors"
+                                className="w-full text-xs font-semibold bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5 focus:outline-none focus:border-brand transition-colors"
                             >
                                 <option value="">None</option>
                                 <option value="15">After 15 min</option>
@@ -165,7 +165,7 @@ export default function AttendanceManageModal({ courseId, teacherId, sessionType
                             onClick={handleToggle}
                             className={`relative w-14 h-7 rounded-full transition-colors duration-200 focus:outline-none ${
                                 toggling ? "opacity-60 cursor-wait" : "cursor-pointer"
-                            } ${isOpen ? "bg-[#3C0078]" : "bg-gray-300"}`}
+                            } ${isOpen ? "bg-brand" : "bg-gray-300"}`}
                         >
                             <motion.span
                                 layout
@@ -181,8 +181,8 @@ export default function AttendanceManageModal({ courseId, teacherId, sessionType
                     )}
 
                     {/* Code block */}
-                    <div className={`rounded-2xl py-7 text-center transition-colors duration-300 ${isOpen ? "bg-[#3C0078]" : "bg-gray-100"}`}>
-                        <p className={`text-[9px] font-black uppercase tracking-[0.25em] mb-4 ${isOpen ? "text-white/50" : "text-gray-400"}`}>
+                    <div className={`rounded-2xl py-7 text-center transition-colors duration-300 ${isOpen ? "bg-brand" : "bg-gray-100"}`}>
+                        <p className={`text-[9px] font-black uppercase tracking-wider mb-4 ${isOpen ? "text-white/50" : "text-gray-400"}`}>
                             Student Check-In Code
                         </p>
                         <AnimatePresence mode="wait">
@@ -203,7 +203,7 @@ export default function AttendanceManageModal({ courseId, teacherId, sessionType
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     exit={{ opacity: 0 }}
-                                    className="text-4xl font-mono text-gray-300 tracking-widest"
+                                    className="text-4xl font-mono text-gray-300 tracking-wider"
                                 >
                                     — — — —
                                 </motion.p>
@@ -223,7 +223,7 @@ export default function AttendanceManageModal({ courseId, teacherId, sessionType
                             </div>
                             <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
                                 <motion.div
-                                    className="h-full bg-[#3C0078] rounded-full"
+                                    className="h-full bg-brand rounded-full"
                                     animate={{ width: `${pct}%` }}
                                     transition={{ duration: 0.4 }}
                                 />
@@ -237,7 +237,7 @@ export default function AttendanceManageModal({ courseId, teacherId, sessionType
                             <div>
                                 <div className="flex items-center gap-2 mb-2">
                                     <div className="w-2 h-2 rounded-full bg-green-500" />
-                                    <span className="text-[9px] font-black uppercase tracking-widest text-gray-500">
+                                    <span className="text-[9px] font-black uppercase tracking-wider text-gray-500">
                                         Present ({status.checkedIn.length})
                                     </span>
                                 </div>
@@ -263,7 +263,7 @@ export default function AttendanceManageModal({ courseId, teacherId, sessionType
                             <div>
                                 <div className="flex items-center gap-2 mb-2">
                                     <div className="w-2 h-2 rounded-full bg-orange-400" />
-                                    <span className="text-[9px] font-black uppercase tracking-widest text-gray-500">
+                                    <span className="text-[9px] font-black uppercase tracking-wider text-gray-500">
                                         Not Yet ({status.notCheckedIn.length})
                                     </span>
                                 </div>
@@ -279,7 +279,7 @@ export default function AttendanceManageModal({ courseId, teacherId, sessionType
                                             <div className="relative shrink-0">
                                                 <button
                                                     onClick={() => handleMarkPresent(s.studentId)}
-                                                    className="w-6 h-6 rounded-full bg-gray-200 hover:bg-green-500 flex items-center justify-center transition-all opacity-0 group-hover/row:opacity-100"
+                                                    className="w-6 h-6 rounded-full bg-gray-200 hover:bg-green-500 flex items-center justify-center transition opacity-0 group-hover/row:opacity-100"
                                                 >
                                                     <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                                                         <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />

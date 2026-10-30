@@ -93,7 +93,7 @@ export default function CourseGlanceSelect({ activeCourseId, setActiveCourseId, 
                 <motion.button
                     layout
                     onClick={() => setExpanded((e) => !e)}
-                    className="h-10 px-3 rounded-full bg-gray-100 text-gray-500 text-xs font-semibold hover:bg-gray-200 active:scale-95 transition-all duration-150 cursor-pointer focus:outline-none mt-2"
+                    className="h-10 px-3 rounded-full bg-gray-100 text-gray-500 text-xs font-semibold hover:bg-gray-200 active:scale-95 transition-[width] duration-150 cursor-pointer focus:outline-none mt-2"
                 >
                     {expanded ? "Less" : `+${orderedCourses.length - COLLAPSED_LIMIT} more`}
                 </motion.button>

@@ -26,16 +26,16 @@ export function LecturerColumn({
         <div className="flex items-center gap-2">
           <button
             onClick={onOpenNotification}
-            className="w-9 h-9 rounded-full bg-[#3C0078]/10 text-[#3C0078] border border-[#3C0078]/20 hover:bg-[#3C0078] hover:text-white flex items-center justify-center transition-all"
+            className="w-9 h-9 rounded-full bg-brand/10 text-brand border border-brand/20 hover:bg-brand hover:text-white flex items-center justify-center transition"
             title="Send Notification"
           >
             <Bell className="w-4 h-4" />
           </button>
           <button
             onClick={() => setIsAddingLecturer(prev => !prev)}
-            className={`w-9 h-9 rounded-full border flex items-center justify-center transition-all ${
+            className={`w-9 h-9 rounded-full border flex items-center justify-center transition ${
               isAddingLecturer
-                ? "border-[#3C0078] bg-[#3C0078]/10 text-[#3C0078]"
+                ? "border-brand bg-brand/10 text-brand"
                 : "border-gray-200 hover:bg-gray-100 text-gray-600"
             }`}
             aria-label="Add lecturer"

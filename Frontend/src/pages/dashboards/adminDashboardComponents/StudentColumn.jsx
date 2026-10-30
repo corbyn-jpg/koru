@@ -22,7 +22,7 @@ function StudentCard({ student, onEdit, onDelete }) {
         {onEdit && (
           <button
             onClick={() => onEdit(student)}
-            className="w-7 h-7 rounded-lg bg-gray-100 hover:bg-[#3C0078]/10 hover:text-[#3C0078] flex items-center justify-center text-gray-400 transition-colors"
+            className="w-7 h-7 rounded-lg bg-gray-100 hover:bg-brand/10 hover:text-brand flex items-center justify-center text-gray-400 transition-colors"
             title="Edit student"
           >
             <Pencil className="w-3.5 h-3.5" />
@@ -74,9 +74,9 @@ export function StudentColumn({
         {showAddStudent && (
           <button
             onClick={() => setIsAddingStudent(prev => !prev)}
-            className={`w-9 h-9 rounded-full border flex items-center justify-center transition-all ${
+            className={`w-9 h-9 rounded-full border flex items-center justify-center transition ${
               isAddingStudent
-                ? "border-[#3C0078] bg-[#3C0078]/10 text-[#3C0078]"
+                ? "border-brand bg-brand/10 text-brand"
                 : "border-gray-200 hover:bg-gray-100 text-gray-600"
             }`}
             aria-label="Add student to course"
@@ -97,8 +97,8 @@ export function StudentColumn({
             {cohortGroups.groups.map(({ cohort, students }) => (
               <div key={cohort.id}>
                 <div className="flex items-center gap-2 px-1 py-2 mb-1">
-                  <div className="w-2 h-2 rounded-full bg-[#3C0078] shrink-0" />
-                  <span className="text-[11px] font-black uppercase tracking-widest text-[#3C0078]">
+                  <div className="w-2 h-2 rounded-full bg-brand shrink-0" />
+                  <span className="text-[11px] font-black uppercase tracking-wider text-brand">
                     {cohort.name}
                   </span>
                   <span className="text-[10px] text-gray-400 font-semibold ml-auto">
@@ -121,7 +121,7 @@ export function StudentColumn({
               <div>
                 <div className="flex items-center gap-2 px-1 py-2 mb-1">
                   <div className="w-2 h-2 rounded-full bg-gray-300 shrink-0" />
-                  <span className="text-[11px] font-black uppercase tracking-widest text-gray-400">
+                  <span className="text-[11px] font-black uppercase tracking-wider text-gray-400">
                     Unassigned
                   </span>
                   <span className="text-[10px] text-gray-400 font-semibold ml-auto">

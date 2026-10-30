@@ -1,3 +1,4 @@
+import { notify, confirmAction } from "../../../components/UI/feedback";
 import React, { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { UserMinus, UserPlus, Search } from "lucide-react";
@@ -67,14 +68,14 @@ export function AdminCourseStudentsView({ courseId }) {
       await load();
       setEnrollSearch("");
     } catch (err) {
-      alert("Failed to enroll: " + err.message);
+      notify("Failed to enroll: " + err.message);
     } finally {
       setEnrolling(null);
     }
   };
 
   const handleRemove = async (enrollmentId, studentId) => {
-    if (!window.confirm("Remove this student from the course?")) return;
+    if (!await confirmAction("Remove this student from the course?", { confirmLabel: "Remove" })) return;
     setRemoving(enrollmentId);
     try {
       await removeEnrollment(enrollmentId);
@@ -86,7 +87,7 @@ export function AdminCourseStudentsView({ courseId }) {
         return next;
       });
     } catch (err) {
-      alert("Failed to remove: " + err.message);
+      notify("Failed to remove: " + err.message);
     } finally {
       setRemoving(null);
     }
@@ -117,7 +118,7 @@ export function AdminCourseStudentsView({ courseId }) {
     } catch (err) {
       // Revert on failure
       setStudentCohortMap(prev => ({ ...prev, [studentId]: oldCohortId || undefined }));
-      alert("Failed to update group: " + err.message);
+      notify("Failed to update group: " + err.message);
     }
   };
 
@@ -142,10 +143,10 @@ export function AdminCourseStudentsView({ courseId }) {
         </div>
         <button
           onClick={() => setShowEnrollPanel(p => !p)}
-          className={`flex items-center gap-2 px-5 py-3 rounded-2xl text-sm font-bold transition-all ${
+          className={`flex items-center gap-2 px-5 py-3 rounded-2xl text-sm font-bold transition ${
             showEnrollPanel
               ? "bg-gray-100 text-gray-700"
-              : "bg-[#3C0078] text-white shadow-lg shadow-[#3C0078]/20 hover:bg-[#2a0055]"
+              : "bg-brand text-white shadow-lg shadow-brand/20 hover:bg-brand-deep"
           }`}
         >
           <UserPlus size={16} /> Enroll Student
@@ -159,7 +160,7 @@ export function AdminCourseStudentsView({ courseId }) {
           animate={{ opacity: 1, y: 0 }}
           className="mb-6 bg-white rounded-3xl border border-gray-100 shadow-sm p-6"
         >
-          <h3 className="text-xs font-black uppercase tracking-widest text-gray-400 mb-4">Add Student to Course</h3>
+          <h3 className="text-xs font-black uppercase tracking-wider text-gray-400 mb-4">Add Student to Course</h3>
           <div className="relative mb-3">
             <Search size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
             <input
@@ -167,7 +168,7 @@ export function AdminCourseStudentsView({ courseId }) {
               placeholder="Search students not yet enrolled..."
               value={enrollSearch}
               onChange={e => setEnrollSearch(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 bg-gray-50 rounded-2xl text-sm font-medium text-gray-900 outline-none focus:ring-2 focus:ring-[#3C0078]/10"
+              className="w-full pl-10 pr-4 py-3 bg-gray-50 rounded-2xl text-sm font-medium text-gray-900 outline-none focus:ring-2 focus:ring-brand/10"
             />
           </div>
           <div className="max-h-48 overflow-y-auto space-y-1.5">
@@ -178,7 +179,7 @@ export function AdminCourseStudentsView({ courseId }) {
             ) : (
               notEnrolled.slice(0, 20).map(s => (
                 <div key={s.id} className="flex items-center gap-3 p-3 rounded-2xl bg-gray-50 hover:bg-gray-100 transition-colors">
-                  <div className="w-8 h-8 rounded-full bg-[#3C0078]/10 flex items-center justify-center text-[#3C0078] font-black text-xs shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-brand/10 flex items-center justify-center text-brand font-black text-xs shrink-0">
                     {s.firstName?.[0]}{s.lastName?.[0]}
                   </div>
                   <div className="flex-1 min-w-0">
@@ -188,7 +189,7 @@ export function AdminCourseStudentsView({ courseId }) {
                   <button
                     onClick={() => handleEnroll(s.id)}
                     disabled={enrolling === s.id}
-                    className="px-4 py-1.5 rounded-xl bg-[#3C0078] text-white text-xs font-bold hover:bg-[#2a0055] transition-all disabled:opacity-50 shrink-0"
+                    className="px-4 py-1.5 rounded-xl bg-brand text-white text-xs font-bold hover:bg-brand-deep transition disabled:opacity-50 shrink-0"
                   >
                     {enrolling === s.id ? "…" : "Enroll"}
                   </button>
@@ -207,7 +208,7 @@ export function AdminCourseStudentsView({ courseId }) {
           placeholder="Search enrolled students..."
           value={search}
           onChange={e => setSearch(e.target.value)}
-          className="w-full pl-10 pr-4 py-3 bg-white border border-gray-100 rounded-2xl text-sm font-medium text-gray-900 outline-none shadow-sm focus:ring-2 focus:ring-[#3C0078]/10"
+          className="w-full pl-10 pr-4 py-3 bg-white border border-gray-100 rounded-2xl text-sm font-medium text-gray-900 outline-none shadow-sm focus:ring-2 focus:ring-brand/10"
         />
       </motion.div>
 
@@ -250,10 +251,10 @@ export function AdminCourseStudentsView({ courseId }) {
           <table className="w-full text-left">
             <thead>
               <tr className="bg-gray-50/50 border-b border-gray-100">
-                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-gray-400">Student</th>
-                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-gray-400">Group</th>
-                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-gray-400">Status</th>
-                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-gray-400 text-right">Actions</th>
+                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-wider text-gray-400">Student</th>
+                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-wider text-gray-400">Group</th>
+                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-wider text-gray-400">Status</th>
+                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-wider text-gray-400 text-right">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -268,7 +269,7 @@ export function AdminCourseStudentsView({ courseId }) {
                   <tr key={enrollment.id} className="border-b border-gray-50 last:border-0 hover:bg-gray-50/50 transition-colors group">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-full bg-[#3C0078]/5 border border-[#3C0078]/10 flex items-center justify-center text-[#3C0078] font-black text-xs shrink-0">
+                        <div className="w-9 h-9 rounded-full bg-brand/5 border border-brand/10 flex items-center justify-center text-brand font-black text-xs shrink-0">
                           {initials}
                         </div>
                         <div>
@@ -284,7 +285,7 @@ export function AdminCourseStudentsView({ courseId }) {
                           onChange={e => handleCohortChange(studentId, e.target.value || null)}
                           className={`text-xs font-bold px-3 py-1.5 rounded-xl outline-none appearance-none cursor-pointer ${
                             assignedCohortId
-                              ? "bg-[#3C0078]/5 text-[#3C0078] border border-[#3C0078]/10"
+                              ? "bg-brand/5 text-brand border border-brand/10"
                               : "bg-gray-100 text-gray-400"
                           }`}
                         >
@@ -312,7 +313,7 @@ export function AdminCourseStudentsView({ courseId }) {
                       <button
                         onClick={() => handleRemove(enrollment.id, studentId)}
                         disabled={removing === enrollment.id}
-                        className="p-2 rounded-xl text-gray-300 hover:text-red-500 hover:bg-red-50 opacity-0 group-hover:opacity-100 transition-all disabled:opacity-50"
+                        className="p-2 rounded-xl text-gray-300 hover:text-red-500 hover:bg-red-50 opacity-0 group-hover:opacity-100 transition disabled:opacity-50"
                         title="Remove from course"
                       >
                         <UserMinus size={15} />

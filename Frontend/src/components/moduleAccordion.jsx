@@ -17,8 +17,8 @@ function AccordionItem({ title, children, defaultOpen = false, onRemove, isTeach
       <div className="flex items-center">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`flex-1 flex items-center justify-between py-2.5 px-4 text-left font-bold transition-all duration-200 rounded-xl mx-2 text-sm ${
-            isOpen ? "text-[#3C0078]" : "text-gray-500 hover:bg-purple-50"
+          className={`flex-1 flex items-center justify-between py-2.5 px-4 text-left font-bold transition duration-200 rounded-xl mx-2 text-sm ${
+            isOpen ? "text-brand" : "text-gray-500 hover:bg-purple-50"
           }`}
         >
           <span className="flex items-center gap-2">
@@ -29,7 +29,7 @@ function AccordionItem({ title, children, defaultOpen = false, onRemove, isTeach
         {isTeacher && (
           <button
             onClick={onRemove}
-            className="p-2 text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-all"
+            className="p-2 text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition"
             title="Remove Section"
           >
             <Trash2 size={14} />
@@ -52,8 +52,8 @@ function SubNavItem({ label, isActive, onClick, onRemove, isTeacher }) {
     <li
       className={`group flex items-center justify-between px-4 py-1.5 text-xs transition-colors mx-4 rounded-lg cursor-pointer ${
         isActive 
-          ? "bg-[#3C0078] text-white font-bold shadow-sm" 
-          : "text-gray-500 hover:text-[#3C0078] hover:bg-purple-100"
+          ? "bg-brand text-white font-bold shadow-sm" 
+          : "text-gray-500 hover:text-brand hover:bg-purple-100"
       }`}
       onClick={onClick}
     >
@@ -64,7 +64,7 @@ function SubNavItem({ label, isActive, onClick, onRemove, isTeacher }) {
             e.stopPropagation();
             onRemove();
           }}
-          className={`p-1 opacity-0 group-hover:opacity-100 transition-all ${
+          className={`p-1 opacity-0 group-hover:opacity-100 transition ${
             isActive ? "text-white/70 hover:text-white" : "text-gray-400 hover:text-red-500"
           }`}
           title="Remove Item"
@@ -181,7 +181,7 @@ export default function ModuleAccordion() {
                   <div className="flex gap-1 mb-2">
                     <button
                       onClick={() => addSubItem(item.id)}
-                      className="flex-1 py-1 bg-[#3C0078] text-white text-[9px] font-bold uppercase tracking-widest rounded-md hover:bg-[#2A0054] transition-all"
+                      className="flex-1 py-1 bg-brand text-white text-[9px] font-bold uppercase tracking-wider rounded-md hover:bg-brand-deep transition"
                     >
                       Add
                     </button>
@@ -196,7 +196,7 @@ export default function ModuleAccordion() {
               ) : (
                 <button
                   onClick={() => setAddingSubItemTo(item.id)}
-                  className="w-full flex items-center justify-center gap-1.5 py-2 border border-dashed border-black/10 rounded-lg text-[9px] font-bold uppercase tracking-[0.1em] text-gray-400 hover:border-[#3C0078]/30 hover:text-[#3C0078] transition-all mb-1"
+                  className="w-full flex items-center justify-center gap-1.5 py-2 border border-dashed border-black/10 rounded-lg text-[9px] font-bold uppercase tracking-[0.1em] text-gray-400 hover:border-brand/30 hover:text-brand transition mb-1"
                 >
                   <Plus size={10} /> Add Item
                 </button>
@@ -225,7 +225,7 @@ export default function ModuleAccordion() {
               <div className="flex gap-1">
                 <button
                   onClick={addSection}
-                  className="flex-1 py-1.5 bg-[#3C0078] text-white text-[10px] font-bold uppercase tracking-widest rounded-lg hover:bg-[#2A0054] transition-colors"
+                  className="flex-1 py-1.5 bg-brand text-white text-[10px] font-bold uppercase tracking-wider rounded-lg hover:bg-brand-deep transition-colors"
                 >
                   Add
                 </button>
@@ -240,7 +240,7 @@ export default function ModuleAccordion() {
           ) : (
             <button
               onClick={() => setIsAddingSection(true)}
-              className="w-full flex items-center justify-center gap-2 py-3 border-2 border-dashed border-black/10 rounded-xl text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:border-black/30 hover:text-black transition-all"
+              className="w-full flex items-center justify-center gap-2 py-3 border-2 border-dashed border-black/10 rounded-xl text-[10px] font-bold uppercase tracking-wider text-gray-400 hover:border-black/30 hover:text-black transition"
             >
               <Plus size={14} /> Add Section
             </button>

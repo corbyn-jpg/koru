@@ -127,7 +127,7 @@ export default function CalendarDayView({ events = [], tasks = [], weeks = [] })
           ‹
         </button>
 
-        <p className="text-[13px] font-semibold tracking-widest text-gray-500 uppercase leading-none">
+        <p className="text-[13px] font-semibold tracking-wider text-gray-500 uppercase leading-none">
           {dayName}&nbsp;
           <span className="text-gray-900 text-xl font-black tracking-normal normal-case">
             {day}
@@ -270,7 +270,7 @@ export default function CalendarDayView({ events = [], tasks = [], weeks = [] })
                     onClick={() => toggleTask(task.id)}
                     aria-label="Toggle task"
                     className={[
-                      "w-6 h-6 rounded-lg border-2 shrink-0 transition-all duration-150 cursor-pointer",
+                      "w-6 h-6 rounded-lg border-2 shrink-0 transition duration-150 cursor-pointer",
                       done
                         ? "bg-gray-700 border-gray-700"
                         : "bg-transparent border-gray-300 hover:border-gray-400",

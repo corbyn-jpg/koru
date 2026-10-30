@@ -157,11 +157,11 @@ export default function AssignmentsProgress() {
           ) : (
             <>
               <div className="p-4 flex flex-col items-center">
-                <span className="text-[10px] font-black uppercase tracking-widest text-[#3C0078] opacity-60 mb-2">Assignments</span>
+                <span className="text-[10px] font-black uppercase tracking-wider text-brand opacity-60 mb-2">Assignments</span>
                 <ProgressRing percentage={progress} size={110} strokeWidth={8} />
               </div>
               <div className="p-4 flex flex-col items-center">
-                <span className="text-[10px] font-black uppercase tracking-widest text-[#3C0078] opacity-60 mb-2">Attendance</span>
+                <span className="text-[10px] font-black uppercase tracking-wider text-brand opacity-60 mb-2">Attendance</span>
                 <ProgressRing percentage={attendanceRate} size={110} strokeWidth={8} />
               </div>
             </>

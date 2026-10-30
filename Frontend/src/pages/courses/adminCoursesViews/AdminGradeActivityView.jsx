@@ -152,8 +152,8 @@ export function AdminGradeActivityView({ courseId }) {
           </div>
         ) : sorted.length === 0 ? (
           <div className="px-8 py-16 text-center">
-            <div className="w-14 h-14 rounded-3xl bg-[#3C0078]/5 flex items-center justify-center mx-auto mb-4">
-              <Award size={24} className="text-[#3C0078]/40" />
+            <div className="w-14 h-14 rounded-3xl bg-brand/5 flex items-center justify-center mx-auto mb-4">
+              <Award size={24} className="text-brand/40" />
             </div>
             <p className="text-gray-500 font-semibold mb-1">No grades recorded yet</p>
             <p className="text-xs text-gray-400">Grades will appear here once teachers start grading submissions.</p>
@@ -166,15 +166,15 @@ export function AdminGradeActivityView({ courseId }) {
                   <th
                     key={opt.key}
                     onClick={() => handleSort(opt.key)}
-                    className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-gray-400 cursor-pointer hover:text-gray-600 transition-colors select-none"
+                    className="px-6 py-4 text-[10px] font-black uppercase tracking-wider text-gray-400 cursor-pointer hover:text-gray-600 transition-colors select-none"
                   >
                     <span className="flex items-center gap-1">
                       {opt.label} <SortIcon k={opt.key} />
                     </span>
                   </th>
                 ))}
-                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-gray-400">Graded By</th>
-                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-widest text-gray-400">Released</th>
+                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-wider text-gray-400">Graded By</th>
+                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-wider text-gray-400">Released</th>
               </tr>
             </thead>
             <tbody>
@@ -198,7 +198,7 @@ export function AdminGradeActivityView({ courseId }) {
                     {/* Student */}
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2.5">
-                        <div className="w-7 h-7 rounded-full bg-[#3C0078]/5 border border-[#3C0078]/10 flex items-center justify-center text-[#3C0078] font-black text-[9px] shrink-0">
+                        <div className="w-7 h-7 rounded-full bg-brand/5 border border-brand/10 flex items-center justify-center text-brand font-black text-[9px] shrink-0">
                           {initials}
                         </div>
                         <span className="text-sm font-semibold text-gray-800 truncate max-w-[140px]">

@@ -53,7 +53,7 @@ export default function CourseManagerModal({ isOpen, onClose }) {
                     return (
                         <div
                         key={course.id}
-                        className={`flex items-center justify-between p-4 rounded-2xl border transition-all duration-200 ${
+                        className={`flex items-center justify-between p-4 rounded-2xl border transition duration-200 ${
                             isHidden
                             ? "bg-gray-50 border-gray-100 opacity-60"
                             : "bg-white border-gray-200 shadow-sm"
@@ -82,10 +82,10 @@ export default function CourseManagerModal({ isOpen, onClose }) {
 
                         <button
                             onClick={() => toggleCourseVisibility(course.id)}
-                            className={`p-3 rounded-xl flex items-center justify-center transition-all ${
+                            className={`p-3 rounded-xl flex items-center justify-center transition ${
                             isHidden
                                 ? "bg-gray-200 text-gray-500 hover:bg-gray-300 hover:text-gray-800"
-                                : "bg-[#3C0078]/10 text-[#3C0078] hover:bg-[#3C0078] hover:text-white"
+                                : "bg-brand/10 text-brand hover:bg-brand hover:text-white"
                             }`}
                             aria-label={isHidden ? "Show course" : "Hide course"}
                             title={isHidden ? "Hidden from sidebar (Click to show)" : "Visible on sidebar (Click to hide)"}

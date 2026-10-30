@@ -179,10 +179,10 @@ export function CourseHomeView({ subject, course, loading }) {
                 }
               }}
               disabled={saving}
-              className={`flex items-center gap-1.5 px-4 py-2 text-xs font-black rounded-xl cursor-pointer shadow-2xs border transition-all disabled:opacity-60 disabled:cursor-not-allowed ${
+              className={`flex items-center gap-1.5 px-4 py-2 text-xs font-black rounded-xl cursor-pointer shadow-2xs border transition disabled:opacity-60 disabled:cursor-not-allowed ${
                 isEditing 
                 ? "bg-green-600 border-green-700 text-white hover:bg-green-700" 
-                : "bg-[#3C0078] border-[#2A0054] text-white hover:bg-[#2A0054]"
+                : "bg-brand border-brand-deep text-white hover:bg-brand-deep"
               }`}
             >
               {isEditing ? (
@@ -253,9 +253,9 @@ export function CourseHomeView({ subject, course, loading }) {
               <button
                 type="button"
                 onClick={() => setShowCoverImage(!showCoverImage)}
-                className={`px-3.5 py-1.5 text-[10px] font-black uppercase tracking-wider rounded-xl border transition-all cursor-pointer ${
+                className={`px-3.5 py-1.5 text-[10px] font-black uppercase tracking-wider rounded-xl border transition cursor-pointer ${
                   showCoverImage
-                  ? "bg-purple-50 text-[#3C0078] border-purple-100 hover:bg-purple-100"
+                  ? "bg-purple-50 text-brand border-purple-100 hover:bg-purple-100"
                   : "bg-gray-100 text-gray-500 border-gray-200 hover:bg-gray-200"
                 }`}
               >
@@ -297,12 +297,12 @@ export function CourseHomeView({ subject, course, loading }) {
 
           {/* Lecturers Grid - Centered & Revamped */}
           <section className="w-full pt-16 pb-12 border-t border-gray-100 flex flex-col items-center mt-12">
-            <h4 className="text-[12px] font-black uppercase tracking-[0.4em] text-gray-400 mb-8 text-center select-none">
+            <h4 className="text-[12px] font-black uppercase tracking-wider text-gray-400 mb-8 text-center select-none">
               Lecturer{lecturers.length > 1 ? "s" : ""}
             </h4>
             <div className="flex flex-wrap justify-center gap-8 w-full max-w-4xl">
               {lecturers.map(lecturer => (
-                <div key={lecturer.id} className="flex items-center gap-4 bg-gray-50/50 hover:bg-gray-50 border border-gray-100 p-4 rounded-2xl transition-all shadow-2xs min-w-[280px]">
+                <div key={lecturer.id} className="flex items-center gap-4 bg-gray-50/50 hover:bg-gray-50 border border-gray-100 p-4 rounded-2xl transition shadow-2xs min-w-[280px]">
                   {/* Profile Image / Initials Fallback */}
                   {lecturer.profileImageUrl ? (
                     <img 
@@ -320,12 +320,12 @@ export function CourseHomeView({ subject, course, loading }) {
                     <span className="text-sm font-black text-gray-900 leading-tight">
                       {lecturer.firstName} {lecturer.lastName}
                     </span>
-                    <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#3C0078] mt-0.5 select-none">
+                    <span className="text-[11px] font-extrabold uppercase tracking-wider text-brand mt-0.5 select-none">
                       Module Head
                     </span>
                     <a 
                       href={`mailto:${lecturer.email}`} 
-                      className="text-xs text-gray-500 hover:text-[#3C0078] font-semibold mt-1 break-all transition-colors"
+                      className="text-xs text-gray-500 hover:text-brand font-semibold mt-1 break-all transition-colors"
                     >
                       {lecturer.email}
                     </a>

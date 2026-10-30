@@ -1,4 +1,5 @@
-﻿import React, { useEffect, useMemo, useState } from "react";
+import { notify } from "../components/UI/feedback";
+import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Volume2,
@@ -12,7 +13,8 @@ import {
   Bell,
   ShieldCheck,
   Palette,
-  Eye
+  Eye,
+  Download
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -23,6 +25,7 @@ import {
   changeUserPassword,
   updateUserProfile,
   disable2FA,
+  downloadMyData,
 } from "../services/authService";
 import { useAuth } from "../contexts/AuthContext";
 
@@ -47,7 +50,7 @@ function ToggleRow({ icon, title, description, checked, onChange }) {
       className="flex min-h-[56px] items-center justify-between gap-4 rounded-2xl border p-5 border-gray-100 bg-gray-50/40 hover:bg-gray-50 transition-colors duration-200 cursor-pointer shadow-3xs"
     >
       <div className="flex items-center gap-4">
-        <span className="rounded-xl bg-[#3C0078]/5 p-2.5 text-[#3C0078] shrink-0">{icon}</span>
+        <span className="rounded-xl bg-brand/5 p-2.5 text-brand shrink-0">{icon}</span>
         <div>
           <p className="text-sm font-extrabold text-gray-900 tracking-tight">
             {title}
@@ -65,7 +68,7 @@ function ToggleRow({ icon, title, description, checked, onChange }) {
           onChange={(e) => onChange(e.target.checked)}
           className="peer sr-only"
         />
-        <span className={`absolute inset-0 rounded-full transition-colors duration-300 ${checked ? "bg-[#3C0078]" : "bg-gray-200"}`} />
+        <span className={`absolute inset-0 rounded-full transition-colors duration-300 ${checked ? "bg-brand" : "bg-gray-200"}`} />
         <span
           className="absolute left-1 h-5 w-5 rounded-full bg-white transition-transform duration-300 shadow-sm"
           style={{ transform: checked ? "translateX(20px)" : "translateX(0)" }}
@@ -84,6 +87,7 @@ export default function SettingsPage() {
     () => session?.twoFactorEnabled ?? false
   );
   const [showSetup2FA, setShowSetup2FA] = useState(false);
+  const [exportingData, setExportingData] = useState(false);
   const [showDisable2FA, setShowDisable2FA] = useState(false);
   const [disableCode, setDisableCode] = useState("");
   const [disabling2FA, setDisabling2FA] = useState(false);
@@ -137,11 +141,11 @@ export default function SettingsPage() {
   const pageClasses = useMemo(
     () => ({
       wrapper: "text-gray-900 font-sans",
-      card: "border border-gray-200/50 bg-white p-6 shadow-2xs rounded-[30px] hover:shadow-xs transition-all duration-300",
+      card: "border border-gray-200/50 bg-white p-6 shadow-2xs rounded-[30px] hover:shadow-xs transition duration-300",
       muted: "text-gray-500 font-medium text-xs leading-relaxed",
-      secondaryButton: "border-2 border-[#3C0078] bg-white text-[#3C0078] hover:bg-[#3C0078] hover:text-white transition-all rounded-xl",
-      select: "border border-gray-200 bg-white text-gray-900 focus:border-[#3C0078]/40 focus:ring-4 focus:ring-[#3C0078]/10 transition-all outline-none rounded-xl px-4 py-2.5 w-full text-sm",
-      input: "border border-gray-200 bg-white text-gray-900 focus:border-[#3C0078]/40 focus:ring-4 focus:ring-[#3C0078]/10 transition-all outline-none rounded-xl px-4 py-2.5",
+      secondaryButton: "border-2 border-brand bg-white text-brand hover:bg-brand hover:text-white transition rounded-xl",
+      select: "border border-gray-200 bg-white text-gray-900 focus:border-brand/40 focus:ring-4 focus:ring-brand/10 transition outline-none rounded-xl px-4 py-2.5 w-full text-sm",
+      input: "border border-gray-200 bg-white text-gray-900 focus:border-brand/40 focus:ring-4 focus:ring-brand/10 transition outline-none rounded-xl px-4 py-2.5",
       label: "text-gray-700 font-bold text-xs uppercase tracking-wider mb-1.5 block",
     }),
     [],
@@ -278,20 +282,20 @@ export default function SettingsPage() {
   }, [activeTab]);
 
   return (
-    <div data-tts-root="true" className={`flex overflow-hidden gap-4 transition-all duration-300 md:h-[calc(100vh-32px)] md:w-full max-md:h-screen max-md:w-screen max-md:-ml-4 max-md:-mr-4 max-md:-mt-4 bg-transparent ${settings.font === "OpenDyslexic" ? "dyslexic-font" : ""} ${pageClasses.wrapper}`}>
+    <div data-tts-root="true" className={`flex overflow-hidden gap-4 transition duration-300 md:h-[calc(100vh-32px)] md:w-full max-md:h-screen max-md:w-screen max-md:-ml-4 max-md:-mr-4 max-md:-mt-4 bg-transparent ${settings.font === "OpenDyslexic" ? "dyslexic-font" : ""} ${pageClasses.wrapper}`}>
       <div className="flex h-full w-full gap-4 overflow-hidden">
         {/* Left Section: Floating Settings Secondary Navigation (Matching Courses) */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="flex flex-col shrink-0 transition-all duration-300
+          className="flex flex-col shrink-0 transition duration-300
             md:h-full md:w-64 md:bg-white/70 md:backdrop-blur-xl md:border md:border-white/20 md:rounded-[28px] md:shadow-lg md:overflow-hidden
             max-md:h-full max-md:w-64 max-md:bg-white/80 max-md:backdrop-blur-md max-md:border-r max-md:border-gray-200/50"
         >
           {/* Settings Sidebar Header Info */}
           <div className="px-6 pt-6 pb-5 border-b border-gray-100 flex flex-col gap-2 shrink-0 select-none">
             <div className="flex items-center gap-2">
-              <span className="px-2 py-0.5 rounded-lg bg-[#3C0078]/10 text-[#3C0078] font-black text-[9px] uppercase tracking-wider shadow-sm">
+              <span className="px-2 py-0.5 rounded-lg bg-brand/10 text-brand font-black text-[9px] uppercase tracking-wider shadow-sm">
                 System
               </span>
               <span className="text-[10px] font-extrabold text-gray-400 tracking-wider">
@@ -325,16 +329,16 @@ export default function SettingsPage() {
                         setProfileError("");
                         setPasswordError("");
                       }}
-                      className={`relative w-[calc(100%-24px)] flex items-center gap-3 px-4 py-2.5 text-xs font-semibold transition-all duration-200 mx-3 my-0.5 rounded-xl group select-none cursor-pointer text-left
+                      className={`relative w-[calc(100%-24px)] flex items-center gap-3 px-4 py-2.5 text-xs font-semibold transition duration-200 mx-3 my-0.5 rounded-xl group select-none cursor-pointer text-left
                         ${isActive
-                          ? "bg-[#3C0078]/5 text-[#3C0078]"
+                          ? "bg-brand/5 text-brand"
                           : "text-gray-600 hover:bg-gray-50/80 hover:text-gray-900"
                         }`}
                     >
                       {isActive && (
                         <motion.div
                           layoutId="activeSettingsLeftAccent"
-                          className="absolute left-0 top-1/4 bottom-1/4 w-0.75 bg-[#3C0078] rounded-r-md shrink-0"
+                          className="absolute left-0 top-1/4 bottom-1/4 w-0.75 bg-brand rounded-r-md shrink-0"
                           transition={{
                             type: "spring",
                             stiffness: 300,
@@ -343,7 +347,7 @@ export default function SettingsPage() {
                         />
                       )}
 
-                      <span className={`transition-colors shrink-0 ${isActive ? "text-[#3C0078]" : "text-gray-400 group-hover:text-gray-600"}`}>
+                      <span className={`transition-colors shrink-0 ${isActive ? "text-brand" : "text-gray-400 group-hover:text-gray-600"}`}>
                         {cat.icon}
                       </span>
                       
@@ -352,7 +356,7 @@ export default function SettingsPage() {
                       {isActive && (
                         <motion.div
                           layoutId="activeSettingsDot"
-                          className="w-1.5 h-1.5 rounded-full bg-[#3C0078] shrink-0"
+                          className="w-1.5 h-1.5 rounded-full bg-brand shrink-0"
                           transition={{
                             type: "spring",
                             stiffness: 300,
@@ -369,11 +373,11 @@ export default function SettingsPage() {
         </motion.div>
 
         {/* Right Section: Main Content Area: Floating Island Card */}
-        <div className="flex-1 flex flex-col overflow-hidden transition-all duration-300 md:bg-white/75 md:backdrop-blur-xl md:border md:border-white/20 md:rounded-[28px] md:shadow-lg max-md:bg-white">
+        <div className="flex-1 flex flex-col overflow-hidden transition duration-300 md:bg-white/75 md:backdrop-blur-xl md:border md:border-white/20 md:rounded-[28px] md:shadow-lg max-md:bg-white">
           {/* Header Top Bar */}
           <div className="h-14 border-b border-gray-100 bg-white/60 backdrop-blur-md flex items-center justify-between px-8 z-10 shrink-0 select-none">
             <div className="flex items-center gap-3">
-              <span className="px-2.5 py-0.5 rounded-lg text-[10px] font-black text-white bg-[#3C0078] shadow-sm">
+              <span className="px-2.5 py-0.5 rounded-lg text-[10px] font-black text-white bg-brand shadow-sm">
                 System Settings
               </span>
               <span className="text-gray-300 text-xs">/</span>
@@ -397,7 +401,7 @@ export default function SettingsPage() {
                     <>
                       <form onSubmit={handleProfileSave} className={pageClasses.card}>
                         <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
-                          <span className="rounded-xl bg-[#3C0078]/5 p-2 text-[#3C0078]"><UserRound size={20} /></span>
+                          <span className="rounded-xl bg-brand/5 p-2 text-brand"><UserRound size={20} /></span>
                           <h2 className="text-xl font-extrabold tracking-tight text-gray-900">User Information</h2>
                         </div>
 
@@ -442,9 +446,9 @@ export default function SettingsPage() {
                                 key={i}
                                 type="button"
                                 onClick={() => setSelectedAvatar(url)}
-                                className={`rounded-full overflow-hidden transition-all ${
+                                className={`rounded-full overflow-hidden transition ${
                                   selectedAvatar === url
-                                    ? "ring-2 ring-[#3C0078] ring-offset-2"
+                                    ? "ring-2 ring-brand ring-offset-2"
                                     : "ring-1 ring-gray-200 hover:ring-gray-400"
                                 }`}
                               >
@@ -457,7 +461,7 @@ export default function SettingsPage() {
                         {profileError ? <div className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-xs font-semibold text-red-700 shadow-3xs">{profileError}</div> : null}
                         {profileMessage ? <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-xs font-semibold text-emerald-700 shadow-3xs">{profileMessage}</div> : null}
 
-                        <button type="submit" disabled={savingProfile} className="mt-6 inline-flex min-h-[42px] items-center justify-center gap-2 rounded-xl bg-[#3C0078] hover:bg-[#2A0054] px-5 py-2.5 text-xs font-black uppercase tracking-wider text-white shadow-md shadow-[#3C0078]/15 transition-all hover:scale-[1.02] cursor-pointer disabled:cursor-not-allowed disabled:opacity-70">
+                        <button type="submit" disabled={savingProfile} className="mt-6 inline-flex min-h-[42px] items-center justify-center gap-2 rounded-xl bg-brand hover:bg-brand-deep px-5 py-2.5 text-xs font-black uppercase tracking-wider text-white shadow-md shadow-brand/15 transition hover:scale-[1.02] cursor-pointer disabled:cursor-not-allowed disabled:opacity-70">
                           <Save size={14} />
                           <span>{savingProfile ? "Saving..." : "Save profile"}</span>
                         </button>
@@ -466,7 +470,7 @@ export default function SettingsPage() {
                       {/* Notification Preferences */}
                       <div className={pageClasses.card}>
                         <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
-                          <span className="rounded-xl bg-[#3C0078]/5 p-2 text-[#3C0078]"><Bell size={20} /></span>
+                          <span className="rounded-xl bg-brand/5 p-2 text-brand"><Bell size={20} /></span>
                           <h2 className="text-xl font-extrabold tracking-tight text-gray-900">Notification Preferences</h2>
                         </div>
                         <p className={`${pageClasses.muted} mb-5`}>
@@ -511,7 +515,7 @@ export default function SettingsPage() {
                         <button
                           type="button"
                           onClick={handleLogout}
-                          className="mt-6 inline-flex min-h-[42px] items-center justify-center gap-2 rounded-xl bg-red-600 hover:bg-red-700 px-5 py-2.5 text-xs font-black uppercase tracking-wider text-white shadow-md shadow-red-600/15 transition-all hover:scale-[1.02] cursor-pointer"
+                          className="mt-6 inline-flex min-h-[42px] items-center justify-center gap-2 rounded-xl bg-red-600 hover:bg-red-700 px-5 py-2.5 text-xs font-black uppercase tracking-wider text-white shadow-md shadow-red-600/15 transition hover:scale-[1.02] cursor-pointer"
                         >
                           <LogOut size={14} />
                           <span>Log out</span>
@@ -524,7 +528,7 @@ export default function SettingsPage() {
                     <>
                       <form onSubmit={handlePasswordSave} className={pageClasses.card}>
                         <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
-                          <span className="rounded-xl bg-[#3C0078]/5 p-2 text-[#3C0078]"><KeyRound size={20} /></span>
+                          <span className="rounded-xl bg-brand/5 p-2 text-brand"><KeyRound size={20} /></span>
                           <h2 className="text-xl font-extrabold tracking-tight text-gray-900">Change Password</h2>
                         </div>
 
@@ -537,7 +541,7 @@ export default function SettingsPage() {
                         {passwordError ? <div className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-xs font-semibold text-red-700 shadow-3xs">{passwordError}</div> : null}
                         {passwordMessage ? <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-xs font-semibold text-emerald-700 shadow-3xs">{passwordMessage}</div> : null}
 
-                        <button type="submit" disabled={savingPassword} className="mt-6 inline-flex min-h-[42px] items-center justify-center gap-2 rounded-xl bg-[#3C0078] hover:bg-[#2A0054] px-5 py-2.5 text-xs font-black uppercase tracking-wider text-white shadow-md shadow-[#3C0078]/15 transition-all hover:scale-[1.02] cursor-pointer disabled:cursor-not-allowed disabled:opacity-70">
+                        <button type="submit" disabled={savingPassword} className="mt-6 inline-flex min-h-[42px] items-center justify-center gap-2 rounded-xl bg-brand hover:bg-brand-deep px-5 py-2.5 text-xs font-black uppercase tracking-wider text-white shadow-md shadow-brand/15 transition hover:scale-[1.02] cursor-pointer disabled:cursor-not-allowed disabled:opacity-70">
                           <KeyRound size={14} />
                           <span>{savingPassword ? "Updating..." : "Update password"}</span>
                         </button>
@@ -546,7 +550,7 @@ export default function SettingsPage() {
                       {/* Multi-Factor Authentication */}
                       <div className={pageClasses.card}>
                         <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
-                          <span className="rounded-xl bg-[#3C0078]/5 p-2 text-[#3C0078]"><ShieldCheck size={20} /></span>
+                          <span className="rounded-xl bg-brand/5 p-2 text-brand"><ShieldCheck size={20} /></span>
                           <h2 className="text-xl font-extrabold tracking-tight text-gray-900">Multi-Factor Authentication</h2>
                         </div>
                         <p className={`${pageClasses.muted} mb-5`}>
@@ -588,7 +592,7 @@ export default function SettingsPage() {
                               value={disableCode}
                               onChange={(e) => { setDisableCode(e.target.value.replace(/\D/g, "").slice(0, 6)); setMfaError(""); }}
                               placeholder="000000"
-                              className="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-center font-mono tracking-widest text-gray-900 focus:border-[#3C0078]/40 focus:ring-4 focus:ring-[#3C0078]/10 outline-none transition-all text-lg"
+                              className="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-center font-mono tracking-wider text-gray-900 focus:border-brand/40 focus:ring-4 focus:ring-brand/10 outline-none transition text-lg"
                             />
                             <div className="flex gap-2">
                               <button
@@ -630,6 +634,37 @@ export default function SettingsPage() {
                         {mfaMessage && <div className="mt-3 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-xs font-semibold text-emerald-700 shadow-3xs">{mfaMessage}</div>}
                       </div>
 
+                      {/* POPIA: people can ask for a copy of the personal information we hold */}
+                      <div className={pageClasses.card}>
+                        <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
+                          <span className="rounded-xl bg-brand/5 p-2 text-brand"><Download size={20} /></span>
+                          <h2 className="text-xl font-extrabold tracking-tight text-gray-900">Your Data</h2>
+                        </div>
+                        <p className={`${pageClasses.muted} mb-5`}>
+                          Download a copy of everything Koru stores about you: your profile, enrolments,
+                          submissions, grades, notes and to-dos. Under POPIA you can ask the registry to
+                          correct or delete it.
+                        </p>
+                        <button
+                          type="button"
+                          disabled={exportingData}
+                          onClick={async () => {
+                            setExportingData(true);
+                            try {
+                              await downloadMyData(session.userId);
+                            } catch (err) {
+                              notify("Couldn't prepare your data: " + err.message);
+                            } finally {
+                              setExportingData(false);
+                            }
+                          }}
+                          className="inline-flex min-h-[42px] items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white px-5 py-2.5 text-xs font-bold text-gray-700 transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-60"
+                        >
+                          <Download size={14} />
+                          <span>{exportingData ? "Preparing…" : "Download my data"}</span>
+                        </button>
+                      </div>
+
                       {/* 2FA Setup Modal */}
                       <AnimatePresence>
                         {showSetup2FA && session?.userId && (
@@ -652,24 +687,24 @@ export default function SettingsPage() {
                     <>
                       <div className={pageClasses.card}>
                         <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
-                          <span className="rounded-xl bg-[#3C0078]/5 p-2 text-[#3C0078]"><Type size={20} /></span>
+                          <span className="rounded-xl bg-brand/5 p-2 text-brand"><Type size={20} /></span>
                           <h2 className="text-xl font-extrabold tracking-tight text-gray-900">Reading Settings</h2>
                         </div>
 
                         <div className="mb-6">
                           <div className="mb-2 flex items-center justify-between">
                             <label className="text-xs font-bold uppercase tracking-wider text-gray-700">Text Size</label>
-                            <span className="text-xs font-bold text-[#3C0078]">{settings.textSize}%</span>
+                            <span className="text-xs font-bold text-brand">{settings.textSize}%</span>
                           </div>
-                          <input type="range" min="100" max="200" value={settings.textSize} onChange={(e) => updateSetting("textSize", Number(e.target.value))} className="h-2 w-full cursor-pointer accent-[#3C0078]" />
+                          <input type="range" min="100" max="200" value={settings.textSize} onChange={(e) => updateSetting("textSize", Number(e.target.value))} className="h-2 w-full cursor-pointer accent-brand" />
                         </div>
 
                         <div className="mb-6">
                           <div className="mb-2 flex items-center justify-between">
                             <label className="text-xs font-bold uppercase tracking-wider text-gray-700">Line Spacing</label>
-                            <span className="text-xs font-bold text-[#3C0078]">{settings.lineSpacing}%</span>
+                            <span className="text-xs font-bold text-brand">{settings.lineSpacing}%</span>
                           </div>
-                          <input type="range" min="120" max="200" value={settings.lineSpacing} onChange={(e) => updateSetting("lineSpacing", Number(e.target.value))} className="h-2 w-full cursor-pointer accent-[#3C0078]" />
+                          <input type="range" min="120" max="200" value={settings.lineSpacing} onChange={(e) => updateSetting("lineSpacing", Number(e.target.value))} className="h-2 w-full cursor-pointer accent-brand" />
                         </div>
 
                         <ToggleRow
@@ -683,7 +718,7 @@ export default function SettingsPage() {
 
                       <div className={pageClasses.card}>
                         <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
-                          <span className="rounded-xl bg-[#3C0078]/5 p-2 text-[#3C0078]"><Volume2 size={20} /></span>
+                          <span className="rounded-xl bg-brand/5 p-2 text-brand"><Volume2 size={20} /></span>
                           <h2 className="text-xl font-extrabold tracking-tight text-gray-900">Text to Speech</h2>
                         </div>
 
@@ -697,7 +732,7 @@ export default function SettingsPage() {
                           />
                         </div>
 
-                        <button type="button" onClick={() => speak("This is a preview of the text to speech accessibility setting.", { force: true })} className="mt-4 inline-flex min-h-[42px] items-center justify-center gap-2 rounded-xl border-2 border-gray-200 bg-white hover:bg-gray-50 text-gray-700 px-5 py-2 text-xs font-black uppercase tracking-wider transition-all hover:scale-[1.02] cursor-pointer">
+                        <button type="button" onClick={() => speak("This is a preview of the text to speech accessibility setting.", { force: true })} className="mt-4 inline-flex min-h-[42px] items-center justify-center gap-2 rounded-xl border-2 border-gray-200 bg-white hover:bg-gray-50 text-gray-700 px-5 py-2 text-xs font-black uppercase tracking-wider transition hover:scale-[1.02] cursor-pointer">
                           <Volume2 size={14} />
                           <span>Preview voice</span>
                         </button>
@@ -706,7 +741,7 @@ export default function SettingsPage() {
                       {/* Visual Style Preferences */}
                       <div className={pageClasses.card}>
                         <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
-                          <span className="rounded-xl bg-[#3C0078]/5 p-2 text-[#3C0078]"><Palette size={20} /></span>
+                          <span className="rounded-xl bg-brand/5 p-2 text-brand"><Palette size={20} /></span>
                           <h2 className="text-xl font-extrabold tracking-tight text-gray-900">Visual Theme & Style</h2>
                         </div>
                         <p className={`${pageClasses.muted} mb-5`}>
@@ -730,34 +765,34 @@ export default function SettingsPage() {
 
                       <div className={pageClasses.card}>
                         <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
-                          <span className="rounded-xl bg-[#3C0078]/5 p-2 text-[#3C0078]"><Sparkles size={20} /></span>
+                          <span className="rounded-xl bg-brand/5 p-2 text-brand"><Sparkles size={20} /></span>
                           <h2 className="text-xl font-extrabold tracking-tight text-gray-900">Accessibility Compliance</h2>
                         </div>
                         <ul className="list-none space-y-3.5 text-xs text-gray-500 font-medium">
                           <li className="flex items-start gap-2.5">
-                            <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#3C0078] mt-1.5 shrink-0" />
+                            <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand mt-1.5 shrink-0" />
                             <span>Buttons and controls use strong color contrast and visible focus states.</span>
                           </li>
                           <li className="flex items-start gap-2.5">
-                            <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#3C0078] mt-1.5 shrink-0" />
+                            <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand mt-1.5 shrink-0" />
                             <span>Touch targets are sized for easier clicking and keyboard access.</span>
                           </li>
                           <li className="flex items-start gap-2.5">
-                            <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#3C0078] mt-1.5 shrink-0" />
+                            <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand mt-1.5 shrink-0" />
                             <span>Dyslexic-friendly font and spacing controls improve reading comfort.</span>
                           </li>
                           <li className="flex items-start gap-2.5">
-                            <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#3C0078] mt-1.5 shrink-0" />
+                            <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand mt-1.5 shrink-0" />
                             <span>Text-to-speech support is available for audio assistance.</span>
                           </li>
                         </ul>
 
                         <div className="mt-6 flex flex-wrap gap-3">
-                          <button type="button" onClick={() => setProfileMessage("All settings have been successfully persisted.")} className="inline-flex min-h-[42px] items-center justify-center gap-2 rounded-xl bg-[#3C0078] hover:bg-[#2A0054] px-5 py-2 text-xs font-black uppercase tracking-wider text-white shadow-md shadow-[#3C0078]/20 transition-all hover:scale-[1.02] cursor-pointer">
+                          <button type="button" onClick={() => setProfileMessage("All settings have been successfully persisted.")} className="inline-flex min-h-[42px] items-center justify-center gap-2 rounded-xl bg-brand hover:bg-brand-deep px-5 py-2 text-xs font-black uppercase tracking-wider text-white shadow-md shadow-brand/20 transition hover:scale-[1.02] cursor-pointer">
                             <Save size={14} />
                             <span>Save All Settings</span>
                           </button>
-                          <button type="button" onClick={handleReset} className="inline-flex min-h-[42px] items-center justify-center gap-2 rounded-xl border-2 border-gray-200 bg-white hover:bg-gray-50 text-gray-700 px-5 py-2 text-xs font-black uppercase tracking-wider transition-all hover:scale-[1.02] cursor-pointer">
+                          <button type="button" onClick={handleReset} className="inline-flex min-h-[42px] items-center justify-center gap-2 rounded-xl border-2 border-gray-200 bg-white hover:bg-gray-50 text-gray-700 px-5 py-2 text-xs font-black uppercase tracking-wider transition hover:scale-[1.02] cursor-pointer">
                             <RotateCcw size={14} />
                             <span>Reset to Defaults</span>
                           </button>

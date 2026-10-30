@@ -3,9 +3,9 @@ import { GraduationCap } from "lucide-react";
 import ChipListEditor from "./ChipListEditor";
 
 const PANEL_CLASS =
-  "rounded-[30px] border border-gray-200/50 bg-white p-6 shadow-2xs hover:shadow-xs transition-all duration-300";
+  "rounded-[30px] border border-gray-200/50 bg-white p-6 shadow-2xs hover:shadow-xs transition duration-300";
 const INPUT_CLASS =
-  "w-full text-sm rounded-xl border border-gray-200 bg-white px-4 py-2.5 transition focus:border-[#3C0078]/40 focus:outline-none focus:ring-4 focus:ring-[#3C0078]/10 text-gray-900";
+  "w-full text-sm rounded-xl border border-gray-200 bg-white px-4 py-2.5 transition focus:border-brand/40 focus:outline-none focus:ring-4 focus:ring-brand/10 text-gray-900";
 const LABEL_CLASS =
   "text-gray-700 font-bold text-xs uppercase tracking-wider mb-1.5 block";
 
@@ -13,7 +13,7 @@ export default function ProfileEducation({ profile, editMode, updateProfile }) {
   return (
     <section className={PANEL_CLASS}>
       <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
-        <span className="rounded-xl bg-[#3C0078]/5 p-2 text-[#3C0078]">
+        <span className="rounded-xl bg-brand/5 p-2 text-brand">
           <GraduationCap size={20} />
         </span>
         <h2 className="text-xl font-extrabold tracking-tight text-gray-900">Education Context</h2>
@@ -25,7 +25,7 @@ export default function ProfileEducation({ profile, editMode, updateProfile }) {
             {profile.education.institution || "No institution set"}
           </p>
           {profile.education.gpa && (
-            <p className="text-xs font-bold text-[#3C0078] uppercase tracking-wider">
+            <p className="text-xs font-bold text-brand uppercase tracking-wider">
               GPA: <span className="text-sm font-extrabold text-gray-900 ml-1">{profile.education.gpa}</span>
             </p>
           )}
@@ -37,7 +37,7 @@ export default function ProfileEducation({ profile, editMode, updateProfile }) {
                 profile.education.modules.filter(Boolean).map((mod, index) => (
                   <span
                     key={`module-${index}`}
-                    className="rounded-full border border-purple-100 bg-purple-50/40 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-[#3C0078] shadow-3xs"
+                    className="rounded-full border border-purple-100 bg-purple-50/40 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-brand shadow-3xs"
                   >
                     {mod}
                   </span>

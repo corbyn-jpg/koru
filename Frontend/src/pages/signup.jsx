@@ -163,7 +163,7 @@ export default function Signup() {
               value={form.institution}
               onChange={handleChange}
               required
-              className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition focus:border-[#3C0078] focus:ring-2 focus:ring-[#9BE9EA]"
+              className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition focus:border-brand focus:ring-2 focus:ring-mint"
             >
               <option value="" disabled>
                 Select your institution
@@ -202,7 +202,7 @@ export default function Signup() {
               name="role"
               value={form.role}
               onChange={handleChange}
-              className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition focus:border-[#3C0078] focus:ring-2 focus:ring-[#9BE9EA]"
+              className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm outline-none transition focus:border-brand focus:ring-2 focus:ring-mint"
             >
               <option value="student">Student</option>
               <option value="teacher">Teacher</option>
@@ -225,14 +225,14 @@ export default function Signup() {
           <button
             type="submit"
             disabled={loading}
-            className="flex items-center justify-center gap-2 sm:col-span-2 rounded-2xl bg-[#3C0078] px-4 py-3 font-semibold text-white transition hover:bg-[#2f005f] disabled:cursor-not-allowed disabled:opacity-70"
+            className="flex items-center justify-center gap-2 sm:col-span-2 rounded-2xl bg-brand px-4 py-3 font-semibold text-white transition hover:bg-[#2f005f] disabled:cursor-not-allowed disabled:opacity-70"
           >
             <GraduationCap size={18} />
             <span>{loading ? "Creating Account..." : "Lets Learn"}</span>
           </button>
         </form>
 
-        <div className="my-5 flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-slate-400">
+        <div className="my-5 flex items-center gap-3 text-xs uppercase tracking-wider text-slate-400">
           <span className="h-px flex-1 bg-slate-200" />
           <span>or</span>
           <span className="h-px flex-1 bg-slate-200" />
@@ -248,7 +248,7 @@ export default function Signup() {
           Already have an account?{" "}
           <Link
             to="/login"
-            className="font-semibold text-[#3C0078] hover:underline"
+            className="font-semibold text-brand hover:underline"
           >
             Log in
           </Link>

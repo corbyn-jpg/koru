@@ -30,7 +30,7 @@ export default function TimelineEventExpanded({
               <h3 className="text-xl font-semibold text-black leading-tight font-['Gabarito']">{title}</h3>
               <p className="text-sm text-gray-400 mt-1">{subtitle}</p>
             </div>
-            <span className={`text-xs font-semibold px-3 py-1.5 rounded-full shrink-0 ${isPast ? "text-white-400 bg-gray-100" : "text-[#3C0078] bg-[#3C0078]/8"}`}>
+            <span className={`text-xs font-semibold px-3 py-1.5 rounded-full shrink-0 ${isPast ? "text-white-400 bg-gray-100" : "text-brand bg-brand/8"}`}>
               {location}
             </span>
           </div>
@@ -39,8 +39,8 @@ export default function TimelineEventExpanded({
 
           <div className="flex items-center justify-between pt-3 border-t border-gray-100">
             <div className="flex items-center gap-3">
-              <div className={`w-9 h-9 rounded-full flex items-center justify-center ${isPast ? "bg-gray-100" : "bg-[#3C0078]/10"}`}>
-                <MdPersonOutline className={`w-5 h-5 ${isPast ? "text-gray-400" : "text-[#3C0078]"}`} />
+              <div className={`w-9 h-9 rounded-full flex items-center justify-center ${isPast ? "bg-gray-100" : "bg-brand/10"}`}>
+                <MdPersonOutline className={`w-5 h-5 ${isPast ? "text-gray-400" : "text-brand"}`} />
               </div>
               <div className="flex flex-col">
                 <span className="text-[11px] text-black leading-tight uppercase tracking-wider font-medium">Lecturer</span>
@@ -60,7 +60,7 @@ export default function TimelineEventExpanded({
               {onManageAttendance && (
                 <button
                   onClick={e => { e.stopPropagation(); onManageAttendance(); }}
-                  className="w-full py-2.5 rounded-xl bg-[#3C0078] text-white text-xs font-black uppercase tracking-widest hover:bg-[#2A0054] transition-colors"
+                  className="w-full py-2.5 rounded-xl bg-brand text-white text-xs font-black uppercase tracking-wider hover:bg-brand-deep transition-colors"
                 >
                   Manage Attendance
                 </button>
@@ -68,7 +68,7 @@ export default function TimelineEventExpanded({
               {onCheckIn && (
                 <button
                   onClick={e => { e.stopPropagation(); onCheckIn(); }}
-                  className="w-full py-2.5 rounded-xl bg-[#3C0078] text-white text-xs font-black uppercase tracking-widest hover:bg-[#2A0054] transition-colors"
+                  className="w-full py-2.5 rounded-xl bg-brand text-white text-xs font-black uppercase tracking-wider hover:bg-brand-deep transition-colors"
                 >
                   Check In Now
                 </button>

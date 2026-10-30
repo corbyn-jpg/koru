@@ -1,3 +1,4 @@
+import { notify, confirmAction } from "../../../components/UI/feedback";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
@@ -78,17 +79,17 @@ export default function CohortManagerModal({ course, onClose }) {
       setNewCohortName("");
       await loadData();
     } catch (err) {
-      alert("Failed to create cohort: " + err.message);
+      notify("Failed to create cohort: " + err.message);
     }
   };
 
   const handleDeleteCohort = async (cohortId) => {
-    if (!window.confirm("Are you sure you want to delete this cohort? All timetabled slots associated with it will be removed.")) return;
+    if (!await confirmAction("Delete this cohort? Its timetabled sessions are removed too.")) return;
     try {
       await deleteClassGroup(cohortId);
       await loadData();
     } catch (err) {
-      alert("Failed to delete cohort: " + err.message);
+      notify("Failed to delete cohort: " + err.message);
     }
   };
 
@@ -127,7 +128,7 @@ export default function CohortManagerModal({ course, onClose }) {
         await handleSelectCohort(selectedCohort.id);
       }
     } catch (err) {
-      alert("Failed to assign student: " + err.message);
+      notify("Failed to assign student: " + err.message);
     }
   };
 
@@ -161,14 +162,14 @@ export default function CohortManagerModal({ course, onClose }) {
       setSchedRoom("");
       await handleSelectCohort(selectedCohort.id);
     } catch (err) {
-      alert("Failed to add schedule: " + err.message);
+      notify("Failed to add schedule: " + err.message);
     } finally {
       setIsAddingSchedule(false);
     }
   };
 
   const handleDeleteSchedule = async (classId) => {
-    if (!window.confirm("Are you sure you want to remove this timetabled session?")) return;
+    if (!await confirmAction("Remove this timetabled session?", { confirmLabel: "Remove" })) return;
     try {
       const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5299/api";
       const res = await fetch(`${API_BASE}/Class/${classId}`, {
@@ -177,7 +178,7 @@ export default function CohortManagerModal({ course, onClose }) {
       if (!res.ok) throw new Error("Failed to delete slot");
       await handleSelectCohort(selectedCohort.id);
     } catch (err) {
-      alert("Failed to delete scheduled session: " + err.message);
+      notify("Failed to delete scheduled session: " + err.message);
     }
   };
 
@@ -193,18 +194,18 @@ export default function CohortManagerModal({ course, onClose }) {
         <div className="p-8 border-b border-gray-100 flex items-center justify-between bg-gray-50/50">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <div className="w-1.5 h-4 bg-[#3C0078] rounded-full"></div>
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#3C0078] opacity-70">
+              <div className="w-1.5 h-4 bg-brand rounded-full"></div>
+              <span className="text-[10px] font-black uppercase tracking-wider text-brand opacity-70">
                 {course?.subject?.code} Cohorts & Timetable
               </span>
             </div>
             <h2 className="text-3xl font-black text-gray-900 tracking-tight">
-              Class Cohorts & <span className="text-[#3C0078]">Schedules</span>
+              Class Cohorts & <span className="text-brand">Schedules</span>
             </h2>
           </div>
           <button 
             onClick={onClose} 
-            className="p-3 bg-white rounded-2xl border border-gray-100 text-gray-400 hover:text-red-500 hover:bg-red-50 hover:border-red-100 transition-all shadow-sm"
+            className="p-3 bg-white rounded-2xl border border-gray-100 text-gray-400 hover:text-red-500 hover:bg-red-50 hover:border-red-100 transition shadow-sm"
           >
             <X size={20} />
           </button>
@@ -244,7 +245,7 @@ export default function CohortManagerModal({ course, onClose }) {
               {/* Cohorts Picker */}
               <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm space-y-4">
                 <div className="flex justify-between items-center">
-                  <h3 className="text-xs font-black uppercase tracking-widest text-gray-400 flex items-center gap-2">
+                  <h3 className="text-xs font-black uppercase tracking-wider text-gray-400 flex items-center gap-2">
                     <Users size={14} /> Active Cohorts ({cohorts.length})
                   </h3>
                   <form onSubmit={handleCreateCohort} className="flex gap-2">
@@ -253,11 +254,11 @@ export default function CohortManagerModal({ course, onClose }) {
                       placeholder="e.g. Group C"
                       value={newCohortName}
                       onChange={e => setNewCohortName(e.target.value)}
-                      className="px-4 py-2 border border-gray-200 rounded-xl text-[12px] font-bold outline-none focus:border-[#3C0078]/30"
+                      className="px-4 py-2 border border-gray-200 rounded-xl text-[12px] font-bold outline-none focus:border-brand/30"
                     />
                     <button 
                       type="submit"
-                      className="px-4 py-2 rounded-xl bg-[#3C0078] text-white text-[11px] font-black uppercase tracking-wider hover:bg-[#3C0078]/90 transition-all flex items-center gap-1.5"
+                      className="px-4 py-2 rounded-xl bg-brand text-white text-[11px] font-black uppercase tracking-wider hover:bg-brand/90 transition flex items-center gap-1.5"
                     >
                       <Plus size={14} /> Add
                     </button>
@@ -271,9 +272,9 @@ export default function CohortManagerModal({ course, onClose }) {
                       <div 
                         key={cohort.id}
                         onClick={() => handleSelectCohort(cohort.id)}
-                        className={`p-4 rounded-2xl cursor-pointer border transition-all flex items-center justify-between group ${
+                        className={`p-4 rounded-2xl cursor-pointer border transition flex items-center justify-between group ${
                           isSelected 
-                            ? "bg-[#3C0078]/5 border-[#3C0078] text-[#3C0078]" 
+                            ? "bg-brand/5 border-brand text-brand" 
                             : "bg-white border-gray-100 hover:border-gray-300"
                         }`}
                       >
@@ -288,7 +289,7 @@ export default function CohortManagerModal({ course, onClose }) {
                             e.stopPropagation();
                             handleDeleteCohort(cohort.id);
                           }}
-                          className="p-1.5 rounded-lg text-gray-300 hover:text-red-500 hover:bg-red-50 transition-all opacity-0 group-hover:opacity-100"
+                          className="p-1.5 rounded-lg text-gray-300 hover:text-red-500 hover:bg-red-50 transition opacity-0 group-hover:opacity-100"
                         >
                           <Trash2 size={13} />
                         </button>
@@ -308,7 +309,7 @@ export default function CohortManagerModal({ course, onClose }) {
                 <div className="flex-1 grid grid-cols-1 md:grid-cols-12 gap-8">
                   {/* Scheduled Slots */}
                   <div className="md:col-span-7 bg-white p-6 rounded-3xl border border-gray-100 shadow-sm flex flex-col">
-                    <h3 className="text-xs font-black uppercase tracking-widest text-gray-400 flex items-center gap-2 mb-4">
+                    <h3 className="text-xs font-black uppercase tracking-wider text-gray-400 flex items-center gap-2 mb-4">
                       <Calendar size={14} /> Timetable for {selectedCohort.name}
                     </h3>
                     
@@ -316,10 +317,10 @@ export default function CohortManagerModal({ course, onClose }) {
                       {cohortSchedules.map((slot) => (
                         <div 
                           key={slot.id} 
-                          className="p-3.5 bg-gray-50 border border-gray-100 rounded-2xl flex items-center justify-between group hover:border-gray-200 transition-all"
+                          className="p-3.5 bg-gray-50 border border-gray-100 rounded-2xl flex items-center justify-between group hover:border-gray-200 transition"
                         >
                           <div className="flex items-center gap-3.5">
-                            <div className="w-10 h-10 rounded-xl bg-white border border-gray-100 flex flex-col items-center justify-center font-black text-[10px] text-[#3C0078] shadow-sm">
+                            <div className="w-10 h-10 rounded-xl bg-white border border-gray-100 flex flex-col items-center justify-center font-black text-[10px] text-brand shadow-sm">
                               {slot.dayOfWeek?.slice(0, 3)}
                             </div>
                             <div>
@@ -336,7 +337,7 @@ export default function CohortManagerModal({ course, onClose }) {
                           
                           <button 
                             onClick={() => handleDeleteSchedule(slot.id)}
-                            className="p-2 text-gray-300 hover:text-red-500 hover:bg-red-50 rounded-xl opacity-0 group-hover:opacity-100 transition-all border-none"
+                            className="p-2 text-gray-300 hover:text-red-500 hover:bg-red-50 rounded-xl opacity-0 group-hover:opacity-100 transition border-none"
                           >
                             <Trash2 size={14} />
                           </button>
@@ -357,7 +358,7 @@ export default function CohortManagerModal({ course, onClose }) {
 
                   {/* Add Class Form */}
                   <div className="md:col-span-5 bg-white p-6 rounded-3xl border border-gray-100 shadow-sm flex flex-col">
-                    <h3 className="text-xs font-black uppercase tracking-widest text-gray-400 flex items-center gap-2 mb-4">
+                    <h3 className="text-xs font-black uppercase tracking-wider text-gray-400 flex items-center gap-2 mb-4">
                       <Plus size={14} /> Schedule Session
                     </h3>
                     <form onSubmit={handleAddSchedule} className="space-y-4">
@@ -409,7 +410,7 @@ export default function CohortManagerModal({ course, onClose }) {
                       <button 
                         type="submit"
                         disabled={isAddingSchedule}
-                        className="w-full py-3 rounded-xl bg-[#3C0078] text-white text-[11px] font-black uppercase tracking-widest hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 disabled:scale-100 shadow-md shadow-[#3C0078]/10"
+                        className="w-full py-3 rounded-xl bg-brand text-white text-[11px] font-black uppercase tracking-wider hover:scale-[1.02] active:scale-[0.98] transition disabled:opacity-50 disabled:scale-100 shadow-md shadow-brand/10"
                       >
                         {isAddingSchedule ? "Saving Slot..." : "Add to Timetable"}
                       </button>
@@ -431,7 +432,7 @@ export default function CohortManagerModal({ course, onClose }) {
             <div className="lg:w-2/5 flex flex-col h-full overflow-hidden bg-white">
               {/* Filter / Summary */}
               <div className="p-8 border-b border-gray-100 space-y-4">
-                <h3 className="text-xs font-black uppercase tracking-widest text-[#3C0078] flex items-center gap-2">
+                <h3 className="text-xs font-black uppercase tracking-wider text-brand flex items-center gap-2">
                   <UserPlus size={14} /> Course Enrollment Roster ({students.length})
                 </h3>
                 <p className="text-[11px] text-gray-400 leading-normal">
@@ -444,7 +445,7 @@ export default function CohortManagerModal({ course, onClose }) {
                 {students.map((student) => (
                   <div 
                     key={student.studentId}
-                    className="p-4 rounded-2xl bg-gray-50/50 border border-gray-100 flex items-center justify-between hover:border-gray-200 transition-all"
+                    className="p-4 rounded-2xl bg-gray-50/50 border border-gray-100 flex items-center justify-between hover:border-gray-200 transition"
                   >
                     <div className="space-y-0.5">
                       <h4 className="text-[13px] font-black text-gray-800">{student.studentName}</h4>
@@ -455,9 +456,9 @@ export default function CohortManagerModal({ course, onClose }) {
                       <select 
                         value={student.classGroupId || ""}
                         onChange={(e) => handleAssignStudentCohort(student.studentId, e.target.value || null)}
-                        className={`px-3 py-1.5 rounded-xl text-[11px] font-black uppercase tracking-wider outline-none border transition-all ${
+                        className={`px-3 py-1.5 rounded-xl text-[11px] font-black uppercase tracking-wider outline-none border transition ${
                           student.classGroupId 
-                            ? "bg-[#3C0078]/5 border-[#3C0078]/10 text-[#3C0078]" 
+                            ? "bg-brand/5 border-brand/10 text-brand" 
                             : "bg-gray-100 border-transparent text-gray-400 hover:bg-gray-200"
                         }`}
                       >

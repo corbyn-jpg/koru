@@ -15,8 +15,8 @@ export default function ProfileTopBar({
     <div className="flex flex-col gap-4 py-4 mb-4 select-none animate-fadeIn">
       <div className="flex flex-wrap items-center justify-between gap-6">
         <div>
-          <p className="inline-flex items-center gap-1.5 rounded-full border border-purple-100 bg-purple-50/50 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-[#3C0078] shadow-3xs">
-            <Sparkles size={11} className="text-[#3C0078]" /> 
+          <p className="inline-flex items-center gap-1.5 rounded-full border border-purple-100 bg-purple-50/50 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-brand shadow-3xs">
+            <Sparkles size={11} className="text-brand" /> 
             <span>Verified University Profile</span>
           </p>
           <h1 className="mt-4 text-4xl font-semibold tracking-tight text-gray-900">Professional Profile Builder</h1>
@@ -31,9 +31,9 @@ export default function ProfileTopBar({
             type="button"
             onClick={() => setEditMode((v) => !v)}
             disabled={publicRoute}
-            className={`inline-flex min-h-[42px] items-center gap-2 rounded-xl border-2 px-5 py-2 text-xs font-black uppercase tracking-wider shadow-3xs transition-all hover:scale-[1.02] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed ${
+            className={`inline-flex min-h-[42px] items-center gap-2 rounded-xl border-2 px-5 py-2 text-xs font-black uppercase tracking-wider shadow-3xs transition hover:scale-[1.02] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed ${
               editMode
-                ? "border-[#3C0078] bg-[#3C0078] text-white"
+                ? "border-brand bg-brand text-white"
                 : "border-gray-200 bg-white text-gray-700 hover:bg-gray-50"
             }`}
           >
@@ -44,7 +44,7 @@ export default function ProfileTopBar({
             type="button"
             onClick={() => setViewAsPublic((v) => !v)}
             disabled={publicRoute}
-            className="inline-flex min-h-[42px] items-center gap-2 rounded-xl border-2 border-gray-200 bg-white px-5 py-2 text-xs font-black uppercase tracking-wider text-gray-700 shadow-3xs transition-all hover:scale-[1.02] hover:bg-gray-50 cursor-pointer disabled:opacity-50"
+            className="inline-flex min-h-[42px] items-center gap-2 rounded-xl border-2 border-gray-200 bg-white px-5 py-2 text-xs font-black uppercase tracking-wider text-gray-700 shadow-3xs transition hover:scale-[1.02] hover:bg-gray-50 cursor-pointer disabled:opacity-50"
           >
             {viewAsPublic ? <EyeOff size={14} /> : <Eye size={14} />}
             <span>{viewAsPublic ? "Exit Preview" : "Preview Public"}</span>
@@ -53,7 +53,7 @@ export default function ProfileTopBar({
             type="button"
             onClick={handlePdfExport}
             disabled={isExporting}
-            className="inline-flex min-h-[42px] items-center gap-2 rounded-xl bg-[#3C0078] hover:bg-[#2A0054] px-5 py-2 text-xs font-black uppercase tracking-wider text-white shadow-md shadow-[#3C0078]/20 transition-all hover:scale-[1.02] cursor-pointer disabled:opacity-50"
+            className="inline-flex min-h-[42px] items-center gap-2 rounded-xl bg-brand hover:bg-brand-deep px-5 py-2 text-xs font-black uppercase tracking-wider text-white shadow-md shadow-brand/20 transition hover:scale-[1.02] cursor-pointer disabled:opacity-50"
           >
             <Download size={14} /> 
             <span>{isExporting ? "Exporting..." : "Export to PDF"}</span>

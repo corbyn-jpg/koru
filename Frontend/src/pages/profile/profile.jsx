@@ -171,9 +171,9 @@ export default function Profile({ publicRoute = false }) {
   const pageClasses = useMemo(
     () => ({
       wrapper: "text-slate-900 font-sans",
-      card: "border border-gray-200/50 bg-white p-6 shadow-2xs rounded-[30px] hover:shadow-xs transition-all duration-300",
+      card: "border border-gray-200/50 bg-white p-6 shadow-2xs rounded-[30px] hover:shadow-xs transition duration-300",
       muted: "text-gray-500 font-medium text-xs leading-relaxed",
-      input: "w-full text-sm rounded-xl border border-gray-200 bg-white px-4 py-2.5 transition focus:border-[#3C0078]/40 focus:outline-none focus:ring-4 focus:ring-[#3C0078]/10 text-gray-900",
+      input: "w-full text-sm rounded-xl border border-gray-200 bg-white px-4 py-2.5 transition focus:border-brand/40 focus:outline-none focus:ring-4 focus:ring-brand/10 text-gray-900",
       label: "text-gray-700 font-bold text-xs uppercase tracking-wider mb-1.5 block",
     }),
     [],
@@ -341,20 +341,20 @@ export default function Profile({ publicRoute = false }) {
   }, [activeTab, categories]);
 
   return (
-    <div data-tts-root="true" className={`flex overflow-hidden gap-4 transition-all duration-300 md:h-[calc(100vh-32px)] md:w-full max-md:h-screen max-md:w-screen max-md:-ml-4 max-md:-mr-4 max-md:-mt-4 bg-transparent ${pageClasses.wrapper}`}>
+    <div data-tts-root="true" className={`flex overflow-hidden gap-4 transition duration-300 md:h-[calc(100vh-32px)] md:w-full max-md:h-screen max-md:w-screen max-md:-ml-4 max-md:-mr-4 max-md:-mt-4 bg-transparent ${pageClasses.wrapper}`}>
       <div className="flex h-full w-full gap-4 overflow-hidden">
         {/* Left Section: Floating Profile Secondary Navigation (Matching Courses & Settings) */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="flex flex-col shrink-0 transition-all duration-300
+          className="flex flex-col shrink-0 transition duration-300
             md:h-full md:w-64 md:bg-white/70 md:backdrop-blur-xl md:border md:border-white/20 md:rounded-[28px] md:shadow-lg md:overflow-hidden
             max-md:h-full max-md:w-64 max-md:bg-white/80 max-md:backdrop-blur-md max-md:border-r max-md:border-gray-200/50"
         >
           {/* Profile Sidebar Header Info */}
           <div className="px-6 pt-6 pb-5 border-b border-gray-100 flex flex-col gap-2 shrink-0 select-none">
             <div className="flex items-center gap-2">
-              <span className="px-2 py-0.5 rounded-lg bg-[#3C0078]/10 text-[#3C0078] font-black text-[9px] uppercase tracking-wider shadow-sm">
+              <span className="px-2 py-0.5 rounded-lg bg-brand/10 text-brand font-black text-[9px] uppercase tracking-wider shadow-sm">
                 {roleLabel}
               </span>
               <span className="text-[10px] font-extrabold text-gray-400 tracking-wider">
@@ -389,16 +389,16 @@ export default function Profile({ publicRoute = false }) {
                           setSaveError("");
                           setUploadError("");
                         }}
-                        className={`relative w-[calc(100%-24px)] flex items-center gap-3 px-4 py-2.5 text-xs font-semibold transition-all duration-200 mx-3 my-0.5 rounded-xl group select-none cursor-pointer text-left
+                        className={`relative w-[calc(100%-24px)] flex items-center gap-3 px-4 py-2.5 text-xs font-semibold transition duration-200 mx-3 my-0.5 rounded-xl group select-none cursor-pointer text-left
                           ${isActive
-                            ? "bg-[#3C0078]/5 text-[#3C0078]"
+                            ? "bg-brand/5 text-brand"
                             : "text-gray-600 hover:bg-gray-50/80 hover:text-gray-900"
                           }`}
                       >
                         {isActive && (
                           <motion.div
                             layoutId="activeProfileLeftAccent"
-                            className="absolute left-0 top-1/4 bottom-1/4 w-0.75 bg-[#3C0078] rounded-r-md shrink-0"
+                            className="absolute left-0 top-1/4 bottom-1/4 w-0.75 bg-brand rounded-r-md shrink-0"
                             transition={{
                               type: "spring",
                               stiffness: 300,
@@ -407,7 +407,7 @@ export default function Profile({ publicRoute = false }) {
                           />
                         )}
 
-                        <span className={`transition-colors shrink-0 ${isActive ? "text-[#3C0078]" : "text-gray-400 group-hover:text-gray-600"}`}>
+                        <span className={`transition-colors shrink-0 ${isActive ? "text-brand" : "text-gray-400 group-hover:text-gray-600"}`}>
                           {cat.icon}
                         </span>
                         
@@ -416,7 +416,7 @@ export default function Profile({ publicRoute = false }) {
                         {isActive && (
                           <motion.div
                             layoutId="activeProfileDot"
-                            className="w-1.5 h-1.5 rounded-full bg-[#3C0078] shrink-0"
+                            className="w-1.5 h-1.5 rounded-full bg-brand shrink-0"
                             transition={{
                               type: "spring",
                               stiffness: 300,
@@ -434,11 +434,11 @@ export default function Profile({ publicRoute = false }) {
         </motion.div>
 
         {/* Right Section: Main Content Area: Floating Island Card */}
-        <div className="flex-1 flex flex-col overflow-hidden transition-all duration-300 md:bg-white/75 md:backdrop-blur-xl md:border md:border-white/20 md:rounded-[28px] md:shadow-lg max-md:bg-white">
+        <div className="flex-1 flex flex-col overflow-hidden transition duration-300 md:bg-white/75 md:backdrop-blur-xl md:border md:border-white/20 md:rounded-[28px] md:shadow-lg max-md:bg-white">
           {/* Header Top Bar */}
           <div className="h-14 border-b border-gray-100 bg-white/60 backdrop-blur-md flex items-center justify-between px-8 z-10 shrink-0 select-none">
             <div className="flex items-center gap-3">
-              <span className="px-2.5 py-0.5 rounded-lg text-[10px] font-black text-white bg-[#3C0078] shadow-sm">
+              <span className="px-2.5 py-0.5 rounded-lg text-[10px] font-black text-white bg-brand shadow-sm">
                 University Portfolio
               </span>
               <span className="text-gray-300 text-xs">/</span>
@@ -451,9 +451,9 @@ export default function Profile({ publicRoute = false }) {
                 <button
                   type="button"
                   onClick={() => setEditMode(!editMode)}
-                  className={`px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider transition-all duration-200 cursor-pointer shadow-3xs hover:scale-[1.02] border
+                  className={`px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider transition duration-200 cursor-pointer shadow-3xs hover:scale-[1.02] border
                     ${editMode
-                      ? "bg-[#3C0078] border-[#3C0078] text-white"
+                      ? "bg-brand border-brand text-white"
                       : "bg-white border-gray-200 text-gray-700 hover:bg-gray-50"
                     }`}
                 >
@@ -463,7 +463,7 @@ export default function Profile({ publicRoute = false }) {
                 <button
                   type="button"
                   onClick={() => window.open(`/profile/p/${profile.vanityUrlSlug || "default"}`)}
-                  className="px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider border border-gray-200 bg-white hover:bg-gray-50 text-gray-700 transition-all duration-200 cursor-pointer shadow-3xs hover:scale-[1.02]"
+                  className="px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider border border-gray-200 bg-white hover:bg-gray-50 text-gray-700 transition duration-200 cursor-pointer shadow-3xs hover:scale-[1.02]"
                 >
                   Public Preview
                 </button>
@@ -472,7 +472,7 @@ export default function Profile({ publicRoute = false }) {
                   type="button"
                   onClick={handlePdfExport}
                   disabled={isExporting}
-                  className="px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:scale-[1.02] transition-all cursor-pointer shadow-3xs disabled:opacity-50"
+                  className="px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:scale-[1.02] transition cursor-pointer shadow-3xs disabled:opacity-50"
                 >
                   {isExporting ? "Exporting..." : "Export CV"}
                 </button>
@@ -512,7 +512,7 @@ export default function Profile({ publicRoute = false }) {
                       {editMode && (
                         <div className={pageClasses.card}>
                           <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
-                            <span className="rounded-xl bg-[#3C0078]/5 p-2 text-[#3C0078]"><UserRound size={20} /></span>
+                            <span className="rounded-xl bg-brand/5 p-2 text-brand"><UserRound size={20} /></span>
                             <h2 className="text-xl font-extrabold tracking-tight text-gray-900">Edit Profile Identity</h2>
                           </div>
                           
@@ -584,7 +584,7 @@ export default function Profile({ publicRoute = false }) {
                               />
                             </div>
                             <div className="sm:col-span-2 flex flex-col gap-2">
-                              <label className="inline-flex w-fit cursor-pointer items-center gap-2 rounded-xl border-2 border-[#3C0078] bg-white px-4 py-2.5 text-xs font-black uppercase tracking-wider text-[#3C0078] hover:bg-[#3C0078] hover:text-white transition-all hover:scale-[1.02]">
+                              <label className="inline-flex w-fit cursor-pointer items-center gap-2 rounded-xl border-2 border-brand bg-white px-4 py-2.5 text-xs font-black uppercase tracking-wider text-brand hover:bg-brand hover:text-white transition hover:scale-[1.02]">
                                 <Upload size={14} />
                                 <span>Upload profile image</span>
                                 <input
@@ -653,7 +653,7 @@ export default function Profile({ publicRoute = false }) {
                       {editMode && (
                         <div className={pageClasses.card}>
                           <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
-                            <span className="rounded-xl bg-[#3C0078]/5 p-2 text-[#3C0078]"><Palette size={20} /></span>
+                            <span className="rounded-xl bg-brand/5 p-2 text-brand"><Palette size={20} /></span>
                             <h2 className="text-xl font-extrabold tracking-tight text-gray-900">Manage Platform Links</h2>
                           </div>
                           
@@ -678,7 +678,7 @@ export default function Profile({ publicRoute = false }) {
                   {activeTab === "visibility" && !publicRoute && (
                     <div className={pageClasses.card}>
                       <div className="mb-6 flex items-center gap-3 border-b border-gray-100 pb-3">
-                        <span className="rounded-xl bg-[#3C0078]/5 p-2 text-[#3C0078]"><Eye size={20} /></span>
+                        <span className="rounded-xl bg-brand/5 p-2 text-brand"><Eye size={20} /></span>
                         <h2 className="text-xl font-extrabold tracking-tight text-gray-900">Privacy &amp; Visibility Checklist</h2>
                       </div>
                       
@@ -695,7 +695,7 @@ export default function Profile({ publicRoute = false }) {
                           type="checkbox"
                           checked={profile.privacy.profilePublic}
                           onChange={() => toggleVisibility("profilePublic")}
-                          className="h-5 w-5 cursor-pointer accent-[#3C0078] shrink-0"
+                          className="h-5 w-5 cursor-pointer accent-brand shrink-0"
                         />
                       </label>
 
@@ -710,7 +710,7 @@ export default function Profile({ publicRoute = false }) {
                               type="checkbox"
                               checked={profile.privacy[key]}
                               onChange={() => toggleVisibility(key)}
-                              className="h-4 w-4 cursor-pointer accent-[#3C0078] shrink-0"
+                              className="h-4 w-4 cursor-pointer accent-brand shrink-0"
                             />
                           </label>
                         ))}
@@ -729,7 +729,7 @@ export default function Profile({ publicRoute = false }) {
                       )}
 
                       <div className="mt-6 rounded-2xl border border-purple-100 bg-gradient-to-br from-purple-50/40 to-indigo-50/20 p-4">
-                        <p className="text-[10px] font-black uppercase tracking-wider text-[#3C0078]">
+                        <p className="text-[10px] font-black uppercase tracking-wider text-brand">
                           Shareable Link
                         </p>
                         <p className="mt-1.5 break-all text-xs font-bold text-gray-700 font-mono select-all bg-white/85 px-3 py-2.5 rounded-xl border border-purple-100/50 shadow-3xs">{shareUrl}</p>
@@ -740,7 +740,7 @@ export default function Profile({ publicRoute = false }) {
                             setCopied(true);
                             setTimeout(() => setCopied(false), 2000);
                           }}
-                          className="mt-3.5 inline-flex items-center gap-1.5 rounded-xl border border-gray-200 bg-white px-4 py-2 text-xs font-black uppercase tracking-wider text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition-all hover:scale-[1.02] shadow-3xs cursor-pointer"
+                          className="mt-3.5 inline-flex items-center gap-1.5 rounded-xl border border-gray-200 bg-white px-4 py-2 text-xs font-black uppercase tracking-wider text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition hover:scale-[1.02] shadow-3xs cursor-pointer"
                         >
                           <span>{copied ? "Copied!" : "Copy link"}</span>
                         </button>

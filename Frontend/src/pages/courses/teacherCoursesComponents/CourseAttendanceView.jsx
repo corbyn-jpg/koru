@@ -152,7 +152,7 @@ export function CourseAttendanceView({ activeCourseId, subject }) {
                     >
                         <Folder size={18} /> Export Log
                     </button>
-                    <button className="px-6 py-3 rounded-2xl bg-[#3C0078] text-white text-sm font-semibold shadow-lg shadow-[#3C0078]/20 hover:bg-[#2A0054] transition-all cursor-pointer">
+                    <button className="px-6 py-3 rounded-2xl bg-brand text-white text-sm font-semibold shadow-lg shadow-brand/20 hover:bg-brand-deep transition cursor-pointer">
                         Take Attendance
                     </button>
                 </div>
@@ -183,7 +183,7 @@ export function CourseAttendanceView({ activeCourseId, subject }) {
                     },
                 ].map((kpi, i) => (
                     <div key={i} className={`flex flex-col gap-1 py-1 flex-1 ${i === 0 ? "pr-6" : "px-6"}`}>
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400">{kpi.label}</p>
+                        <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">{kpi.label}</p>
                         <p className="text-2xl font-black leading-none text-gray-900">{kpi.value}</p>
                         <p className="text-xs text-gray-400 truncate mt-0.5">{kpi.sub}</p>
                     </div>
@@ -199,7 +199,7 @@ export function CourseAttendanceView({ activeCourseId, subject }) {
                             <h3 className="text-base font-bold text-gray-900">Class Attendance Overview</h3>
                             <p className="text-xs text-gray-400 mt-0.5">{subject?.code || "Course"} · {totalSessions} sessions recorded</p>
                         </div>
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-[#3C0078] bg-[#3C0078]/6 px-3 py-1.5 rounded-lg shrink-0">Target 80%</span>
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-brand bg-brand/6 px-3 py-1.5 rounded-lg shrink-0">Target 80%</span>
                     </div>
                     <div className="flex-1 min-h-[220px]">
                         <AttendanceChart
@@ -236,12 +236,12 @@ export function CourseAttendanceView({ activeCourseId, subject }) {
                                         <span className={`w-5 text-[11px] font-black text-right shrink-0 ${
                                             i === 0 ? "text-yellow-500" : i === 1 ? "text-gray-400" : i === 2 ? "text-orange-400" : "text-gray-300"
                                         }`}>{i + 1}</span>
-                                        <div className="w-7 h-7 rounded-full bg-[#3C0078]/8 border border-[#3C0078]/10 flex items-center justify-center text-[10px] font-black text-[#3C0078] shrink-0">
+                                        <div className="w-7 h-7 rounded-full bg-brand/8 border border-brand/10 flex items-center justify-center text-[10px] font-black text-brand shrink-0">
                                             {s.avatar}
                                         </div>
                                         <span className="flex-1 text-xs font-semibold text-gray-800 truncate">{s.name}</span>
                                         <span className={`text-xs font-black tabular-nums shrink-0 ${
-                                            rate >= 90 ? "text-green-600" : rate >= 80 ? "text-[#3C0078]" : "text-orange-500"
+                                            rate >= 90 ? "text-green-600" : rate >= 80 ? "text-brand" : "text-orange-500"
                                         }`}>{rate}%</span>
                                     </div>
                                 );
@@ -255,14 +255,14 @@ export function CourseAttendanceView({ activeCourseId, subject }) {
             <motion.div variants={slideUp} className="flex flex-row gap-5 items-start mb-8">
 
                 {/* Left: students table — shrinks when panel is open */}
-                <div className={`bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden transition-all duration-300 min-w-0 ${
+                <div className={`bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden transition duration-300 min-w-0 ${
                     selectedStudent ? "w-[44%] shrink-0" : "w-full"
                 }`}>
                     <div className="px-6 py-5 border-b border-gray-50 flex justify-between items-center">
                         <h2 className="text-2xl font-bold">Students Attendance</h2>
                         <button
                             onClick={() => setShowFilter(!showFilter)}
-                            className={`p-2.5 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer ${showFilter ? "text-[#3C0078] bg-[#3C0078]/10" : "text-gray-400"}`}
+                            className={`p-2.5 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer ${showFilter ? "text-brand bg-brand/10" : "text-gray-400"}`}
                         >
                             <Filter size={20} />
                         </button>
@@ -283,7 +283,7 @@ export function CourseAttendanceView({ activeCourseId, subject }) {
                                         placeholder="Search by student name..."
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
-                                        className="w-full pl-10 pr-4 py-2 text-xs rounded-xl border border-gray-200 focus:outline-none focus:border-[#3C0078] focus:ring-1 focus:ring-[#3C0078] transition-all bg-white text-gray-800"
+                                        className="w-full pl-10 pr-4 py-2 text-xs rounded-xl border border-gray-200 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand transition bg-white text-gray-800"
                                     />
                                     <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400">
                                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -304,9 +304,9 @@ export function CourseAttendanceView({ activeCourseId, subject }) {
                                         <button
                                             key={status}
                                             onClick={() => setStatusFilter(status)}
-                                            className={`px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer ${
+                                            className={`px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider transition whitespace-nowrap cursor-pointer ${
                                                 statusFilter === status
-                                                    ? "bg-[#3C0078] text-white shadow-sm shadow-[#3C0078]/20"
+                                                    ? "bg-brand text-white shadow-sm shadow-brand/20"
                                                     : "bg-gray-100 text-gray-500 hover:bg-gray-200"
                                             }`}
                                         >
@@ -372,22 +372,22 @@ export function CourseAttendanceView({ activeCourseId, subject }) {
                                         <tr
                                             key={student.id}
                                             onClick={() => setSelectedStudent(isActive ? null : student)}
-                                            className={`border-b border-gray-50 last:border-0 transition-all cursor-pointer group ${
-                                                isActive ? "bg-[#3C0078]/5" : "hover:bg-gray-50/60"
+                                            className={`border-b border-gray-50 last:border-0 transition cursor-pointer group ${
+                                                isActive ? "bg-brand/5" : "hover:bg-gray-50/60"
                                             }`}
                                         >
-                                            <td className={`py-3 pl-5 pr-3 ${isActive ? "border-l-2 border-[#3C0078]" : ""}`}>
+                                            <td className={`py-3 pl-5 pr-3 ${isActive ? "border-l-2 border-brand" : ""}`}>
                                                 <div className="flex items-center gap-3">
                                                     <div className={`w-8 h-8 rounded-full flex items-center justify-center font-black text-xs shrink-0 ${
                                                         isActive
-                                                            ? "bg-[#3C0078]/15 border-2 border-[#3C0078]/30 text-[#3C0078]"
-                                                            : "bg-[#3C0078]/5 border-2 border-[#3C0078]/10 text-[#3C0078]"
+                                                            ? "bg-brand/15 border-2 border-brand/30 text-brand"
+                                                            : "bg-brand/5 border-2 border-brand/10 text-brand"
                                                     }`}>
                                                         {student.avatar}
                                                     </div>
                                                     <div className="min-w-0">
                                                         <div className={`font-bold text-sm truncate transition-colors ${
-                                                            isActive ? "text-[#3C0078]" : "text-gray-900 group-hover:text-[#3C0078]"
+                                                            isActive ? "text-brand" : "text-gray-900 group-hover:text-brand"
                                                         }`}>{student.name}</div>
                                                         {!selectedStudent && (
                                                             <div className="text-xs text-gray-400 mt-0.5 truncate">{student.email}</div>
@@ -400,7 +400,7 @@ export function CourseAttendanceView({ activeCourseId, subject }) {
                                             </td>
                                             {!selectedStudent && (
                                                 <td className="px-4 py-3">
-                                                    <span className={`px-2.5 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${
+                                                    <span className={`px-2.5 py-1 rounded-full text-[9px] font-black uppercase tracking-wider ${
                                                         rate > 85 ? "bg-green-100 text-green-700" :
                                                         rate > 75 ? "bg-blue-50 text-blue-700" :
                                                         rate > 65 ? "bg-orange-50 text-orange-700" : "bg-red-50 text-red-700"
@@ -432,7 +432,7 @@ export function CourseAttendanceView({ activeCourseId, subject }) {
                             {/* Header */}
                             <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 shrink-0">
                                 <div className="flex items-center gap-3 min-w-0">
-                                    <div className="w-9 h-9 rounded-full bg-[#3C0078]/8 border-2 border-[#3C0078]/15 flex items-center justify-center font-black text-sm text-[#3C0078] shrink-0">
+                                    <div className="w-9 h-9 rounded-full bg-brand/8 border-2 border-brand/15 flex items-center justify-center font-black text-sm text-brand shrink-0">
                                         {selectedStudent.avatar}
                                     </div>
                                     <div className="min-w-0">
@@ -472,7 +472,7 @@ export function CourseAttendanceView({ activeCourseId, subject }) {
                                             </div>
                                             <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
                                                 <div
-                                                    className="h-full rounded-full transition-all duration-500"
+                                                    className="h-full rounded-full transition-[width] duration-500"
                                                     style={{
                                                         width: `${rate}%`,
                                                         background: rate >= 80 ? "#22c55e" : rate >= 65 ? "#f97316" : "#ef4444"
@@ -487,7 +487,7 @@ export function CourseAttendanceView({ activeCourseId, subject }) {
 
                             {/* Session list — scrollable */}
                             <div className="flex-1 overflow-y-auto px-5 py-4">
-                                <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3">Session History</p>
+                                <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-3">Session History</p>
                                 {studentRecords.length === 0 ? (
                                     <div className="flex flex-col items-center justify-center py-10 text-center">
                                         <Calendar size={28} className="text-gray-200 mb-2" />

@@ -41,37 +41,37 @@ export function EditUserModal({ user, label = "User", onSave, onCancel }) {
 
         <div className="grid grid-cols-2 gap-3">
           <div className="flex flex-col gap-1.5">
-            <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest">First Name</label>
+            <label className="text-[10px] font-black text-gray-400 uppercase tracking-wider">First Name</label>
             <input
               type="text"
               placeholder="First name"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               autoFocus
-              className="text-sm border border-gray-200 rounded-xl px-4 py-3 outline-none focus:border-[#3C0078] focus:ring-2 focus:ring-[#3C0078]/10 transition-all"
+              className="text-sm border border-gray-200 rounded-xl px-4 py-3 outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition"
             />
           </div>
           <div className="flex flex-col gap-1.5">
-            <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Last Name</label>
+            <label className="text-[10px] font-black text-gray-400 uppercase tracking-wider">Last Name</label>
             <input
               type="text"
               placeholder="Last name"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
-              className="text-sm border border-gray-200 rounded-xl px-4 py-3 outline-none focus:border-[#3C0078] focus:ring-2 focus:ring-[#3C0078]/10 transition-all"
+              className="text-sm border border-gray-200 rounded-xl px-4 py-3 outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition"
             />
           </div>
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Email Address</label>
+          <label className="text-[10px] font-black text-gray-400 uppercase tracking-wider">Email Address</label>
           <input
             type="email"
             placeholder="email@university.ac"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSave()}
-            className="text-sm border border-gray-200 rounded-xl px-4 py-3 outline-none focus:border-[#3C0078] focus:ring-2 focus:ring-[#3C0078]/10 transition-all"
+            className="text-sm border border-gray-200 rounded-xl px-4 py-3 outline-none focus:border-brand focus:ring-2 focus:ring-brand/10 transition"
           />
         </div>
 
@@ -85,7 +85,7 @@ export function EditUserModal({ user, label = "User", onSave, onCancel }) {
           <button
             onClick={handleSave}
             disabled={!canSave}
-            className="flex-[2] px-4 py-3 text-sm font-bold text-white bg-[#3C0078] rounded-2xl hover:bg-[#2a0055] transition-colors disabled:opacity-40"
+            className="flex-[2] px-4 py-3 text-sm font-bold text-white bg-brand rounded-2xl hover:bg-brand-deep transition-colors disabled:opacity-40"
           >
             Save Changes
           </button>

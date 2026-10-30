@@ -20,9 +20,9 @@ export function CourseColumn({
         <h2 className="text-2xl font-bold font-['Gabarito']">Courses</h2>
         <button
           onClick={onAddCourse}
-          className={`w-9 h-9 rounded-full border flex items-center justify-center transition-all ${
+          className={`w-9 h-9 rounded-full border flex items-center justify-center transition ${
             isAddingCourse
-              ? "border-[#3C0078] bg-[#3C0078]/10 text-[#3C0078]"
+              ? "border-brand bg-brand/10 text-brand"
               : "border-gray-200 hover:bg-gray-100 text-gray-600"
           }`}
           aria-label="Add course"
@@ -57,16 +57,16 @@ export function CourseColumn({
                 </div>
                 {hasWarning && (
                   <div className="relative group/tooltip shrink-0">
-                    <div className={`w-6 h-6 rounded-full flex items-center justify-center cursor-help transition-all ${
+                    <div className={`w-6 h-6 rounded-full flex items-center justify-center cursor-help transition ${
                       isSelected
-                        ? "bg-yellow-400 text-[#3C0078]"
+                        ? "bg-yellow-400 text-brand"
                         : "bg-amber-50 border border-amber-200 text-amber-600 hover:bg-amber-100"
                     }`}>
                       <AlertTriangle size={12} className="stroke-[2.5]" />
                     </div>
                     
                     {/* Tooltip Content */}
-                    <div className="absolute right-full top-1/2 -translate-y-1/2 mr-2 hidden group-hover/tooltip:block z-50 bg-gray-900 text-white text-[10px] font-bold px-3 py-2 rounded-xl shadow-xl whitespace-nowrap pointer-events-none transition-all">
+                    <div className="absolute right-full top-1/2 -translate-y-1/2 mr-2 hidden group-hover/tooltip:block z-50 bg-gray-900 text-white text-[10px] font-bold px-3 py-2 rounded-xl shadow-xl whitespace-nowrap pointer-events-none transition">
                       {warningMessage}
                       {/* Arrow */}
                       <div className="absolute left-full top-1/2 -translate-y-1/2 border-4 border-transparent border-l-gray-900" />

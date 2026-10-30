@@ -35,14 +35,14 @@ export default function TeacherPerspectiveModal({ course, onClose }) {
         {/* Header Bar */}
         <div className="px-8 py-3 bg-gray-50 border-b border-gray-100 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-xl bg-[#3C0078] text-white flex items-center justify-center font-black">
+            <div className="w-10 h-10 rounded-xl bg-brand text-white flex items-center justify-center font-black">
               {course.subject?.code?.[0] || "T"}
             </div>
             <div>
               <h3 className="text-sm font-black text-gray-900 uppercase tracking-tight">
-                Teacher Perspective: <span className="text-[#3C0078]">{course.subject?.name}</span>
+                Teacher Perspective: <span className="text-brand">{course.subject?.name}</span>
               </h3>
-              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">
                 Viewing Live Page Experience • {previewUrl}
               </p>
             </div>
@@ -52,7 +52,7 @@ export default function TeacherPerspectiveModal({ course, onClose }) {
             {/* Close button */}
             <button 
               onClick={onClose} 
-              className="p-2.5 bg-white border border-gray-100 rounded-xl text-gray-400 hover:text-red-500 hover:border-red-100 transition-all shadow-sm flex items-center gap-2"
+              className="p-2.5 bg-white border border-gray-100 rounded-xl text-gray-400 hover:text-red-500 hover:border-red-100 transition shadow-sm flex items-center gap-2"
               title="Close Preview"
             >
               <span className="text-[10px] font-black uppercase tracking-wider">Exit Preview</span>
@@ -73,7 +73,7 @@ export default function TeacherPerspectiveModal({ course, onClose }) {
           
           {/* Floating UI Indicator */}
           <div className="absolute bottom-6 right-6 pointer-events-none z-[100]">
-            <div className="px-4 py-2 rounded-full bg-[#3C0078] text-white text-[10px] font-black uppercase tracking-[0.2em] shadow-lg shadow-[#3C0078]/20 border border-white/10">
+            <div className="px-4 py-2 rounded-full bg-brand text-white text-[10px] font-black uppercase tracking-wider shadow-lg shadow-brand/20 border border-white/10">
               Live URL Preview
             </div>
           </div>

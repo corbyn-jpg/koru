@@ -65,16 +65,23 @@ export default function Login({ role = "student" }) {
   // After credentials or 2FA are validated, check if this is the user's
   // first login. If so, offer 2FA setup before entering the app.
   function afterAuth(userData) {
+    // Save the session straight away: the 2FA setup offer below calls the API and needs the token
+    saveSession(userData);
     const alreadyPrompted = localStorage.getItem(`twoFactorPrompted_${userData.userId}`);
     if (!alreadyPrompted && !userData.twoFactorEnabled) {
       setPendingUserData(userData);
       setStep("firstLoginPrompt");
     } else {
-      finalizeLogin(userData);
+      navigate("/dashboard");
     }
   }
 
   function finalizeLogin(userData) {
+    saveSession(userData);
+    navigate("/dashboard");
+  }
+
+  function saveSession(userData) {
     login({
       userId: userData.userId,
       email: userData.email,
@@ -83,8 +90,8 @@ export default function Login({ role = "student" }) {
       role: userData.role,
       profileImageUrl: userData.profileImageUrl,
       twoFactorEnabled: userData.twoFactorEnabled ?? false,
+      token: userData.token,
     });
-    navigate("/dashboard");
   }
 
   async function handleSubmit(event) {
@@ -288,11 +295,6 @@ export default function Login({ role = "student" }) {
                   <span>{loading ? "Signing in..." : "Let's Learn"}</span>
                 </button>
 
-                <div className="my-2 flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-slate-400">
-                  <span className="h-px flex-1 bg-slate-200" />
-                  <span>or</span>
-                  <span className="h-px flex-1 bg-slate-200" />
-                </div>
 
                 <GoogleAuthButton
                   text="signin_with"
@@ -325,7 +327,7 @@ export default function Login({ role = "student" }) {
                   onChange={handleTwoFactorCodeInput}
                   placeholder="000000"
                   autoFocus
-                  className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 py-4 text-center text-2xl font-mono tracking-[0.6em] text-gray-900 focus:border-[#3C0078]/40 focus:ring-4 focus:ring-[#3C0078]/10 outline-none transition-all"
+                  className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 py-4 text-center text-2xl font-mono tracking-[0.6em] text-gray-900 focus:border-brand/40 focus:ring-4 focus:ring-brand/10 outline-none transition"
                 />
 
                 {error ? (
@@ -380,7 +382,7 @@ export default function Login({ role = "student" }) {
                   <button
                     type="button"
                     onClick={() => setShowSetupModal(true)}
-                    className="flex items-center justify-center gap-2 rounded-2xl bg-[#3C0078] hover:bg-[#2A0054] px-4 py-3 font-semibold text-white transition shadow-md shadow-[#3C0078]/15"
+                    className="flex items-center justify-center gap-2 rounded-2xl bg-brand hover:bg-brand-deep px-4 py-3 font-semibold text-white transition shadow-md shadow-brand/15"
                   >
                     <ShieldCheck size={18} />
                     Enable 2FA Now

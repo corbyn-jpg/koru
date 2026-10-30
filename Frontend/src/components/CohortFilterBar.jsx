@@ -9,14 +9,14 @@ export default function CohortFilterBar({ cohorts = [], selected, onChange }) {
 
   return (
     <div className="flex items-center gap-2 flex-wrap">
-      <span className="text-[10px] font-black uppercase tracking-widest text-gray-400 flex items-center gap-1 shrink-0">
+      <span className="text-[10px] font-black uppercase tracking-wider text-gray-400 flex items-center gap-1 shrink-0">
         <Users size={12} /> Group
       </span>
       <button
         onClick={() => onChange(null)}
-        className={`px-3 py-1.5 rounded-full text-[11px] font-bold transition-all ${
+        className={`px-3 py-1.5 rounded-full text-[11px] font-bold transition ${
           selected === null
-            ? "bg-[#3C0078] text-white shadow-sm shadow-[#3C0078]/20"
+            ? "bg-brand text-white shadow-sm shadow-brand/20"
             : "bg-gray-100 text-gray-500 hover:bg-gray-200"
         }`}
       >
@@ -26,9 +26,9 @@ export default function CohortFilterBar({ cohorts = [], selected, onChange }) {
         <button
           key={c.id}
           onClick={() => onChange(c.id)}
-          className={`px-3 py-1.5 rounded-full text-[11px] font-bold transition-all ${
+          className={`px-3 py-1.5 rounded-full text-[11px] font-bold transition ${
             selected === c.id
-              ? "bg-[#3C0078] text-white shadow-sm shadow-[#3C0078]/20"
+              ? "bg-brand text-white shadow-sm shadow-brand/20"
               : "bg-gray-100 text-gray-500 hover:bg-gray-200"
           }`}
         >

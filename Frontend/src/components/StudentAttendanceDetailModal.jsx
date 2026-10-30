@@ -90,7 +90,7 @@ export default function StudentAttendanceDetailModal({
                 {/* Header */}
                 <div className="px-8 pt-8 pb-6 border-b border-gray-100 flex items-start justify-between bg-gray-50/50">
                     <div className="flex items-center gap-4">
-                        <div className="w-14 h-14 rounded-full bg-[#3C0078]/10 border-2 border-[#3C0078]/25 flex items-center justify-center font-black text-lg text-[#3C0078] shadow-sm select-none">
+                        <div className="w-14 h-14 rounded-full bg-brand/10 border-2 border-brand/25 flex items-center justify-center font-black text-lg text-brand shadow-sm select-none">
                             {student.avatar}
                         </div>
                         <div>
@@ -100,7 +100,7 @@ export default function StudentAttendanceDetailModal({
                     </div>
                     <button
                         onClick={onClose}
-                        className="w-10 h-10 rounded-full bg-gray-100 hover:bg-red-50 hover:text-red-500 flex items-center justify-center transition-all text-gray-500"
+                        className="w-10 h-10 rounded-full bg-gray-100 hover:bg-red-50 hover:text-red-500 flex items-center justify-center transition-[width] text-gray-500"
                         aria-label="Close modal"
                     >
                         <X size={20} />
@@ -156,7 +156,7 @@ export default function StudentAttendanceDetailModal({
                                 return (
                                     <div
                                         key={record.id}
-                                        className="flex items-center justify-between p-4 rounded-2xl border border-gray-100 bg-white hover:border-[#3C0078]/10 hover:shadow-sm transition-all duration-200"
+                                        className="flex items-center justify-between p-4 rounded-2xl border border-gray-100 bg-white hover:border-brand/10 hover:shadow-sm transition duration-200"
                                     >
                                         {/* Date and Session Type */}
                                         <div className="flex-1 min-w-0 pr-4">
@@ -189,7 +189,7 @@ export default function StudentAttendanceDetailModal({
                                                             key={opt.label}
                                                             disabled={isUpdating}
                                                             onClick={() => handleStatusChange(record.id, opt.label)}
-                                                            className={`px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider border transition-all duration-200 ${
+                                                            className={`px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider border transition duration-200 ${
                                                                 isActive
                                                                     ? `${opt.colorClass} shadow-xs`
                                                                     : "border-transparent text-gray-400 hover:text-gray-600 hover:bg-gray-200/50"

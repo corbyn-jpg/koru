@@ -70,7 +70,7 @@ export default function EventModal({ mode, event, onSave, onDelete, onClose }) {
           transition={{ duration: 0.2 }}
         >
           {/* Accent bar */}
-          <div className="h-1.5 w-full bg-gradient-to-r from-[#3C0078] to-[#7B2FBE]" />
+          <div className="h-1.5 w-full bg-gradient-to-r from-brand to-[#7B2FBE]" />
 
           {/* Header */}
           <div className="flex items-center justify-between px-6 pt-5 pb-2">
@@ -96,7 +96,7 @@ export default function EventModal({ mode, event, onSave, onDelete, onClose }) {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 required
-                className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3C0078]/30 focus:border-[#3C0078]"
+                className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
                 placeholder="e.g. DV300 – Theory"
               />
             </div>
@@ -108,7 +108,7 @@ export default function EventModal({ mode, event, onSave, onDelete, onClose }) {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 rows={2}
-                className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3C0078]/30 focus:border-[#3C0078] resize-none"
+                className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand resize-none"
                 placeholder="Optional details…"
               />
             </div>
@@ -119,7 +119,7 @@ export default function EventModal({ mode, event, onSave, onDelete, onClose }) {
               <select
                 value={eventType}
                 onChange={(e) => setEventType(e.target.value)}
-                className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3C0078]/30 focus:border-[#3C0078] bg-white"
+                className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand bg-white"
               >
                 <option value="">Select type…</option>
                 <option value="Lecture">Lecture</option>
@@ -141,7 +141,7 @@ export default function EventModal({ mode, event, onSave, onDelete, onClose }) {
                   value={start}
                   onChange={(e) => setStart(e.target.value)}
                   required
-                  className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3C0078]/30 focus:border-[#3C0078]"
+                  className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
                 />
               </div>
               <div>
@@ -151,7 +151,7 @@ export default function EventModal({ mode, event, onSave, onDelete, onClose }) {
                   value={end}
                   onChange={(e) => setEnd(e.target.value)}
                   required
-                  className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3C0078]/30 focus:border-[#3C0078]"
+                  className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
                 />
               </div>
             </div>
@@ -173,7 +173,7 @@ export default function EventModal({ mode, event, onSave, onDelete, onClose }) {
                   type="text"
                   value={courseId}
                   onChange={(e) => setCourseId(e.target.value)}
-                  className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3C0078]/30 focus:border-[#3C0078]"
+                  className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand"
                   placeholder="e.g. course-123"
                 />
               </div>
@@ -198,7 +198,7 @@ export default function EventModal({ mode, event, onSave, onDelete, onClose }) {
               {/* Save / Create button */}
               <button
                 type="submit"
-                className="px-5 py-2 rounded-lg text-sm font-medium text-white bg-[#3C0078] hover:bg-[#2d005a] transition-colors border-none"
+                className="px-5 py-2 rounded-lg text-sm font-medium text-white bg-brand hover:bg-[#2d005a] transition-colors border-none"
               >
                 {mode === "create" ? "Create Event" : "Save Changes"}
               </button>

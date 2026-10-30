@@ -37,8 +37,8 @@ export function AddTodoModal({ lecturer, onSave, onClose }) {
       >
         <div className="flex items-center justify-between mb-5">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-[#3C0078]/10 flex items-center justify-center">
-              <ListTodo size={18} className="text-[#3C0078]" />
+            <div className="w-10 h-10 rounded-2xl bg-brand/10 flex items-center justify-center">
+              <ListTodo size={18} className="text-brand" />
             </div>
             <div>
               <h3 className="text-base font-black text-gray-900 font-['Gabarito']">Add To Do</h3>
@@ -55,36 +55,36 @@ export function AddTodoModal({ lecturer, onSave, onClose }) {
 
         <div className="space-y-3">
           <div>
-            <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 block mb-1.5">Task Title</label>
+            <label className="text-[10px] font-black uppercase tracking-wider text-gray-400 block mb-1.5">Task Title</label>
             <input
               type="text"
               placeholder="e.g. Grade submissions for Week 5"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               autoFocus
-              className="w-full text-sm border border-gray-200 rounded-xl px-4 py-2.5 outline-none focus:border-[#3C0078] transition-colors"
+              className="w-full text-sm border border-gray-200 rounded-xl px-4 py-2.5 outline-none focus:border-brand transition-colors"
             />
           </div>
 
           <div>
-            <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 block mb-1.5">Due Date</label>
+            <label className="text-[10px] font-black uppercase tracking-wider text-gray-400 block mb-1.5">Due Date</label>
             <input
               type="date"
               value={dueDate}
               onChange={(e) => setDueDate(e.target.value)}
-              className="w-full text-sm border border-gray-200 rounded-xl px-4 py-2.5 outline-none focus:border-[#3C0078] transition-colors"
+              className="w-full text-sm border border-gray-200 rounded-xl px-4 py-2.5 outline-none focus:border-brand transition-colors"
             />
           </div>
 
           <div>
-            <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 block mb-1.5">Course Code <span className="normal-case font-medium text-gray-300">(optional)</span></label>
+            <label className="text-[10px] font-black uppercase tracking-wider text-gray-400 block mb-1.5">Course Code <span className="normal-case font-medium text-gray-300">(optional)</span></label>
             <input
               type="text"
               placeholder="e.g. IXD300"
               value={courseCode}
               onChange={(e) => setCourseCode(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSave()}
-              className="w-full text-sm border border-gray-200 rounded-xl px-4 py-2.5 outline-none focus:border-[#3C0078] transition-colors"
+              className="w-full text-sm border border-gray-200 rounded-xl px-4 py-2.5 outline-none focus:border-brand transition-colors"
             />
           </div>
         </div>
@@ -99,7 +99,7 @@ export function AddTodoModal({ lecturer, onSave, onClose }) {
           <button
             onClick={handleSave}
             disabled={!canSave || saving}
-            className="px-5 py-2 text-xs font-bold text-white bg-[#3C0078] rounded-xl hover:bg-[#2a0055] transition-colors disabled:opacity-40"
+            className="px-5 py-2 text-xs font-bold text-white bg-brand rounded-xl hover:bg-brand-deep transition-colors disabled:opacity-40"
           >
             {saving ? "Adding…" : "Add To Do"}
           </button>

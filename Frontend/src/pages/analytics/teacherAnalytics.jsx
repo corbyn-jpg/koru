@@ -4,6 +4,7 @@ import { CheckCircle, Award, FileText } from "lucide-react";
 
 import { useAuth } from "../../contexts/AuthContext";
 import { getTeacherCourses } from "../../services/courseService";
+import { getCourseStudentCount } from "../../services/enrollmentService";
 import { getCourseAssignments } from "../../services/assignmentService";
 import { getCourseSubmissions } from "../../services/submissionService";
 import { getCourseGrades } from "../../services/gradeService";
@@ -23,11 +24,11 @@ const fadeUp = {
 function FilterSelect({ label, value, options, onChange }) {
   return (
     <label className="flex items-center gap-2">
-      <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">{label}</span>
+      <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">{label}</span>
       <select
         value={value}
         onChange={e => onChange(e.target.value)}
-        className="rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-semibold text-gray-700 outline-none focus:border-[#3C0078] focus:ring-2 focus:ring-[#3C0078]/20 transition-all cursor-pointer"
+        className="rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-semibold text-gray-700 outline-none focus:border-brand focus:ring-2 focus:ring-brand/20 transition cursor-pointer"
       >
         {options.map(o => <option key={o} value={o}>{o}</option>)}
       </select>
@@ -46,7 +47,7 @@ function ProgressRing({ percent, size = 56, stroke = 5, color = "#3C0078" }) {
       <circle
         cx={size / 2} cy={size / 2} r={r} fill="none" stroke={color} strokeWidth={stroke}
         strokeDasharray={circ} strokeDashoffset={offset} strokeLinecap="round"
-        className="transition-all duration-700"
+        className="transition duration-700"
       />
     </svg>
   );
@@ -73,7 +74,11 @@ export default function TeacherAnalytics() {
       if (!user?.userId) return;
       try {
         const data = await getTeacherCourses(user.userId);
-        const mapped = (data || []).map(c => ({
+        // Course rows don't carry their enrolments, so ask for each course's head count
+        const counts = await Promise.all(
+          (data || []).map(c => getCourseStudentCount(c.id).catch(() => 0))
+        );
+        const mapped = (data || []).map((c, i) => ({
           id: c.id,
           code: c.subject?.code || c.code || "???",
           name: c.subject?.name || c.name || "Course",
@@ -81,7 +86,7 @@ export default function TeacherAnalytics() {
           yearLevel: c.yearLevel || "3rd Year",
           semester: c.term || c.semester || "Semester 1",
           year: String(c.year || c.academicYear || new Date().getFullYear()),
-          enrolled: c.enrollments?.length || 0,
+          enrolled: Number(counts[i]) || 0,
           color: "#3C0078",
         }));
         if (mounted) setTeacherCourses(mapped);
@@ -272,11 +277,11 @@ export default function TeacherAnalytics() {
               onChange={v => { setSelectedYearLevel(v); setSelectedCourseId("all"); }}
             />
             <div className="ml-auto flex items-center gap-3 pl-6 border-l border-gray-100">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Course</span>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Course</span>
               <select
                 value={selectedCourseId}
                 onChange={e => setSelectedCourseId(e.target.value)}
-                className="rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-semibold text-gray-700 outline-none focus:border-[#3C0078] focus:ring-2 focus:ring-[#3C0078]/20 transition cursor-pointer"
+                className="rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-semibold text-gray-700 outline-none focus:border-brand focus:ring-2 focus:ring-brand/20 transition cursor-pointer"
               >
                 <option value="all">All Courses</option>
                 {filteredCourses.map(c => (
@@ -300,7 +305,7 @@ export default function TeacherAnalytics() {
             { label: "Pending to Grade", value: pendingGrading, sub: "submissions" },
           ].map((kpi, i) => (
             <div key={i} className={`flex flex-col gap-1 flex-1 ${i === 0 ? "pr-6" : "px-6"}`}>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400">{kpi.label}</p>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">{kpi.label}</p>
               <p className="text-2xl font-black leading-none text-gray-900">{kpi.value}</p>
               <p className="text-xs text-gray-400 truncate mt-0.5">{kpi.sub}</p>
             </div>
@@ -315,7 +320,7 @@ export default function TeacherAnalytics() {
 
             {/* Course Averages */}
             <motion.div variants={fadeUp}>
-              <h2 className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3">Course Averages</h2>
+              <h2 className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-3">Course Averages</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 {filteredCourses.map(course => {
                   const avg = gradedAssignments.filter(a => a.courseId === course.id);
@@ -325,7 +330,7 @@ export default function TeacherAnalytics() {
                     <div
                       key={course.id}
                       onClick={() => setSelectedCourseId(isSelected ? "all" : course.id)}
-                      className={`bg-white rounded-2xl border shadow-sm p-5 cursor-pointer transition-all ${isSelected ? "border-[#3C0078]" : "border-gray-100 hover:border-gray-200"}`}
+                      className={`bg-white rounded-2xl border shadow-sm p-5 cursor-pointer transition ${isSelected ? "border-brand" : "border-gray-100 hover:border-gray-200"}`}
                     >
                       <div className="flex items-center gap-3 mb-3">
                         <div className="relative shrink-0">
@@ -353,19 +358,19 @@ export default function TeacherAnalytics() {
             <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
               <div className="px-6 py-5 border-b border-gray-50 flex justify-between items-center">
                 <h2 className="text-base font-bold text-gray-900">Grading Progress</h2>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
                   {filteredAssignments.length} assignments
                 </span>
               </div>
               <table className="w-full text-left">
                 <thead>
                   <tr className="bg-gray-50/50">
-                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400">Assignment</th>
-                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400">Course</th>
-                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400 text-center">Graded</th>
-                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400 text-center">Avg Score</th>
-                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400">Due Date</th>
-                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400">Status</th>
+                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-wider text-gray-400">Assignment</th>
+                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-wider text-gray-400">Course</th>
+                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-wider text-gray-400 text-center">Graded</th>
+                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-wider text-gray-400 text-center">Avg Score</th>
+                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-wider text-gray-400">Due Date</th>
+                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-wider text-gray-400">Status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -386,7 +391,7 @@ export default function TeacherAnalytics() {
                             <span className="text-sm font-bold text-gray-900">{a.graded}/{a.totalSubmissions}</span>
                             <div className="w-12 h-1 bg-gray-100 rounded-full overflow-hidden">
                               <div
-                                className={`h-full rounded-full transition-all ${done ? "bg-green-500" : pct > 50 ? "bg-amber-400" : "bg-red-400"}`}
+                                className={`h-full rounded-full transition-[width] ${done ? "bg-green-500" : pct > 50 ? "bg-amber-400" : "bg-red-400"}`}
                                 style={{ width: `${pct}%` }}
                               />
                             </div>
@@ -401,7 +406,7 @@ export default function TeacherAnalytics() {
                           {new Date(a.dueDate).toLocaleDateString("en-ZA", { month: "short", day: "numeric" })}
                         </td>
                         <td className="px-6 py-4">
-                          <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${
+                          <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
                             done ? "bg-green-50 text-green-600" :
                             noGrades ? "bg-gray-100 text-gray-400" :
                             "bg-amber-50 text-amber-600"
@@ -420,17 +425,17 @@ export default function TeacherAnalytics() {
             <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
               <div className="px-6 py-5 border-b border-gray-50 flex justify-between items-center">
                 <h2 className="text-base font-bold text-gray-900">Student Performance</h2>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
                   {studentRoster.length} students
                 </span>
               </div>
               <table className="w-full text-left">
                 <thead>
                   <tr className="bg-gray-50/50">
-                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400">Student</th>
-                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400 text-center">Avg Grade</th>
-                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400 text-center">Submitted</th>
-                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400">Status</th>
+                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-wider text-gray-400">Student</th>
+                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-wider text-gray-400 text-center">Avg Grade</th>
+                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-wider text-gray-400 text-center">Submitted</th>
+                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-wider text-gray-400">Status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -462,7 +467,7 @@ export default function TeacherAnalytics() {
                         {s.submissions}/{s.totalAssignments}
                       </td>
                       <td className="px-6 py-4">
-                        <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${
+                        <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
                           s.status === "Excellent" ? "bg-green-50 text-green-600" :
                           s.status === "Good" ? "bg-blue-50 text-blue-600" :
                           s.status === "At Risk" ? "bg-amber-50 text-amber-600" :
@@ -482,7 +487,7 @@ export default function TeacherAnalytics() {
 
             {/* Class Summary */}
             <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3">Class Summary</p>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-3">Class Summary</p>
               <div className="flex items-baseline gap-2 mb-1">
                 <span className="text-3xl font-black text-gray-900">{classAvg}%</span>
                 <span className="text-sm text-gray-400">class average</span>
@@ -498,7 +503,7 @@ export default function TeacherAnalytics() {
 
             {/* Grade Distribution — real SA bands */}
             <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-              <h3 className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-4">Grade Distribution</h3>
+              <h3 className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-4">Grade Distribution</h3>
               <div className="space-y-2.5">
                 {gradeDistribution.map(b => {
                   const maxCount = Math.max(...gradeDistribution.map(d => d.count), 1);
@@ -510,7 +515,7 @@ export default function TeacherAnalytics() {
                           initial={{ width: 0 }}
                           animate={{ width: `${(b.count / maxCount) * 100}%` }}
                           transition={{ duration: 0.7, ease: "easeOut" }}
-                          className="h-full rounded-md bg-[#3C0078]/20"
+                          className="h-full rounded-md bg-brand/20"
                         />
                       </div>
                       <span className="text-xs font-bold text-gray-700 w-5 text-right">{b.count}</span>
@@ -522,7 +527,7 @@ export default function TeacherAnalytics() {
 
             {/* Grading Queue */}
             <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-              <h3 className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-4">Grading Queue</h3>
+              <h3 className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-4">Grading Queue</h3>
               <div className="space-y-2">
                 {filteredAssignments.filter(a => a.graded < a.totalSubmissions).map(a => {
                   const remaining = a.totalSubmissions - a.graded;
@@ -552,7 +557,7 @@ export default function TeacherAnalytics() {
 
             {/* At-Risk Students */}
             <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-              <h3 className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-4">At-Risk Students</h3>
+              <h3 className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-4">At-Risk Students</h3>
               <div className="space-y-2">
                 {studentRoster
                   .filter(s => s.status === "At Risk" || s.status === "Critical")

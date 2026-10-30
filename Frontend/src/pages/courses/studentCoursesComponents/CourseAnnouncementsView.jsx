@@ -65,7 +65,7 @@ export default function CourseAnnouncementsView({ activeCourseId }) {
                 {announcements.some(a => !a.isRead) && (
                     <button
                         onClick={handleMarkAllRead}
-                        className="px-6 py-2.5 rounded-2xl bg-[#3C0078]/5 text-[#3C0078] font-bold text-xs uppercase tracking-widest hover:bg-[#3C0078] hover:text-white transition-all self-start sm:self-auto"
+                        className="px-6 py-2.5 rounded-2xl bg-brand/5 text-brand font-bold text-xs uppercase tracking-wider hover:bg-brand hover:text-white transition self-start sm:self-auto"
                     >
                         Mark All as Read
                     </button>
@@ -78,7 +78,7 @@ export default function CourseAnnouncementsView({ activeCourseId }) {
                 <div 
                     className={`${
                         selectedId ? "hidden lg:flex" : "flex"
-                    } flex-col gap-4 overflow-y-auto pr-2 transition-all duration-300 ${
+                    } flex-col gap-4 overflow-y-auto pr-2 transition duration-300 ${
                         selectedId ? "w-full lg:w-[45%] lg:shrink-0" : "w-full"
                     }`}
                 >
@@ -107,9 +107,9 @@ export default function CourseAnnouncementsView({ activeCourseId }) {
                             key={post.id}
                             onClick={() => handleSelectAnnouncement(post)}
                             variants={slideUp}
-                            className={`p-5 rounded-2xl border transition-all cursor-pointer relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-4 group shrink-0 ${
+                            className={`p-5 rounded-2xl border transition cursor-pointer relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-4 group shrink-0 ${
                                 selectedId === post.id 
-                                    ? "bg-[#3C0078]/5 border-[#3C0078]/30 shadow-md" 
+                                    ? "bg-brand/5 border-brand/30 shadow-md" 
                                     : "bg-white border-gray-100 shadow-sm hover:shadow-md"
                             }`}
                         >
@@ -130,20 +130,20 @@ export default function CourseAnnouncementsView({ activeCourseId }) {
                                 {/* Title, author, preview */}
                                 <div className="flex-1 min-w-0">
                                     <div className="flex items-center gap-2 mb-1 flex-wrap">
-                                        <h2 className={`text-lg leading-snug group-hover:text-[#3C0078] transition-colors ${!post.isRead ? "font-extrabold text-black" : "font-bold text-gray-800"}`}>
+                                        <h2 className={`text-lg leading-snug group-hover:text-brand transition-colors ${!post.isRead ? "font-extrabold text-black" : "font-bold text-gray-800"}`}>
                                             {post.title}
                                         </h2>
                                         {!post.isRead && (
                                             <span className="flex h-2.5 w-2.5 shrink-0 relative">
-                                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 bg-[#3C0078]"></span>
-                                                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#3C0078]"></span>
+                                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 bg-brand"></span>
+                                                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand"></span>
                                             </span>
                                         )}
                                     </div>
                                     <p className="text-gray-500 text-sm leading-relaxed line-clamp-1">
                                         {post.preview}
                                     </p>
-                                    <p className="text-[10px] font-black uppercase tracking-widest text-[#3C0078] mt-1.5 opacity-70">
+                                    <p className="text-[10px] font-black uppercase tracking-wider text-brand mt-1.5 opacity-70">
                                         Posted by {post.lecturerName || post.lecturer?.name || post.lecturer || "Lecturer"}
                                     </p>
                                 </div>
@@ -192,12 +192,12 @@ export default function CourseAnnouncementsView({ activeCourseId }) {
                             </h2>
 
                             <div className="flex items-center gap-3 mb-6 pb-6 border-b border-gray-100">
-                                <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-[#3C0078]">
+                                <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-brand">
                                     <User size={20} />
                                 </div>
                                 <div>
-                                    <p className="text-xs font-black uppercase tracking-widest text-gray-400">Published By</p>
-                                    <p className="font-bold text-[#3C0078]">{selectedAnnouncement.lecturerName || selectedAnnouncement.lecturer?.name || selectedAnnouncement.lecturer || "Lecturer"}</p>
+                                    <p className="text-xs font-black uppercase tracking-wider text-gray-400">Published By</p>
+                                    <p className="font-bold text-brand">{selectedAnnouncement.lecturerName || selectedAnnouncement.lecturer?.name || selectedAnnouncement.lecturer || "Lecturer"}</p>
                                 </div>
                             </div>
 

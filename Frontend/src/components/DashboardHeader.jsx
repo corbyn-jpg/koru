@@ -37,7 +37,7 @@ export default function DashboardHeader({
           <div className="min-w-0">
             <h1 className="text-3xl font-bold font-['Gabarito'] text-slate-900 leading-tight">
               {greeting}{firstName ? `, ${firstName}` : ""}
-              <span className="text-[#3C0078]">.</span>
+              <span className="text-brand">.</span>
             </h1>
 
             {contextLine && (

@@ -74,7 +74,7 @@ export default function HeaderTopBar({ children }) {
   }, [path, pathParts, role, visibleCourses]);
 
   return (
-    <div className="h-14 border-b border-gray-100 bg-white/60 backdrop-blur-md flex items-center justify-between px-8 z-10 shrink-0 select-none">
+    <div className="h-14 border-b border-gray-100 bg-white/80 flex items-center justify-between px-8 z-10 shrink-0 select-none">
       <div className="flex items-center gap-3">
         {navInfo.showBadge && (
           <span

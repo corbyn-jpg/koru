@@ -259,7 +259,7 @@ export default function StudentCalendar({ onDeleteClassEvent } = {}) {
             id="cal-add-task-btn"
             aria-label="Add Task"
             onClick={() => setTaskModal({ open: true, editEvent: null, defaultDate: "" })}
-            className="flex items-center gap-2 bg-white rounded-full px-5 py-2.5 text-sm font-semibold text-gray-700 shadow-sm border-none cursor-pointer transition-all duration-150 hover:shadow-lg hover:-translate-y-px font-[inherit]"
+            className="flex items-center gap-2 bg-white rounded-full px-5 py-2.5 text-sm font-semibold text-gray-700 shadow-sm border-none cursor-pointer transition duration-150 hover:shadow-lg hover:-translate-y-px font-[inherit]"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="12" r="10" />
@@ -286,7 +286,7 @@ export default function StudentCalendar({ onDeleteClassEvent } = {}) {
               {/* Day-of-week header */}
               <div className="grid grid-cols-7 border-b border-gray-200">
                 {WEEK_DAYS.map((label, i) => (
-                  <div key={i} className="text-center text-[11px] font-semibold uppercase tracking-widest text-gray-400 py-2.5">
+                  <div key={i} className="text-center text-[11px] font-semibold uppercase tracking-wider text-gray-400 py-2.5">
                     {label}
                   </div>
                 ))}

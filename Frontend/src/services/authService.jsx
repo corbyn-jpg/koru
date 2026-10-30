@@ -108,3 +108,15 @@ export async function validate2FA(userId, code) {
   return handleResponse(res);
 }
 
+
+// GET /api/User/{id}/export – everything Koru stores about this user, as one JSON file (POPIA access request)
+export async function downloadMyData(userId) {
+  const res = await fetch(`${API_BASE}/User/${encodeURIComponent(userId)}/export`);
+  const data = await handleResponse(res);
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = `koru-my-data-${new Date().toISOString().slice(0, 10)}.json`;
+  link.click();
+  URL.revokeObjectURL(link.href);
+}

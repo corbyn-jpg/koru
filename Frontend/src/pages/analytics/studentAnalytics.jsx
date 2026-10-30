@@ -54,7 +54,7 @@ function ProgressRing({ percent, size = 56, stroke = 5, color = "#3C0078" }) {
       <circle
         cx={size / 2} cy={size / 2} r={r} fill="none" stroke={color} strokeWidth={stroke}
         strokeDasharray={circ} strokeDashoffset={offset} strokeLinecap="round"
-        className="transition-all duration-700"
+        className="transition duration-700"
       />
     </svg>
   );
@@ -261,7 +261,7 @@ export default function StudentAnalytics() {
             { label: "Pending Review", value: submissionsSummary.pending, sub: "awaiting grades" },
           ].map((kpi, i) => (
             <div key={i} className={`flex flex-col gap-1 flex-1 ${i === 0 ? "pr-6" : "px-6"}`}>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400">{kpi.label}</p>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">{kpi.label}</p>
               <p className="text-2xl font-black leading-none text-gray-900">{kpi.value}</p>
               <p className="text-xs text-gray-400 truncate mt-0.5">{kpi.sub}</p>
             </div>
@@ -288,7 +288,7 @@ export default function StudentAnalytics() {
               </div>
               <div className="mt-2">
                 <MiniSparkline data={monthlyTrendData.data} color="#3C0078" height={100} />
-                <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest text-gray-300 mt-2 px-1">
+                <div className="flex justify-between text-[10px] font-bold uppercase tracking-wider text-gray-300 mt-2 px-1">
                   {monthlyTrendData.labels.map((m, i) => <span key={i}>{m}</span>)}
                 </div>
               </div>
@@ -296,7 +296,7 @@ export default function StudentAnalytics() {
 
             {/* ─── Course Performance ─── */}
             <motion.div variants={fadeUp}>
-              <h2 className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3">Course Performance</h2>
+              <h2 className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-3">Course Performance</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {coursePerformance.map(course => {
                   const pct = course.average;
@@ -330,18 +330,18 @@ export default function StudentAnalytics() {
             <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
               <div className="px-6 py-5 border-b border-gray-50 flex justify-between items-center">
                 <h2 className="text-base font-bold text-gray-900">Recent Grades</h2>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
                   Last {recentGrades.length} assignments
                 </span>
               </div>
               <table className="w-full text-left">
                 <thead>
                   <tr className="bg-gray-50/50">
-                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400">Assignment</th>
-                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400">Course</th>
-                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400 text-center">Score</th>
-                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400 text-center">Date</th>
-                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400">Status</th>
+                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-wider text-gray-400">Assignment</th>
+                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-wider text-gray-400">Course</th>
+                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-wider text-gray-400 text-center">Score</th>
+                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-wider text-gray-400 text-center">Date</th>
+                    <th className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-wider text-gray-400">Status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -372,7 +372,7 @@ export default function StudentAnalytics() {
                             : "—"}
                         </td>
                         <td className="px-6 py-4">
-                          <span className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-green-50 text-green-600">
+                          <span className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-green-50 text-green-600">
                             {g.status}
                           </span>
                         </td>
@@ -390,7 +390,7 @@ export default function StudentAnalytics() {
 
             {/* Top Course */}
             <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3">Top Course</p>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-3">Top Course</p>
               <div className="flex items-baseline gap-2 mb-1">
                 <span className="text-3xl font-black text-gray-900">{highestCourse.average}%</span>
                 <span className="text-sm text-gray-400 font-medium">{highestCourse.label}</span>
@@ -404,7 +404,7 @@ export default function StudentAnalytics() {
 
             {/* Submission Breakdown */}
             <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-              <h3 className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-4">Submission Breakdown</h3>
+              <h3 className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-4">Submission Breakdown</h3>
               <div className="space-y-3">
                 {[
                   { label: "Graded", value: submissionsSummary.graded, total: submissionsSummary.total, color: "bg-green-500" },
@@ -418,7 +418,7 @@ export default function StudentAnalytics() {
                     </div>
                     <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
                       <div
-                        className={`h-full rounded-full ${item.color} transition-all duration-700`}
+                        className={`h-full rounded-full ${item.color} transition-[width] duration-700`}
                         style={{ width: `${item.total > 0 ? (item.value / item.total) * 100 : 0}%` }}
                       />
                     </div>
@@ -429,7 +429,7 @@ export default function StudentAnalytics() {
 
             {/* Upcoming Deadlines */}
             <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-              <h3 className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-4">Upcoming Deadlines</h3>
+              <h3 className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-4">Upcoming Deadlines</h3>
               <div className="space-y-2">
                 {upcomingAssignments.length === 0 ? (
                   <p className="text-sm text-gray-400 text-center py-4">No upcoming deadlines</p>
@@ -467,7 +467,7 @@ export default function StudentAnalytics() {
 
             {/* Recent Feedback */}
             <motion.div variants={fadeUp} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-              <h3 className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-4">Recent Feedback</h3>
+              <h3 className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-4">Recent Feedback</h3>
               <div className="space-y-2">
                 {feedback.length === 0 ? (
                   <p className="text-sm text-gray-400 text-center py-4">No feedback yet</p>

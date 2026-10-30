@@ -135,10 +135,10 @@ export default function AssistantInput({ onSend, disabled = false, role = "teach
   return (
     <div className="w-full max-w-3xl mx-auto">
       <div
-        className={`relative w-full bg-white/85 backdrop-blur-xl border shadow-lg rounded-2xl p-3 flex flex-col transition-all duration-200 ${
+        className={`relative w-full bg-white/85 backdrop-blur-xl border shadow-lg rounded-2xl p-3 flex flex-col transition duration-200 ${
           disabled
             ? "opacity-70 border-gray-200/40"
-            : "border-white/70 focus-within:shadow-[#3C0078]/10 focus-within:ring-2 focus-within:ring-[#3C0078]/15"
+            : "border-white/70 focus-within:shadow-brand/10 focus-within:ring-2 focus-within:ring-brand/15"
         }`}
       >
         {/* Textarea */}
@@ -186,7 +186,7 @@ export default function AssistantInput({ onSend, disabled = false, role = "teach
                 onClick={() => setIsToolsOpen((o) => !o)}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl transition-colors text-sm font-semibold disabled:opacity-40 cursor-pointer ${
                   isToolsOpen
-                    ? "bg-[#3C0078]/8 text-[#3C0078]"
+                    ? "bg-brand/8 text-brand"
                     : "hover:bg-gray-100 text-gray-500 hover:text-gray-700"
                 }`}
               >
@@ -255,7 +255,7 @@ export default function AssistantInput({ onSend, disabled = false, role = "teach
                   transition={{ duration: 0.15 }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-9 h-9 rounded-xl bg-[#3C0078] flex items-center justify-center shadow-md shadow-[#3C0078]/20 text-white cursor-pointer"
+                  className="w-9 h-9 rounded-xl bg-brand flex items-center justify-center shadow-md shadow-brand/20 text-white cursor-pointer"
                   aria-label="Send message"
                 >
                   <Send className="w-4 h-4 ml-0.5" />

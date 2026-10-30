@@ -1,3 +1,4 @@
+import { notify } from "../../../components/UI/feedback";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Save, X, User, BookOpen, Users, GraduationCap, Plus } from "lucide-react";
@@ -85,7 +86,7 @@ export function AdminCourseOverviewView({ course, onSaved }) {
       setDirty(false);
       onSaved?.();
     } catch (err) {
-      alert("Failed to save: " + err.message);
+      notify("Failed to save: " + err.message);
     } finally {
       setSaving(false);
     }
@@ -120,7 +121,7 @@ export function AdminCourseOverviewView({ course, onSaved }) {
       <motion.header variants={slideUp} className="mb-7 flex items-start justify-between gap-4">
         <div className="min-w-0">
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
               {course.subject?.code || course.code}
             </span>
             <span className="text-[10px] text-gray-300">·</span>
@@ -146,9 +147,9 @@ export function AdminCourseOverviewView({ course, onSaved }) {
           <button
             onClick={handleSave}
             disabled={!dirty || saving}
-            className={`px-5 py-2 rounded-xl text-sm font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
+            className={`px-5 py-2 rounded-xl text-sm font-bold flex items-center gap-1.5 transition cursor-pointer ${
               dirty
-                ? "bg-[#3C0078] text-white hover:bg-[#2a0055] shadow-sm shadow-[#3C0078]/20"
+                ? "bg-brand text-white hover:bg-brand-deep shadow-sm shadow-brand/20"
                 : "bg-gray-100 text-gray-400 cursor-not-allowed"
             }`}
           >
@@ -165,11 +166,11 @@ export function AdminCourseOverviewView({ course, onSaved }) {
           { label: "Capacity", value: form.capacity, icon: BookOpen },
         ].map(({ label, value, icon: Icon }) => (
           <div key={label} className="px-6 py-5 flex items-center gap-4">
-            <div className="w-9 h-9 rounded-2xl bg-[#3C0078]/6 flex items-center justify-center shrink-0">
-              <Icon className="w-4 h-4 text-[#3C0078]" />
+            <div className="w-9 h-9 rounded-2xl bg-brand/6 flex items-center justify-center shrink-0">
+              <Icon className="w-4 h-4 text-brand" />
             </div>
             <div>
-              <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-0.5">{label}</p>
+              <p className="text-[10px] font-black uppercase tracking-wider text-gray-400 mb-0.5">{label}</p>
               <p className="text-2xl font-bold text-gray-900 tabular-nums leading-none">{value}</p>
             </div>
           </div>
@@ -185,8 +186,8 @@ export function AdminCourseOverviewView({ course, onSaved }) {
           </div>
           <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
             <div
-              className={`h-full rounded-full transition-all duration-500 ${
-                enrollFill >= 90 ? "bg-red-400" : enrollFill >= 70 ? "bg-amber-400" : "bg-[#3C0078]"
+              className={`h-full rounded-full transition-[width] duration-500 ${
+                enrollFill >= 90 ? "bg-red-400" : enrollFill >= 70 ? "bg-amber-400" : "bg-brand"
               }`}
               style={{ width: `${enrollFill}%` }}
             />
@@ -198,13 +199,13 @@ export function AdminCourseOverviewView({ course, onSaved }) {
         {/* Left: Course Settings */}
         <motion.div variants={scaleIn} className="bg-white border border-gray-100 rounded-3xl overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-100">
-            <h3 className="text-[10px] font-black uppercase tracking-widest text-gray-400">Course Settings</h3>
+            <h3 className="text-[10px] font-black uppercase tracking-wider text-gray-400">Course Settings</h3>
           </div>
           <div className="px-6 py-5 space-y-4">
 
             {/* Lecturer rows */}
             <div>
-              <label className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-2">
+              <label className="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">
                 Lecturers
               </label>
               <div className="flex flex-col gap-2">
@@ -222,7 +223,7 @@ export function AdminCourseOverviewView({ course, onSaved }) {
                         <select
                           value={tid}
                           onChange={e => setLecturerId(idx, e.target.value)}
-                          className="w-full pl-4 pr-9 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-semibold text-gray-900 outline-none focus:ring-2 focus:ring-[#3C0078]/10 focus:border-[#3C0078]/30 appearance-none cursor-pointer transition-all"
+                          className="w-full pl-4 pr-9 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-semibold text-gray-900 outline-none focus:ring-2 focus:ring-brand/10 focus:border-brand/30 appearance-none cursor-pointer transition"
                         >
                           <option value="">No lecturer assigned</option>
                           {teachers.map(t => (
@@ -250,7 +251,7 @@ export function AdminCourseOverviewView({ course, onSaved }) {
 
                 <button
                   onClick={addLecturerRow}
-                  className="flex items-center gap-1.5 text-xs font-semibold text-[#3C0078]/70 hover:text-[#3C0078] transition-colors pt-0.5 w-fit cursor-pointer"
+                  className="flex items-center gap-1.5 text-xs font-semibold text-brand/70 hover:text-brand transition-colors pt-0.5 w-fit cursor-pointer"
                 >
                   <Plus size={13} />
                   Add another lecturer
@@ -261,25 +262,25 @@ export function AdminCourseOverviewView({ course, onSaved }) {
             {/* Year + Capacity */}
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-2">Year</label>
+                <label className="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Year</label>
                 <input
                   type="number"
                   min={2020}
                   max={2035}
                   value={form.year}
                   onChange={e => update("year", e.target.value)}
-                  className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-semibold text-gray-900 outline-none focus:ring-2 focus:ring-[#3C0078]/10 focus:border-[#3C0078]/30 transition-all"
+                  className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-semibold text-gray-900 outline-none focus:ring-2 focus:ring-brand/10 focus:border-brand/30 transition"
                 />
               </div>
               <div>
-                <label className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-2">Capacity</label>
+                <label className="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-2">Capacity</label>
                 <input
                   type="number"
                   min={1}
                   max={500}
                   value={form.capacity}
                   onChange={e => update("capacity", e.target.value)}
-                  className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-semibold text-gray-900 outline-none focus:ring-2 focus:ring-[#3C0078]/10 focus:border-[#3C0078]/30 transition-all"
+                  className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-semibold text-gray-900 outline-none focus:ring-2 focus:ring-brand/10 focus:border-brand/30 transition"
                 />
               </div>
             </div>
@@ -296,7 +297,7 @@ export function AdminCourseOverviewView({ course, onSaved }) {
                 onClick={() => update("isVisible", !form.isVisible)}
                 aria-pressed={form.isVisible}
                 className={`w-11 h-6 rounded-full transition-colors flex items-center px-0.5 shrink-0 cursor-pointer ${
-                  form.isVisible ? "bg-[#3C0078]" : "bg-gray-200"
+                  form.isVisible ? "bg-brand" : "bg-gray-200"
                 }`}
               >
                 <span className={`w-5 h-5 bg-white rounded-full shadow-sm transition-transform ${form.isVisible ? "translate-x-5" : "translate-x-0"}`} />
@@ -310,13 +311,13 @@ export function AdminCourseOverviewView({ course, onSaved }) {
           {/* Lecturers card */}
           <div className="bg-white border border-gray-100 rounded-3xl overflow-hidden">
             <div className="px-6 py-4 border-b border-gray-100">
-              <h3 className="text-[10px] font-black uppercase tracking-widest text-gray-400">Lecturers</h3>
+              <h3 className="text-[10px] font-black uppercase tracking-wider text-gray-400">Lecturers</h3>
             </div>
             <div className="px-6 py-5 flex flex-col gap-2">
               {courseLecturers.length > 0 ? (
                 courseLecturers.map(t => (
-                  <div key={t.id} className="flex items-center gap-3.5 p-3 rounded-2xl bg-[#3C0078]/4 border border-[#3C0078]/8">
-                    <div className="w-10 h-10 rounded-xl bg-[#3C0078] text-white flex items-center justify-center font-bold text-sm shrink-0 select-none">
+                  <div key={t.id} className="flex items-center gap-3.5 p-3 rounded-2xl bg-brand/4 border border-brand/8">
+                    <div className="w-10 h-10 rounded-xl bg-brand text-white flex items-center justify-center font-bold text-sm shrink-0 select-none">
                       {initials(t)}
                     </div>
                     <div className="flex-1 min-w-0">
@@ -339,12 +340,12 @@ export function AdminCourseOverviewView({ course, onSaved }) {
           {/* Subject info */}
           <div className="bg-white border border-gray-100 rounded-3xl overflow-hidden">
             <div className="px-6 py-4 border-b border-gray-100">
-              <h3 className="text-[10px] font-black uppercase tracking-widest text-gray-400">Subject</h3>
+              <h3 className="text-[10px] font-black uppercase tracking-wider text-gray-400">Subject</h3>
             </div>
             <div className="px-6 py-5 space-y-3.5">
               <div className="flex items-center justify-between gap-4">
                 <span className="text-xs font-semibold text-gray-400">Code</span>
-                <span className="text-xs font-black text-[#3C0078] px-2.5 py-1 rounded-lg bg-[#3C0078]/6">
+                <span className="text-xs font-black text-brand px-2.5 py-1 rounded-lg bg-brand/6">
                   {course.subject?.code || course.code || "—"}
                 </span>
               </div>

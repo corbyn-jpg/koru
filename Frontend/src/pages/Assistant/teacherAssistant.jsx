@@ -59,7 +59,7 @@ const ROLE_CONFIG = {
   teacher: {
     label: "Teacher",
     Icon: BookOpen,
-    badge: "bg-purple-50 text-[#3C0078] border border-purple-100",
+    badge: "bg-purple-50 text-brand border border-purple-100",
     subtitle: "Where should we start?",
     chips: [
       { label: "Analyse class performance", message: "Analyse my class performance and highlight any areas of concern." },
@@ -122,7 +122,7 @@ function renderMessageContent(content) {
         const code = s.split(/`([^`]+)`/g);
         return code.map((c, k) =>
           k % 2 === 1 ? (
-            <code key={k} className="px-1.5 py-0.5 rounded-md bg-purple-50 text-[#3C0078] text-[0.8em] font-mono border border-purple-100">
+            <code key={k} className="px-1.5 py-0.5 rounded-md bg-purple-50 text-brand text-[0.8em] font-mono border border-purple-100">
               {c}
             </code>
           ) : c
@@ -332,10 +332,10 @@ export default function TeacherAssistant() {
   // ── Render ────────────────────────────────────────────────────────────────
 
   return (
-    <div className="flex flex-col overflow-hidden transition-all duration-300 md:h-[calc(100vh-32px)] md:w-full md:bg-white/55 md:backdrop-blur-xl md:border md:border-white/20 md:rounded-[28px] md:shadow-lg max-md:h-screen max-md:w-screen max-md:-ml-4 max-md:-mr-4 max-md:-mt-4 max-md:bg-transparent text-slate-900">
+    <div className="flex flex-col overflow-hidden transition duration-300 md:h-[calc(100vh-32px)] md:w-full md:bg-white/55 md:border md:border-white/20 md:rounded-[28px] md:shadow-lg max-md:h-screen max-md:w-screen max-md:-ml-4 max-md:-mr-4 max-md:-mt-4 max-md:bg-transparent text-slate-900">
 
       {/* ── Top header bar ─────────────────────────────────────────────────── */}
-      <div className="flex items-center justify-between pr-4 border-b border-gray-100/60 bg-white/30 backdrop-blur-md shrink-0">
+      <div className="flex items-center justify-between pr-4 border-b border-gray-100/60 bg-white/30 shrink-0">
         <div className="flex items-center gap-1 flex-1">
           <button
             onClick={() => setSidebarOpen((o) => !o)}
@@ -356,7 +356,7 @@ export default function TeacherAssistant() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.85 }}
               onClick={handleClearActive}
-              className="flex items-center gap-1.5 px-3 py-1.5 mr-1 rounded-full bg-white/50 hover:bg-red-50 border border-gray-200/50 text-gray-400 hover:text-red-500 text-xs font-medium transition-all cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 mr-1 rounded-full bg-white/50 hover:bg-red-50 border border-gray-200/50 text-gray-400 hover:text-red-500 text-xs font-medium transition cursor-pointer"
             >
               <Trash2 className="w-3.5 h-3.5" />
               Clear chat
@@ -383,7 +383,7 @@ export default function TeacherAssistant() {
               <div className="p-3 pb-2">
                 <button
                   onClick={handleNewChat}
-                  className="w-full flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-[#3C0078]/5 hover:bg-[#3C0078]/10 border border-[#3C0078]/10 text-[#3C0078] text-sm font-semibold transition-colors cursor-pointer"
+                  className="w-full flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-brand/5 hover:bg-brand/10 border border-brand/10 text-brand text-sm font-semibold transition-colors cursor-pointer"
                 >
                   <Plus className="w-4 h-4 shrink-0" />
                   New conversation
@@ -403,15 +403,15 @@ export default function TeacherAssistant() {
                       key={chat.id}
                       layout
                       onClick={() => handleSelectChat(chat.id)}
-                      className={`group w-full text-left px-3 py-2.5 rounded-xl flex items-start gap-2.5 transition-all cursor-pointer ${
+                      className={`group w-full text-left px-3 py-2.5 rounded-xl flex items-start gap-2.5 transition cursor-pointer ${
                         chat.id === activeChatId
-                          ? "bg-[#3C0078]/8 text-gray-900"
+                          ? "bg-brand/8 text-gray-900"
                           : "hover:bg-gray-50 text-gray-500"
                       }`}
                     >
                       <MessageSquare
                         className={`w-4 h-4 shrink-0 mt-0.5 transition-colors ${
-                          chat.id === activeChatId ? "text-[#3C0078]" : "text-gray-300 group-hover:text-gray-400"
+                          chat.id === activeChatId ? "text-brand" : "text-gray-300 group-hover:text-gray-400"
                         }`}
                       />
                       <div className="flex-1 min-w-0">
@@ -424,7 +424,7 @@ export default function TeacherAssistant() {
                       </div>
                       <button
                         onClick={(e) => handleDeleteChat(e, chat.id)}
-                        className="opacity-0 group-hover:opacity-100 p-1 rounded-md hover:bg-red-50 hover:text-red-500 text-gray-300 transition-all shrink-0 cursor-pointer"
+                        className="opacity-0 group-hover:opacity-100 p-1 rounded-md hover:bg-red-50 hover:text-red-500 text-gray-300 transition shrink-0 cursor-pointer"
                         aria-label="Delete conversation"
                       >
                         <Trash2 className="w-3 h-3" />
@@ -467,7 +467,7 @@ export default function TeacherAssistant() {
                   transition={{ duration: 0.35 }}
                   className="flex flex-col items-center text-center max-w-lg w-full"
                 >
-                  <h2 className="text-4xl font-bold font-['Gabarito'] text-[#3C0078] mb-1">
+                  <h2 className="text-4xl font-bold font-['Gabarito'] text-brand mb-1">
                     Hi {firstName || "there"},
                   </h2>
                   <h3 className="text-3xl font-bold font-['Gabarito'] text-slate-700 mb-10">
@@ -482,7 +482,7 @@ export default function TeacherAssistant() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 + i * 0.055, duration: 0.25 }}
                         onClick={() => handleSend(chip.message)}
-                        className="px-4 py-3 rounded-xl bg-white/70 hover:bg-white/95 border border-white/60 shadow-sm backdrop-blur-sm text-sm font-medium text-slate-700 hover:text-slate-900 text-left transition-all cursor-pointer leading-snug"
+                        className="px-4 py-3 rounded-xl bg-white/70 hover:bg-white/95 border border-white/60 shadow-sm backdrop-blur-sm text-sm font-medium text-slate-700 hover:text-slate-900 text-left transition cursor-pointer leading-snug"
                       >
                         {chip.label}
                       </motion.button>
@@ -528,7 +528,7 @@ export default function TeacherAssistant() {
                           className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 mb-1 text-xs font-bold ${
                             isUser
                               ? "bg-gray-200 text-gray-600"
-                              : "bg-[#3C0078]/10 text-[#3C0078]"
+                              : "bg-brand/10 text-brand"
                           }`}
                         >
                           {isUser
@@ -558,7 +558,7 @@ export default function TeacherAssistant() {
                           {!isUser && (
                             <button
                               onClick={() => handleCopy(msg.content, idx)}
-                              className="absolute -bottom-2.5 left-2 p-1.5 rounded-lg bg-white border border-gray-100 shadow-sm text-gray-400 hover:text-[#3C0078] opacity-0 group-hover:opacity-100 transition-all cursor-pointer"
+                              className="absolute -bottom-2.5 left-2 p-1.5 rounded-lg bg-white border border-gray-100 shadow-sm text-gray-400 hover:text-brand opacity-0 group-hover:opacity-100 transition cursor-pointer"
                               aria-label="Copy response"
                             >
                               {copiedIndex === idx
@@ -578,15 +578,15 @@ export default function TeacherAssistant() {
                       animate={{ opacity: 1, y: 0 }}
                       className="flex items-end gap-2.5"
                     >
-                      <div className="w-7 h-7 rounded-full bg-[#3C0078]/10 flex items-center justify-center shrink-0 mb-1">
-                        <Bot className="w-3.5 h-3.5 text-[#3C0078]" />
+                      <div className="w-7 h-7 rounded-full bg-brand/10 flex items-center justify-center shrink-0 mb-1">
+                        <Bot className="w-3.5 h-3.5 text-brand" />
                       </div>
                       <div className="px-4 py-3.5 rounded-2xl rounded-bl-sm bg-white/60 backdrop-blur-sm border border-white/50 shadow-sm">
                         <div className="flex items-center gap-1.5">
                           {[0, 0.15, 0.3].map((delay, i) => (
                             <motion.div
                               key={i}
-                              className="w-2 h-2 rounded-full bg-[#3C0078]/40"
+                              className="w-2 h-2 rounded-full bg-brand/40"
                               animate={{ y: [0, -5, 0] }}
                               transition={{ repeat: Infinity, duration: 0.9, delay }}
                             />

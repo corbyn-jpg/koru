@@ -97,7 +97,7 @@ export default function CourseNotesView({ activeCourseId }) {
                         {notes.map(note => (
                             <div
                                 key={note.id}
-                                className={`group w-full text-left p-4 rounded-2xl transition-colors flex items-start justify-between gap-2 cursor-pointer ${activeNote?.id === note.id ? 'bg-[#3C0078] text-white' : 'bg-gray-50 hover:bg-gray-100 text-gray-800'}`}
+                                className={`group w-full text-left p-4 rounded-2xl transition-colors flex items-start justify-between gap-2 cursor-pointer ${activeNote?.id === note.id ? 'bg-brand text-white' : 'bg-gray-50 hover:bg-gray-100 text-gray-800'}`}
                                 onClick={() => setActiveNote(note)}
                             >
                                 <div className="min-w-0">
@@ -117,7 +117,7 @@ export default function CourseNotesView({ activeCourseId }) {
                                             console.error("Failed to delete note:", err);
                                         }
                                     }}
-                                    className={`shrink-0 p-1 rounded-lg transition-all ${activeNote?.id === note.id ? 'text-white/60 hover:text-white hover:bg-white/10' : 'text-transparent group-hover:text-gray-400 hover:!text-red-500 hover:!bg-red-50'}`}
+                                    className={`shrink-0 p-1 rounded-lg transition ${activeNote?.id === note.id ? 'text-white/60 hover:text-white hover:bg-white/10' : 'text-transparent group-hover:text-gray-400 hover:!text-red-500 hover:!bg-red-50'}`}
                                     title="Delete note"
                                 >
                                     <Trash2 size={14} />

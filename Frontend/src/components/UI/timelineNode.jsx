@@ -16,7 +16,7 @@ export default function TimelineNode({ isActive = false, isPast = false, isFirst
 
       {/* Centre dot – active = large purple, past = grey filled, future = outlined */}
       <div
-        className={`rounded-full shrink-0 transition-all duration-300 ${
+        className={`rounded-full shrink-0 transition duration-300 ${
           isActive
             ? "w-4 h-4 bg-purple-500 shadow-[0_0_0_4px_rgba(60,0,120,0.12)]"
             : isPast

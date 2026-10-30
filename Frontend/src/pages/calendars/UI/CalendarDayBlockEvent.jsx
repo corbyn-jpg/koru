@@ -139,7 +139,7 @@ export default function CalendarDayBlockEvent({
             tooltipPosition === "down"
               ? "-translate-y-1.5 group-hover:translate-y-0"
               : "translate-y-1.5 group-hover:translate-y-0",
-            "transition-all duration-200 ease-out",
+            "transition duration-200 ease-out",
           ].join(" ")}
         >
           {/* ── Title row with icon ── */}
@@ -189,7 +189,7 @@ export default function CalendarDayBlockEvent({
       {/* ── Event pill ─────────────────────────────────────── */}
       <div
         className={[
-          "flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-medium transition-all duration-150 shadow-xs hover:-translate-y-px hover:shadow-md",
+          "flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-medium transition duration-150 shadow-xs hover:-translate-y-px hover:shadow-md",
           isUserTask
             ? "bg-amber-50 text-gray-800 hover:bg-amber-100"
             : type === "scheduled"

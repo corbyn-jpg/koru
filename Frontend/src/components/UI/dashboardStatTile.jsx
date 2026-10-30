@@ -1,16 +1,16 @@
 import { motion } from "framer-motion";
 
 const ICON_COLORS = {
-  purple:  "text-[#3C0078]/60",
-  orange:  "text-[#FF8731]/70",
+  purple:  "text-brand/60",
+  orange:  "text-ember/70",
   sky:     "text-sky-400",
   emerald: "text-emerald-500",
   slate:   "text-slate-400",
 };
 
 const HINT_COLORS = {
-  purple:  "text-[#3C0078]/70",
-  orange:  "text-[#FF8731]/80",
+  purple:  "text-brand/70",
+  orange:  "text-ember/80",
   sky:     "text-sky-500",
   emerald: "text-emerald-600",
   slate:   "text-slate-500",

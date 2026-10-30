@@ -1,3 +1,4 @@
+import { notify } from "../../../components/UI/feedback";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -9,10 +10,13 @@ import {
     ExternalLink,
     Loader
 } from "lucide-react";
-import { getCourseModules } from "../../../services/moduleService";
+import { getCourseModules, openModuleItemUrl } from "../../../services/moduleService";
 
 export default function CourseModulesView({ activeCourseId }) {
   const navigate = useNavigate();
+  const openItem = (item) => {
+    if (!openModuleItemUrl(item)) notify("This item has no link or file attached yet.");
+  };
   const [modules, setModules] = useState([]);
   const [modulesLoading, setModulesLoading] = useState(false);
 
@@ -58,7 +62,7 @@ export default function CourseModulesView({ activeCourseId }) {
       <div className="flex items-center justify-end gap-3 shrink-0">
         <button
           onClick={toggleAll}
-          className="flex items-center justify-center px-4 py-2 text-xs font-bold border border-gray-200 bg-white hover:bg-gray-50 text-gray-700 rounded-xl transition-all cursor-pointer shadow-xs"
+          className="flex items-center justify-center px-4 py-2 text-xs font-bold border border-gray-200 bg-white hover:bg-gray-50 text-gray-700 rounded-xl transition cursor-pointer shadow-xs"
         >
           {areAllCollapsed ? "Expand all" : "Collapse all"}
         </button>
@@ -140,7 +144,7 @@ export default function CourseModulesView({ activeCourseId }) {
                         {item.type === "link" ? (
                           <a 
                             href="#"
-                            onClick={(e) => { e.preventDefault(); alert(`Opening link: ${item.label}`); }}
+                            onClick={(e) => { e.preventDefault(); openItem(item); }}
                             className="text-xs font-bold !text-blue-600 hover:underline flex items-center gap-1.5 min-w-0"
                           >
                             <span className="truncate">{item.label}</span>
@@ -148,7 +152,7 @@ export default function CourseModulesView({ activeCourseId }) {
                           </a>
                         ) : item.type === "document" ? (
                           <span 
-                            className="text-xs font-bold text-gray-700 hover:text-[#3C0078] hover:underline truncate cursor-pointer"
+                            className="text-xs font-bold text-gray-700 hover:text-brand hover:underline truncate cursor-pointer"
                             onClick={() => navigate(`/courses/${activeCourseId}/items/${item.id}${window.location.search}`)}
                           >
                             {item.label}
@@ -156,7 +160,7 @@ export default function CourseModulesView({ activeCourseId }) {
                         ) : (
                           <span 
                             className="text-xs font-bold text-gray-700 truncate cursor-pointer hover:text-gray-900"
-                            onClick={() => alert(`Downloading attachment: ${item.label}`)}
+                            onClick={() => openItem(item)}
                           >
                             {item.label}
                           </span>

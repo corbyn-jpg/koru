@@ -337,7 +337,7 @@ export default function WeeklyHorizontalTimeline({ onModalToggle }) {
         <div className="flex items-center gap-4 bg-slate-100/80 border border-slate-200 p-1.5 rounded-2xl">
           <button
             onClick={handlePrevWeek}
-            className="w-8 h-8 rounded-xl flex items-center justify-center text-slate-500 hover:bg-white hover:text-purple-700 active:scale-95 transition-all shadow-sm cursor-pointer"
+            className="w-8 h-8 rounded-xl flex items-center justify-center text-slate-500 hover:bg-white hover:text-purple-700 active:scale-95 transition shadow-sm cursor-pointer"
             title="Previous Week"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -349,7 +349,7 @@ export default function WeeklyHorizontalTimeline({ onModalToggle }) {
 
           <button
             onClick={handleNextWeek}
-            className="w-8 h-8 rounded-xl flex items-center justify-center text-slate-500 hover:bg-white hover:text-purple-700 active:scale-95 transition-all shadow-sm cursor-pointer"
+            className="w-8 h-8 rounded-xl flex items-center justify-center text-slate-500 hover:bg-white hover:text-purple-700 active:scale-95 transition shadow-sm cursor-pointer"
             title="Next Week"
           >
             <ChevronRight className="w-5 h-5" />
@@ -360,7 +360,7 @@ export default function WeeklyHorizontalTimeline({ onModalToggle }) {
         {/* <div className="flex items-center gap-3">
           <button
             onClick={handleResetToToday}
-            className="text-xs font-bold px-3 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white shadow-md shadow-purple-500/20 active:scale-95 transition-all cursor-pointer font-['Gabarito']"
+            className="text-xs font-bold px-3 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white shadow-md shadow-purple-500/20 active:scale-95 transition cursor-pointer font-['Gabarito']"
           >
             Go to Today
           </button>
@@ -405,7 +405,7 @@ export default function WeeklyHorizontalTimeline({ onModalToggle }) {
                       exit={{ opacity: 0, scale: 0.9 }}
                       key={assignment.id}
                       onClick={() => setSelectedAssignment(assignment)}
-                      className={`w-full max-w-[135px] h-10 truncate text-[0.8rem] font-bold py-1 px-1.5 rounded-lg cursor-pointer transition-all flex items-center gap-1 text-left shrink-0 ${isPastEvent(assignment.dueDate) ? 'bg-gray-100 text-gray-400 hover:bg-gray-150' : 'bg-purple-50 text-purple-700 hover:bg-purple-100'
+                      className={`w-full max-w-[135px] h-10 truncate text-[0.8rem] font-bold py-1 px-1.5 rounded-lg cursor-pointer transition flex items-center gap-1 text-left shrink-0 ${isPastEvent(assignment.dueDate) ? 'bg-gray-100 text-gray-400 hover:bg-gray-150' : 'bg-purple-50 text-purple-700 hover:bg-purple-100'
                         }`}
                       title={`${assignment.course?.subject?.code || 'UX300'}: ${assignment.title}`}
                     >
@@ -422,7 +422,7 @@ export default function WeeklyHorizontalTimeline({ onModalToggle }) {
                       exit={{ opacity: 0, scale: 0.9 }}
                       key={todo.id}
                       onClick={(e) => handleToggleTodo(todo.id, e)}
-                      className={`group/todo w-full max-w-[135px] truncate text-[10px] py-1 px-1.5 rounded-lg border flex items-center justify-between cursor-pointer transition-all shadow-sm text-left shrink-0 ${isPastEvent(todo.date) ? (
+                      className={`group/todo w-full max-w-[135px] truncate text-[10px] py-1 px-1.5 rounded-lg border flex items-center justify-between cursor-pointer transition shadow-sm text-left shrink-0 ${isPastEvent(todo.date) ? (
                         todo.completed
                           ? 'bg-gray-50 border-gray-200 text-gray-400 line-through'
                           : 'bg-gray-100 border-gray-300 text-gray-500 hover:bg-gray-150 font-medium'
@@ -454,7 +454,7 @@ export default function WeeklyHorizontalTimeline({ onModalToggle }) {
                 {/* PLUS BUTTON TRIGGER FOR CREATION MODAL */}
                 <button
                   onClick={() => openCreateModal(dayDate)}
-                  className="w-5 h-5 rounded-full bg-slate-100 hover:bg-purple-100 hover:text-purple-600 text-slate-400 flex items-center justify-center shrink-0 border border-slate-200/50 hover:border-purple-200 shadow-sm transition-all active:scale-95 cursor-pointer mt-1 opacity-0 group-hover:opacity-100 focus:opacity-100 focus-within:opacity-100"
+                  className="w-5 h-5 rounded-full bg-slate-100 hover:bg-purple-100 hover:text-purple-600 text-slate-400 flex items-center justify-center shrink-0 border border-slate-200/50 hover:border-purple-200 shadow-sm transition active:scale-95 cursor-pointer mt-1 opacity-0 group-hover:opacity-100 focus:opacity-100 focus-within:opacity-100"
                   title="Create custom event"
                 >
                   <Plus className="w-3.5 h-3.5" />
@@ -462,13 +462,13 @@ export default function WeeklyHorizontalTimeline({ onModalToggle }) {
               </div>
 
               {/* CONNECTIVE TOP DOTTED LINE */}
-              <div className={`w-[2px] h-4 border-l-2 transition-all opacity-0 group-hover:opacity-100 ${dayA.length > 0 || dayT.length > 0 ? 'border-gray-300' : 'border-gray-200'
+              <div className={`w-[2px] h-4 border-l-2 transition opacity-0 group-hover:opacity-100 ${dayA.length > 0 || dayT.length > 0 ? 'border-gray-300' : 'border-gray-200'
                 }`} />
 
               {/* ── TIMELINE AXIS DOT ── */}
               <div
                 onClick={() => openCreateModal(dayDate)}
-                className={`w-9 h-9 rounded-full flex flex-col items-center justify-center transition-all duration-300 hover:scale-110 cursor-pointer shadow-md z-10 font-['Gabarito'] ${dayToday
+                className={`w-9 h-9 rounded-full flex flex-col items-center justify-center transition duration-300 hover:scale-110 cursor-pointer shadow-md z-10 font-['Gabarito'] ${dayToday
                   ? 'bg-purple-600 border-purple-600 text-white ring-4 ring-purple-100 shadow-purple-500/20 scale-105'
                   : hasItems
                     ? 'bg-white border-purple-400 text-slate-800'
@@ -481,7 +481,7 @@ export default function WeeklyHorizontalTimeline({ onModalToggle }) {
               </div>
 
               {/* CONNECTIVE BOTTOM DOTTED LINE */}
-              <div className={`w-[2px] h-4 border-l-2 transition-all opacity-0 group-hover:opacity-100 ${dayC.length > 0 ? 'border-gray-300' : 'border-gray-200'
+              <div className={`w-[2px] h-4 border-l-2 transition opacity-0 group-hover:opacity-100 ${dayC.length > 0 ? 'border-gray-300' : 'border-gray-200'
                 }`} />
 
               {/* BOTTOM AREA: Classes & Meetings */}
@@ -504,7 +504,7 @@ export default function WeeklyHorizontalTimeline({ onModalToggle }) {
                         exit={{ opacity: 0, scale: 0.9 }}
                         key={cls.id}
                         onClick={() => setSelectedClass(cls)}
-                        className={`group/meeting w-full max-w-[135px] text-left text-[0.8rem] p-1.5 rounded-lg cursor-pointer transition-all flex flex-col gap-0.5 leading-tight shrink-0 relative ${isPast ? 'bg-gray-100 border border-gray-200 hover:bg-gray-150' : (cls.isCustom ? 'bg-white border-dashed border-orange-200 hover:bg-orange-100' : 'bg-purple-50 border border-purple-200 hover:bg-purple-200/80')
+                        className={`group/meeting w-full max-w-[135px] text-left text-[0.8rem] p-1.5 rounded-lg cursor-pointer transition flex flex-col gap-0.5 leading-tight shrink-0 relative ${isPast ? 'bg-gray-100 border border-gray-200 hover:bg-gray-150' : (cls.isCustom ? 'bg-white border-dashed border-orange-200 hover:bg-orange-100' : 'bg-purple-50 border border-purple-200 hover:bg-purple-200/80')
                           }`}
                         title={cls.title}
                       >
@@ -579,7 +579,7 @@ export default function WeeklyHorizontalTimeline({ onModalToggle }) {
                   <button
                     type="button"
                     onClick={() => setFormType("todo")}
-                    className={`flex-1 py-2 text-xs font-bold rounded-xl transition-all cursor-pointer ${formType === "todo"
+                    className={`flex-1 py-2 text-xs font-bold rounded-xl transition cursor-pointer ${formType === "todo"
                       ? "bg-white text-purple-700 shadow-sm"
                       : "text-slate-500 hover:text-slate-700 hover:bg-slate-200/40"
                       }`}
@@ -589,7 +589,7 @@ export default function WeeklyHorizontalTimeline({ onModalToggle }) {
                   <button
                     type="button"
                     onClick={() => setFormType("meeting")}
-                    className={`flex-1 py-2 text-xs font-bold rounded-xl transition-all cursor-pointer ${formType === "meeting"
+                    className={`flex-1 py-2 text-xs font-bold rounded-xl transition cursor-pointer ${formType === "meeting"
                       ? "bg-white text-orange-700 shadow-sm"
                       : "text-slate-500 hover:text-slate-700 hover:bg-slate-200/40"
                       }`}
@@ -608,7 +608,7 @@ export default function WeeklyHorizontalTimeline({ onModalToggle }) {
                       type="text"
                       required
                       placeholder={formType === "todo" ? "e.g., Finish Lit Review essay" : "e.g., Visual Semiotics Study Session"}
-                      className="w-full text-xs px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:bg-white transition-all font-semibold text-slate-700"
+                      className="w-full text-xs px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:bg-white transition font-semibold text-slate-700"
                       value={formTitle}
                       onChange={(e) => setFormTitle(e.target.value)}
                     />
@@ -620,7 +620,7 @@ export default function WeeklyHorizontalTimeline({ onModalToggle }) {
                       <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">Time</label>
                       <input
                         type="time"
-                        className="w-full text-xs px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:bg-white transition-all font-semibold text-slate-700"
+                        className="w-full text-xs px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:bg-white transition font-semibold text-slate-700"
                         value={formTime}
                         onChange={(e) => setFormTime(e.target.value)}
                       />
@@ -631,7 +631,7 @@ export default function WeeklyHorizontalTimeline({ onModalToggle }) {
                         type="text"
                         disabled={formIsOnline}
                         placeholder={formIsOnline ? "Online Session" : "e.g., Room 304"}
-                        className="w-full text-xs px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:bg-white transition-all font-semibold text-slate-700 disabled:opacity-50 disabled:bg-slate-100"
+                        className="w-full text-xs px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:bg-white transition font-semibold text-slate-700 disabled:opacity-50 disabled:bg-slate-100"
                         value={formIsOnline ? "Online" : formPlace}
                         onChange={(e) => setFormPlace(e.target.value)}
                       />
@@ -673,7 +673,7 @@ export default function WeeklyHorizontalTimeline({ onModalToggle }) {
                             type="url"
                             required={formIsOnline}
                             placeholder="https://teams.microsoft.com/l/meetup-join/..."
-                            className="w-full text-[11px] px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:bg-white transition-all font-semibold text-slate-700"
+                            className="w-full text-[11px] px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 focus:bg-white transition font-semibold text-slate-700"
                             value={formMeetingLink}
                             onChange={(e) => setFormMeetingLink(e.target.value)}
                           />
@@ -687,13 +687,13 @@ export default function WeeklyHorizontalTimeline({ onModalToggle }) {
                     <button
                       type="button"
                       onClick={closeCreateModal}
-                      className="px-4 py-2 border border-slate-200 text-slate-500 hover:bg-slate-50 text-xs font-bold rounded-xl cursor-pointer transition-all active:scale-95"
+                      className="px-4 py-2 border border-slate-200 text-slate-500 hover:bg-slate-50 text-xs font-bold rounded-xl cursor-pointer transition active:scale-95"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
-                      className={`px-5 py-2 text-white text-xs font-bold rounded-xl cursor-pointer transition-all shadow-md active:scale-95 ${formType === "todo"
+                      className={`px-5 py-2 text-white text-xs font-bold rounded-xl cursor-pointer transition shadow-md active:scale-95 ${formType === "todo"
                         ? "bg-purple-600 hover:bg-purple-700 shadow-purple-500/20"
                         : "bg-orange-500 hover:bg-orange-600 shadow-orange-500/20"
                         }`}
@@ -756,13 +756,13 @@ export default function WeeklyHorizontalTimeline({ onModalToggle }) {
                   <div className="flex gap-2">
                     <button
                       onClick={() => setSelectedAssignment(null)}
-                      className="px-4 py-2 border border-slate-200 text-slate-500 hover:bg-slate-50 text-xs font-bold rounded-xl cursor-pointer transition-all"
+                      className="px-4 py-2 border border-slate-200 text-slate-500 hover:bg-slate-50 text-xs font-bold rounded-xl cursor-pointer transition"
                     >
                       Close
                     </button>
                     <a
                       href={`/courses/${selectedAssignment.courseId}/assignments/${selectedAssignment.id}`}
-                      className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold rounded-xl cursor-pointer transition-all flex items-center gap-1 shadow-md shadow-purple-500/20"
+                      className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold rounded-xl cursor-pointer transition flex items-center gap-1 shadow-md shadow-purple-500/20"
                     >
                       Open Assignment <ExternalLink className="w-3.5 h-3.5" />
                     </a>
@@ -840,7 +840,7 @@ export default function WeeklyHorizontalTimeline({ onModalToggle }) {
                 <div className="flex justify-end gap-2 border-t border-slate-100 pt-4 mt-6">
                   <button
                     onClick={() => setSelectedClass(null)}
-                    className="px-4 py-2 border border-slate-200 text-slate-500 hover:bg-slate-50 text-xs font-bold rounded-xl cursor-pointer transition-all"
+                    className="px-4 py-2 border border-slate-200 text-slate-500 hover:bg-slate-50 text-xs font-bold rounded-xl cursor-pointer transition"
                   >
                     Close
                   </button>
@@ -849,7 +849,7 @@ export default function WeeklyHorizontalTimeline({ onModalToggle }) {
                       href={selectedClass.meetingLink || "https://teams.microsoft.com"}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold rounded-xl cursor-pointer transition-all flex items-center gap-1 shadow-md shadow-orange-500/20"
+                      className="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold rounded-xl cursor-pointer transition flex items-center gap-1 shadow-md shadow-orange-500/20"
                     >
                       Join Meeting <ExternalLink className="w-3.5 h-3.5" />
                     </a>

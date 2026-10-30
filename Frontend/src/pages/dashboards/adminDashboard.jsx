@@ -1,3 +1,4 @@
+import { notify, confirmAction } from "../../components/UI/feedback";
 import React, { useState, useMemo, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Users, BookOpen, GraduationCap, UserCheck } from "lucide-react";
@@ -294,7 +295,7 @@ export default function AdminDashboard() {
       setCourseForm(DEFAULT_COURSE_FORM);
       await fetchData();
     } catch (err) {
-      alert("Failed to create course: " + err.message);
+      notify("Failed to create course: " + err.message);
     }
   };
 
@@ -304,7 +305,7 @@ export default function AdminDashboard() {
       setIsAddingLecturer(false);
       await fetchData();
     } catch (err) {
-      alert("Failed to create lecturer: " + err.message);
+      notify("Failed to create lecturer: " + err.message);
     }
   };
 
@@ -314,7 +315,7 @@ export default function AdminDashboard() {
     try {
       const targetCourses = courses.filter(c => selectedIds.includes(c.lecturerId));
       if (targetCourses.length === 0) {
-        alert("The selected lecturers have no courses in the current filter. No events created.");
+        notify("The selected lecturers have no courses in the current filter. No events created.");
         return;
       }
       await Promise.all(
@@ -324,7 +325,7 @@ export default function AdminDashboard() {
       );
       setIsSendingNotification(false);
     } catch (err) {
-      alert("Failed to send notification: " + err.message);
+      notify("Failed to send notification: " + err.message);
     }
   };
 
@@ -338,7 +339,7 @@ export default function AdminDashboard() {
       setIsAddingStudent(false);
       await fetchData();
     } catch (err) {
-      alert("Failed to create student: " + err.message);
+      notify("Failed to create student: " + err.message);
     }
   };
 
@@ -354,22 +355,22 @@ export default function AdminDashboard() {
       setEditingUser(null);
       await fetchData();
     } catch (err) {
-      alert("Failed to update: " + err.message);
+      notify("Failed to update: " + err.message);
     }
   };
 
   const handleDeleteLecturer = async (lecturer) => {
-    if (!window.confirm(`Delete lecturer "${lecturer.name}"? This will permanently remove their account.`)) return;
+    if (!await confirmAction(`Delete lecturer "${lecturer.name}"? This will permanently remove their account.`)) return;
     try {
       await userService.deleteUser(lecturer.id);
       await fetchData();
     } catch (err) {
-      alert("Failed to delete lecturer: " + err.message);
+      notify("Failed to delete lecturer: " + err.message);
     }
   };
 
   const handleDeleteStudent = async (student) => {
-    if (!window.confirm(`Remove "${student.name}" from this course?`)) return;
+    if (!await confirmAction(`Remove "${student.name}" from this course?`, { confirmLabel: "Remove" })) return;
     try {
       const enrollment = enrollments.find(
         (e) => e.student?.id === student.id && e.courseId === selectedCourseId
@@ -378,7 +379,7 @@ export default function AdminDashboard() {
       await enrollmentService.deleteEnrollment(enrollment.id);
       await fetchData();
     } catch (err) {
-      alert("Failed to remove student: " + err.message);
+      notify("Failed to remove student: " + err.message);
     }
   };
 
@@ -446,11 +447,11 @@ export default function AdminDashboard() {
           {/* Column 2 — lecturer */}
           <div className="flex flex-col gap-3 bg-white rounded-[28px] p-5 shadow-sm border border-gray-100">
             <div className="h-5 rounded-full bg-gray-200 w-28 mb-1" />
-            <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#3C0078]/10 mt-2">
-              <div className="w-10 h-10 rounded-full bg-[#3C0078]/20 shrink-0" />
+            <div className="flex items-center gap-3 p-3 rounded-2xl bg-brand/10 mt-2">
+              <div className="w-10 h-10 rounded-full bg-brand/20 shrink-0" />
               <div className="flex-1 flex flex-col gap-2">
-                <div className="h-2 rounded-full bg-[#3C0078]/20 w-2/5" />
-                <div className="h-3 rounded-full bg-[#3C0078]/20 w-3/5" />
+                <div className="h-2 rounded-full bg-brand/20 w-2/5" />
+                <div className="h-3 rounded-full bg-brand/20 w-3/5" />
               </div>
             </div>
           </div>

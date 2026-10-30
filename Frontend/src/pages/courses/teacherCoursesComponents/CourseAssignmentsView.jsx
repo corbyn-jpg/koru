@@ -88,13 +88,13 @@ function CreateAssignmentDrawer({ onClose, onSave, initialData, cohorts = [], de
             <div className="flex-1 overflow-y-auto px-8 py-6 space-y-6">
                     {cohorts.length > 0 && (
                         <div>
-                            <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-3 block">Assign To</label>
+                            <label className="text-[10px] font-black uppercase tracking-wider text-gray-400 mb-3 block">Assign To</label>
                             <div className="flex flex-wrap gap-2">
                                 <button
                                     onClick={() => handleChange("classGroupId", null)}
-                                    className={`px-4 py-2 rounded-xl text-xs font-bold transition-all border ${
+                                    className={`px-4 py-2 rounded-xl text-xs font-bold transition border ${
                                         form.classGroupId === null
-                                            ? "bg-[#3C0078] text-white border-[#3C0078]"
+                                            ? "bg-brand text-white border-brand"
                                             : "bg-gray-50 text-gray-600 border-gray-200 hover:border-gray-300"
                                     }`}
                                 >
@@ -104,9 +104,9 @@ function CreateAssignmentDrawer({ onClose, onSave, initialData, cohorts = [], de
                                     <button
                                         key={c.id}
                                         onClick={() => handleChange("classGroupId", c.id)}
-                                        className={`px-4 py-2 rounded-xl text-xs font-bold transition-all border ${
+                                        className={`px-4 py-2 rounded-xl text-xs font-bold transition border ${
                                             form.classGroupId === c.id
-                                                ? "bg-[#3C0078] text-white border-[#3C0078]"
+                                                ? "bg-brand text-white border-brand"
                                                 : "bg-gray-50 text-gray-600 border-gray-200 hover:border-gray-300"
                                         }`}
                                     >
@@ -117,7 +117,7 @@ function CreateAssignmentDrawer({ onClose, onSave, initialData, cohorts = [], de
                         </div>
                     )}
                     <div>
-                        <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-3 block">Assignment Type</label>
+                        <label className="text-[10px] font-black uppercase tracking-wider text-gray-400 mb-3 block">Assignment Type</label>
                         <div className="grid grid-cols-3 gap-2">
                             {ASSIGNMENT_TYPES.map(t => {
                                 const Icon = t.icon;
@@ -125,14 +125,14 @@ function CreateAssignmentDrawer({ onClose, onSave, initialData, cohorts = [], de
                                     <button
                                         key={t.id}
                                         onClick={() => handleChange("type", t.id)}
-                                        className={`flex flex-col items-center gap-2 p-3 rounded-2xl border-2 text-center transition-all ${
-                                            form.type === t.id ? "border-[#3C0078] bg-[#3C0078]/5" : "border-gray-100 hover:border-gray-200 bg-gray-50"
+                                        className={`flex flex-col items-center gap-2 p-3 rounded-2xl border-2 text-center transition ${
+                                            form.type === t.id ? "border-brand bg-brand/5" : "border-gray-100 hover:border-gray-200 bg-gray-50"
                                         }`}
                                     >
                                         <span className={`inline-flex items-center justify-center w-9 h-9 rounded-xl ${t.bg}`}>
                                             <Icon size={18} style={{ color: t.color }} />
                                         </span>
-                                        <span className={`text-[10px] font-bold leading-tight ${form.type === t.id ? "text-[#3C0078]" : "text-gray-500"}`}>
+                                        <span className={`text-[10px] font-bold leading-tight ${form.type === t.id ? "text-brand" : "text-gray-500"}`}>
                                             {t.label}
                                         </span>
                                     </button>
@@ -142,44 +142,44 @@ function CreateAssignmentDrawer({ onClose, onSave, initialData, cohorts = [], de
                     </div>
 
                     <div>
-                        <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2 block">Title</label>
+                        <label className="text-[10px] font-black uppercase tracking-wider text-gray-400 mb-2 block">Title</label>
                         <input
                             type="text"
                             placeholder="Assignment title..."
                             value={form.title}
                             onChange={e => handleChange("title", e.target.value)}
-                            className="w-full bg-gray-50 rounded-2xl px-5 py-4 text-gray-900 font-semibold text-sm focus:outline-none focus:ring-2 focus:ring-[#3C0078]/20 border border-transparent transition-all"
+                            className="w-full bg-gray-50 rounded-2xl px-5 py-4 text-gray-900 font-semibold text-sm focus:outline-none focus:ring-2 focus:ring-brand/20 border border-transparent transition"
                         />
                     </div>
 
                     <div>
-                        <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2 block">Instructions / Description</label>
+                        <label className="text-[10px] font-black uppercase tracking-wider text-gray-400 mb-2 block">Instructions / Description</label>
                         <textarea
                             rows={4}
                             placeholder="Write the assignment instructions here..."
                             value={form.description}
                             onChange={e => handleChange("description", e.target.value)}
-                            className="w-full bg-gray-50 rounded-2xl px-5 py-4 text-gray-900 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#3C0078]/20 border border-transparent transition-all resize-none leading-relaxed"
+                            className="w-full bg-gray-50 rounded-2xl px-5 py-4 text-gray-900 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand/20 border border-transparent transition resize-none leading-relaxed"
                         />
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
                         <div>
-                            <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2 block">Points</label>
+                            <label className="text-[10px] font-black uppercase tracking-wider text-gray-400 mb-2 block">Points</label>
                             <input
                                 type="number"
                                 min={0}
                                 value={form.points}
                                 onChange={e => handleChange("points", parseInt(e.target.value) || 0)}
-                                className="w-full bg-gray-50 rounded-2xl px-5 py-4 text-gray-900 font-bold text-sm focus:outline-none focus:ring-2 focus:ring-[#3C0078]/20 border border-transparent transition-all"
+                                className="w-full bg-gray-50 rounded-2xl px-5 py-4 text-gray-900 font-bold text-sm focus:outline-none focus:ring-2 focus:ring-brand/20 border border-transparent transition"
                             />
                         </div>
                         <div>
-                            <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2 block">Grade Display</label>
+                            <label className="text-[10px] font-black uppercase tracking-wider text-gray-400 mb-2 block">Grade Display</label>
                             <select
                                 value={form.gradeDisplay}
                                 onChange={e => handleChange("gradeDisplay", e.target.value)}
-                                className="w-full bg-gray-50 rounded-2xl px-5 py-4 text-gray-900 font-semibold text-sm focus:outline-none focus:ring-2 focus:ring-[#3C0078]/20 border border-transparent transition-all appearance-none"
+                                className="w-full bg-gray-50 rounded-2xl px-5 py-4 text-gray-900 font-semibold text-sm focus:outline-none focus:ring-2 focus:ring-brand/20 border border-transparent transition appearance-none"
                             >
                                 {GRADE_DISPLAY_OPTIONS.map(o => <option key={o}>{o}</option>)}
                             </select>
@@ -188,38 +188,38 @@ function CreateAssignmentDrawer({ onClose, onSave, initialData, cohorts = [], de
 
                     <div className="flex items-center justify-between bg-gray-50 rounded-2xl px-5 py-4">
                         <div>
-                            <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">Allow Multiple Attempts</p>
+                            <p className="text-[10px] font-black uppercase tracking-wider text-gray-400">Allow Multiple Attempts</p>
                             <p className="text-xs text-gray-500 mt-0.5">Students can resubmit until closed</p>
                         </div>
                         <button
                             onClick={() => handleChange("allowMultipleAttempts", !form.allowMultipleAttempts)}
-                            className={`w-12 h-6 rounded-full transition-colors flex items-center px-0.5 ${form.allowMultipleAttempts ? "bg-[#3C0078]" : "bg-gray-300"}`}
+                            className={`w-12 h-6 rounded-full transition-colors flex items-center px-0.5 ${form.allowMultipleAttempts ? "bg-brand" : "bg-gray-300"}`}
                         >
                             <span className={`w-5 h-5 bg-white rounded-full shadow transition-transform ${form.allowMultipleAttempts ? "translate-x-6" : "translate-x-0"}`} />
                         </button>
                     </div>
 
                     <div>
-                        <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-3 block">Dates</label>
+                        <label className="text-[10px] font-black uppercase tracking-wider text-gray-400 mb-3 block">Dates</label>
                         <div className="bg-gray-50 rounded-[28px] p-6 space-y-4">
                             <div>
-                                <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2 block">Opens</label>
-                                <input type="datetime-local" value={form.openDate} onChange={e => handleChange("openDate", e.target.value)} className="w-full bg-white rounded-2xl px-5 py-3 text-gray-900 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-[#3C0078]/20 border border-gray-100 transition-all" />
+                                <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-2 block">Opens</label>
+                                <input type="datetime-local" value={form.openDate} onChange={e => handleChange("openDate", e.target.value)} className="w-full bg-white rounded-2xl px-5 py-3 text-gray-900 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-brand/20 border border-gray-100 transition" />
                             </div>
                             <div>
-                                <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2 block">Due Date</label>
-                                <input type="datetime-local" value={form.dueDate} onChange={e => handleChange("dueDate", e.target.value)} className="w-full bg-white rounded-2xl px-5 py-3 text-gray-900 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-[#3C0078]/20 border border-gray-100 transition-all" />
+                                <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-2 block">Due Date</label>
+                                <input type="datetime-local" value={form.dueDate} onChange={e => handleChange("dueDate", e.target.value)} className="w-full bg-white rounded-2xl px-5 py-3 text-gray-900 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-brand/20 border border-gray-100 transition" />
                             </div>
                             <div>
-                                <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2 block">Closes</label>
-                                <input type="datetime-local" value={form.closeDate} onChange={e => handleChange("closeDate", e.target.value)} className="w-full bg-white rounded-2xl px-5 py-3 text-gray-900 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-[#3C0078]/20 border border-gray-100 transition-all" />
+                                <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-2 block">Closes</label>
+                                <input type="datetime-local" value={form.closeDate} onChange={e => handleChange("closeDate", e.target.value)} className="w-full bg-white rounded-2xl px-5 py-3 text-gray-900 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-brand/20 border border-gray-100 transition" />
                             </div>
                         </div>
                     </div>
 
                     {form.type === "external" && (
                         <div>
-                            <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-3 block">External Tool</label>
+                            <label className="text-[10px] font-black uppercase tracking-wider text-gray-400 mb-3 block">External Tool</label>
                             <div className="grid grid-cols-2 gap-3 mb-4">
                                 {EXTERNAL_TOOLS.map(tool => (
                                     <button
@@ -229,7 +229,7 @@ function CreateAssignmentDrawer({ onClose, onSave, initialData, cohorts = [], de
                                             handleChange("externalToolName", tool.name);
                                             if (!form.externalToolUrl) handleChange("externalToolUrl", tool.baseUrl);
                                         }}
-                                        className={`flex items-center gap-3 p-4 rounded-2xl border-2 text-left transition-all ${
+                                        className={`flex items-center gap-3 p-4 rounded-2xl border-2 text-left transition ${
                                             form.externalToolName === tool.name
                                                 ? "border-[#6366F1] bg-[#6366F1]/5"
                                                 : "border-gray-100 hover:border-gray-200 bg-gray-50"
@@ -250,13 +250,13 @@ function CreateAssignmentDrawer({ onClose, onSave, initialData, cohorts = [], de
                                     </button>
                                 ))}
                             </div>
-                            <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2 block">Tool URL / Launch Link</label>
+                            <label className="text-[10px] font-black uppercase tracking-wider text-gray-400 mb-2 block">Tool URL / Launch Link</label>
                             <input
                                 type="url"
                                 placeholder="https://..."
                                 value={form.externalToolUrl}
                                 onChange={e => handleChange("externalToolUrl", e.target.value)}
-                                className="w-full bg-gray-50 rounded-2xl px-5 py-4 text-gray-900 font-semibold text-sm focus:outline-none focus:ring-2 focus:ring-[#6366F1]/20 border border-transparent transition-all"
+                                className="w-full bg-gray-50 rounded-2xl px-5 py-4 text-gray-900 font-semibold text-sm focus:outline-none focus:ring-2 focus:ring-[#6366F1]/20 border border-transparent transition"
                             />
                         </div>
                     )}
@@ -264,8 +264,8 @@ function CreateAssignmentDrawer({ onClose, onSave, initialData, cohorts = [], de
                     {form.type === "quiz" && (
                         <div>
                             <div className="flex items-center justify-between mb-3">
-                                <label className="text-[10px] font-black uppercase tracking-widest text-gray-400">Quiz Questions</label>
-                                <button onClick={addQuestion} className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#FF8731]/10 text-[#FF8731] font-bold text-[10px] uppercase tracking-widest hover:bg-[#FF8731]/20 transition-all">
+                                <label className="text-[10px] font-black uppercase tracking-wider text-gray-400">Quiz Questions</label>
+                                <button onClick={addQuestion} className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-ember/10 text-ember font-bold text-[10px] uppercase tracking-wider hover:bg-ember/20 transition">
                                     <Plus size={14} /> Add Question
                                 </button>
                             </div>
@@ -276,28 +276,28 @@ function CreateAssignmentDrawer({ onClose, onSave, initialData, cohorts = [], de
                                 {quizQuestions.map((q, qi) => (
                                     <div key={qi} className="bg-gray-50 rounded-[24px] p-5 space-y-3">
                                         <div className="flex items-start gap-3">
-                                            <span className="w-6 h-6 rounded-full bg-[#FF8731]/20 text-[#FF8731] text-[10px] font-black flex items-center justify-center shrink-0 mt-1">{qi + 1}</span>
+                                            <span className="w-6 h-6 rounded-full bg-ember/20 text-ember text-[10px] font-black flex items-center justify-center shrink-0 mt-1">{qi + 1}</span>
                                             <input
                                                 type="text"
                                                 placeholder="Question text..."
                                                 value={q.question}
                                                 onChange={e => updateQuestion(qi, "question", e.target.value)}
-                                                className="flex-1 bg-white rounded-xl px-4 py-2 text-sm text-gray-900 font-medium focus:outline-none focus:ring-2 focus:ring-[#FF8731]/20 border border-gray-100"
+                                                className="flex-1 bg-white rounded-xl px-4 py-2 text-sm text-gray-900 font-medium focus:outline-none focus:ring-2 focus:ring-ember/20 border border-gray-100"
                                             />
-                                            <button onClick={() => removeQuestion(qi)} className="p-1.5 rounded-lg text-gray-300 hover:text-red-500 hover:bg-red-50 transition-all">
+                                            <button onClick={() => removeQuestion(qi)} className="p-1.5 rounded-lg text-gray-300 hover:text-red-500 hover:bg-red-50 transition">
                                                 <Trash2 size={14} />
                                             </button>
                                         </div>
                                         <div className="space-y-2 pl-9">
                                             {q.options.map((opt, oi) => (
                                                 <div key={oi} className="flex items-center gap-2">
-                                                    <input type="radio" name={`correct-${qi}`} checked={q.correctAnswer === oi} onChange={() => updateQuestion(qi, "correctAnswer", oi)} className="accent-[#3C0078]" />
+                                                    <input type="radio" name={`correct-${qi}`} checked={q.correctAnswer === oi} onChange={() => updateQuestion(qi, "correctAnswer", oi)} className="accent-brand" />
                                                     <input
                                                         type="text"
                                                         placeholder={`Option ${oi + 1}...`}
                                                         value={opt}
                                                         onChange={e => updateOption(qi, oi, e.target.value)}
-                                                        className="flex-1 bg-white rounded-xl px-4 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#3C0078]/10 border border-gray-100"
+                                                        className="flex-1 bg-white rounded-xl px-4 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-brand/10 border border-gray-100"
                                                     />
                                                 </div>
                                             ))}
@@ -311,12 +311,12 @@ function CreateAssignmentDrawer({ onClose, onSave, initialData, cohorts = [], de
                 </div>
 
                 <div className="px-8 py-5 border-t border-gray-100 flex gap-3 shrink-0">
-                    <button onClick={onClose} className="flex-1 py-4 rounded-2xl border-2 border-gray-200 text-gray-700 font-bold text-xs uppercase tracking-widest hover:bg-gray-50 transition-all">
+                    <button onClick={onClose} className="flex-1 py-4 rounded-2xl border-2 border-gray-200 text-gray-700 font-bold text-xs uppercase tracking-wider hover:bg-gray-50 transition">
                         Cancel
                     </button>
                     <button
                         onClick={handleSubmit}
-                        className="flex-1 py-4 rounded-2xl bg-[#3C0078] text-white font-bold text-xs uppercase tracking-widest hover:bg-[#2A0054] transition-all shadow-lg shadow-[#3C0078]/20 flex items-center justify-center gap-2"
+                        className="flex-1 py-4 rounded-2xl bg-brand text-white font-bold text-xs uppercase tracking-wider hover:bg-brand-deep transition shadow-lg shadow-brand/20 flex items-center justify-center gap-2"
                     >
                         <Eye size={16} /> {isEditing ? "Save Changes" : "Publish"}
                     </button>
@@ -394,7 +394,7 @@ function SubmissionFileViewer({ submission }) {
         <div className="flex flex-col items-center justify-center h-64 bg-gray-50 rounded-3xl border border-gray-100 gap-3">
             <FileText size={28} className="text-gray-300" />
             <p className="text-sm text-gray-400 font-medium">Unable to load file preview</p>
-            <a href={fileUrl} target="_blank" rel="noreferrer" className="text-xs text-[#3C0078] font-bold hover:underline">Try opening directly</a>
+            <a href={fileUrl} target="_blank" rel="noreferrer" className="text-xs text-brand font-bold hover:underline">Try opening directly</a>
         </div>
     );
 
@@ -419,7 +419,7 @@ function SubmissionFileViewer({ submission }) {
         <div className="flex flex-col items-center justify-center h-64 bg-gray-50 rounded-3xl border border-gray-100 gap-3">
             <FileText size={28} className="text-gray-300" />
             <p className="text-sm text-gray-500 font-medium">{fileExt.toUpperCase()} file</p>
-            <a href={blobUrl} target="_blank" rel="noreferrer" className="px-4 py-2 rounded-xl bg-[#3C0078]/5 text-[#3C0078] text-xs font-bold hover:bg-[#3C0078]/10 transition-colors">
+            <a href={blobUrl} target="_blank" rel="noreferrer" className="px-4 py-2 rounded-xl bg-brand/5 text-brand text-xs font-bold hover:bg-brand/10 transition-colors">
                 Download File
             </a>
         </div>
@@ -547,7 +547,7 @@ function TeacherSubmissionReview({
         <div className="flex-1 flex flex-col overflow-hidden">
             <div className="shrink-0 px-8 pt-8 pb-4">
                 <div className="flex items-center gap-3 mb-6">
-                    <button onClick={onBack} className="flex items-center gap-2 text-gray-400 hover:text-[#3C0078] transition-colors font-semibold text-sm group">
+                    <button onClick={onBack} className="flex items-center gap-2 text-gray-400 hover:text-brand transition-colors font-semibold text-sm group">
                         <ChevronRight size={18} className="rotate-180 group-hover:-translate-x-1 transition-transform" />
                         Back to Assignments
                     </button>
@@ -570,7 +570,7 @@ function TeacherSubmissionReview({
                     {!loading && visibleSubmissions.length > 0 && (
                         <div className="flex items-center gap-3">
                             <div className="px-4 py-2 bg-green-50 rounded-2xl text-center">
-                                <p className="text-[9px] font-black uppercase tracking-widest text-green-600">Graded</p>
+                                <p className="text-[9px] font-black uppercase tracking-wider text-green-600">Graded</p>
                                 <p className="text-lg font-black italic text-green-700">
                                     {visibleSubmissions.filter(s => grades[s.id]).length}/{visibleSubmissions.length}
                                 </p>
@@ -579,13 +579,13 @@ function TeacherSubmissionReview({
                                 Object.values(grades).every(g => g.isReleased) ? (
                                     <div className="px-4 py-2 bg-purple-50 rounded-2xl flex items-center gap-2">
                                         <Check size={14} className="text-purple-600" />
-                                        <span className="text-xs font-bold uppercase tracking-widest text-purple-600">Released</span>
+                                        <span className="text-xs font-bold uppercase tracking-wider text-purple-600">Released</span>
                                     </div>
                                 ) : (
                                     <button
                                         onClick={handleRelease}
                                         disabled={releasing}
-                                        className="px-5 py-2.5 bg-[#3C0078] text-white rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-[#2d0059] transition-colors disabled:opacity-60"
+                                        className="px-5 py-2.5 bg-brand text-white rounded-2xl text-xs font-black uppercase tracking-wider hover:bg-[#2d0059] transition-colors disabled:opacity-60"
                                     >
                                         {releasing ? "Releasing..." : "Release Grades"}
                                     </button>
@@ -619,25 +619,25 @@ function TeacherSubmissionReview({
                                     <button
                                         key={sub.id}
                                         onClick={() => setSelectedSub(sub)}
-                                        className={`w-full text-left flex items-center gap-3 px-4 py-3 rounded-2xl transition-all ${
+                                        className={`w-full text-left flex items-center gap-3 px-4 py-3 rounded-2xl transition ${
                                             isSelected
                                                 ? "bg-white border border-gray-200 shadow-sm"
                                                 : "hover:bg-white/60 border border-transparent"
                                         }`}
                                     >
                                         <div className={`shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-xs font-black ${
-                                            isSelected ? "bg-[#3C0078] text-white" : "bg-[#3C0078]/5 border-2 border-[#3C0078]/10 text-[#3C0078]"
+                                            isSelected ? "bg-brand text-white" : "bg-brand/5 border-2 border-brand/10 text-brand"
                                         }`}>
                                             {(sub.student?.firstName?.[0] || "?").toUpperCase()}{(sub.student?.lastName?.[0] || "").toUpperCase()}
                                         </div>
                                         <div className="flex-1 min-w-0">
-                                            <p className={`text-sm font-bold truncate ${isSelected ? "text-[#3C0078]" : "text-gray-900"}`}>{studentName}</p>
+                                            <p className={`text-sm font-bold truncate ${isSelected ? "text-brand" : "text-gray-900"}`}>{studentName}</p>
                                             <p className="text-[10px] text-gray-400 mt-0.5">
                                                 {sub.submittedAt ? new Date(sub.submittedAt).toLocaleDateString("en-US", { month: "short", day: "numeric" }) : "—"}
                                             </p>
                                         </div>
                                         <div className="shrink-0 flex flex-col items-end gap-1">
-                                            <span className={`px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-widest ${
+                                            <span className={`px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-wider ${
                                                 sub.status === "Graded" ? "bg-green-100 text-green-700"
                                                 : sub.status === "Late" ? "bg-orange-100 text-orange-600"
                                                 : "bg-blue-50 text-blue-600"
@@ -665,7 +665,7 @@ function TeacherSubmissionReview({
                                 >
                                     {/* Student header */}
                                     <div className="flex items-center gap-4">
-                                        <div className="w-11 h-11 rounded-full bg-[#3C0078] flex items-center justify-center">
+                                        <div className="w-11 h-11 rounded-full bg-brand flex items-center justify-center">
                                             <span className="text-white font-bold text-sm">
                                                 {(selectedSub.student?.firstName?.[0] || "?").toUpperCase()}{(selectedSub.student?.lastName?.[0] || "").toUpperCase()}
                                             </span>
@@ -678,7 +678,7 @@ function TeacherSubmissionReview({
                                             <p className="text-xs font-semibold text-gray-500">{selectedSub.submittedAt ? new Date(selectedSub.submittedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "—"}</p>
                                             <p className="text-[10px] text-gray-400">{selectedSub.submittedAt ? new Date(selectedSub.submittedAt).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }) : ""}</p>
                                         </div>
-                                        <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${
+                                        <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-wider ${
                                             selectedSub.status === "Graded" ? "bg-green-100 text-green-700"
                                             : selectedSub.status === "Late" ? "bg-orange-100 text-orange-600"
                                             : selectedSub.status === "Submitted" || selectedSub.status === "Resubmitted" ? "bg-blue-50 text-blue-600"
@@ -707,7 +707,7 @@ function TeacherSubmissionReview({
 
                                         return (
                                             <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6">
-                                                <h3 className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-4">Grade</h3>
+                                                <h3 className="text-[10px] font-black uppercase tracking-wider text-gray-400 mb-4">Grade</h3>
                                                 {existingGrade && !gs.editing ? (
                                                     <div className="flex items-center justify-between">
                                                         <div className="flex items-center gap-4">
@@ -715,12 +715,12 @@ function TeacherSubmissionReview({
                                                                 {existingGrade.pointsEarned}{maxPts != null && <span className="text-base font-normal text-gray-400">/{maxPts} pts</span>}
                                                             </span>
                                                             {maxPts != null && (
-                                                                <div className="px-4 py-2 rounded-2xl bg-[#3C0078] text-white">
+                                                                <div className="px-4 py-2 rounded-2xl bg-brand text-white">
                                                                     <span className="text-lg font-black italic">{Math.round((existingGrade.pointsEarned / maxPts) * 100)}%</span>
                                                                 </div>
                                                             )}
                                                         </div>
-                                                        <button onClick={() => setField(selectedSub.id, "editing", true)} className="flex items-center gap-2 px-5 py-2.5 rounded-2xl border border-gray-200 text-xs font-bold text-gray-500 hover:border-[#3C0078] hover:text-[#3C0078] transition-all">
+                                                        <button onClick={() => setField(selectedSub.id, "editing", true)} className="flex items-center gap-2 px-5 py-2.5 rounded-2xl border border-gray-200 text-xs font-bold text-gray-500 hover:border-brand hover:text-brand transition">
                                                             <Edit2 size={13} /> Update
                                                         </button>
                                                     </div>
@@ -735,7 +735,7 @@ function TeacherSubmissionReview({
                                                                     onChange={e => setField(selectedSub.id, "points", e.target.value)}
                                                                     placeholder={maxPts != null ? `0 – ${maxPts}` : "Points"}
                                                                     disabled={gs.saving}
-                                                                    className="w-32 px-4 py-3 rounded-2xl border border-gray-200 text-sm font-bold text-gray-900 focus:outline-none focus:border-[#3C0078] transition-colors disabled:opacity-50"
+                                                                    className="w-32 px-4 py-3 rounded-2xl border border-gray-200 text-sm font-bold text-gray-900 focus:outline-none focus:border-brand transition-colors disabled:opacity-50"
                                                                 />
                                                                 {pct !== null && (
                                                                     <div className={`px-4 py-3 rounded-2xl font-black italic text-lg min-w-[65px] text-center ${pct >= 75 ? "bg-green-50 text-green-700" : pct >= 50 ? "bg-orange-50 text-orange-600" : "bg-red-50 text-red-600"}`}>
@@ -747,14 +747,14 @@ function TeacherSubmissionReview({
                                                         </div>
                                                         <div className="flex gap-2 pb-0.5">
                                                             {existingGrade && (
-                                                                <button onClick={() => { setField(selectedSub.id, "editing", false); setField(selectedSub.id, "points", String(existingGrade.pointsEarned)); }} disabled={gs.saving} className="px-4 py-3 rounded-2xl border border-gray-200 text-xs font-bold text-gray-400 hover:bg-gray-50 transition-all">
+                                                                <button onClick={() => { setField(selectedSub.id, "editing", false); setField(selectedSub.id, "points", String(existingGrade.pointsEarned)); }} disabled={gs.saving} className="px-4 py-3 rounded-2xl border border-gray-200 text-xs font-bold text-gray-400 hover:bg-gray-50 transition">
                                                                     Cancel
                                                                 </button>
                                                             )}
                                                             <button
                                                                 onClick={() => handleGrade(selectedSub)}
                                                                 disabled={gs.saving || gs.points === ""}
-                                                                className={`flex items-center gap-2 px-6 py-3 rounded-2xl text-xs font-bold uppercase tracking-widest text-white transition-all ${gs.saving || gs.points === "" ? "bg-gray-200 text-gray-400 cursor-not-allowed" : "bg-[#3C0078] hover:bg-[#2A0054] shadow-lg shadow-[#3C0078]/20"}`}
+                                                                className={`flex items-center gap-2 px-6 py-3 rounded-2xl text-xs font-bold uppercase tracking-wider text-white transition ${gs.saving || gs.points === "" ? "bg-gray-200 text-gray-400 cursor-not-allowed" : "bg-brand hover:bg-brand-deep shadow-lg shadow-brand/20"}`}
                                                             >
                                                                 {gs.saving ? <><Loader size={13} className="animate-spin" /> Saving...</> : <><Check size={14} /> {existingGrade ? "Update" : "Submit Grade"}</>}
                                                             </button>
@@ -818,7 +818,7 @@ function AssignmentPreviewDrawer({ assignment, onClose }) {
                     <div>
                         <div className="flex items-center gap-3 mb-1">
                             <h2 className="text-2xl font-bold text-gray-900">Assignment Preview</h2>
-                            <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-[#3C0078]/10 text-[#3C0078]">Student View</span>
+                            <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-brand/10 text-brand">Student View</span>
                         </div>
                         <p className="text-sm text-gray-400">This is what students see</p>
                     </div>
@@ -828,7 +828,7 @@ function AssignmentPreviewDrawer({ assignment, onClose }) {
                 </div>
 
                 <div className="flex-1 overflow-y-auto px-10 py-8 space-y-7">
-                    <div className="bg-[#3C0078]/5 rounded-[28px] p-6">
+                    <div className="bg-brand/5 rounded-[28px] p-6">
                         <div className="flex items-start gap-4">
                             <span className={`inline-flex items-center justify-center w-12 h-12 rounded-2xl ${typeInfo?.bg || "bg-gray-100"} shrink-0`}>
                                 <Icon size={22} style={{ color: typeInfo?.color || "#64748B" }} />
@@ -836,9 +836,9 @@ function AssignmentPreviewDrawer({ assignment, onClose }) {
                             <div className="flex-1 min-w-0">
                                 <h1 className="text-xl font-bold text-gray-900 leading-tight">{assignment.title}</h1>
                                 <div className="flex items-center gap-3 mt-2 flex-wrap">
-                                    <span className="text-[10px] font-black uppercase tracking-widest text-gray-500">{typeInfo?.label}</span>
+                                    <span className="text-[10px] font-black uppercase tracking-wider text-gray-500">{typeInfo?.label}</span>
                                     {assignment.points != null && (
-                                        <span className="text-[10px] font-black uppercase tracking-widest text-[#3C0078]">{assignment.points} pts</span>
+                                        <span className="text-[10px] font-black uppercase tracking-wider text-brand">{assignment.points} pts</span>
                                     )}
                                 </div>
                             </div>
@@ -847,7 +847,7 @@ function AssignmentPreviewDrawer({ assignment, onClose }) {
 
                     {(assignment.openDate || assignment.dueDate || assignment.closeDate) && (
                         <div>
-                            <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-3 block">Timeline</label>
+                            <label className="text-[10px] font-black uppercase tracking-wider text-gray-400 mb-3 block">Timeline</label>
                             <div className="bg-gray-50 rounded-[24px] p-5 space-y-3">
                                 {assignment.openDate && (
                                     <div className="flex items-center justify-between">
@@ -873,7 +873,7 @@ function AssignmentPreviewDrawer({ assignment, onClose }) {
 
                     {assignment.description && (
                         <div>
-                            <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-3 block">Instructions</label>
+                            <label className="text-[10px] font-black uppercase tracking-wider text-gray-400 mb-3 block">Instructions</label>
                             <div className="bg-gray-50 rounded-[24px] p-5 text-sm text-gray-700 leading-relaxed whitespace-pre-wrap">
                                 {assignment.description}
                             </div>
@@ -882,7 +882,7 @@ function AssignmentPreviewDrawer({ assignment, onClose }) {
 
                     {assignment.type === "external" && (
                         <div>
-                            <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-3 block">External Tool</label>
+                            <label className="text-[10px] font-black uppercase tracking-wider text-gray-400 mb-3 block">External Tool</label>
                             {assignment.externalToolName || assignment.externalToolUrl ? (
                                 <div className="bg-gray-50 rounded-[24px] p-5 flex items-center gap-4">
                                     {externalTool ? (
@@ -922,12 +922,12 @@ function AssignmentPreviewDrawer({ assignment, onClose }) {
 
                     {assignment.type === "quiz" && quizQuestions.length > 0 && (
                         <div>
-                            <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-3 block">Quiz Questions ({quizQuestions.length})</label>
+                            <label className="text-[10px] font-black uppercase tracking-wider text-gray-400 mb-3 block">Quiz Questions ({quizQuestions.length})</label>
                             <div className="space-y-4">
                                 {quizQuestions.map((q, qi) => (
                                     <div key={qi} className="bg-gray-50 rounded-[24px] p-5 space-y-3">
                                         <div className="flex items-start gap-3">
-                                            <span className="w-6 h-6 rounded-full bg-[#FF8731]/20 text-[#FF8731] text-[10px] font-black flex items-center justify-center shrink-0 mt-0.5">{qi + 1}</span>
+                                            <span className="w-6 h-6 rounded-full bg-ember/20 text-ember text-[10px] font-black flex items-center justify-center shrink-0 mt-0.5">{qi + 1}</span>
                                             <p className="text-sm text-gray-900 font-semibold flex-1">{q.question || <span className="text-gray-400 italic">No question text</span>}</p>
                                         </div>
                                         <div className="space-y-2 pl-9">
@@ -941,7 +941,7 @@ function AssignmentPreviewDrawer({ assignment, onClose }) {
                                                         {q.correctAnswer === oi && <span className="w-2 h-2 rounded-full bg-white" />}
                                                     </span>
                                                     {opt || <span className="text-gray-400 italic">Empty option</span>}
-                                                    {q.correctAnswer === oi && <span className="ml-auto text-[10px] font-black uppercase tracking-widest text-green-600">Correct</span>}
+                                                    {q.correctAnswer === oi && <span className="ml-auto text-[10px] font-black uppercase tracking-wider text-green-600">Correct</span>}
                                                 </div>
                                             ))}
                                         </div>
@@ -953,7 +953,7 @@ function AssignmentPreviewDrawer({ assignment, onClose }) {
                 </div>
 
                 <div className="px-10 py-6 border-t border-gray-100 shrink-0">
-                    <button onClick={onClose} className="w-full py-4 rounded-2xl border-2 border-gray-200 text-gray-700 font-bold text-xs uppercase tracking-widest hover:bg-gray-50 transition-all">
+                    <button onClick={onClose} className="w-full py-4 rounded-2xl border-2 border-gray-200 text-gray-700 font-bold text-xs uppercase tracking-wider hover:bg-gray-50 transition">
                         Close Preview
                     </button>
                 </div>
@@ -976,7 +976,7 @@ function AssignmentGroupRow({ group, onTogglePublish, onDelete, onEdit, onClose,
                         <ChevronDown size={18} />
                     </span>
                     <span className="font-bold text-gray-900 text-base">{group.name}</span>
-                    <span className="text-[10px] font-black uppercase tracking-widest text-gray-400 bg-white px-3 py-1 rounded-full border border-gray-200">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-gray-400 bg-white px-3 py-1 rounded-full border border-gray-200">
                         {group.weight}% of grade
                     </span>
                     <span className="text-[10px] text-gray-400 font-medium">
@@ -1011,14 +1011,14 @@ function AssignmentGroupRow({ group, onTogglePublish, onDelete, onEdit, onClose,
                                         const submissionPct = item.totalStudents > 0 ? Math.round((item.submissions / item.totalStudents) * 100) : 0;
 
                                         return (
-                                            <motion.tr key={item.id} layout className="border-b border-gray-50 last:border-0 hover:bg-gray-50/50 transition-all group">
+                                            <motion.tr key={item.id} layout className="border-b border-gray-50 last:border-0 hover:bg-gray-50/50 transition group">
                                                 <td className="px-6 py-3.5">
                                                     <div className="flex items-center gap-3">
                                                         <span className={`shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-xl ${typeInfo?.bg || "bg-gray-100"}`}>
                                                             <Icon size={16} style={{ color: typeInfo?.color || "#64748B" }} />
                                                         </span>
                                                         <div>
-                                                            <div className="font-bold text-gray-900 group-hover:text-[#3C0078] transition-colors text-sm">{item.title}</div>
+                                                            <div className="font-bold text-gray-900 group-hover:text-brand transition-colors text-sm">{item.title}</div>
                                                             <div className="text-xs text-gray-400 mt-0.5">{typeInfo?.label} · {item.points} pts</div>
                                                         </div>
                                                     </div>
@@ -1033,12 +1033,12 @@ function AssignmentGroupRow({ group, onTogglePublish, onDelete, onEdit, onClose,
                                                     <div className="flex flex-col items-center gap-1">
                                                         <span className="text-sm font-black italic text-gray-900">{item.submissions}/{item.totalStudents}</span>
                                                         <div className="w-16 h-1.5 bg-gray-100 rounded-full overflow-hidden">
-                                                            <div className="h-full bg-[#3C0078] rounded-full transition-all" style={{ width: `${submissionPct}%` }} />
+                                                            <div className="h-full bg-brand rounded-full transition-[width]" style={{ width: `${submissionPct}%` }} />
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td className="px-6 py-3.5">
-                                                    <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest shadow-sm ${
+                                                    <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-wider shadow-sm ${
                                                         item.isClosed ? "bg-red-50 text-red-600" : "bg-green-50 text-green-700"
                                                     }`}>
                                                         {item.isClosed ? "Closed" : "Open"}
@@ -1046,25 +1046,25 @@ function AssignmentGroupRow({ group, onTogglePublish, onDelete, onEdit, onClose,
                                                 </td>
                                                 <td className="px-6 py-3.5">
                                                     <div className="flex items-center justify-end gap-2">
-                                                        <button onClick={() => onPreview(item)} className="px-3 py-1.5 rounded-lg border border-gray-100 text-[9px] font-black uppercase tracking-[0.15em] text-gray-400 hover:bg-gray-100 transition-all whitespace-nowrap shadow-sm">
+                                                        <button onClick={() => onPreview(item)} className="px-3 py-1.5 rounded-lg border border-gray-100 text-[9px] font-black uppercase tracking-[0.15em] text-gray-400 hover:bg-gray-100 transition whitespace-nowrap shadow-sm">
                                                             Preview
                                                         </button>
-                                                        <button onClick={() => onView(item)} className="px-3 py-1.5 rounded-lg border border-gray-100 text-[9px] font-black uppercase tracking-[0.15em] text-gray-400 group-hover:bg-[#3C0078] group-hover:text-white group-hover:border-[#3C0078] transition-all whitespace-nowrap shadow-sm">
+                                                        <button onClick={() => onView(item)} className="px-3 py-1.5 rounded-lg border border-gray-100 text-[9px] font-black uppercase tracking-[0.15em] text-gray-400 group-hover:bg-brand group-hover:text-white group-hover:border-brand transition whitespace-nowrap shadow-sm">
                                                             Review
                                                         </button>
                                                         <button
                                                             onClick={() => onClose(group.id, item.id)}
-                                                            className={`px-3 py-1.5 rounded-lg border text-[9px] font-black uppercase tracking-[0.15em] transition-all whitespace-nowrap shadow-sm ${
+                                                            className={`px-3 py-1.5 rounded-lg border text-[9px] font-black uppercase tracking-[0.15em] transition whitespace-nowrap shadow-sm ${
                                                                 item.isClosed ? "border-red-100 text-red-500 hover:bg-red-50" : "border-gray-100 text-gray-400 hover:bg-red-50 hover:text-red-500 hover:border-red-100"
                                                             }`}
                                                             title={item.isClosed ? "Click to reopen" : "Click to close"}
                                                         >
                                                             {item.isClosed ? "Reopen" : "Close"}
                                                         </button>
-                                                        <button onClick={() => onEdit(group.id, item.id)} className="p-1.5 rounded-lg text-gray-300 hover:text-[#3C0078] hover:bg-[#3C0078]/10 transition-all opacity-0 group-hover:opacity-100">
+                                                        <button onClick={() => onEdit(group.id, item.id)} className="p-1.5 rounded-lg text-gray-300 hover:text-brand hover:bg-brand/10 transition opacity-0 group-hover:opacity-100">
                                                             <Edit2 size={14} />
                                                         </button>
-                                                        <button onClick={() => onDelete(group.id, item.id)} className="p-1.5 rounded-lg text-gray-300 hover:text-red-500 hover:bg-red-50 transition-all opacity-0 group-hover:opacity-100">
+                                                        <button onClick={() => onDelete(group.id, item.id)} className="p-1.5 rounded-lg text-gray-300 hover:text-red-500 hover:bg-red-50 transition opacity-0 group-hover:opacity-100">
                                                             <Trash2 size={14} />
                                                         </button>
                                                     </div>
@@ -1243,7 +1243,7 @@ export function CourseAssignmentsView({ subject, activeCourseId }) {
                             whileHover={{ scale: 1.03 }}
                             whileTap={{ scale: 0.97 }}
                             onClick={() => setShowDrawer(true)}
-                            className="bg-[#3C0078] text-white px-8 py-3 rounded-2xl font-bold text-xs uppercase tracking-widest flex items-center gap-2 shadow-lg shadow-[#3C0078]/20"
+                            className="bg-brand text-white px-8 py-3 rounded-2xl font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg shadow-brand/20"
                         >
                             <Plus size={18} /> Create Assignment
                         </motion.button>
@@ -1256,15 +1256,15 @@ export function CourseAssignmentsView({ subject, activeCourseId }) {
                         { label: "Open", value: loading ? "..." : openCount, accent: true },
                         { label: "Closed", value: loading ? "..." : totalAssignments - openCount, accent: false },
                     ].map((stat) => (
-                        <div key={stat.label} className={`rounded-[28px] px-7 py-6 flex flex-col gap-1 ${stat.accent ? "bg-[#3C0078] text-white" : "bg-white border border-gray-100 shadow-sm"}`}>
-                            <span className={`text-[10px] font-black uppercase tracking-widest ${stat.accent ? "text-white/60" : "text-gray-400"}`}>{stat.label}</span>
+                        <div key={stat.label} className={`rounded-[28px] px-7 py-6 flex flex-col gap-1 ${stat.accent ? "bg-brand text-white" : "bg-white border border-gray-100 shadow-sm"}`}>
+                            <span className={`text-[10px] font-black uppercase tracking-wider ${stat.accent ? "text-white/60" : "text-gray-400"}`}>{stat.label}</span>
                             <span className={`text-4xl font-black italic ${stat.accent ? "text-white" : "text-gray-900"}`}>{stat.value}</span>
                         </div>
                     ))}
                 </motion.div>
 
                 <motion.div variants={slideUp} className="mb-10">
-                    <h2 className="text-sm font-black uppercase tracking-widest text-gray-400 mb-4">Assignment Types</h2>
+                    <h2 className="text-sm font-black uppercase tracking-wider text-gray-400 mb-4">Assignment Types</h2>
                     <div className="flex flex-wrap gap-3">
                         {ASSIGNMENT_TYPES.map(t => {
                             const Icon = t.icon;
@@ -1276,13 +1276,13 @@ export function CourseAssignmentsView({ subject, activeCourseId }) {
                                     whileHover={{ y: -3 }}
                                     whileTap={{ scale: 0.97 }}
                                     onClick={() => setActiveTypeFilter(isActive ? "all" : t.id)}
-                                    className={`flex-1 min-w-[130px] flex flex-col items-start gap-3 p-5 rounded-[24px] border-2 text-left transition-all ${isActive ? "border-[#3C0078] bg-[#3C0078]/5 shadow-md" : "border-gray-100 bg-white hover:border-gray-200 hover:shadow-sm"}`}
+                                    className={`flex-1 min-w-[130px] flex flex-col items-start gap-3 p-5 rounded-[24px] border-2 text-left transition ${isActive ? "border-brand bg-brand/5 shadow-md" : "border-gray-100 bg-white hover:border-gray-200 hover:shadow-sm"}`}
                                 >
                                     <span className={`inline-flex items-center justify-center w-10 h-10 rounded-2xl ${t.bg}`}>
                                         <Icon size={20} style={{ color: t.color }} />
                                     </span>
                                     <div>
-                                        <p className={`text-[10px] font-black uppercase tracking-widest leading-tight ${isActive ? "text-[#3C0078]" : "text-gray-500"}`}>{t.label}</p>
+                                        <p className={`text-[10px] font-black uppercase tracking-wider leading-tight ${isActive ? "text-brand" : "text-gray-500"}`}>{t.label}</p>
                                         <p className="text-2xl font-black italic text-gray-900 mt-1">{count}</p>
                                     </div>
                                 </motion.button>
@@ -1294,7 +1294,7 @@ export function CourseAssignmentsView({ subject, activeCourseId }) {
                 {activeTypeFilter !== "all" && (
                     <motion.div variants={slideUp} className="mb-6 flex items-center gap-3">
                         <span className="text-sm text-gray-500">Filtering by:</span>
-                        <button onClick={() => setActiveTypeFilter("all")} className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#3C0078]/10 text-[#3C0078] font-bold text-xs uppercase tracking-widest hover:bg-[#3C0078]/20 transition-all">
+                        <button onClick={() => setActiveTypeFilter("all")} className="flex items-center gap-2 px-4 py-2 rounded-full bg-brand/10 text-brand font-bold text-xs uppercase tracking-wider hover:bg-brand/20 transition">
                             {ASSIGNMENT_TYPES.find(t => t.id === activeTypeFilter)?.label}
                             <X size={14} />
                         </button>
@@ -1303,7 +1303,7 @@ export function CourseAssignmentsView({ subject, activeCourseId }) {
 
                 <motion.div variants={slideUp}>
                     <div className="mb-5">
-                        <h2 className="text-sm font-black uppercase tracking-widest text-gray-400">Assignment Groups</h2>
+                        <h2 className="text-sm font-black uppercase tracking-wider text-gray-400">Assignment Groups</h2>
                     </div>
                     {filteredGroups.length === 0 ? (
                         <div className="text-center py-20 bg-gray-50 rounded-[40px] border border-gray-100 text-gray-400 font-medium">

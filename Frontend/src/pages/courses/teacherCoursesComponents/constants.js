@@ -65,7 +65,7 @@ export const ASSIGNMENT_TYPES = [
         label: "Online Submission",
         icon: FileText,
         color: "#3C0078",
-        bg: "bg-[#3C0078]/10",
+        bg: "bg-brand/10",
         description: "File uploads, text entry, URLs, or media recordings submitted directly through the platform.",
     },
     {
@@ -73,7 +73,7 @@ export const ASSIGNMENT_TYPES = [
         label: "Quiz",
         icon: HelpCircle,
         color: "#FF8731",
-        bg: "bg-[#FF8731]/10",
+        bg: "bg-ember/10",
         description: "Multiple choice, essay, and matching questions with automatic or manual grading.",
     },
     {

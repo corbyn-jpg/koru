@@ -1,7 +1,8 @@
+import { notify } from "../../components/UI/feedback";
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import PageCanvas from "../../components/PageCanvas";
-import { getPageContent, savePageContent, getCourseModules } from "../../services/moduleService";
+import { getPageContent, savePageContent, getCourseModules, openModuleItemUrl } from "../../services/moduleService";
 import { 
     Bold, 
     Italic, 
@@ -109,9 +110,9 @@ export default function CourseItemView({ activeCourseId, activeItemId, isStudent
         if (item.type === "document") {
             navigate(`/courses/${activeCourseId}/items/${item.id}${isStudentView ? "?viewAs=student" : ""}`);
         } else if (item.type === "link") {
-            alert(`Opening link: ${item.label}`);
+            if (!openModuleItemUrl(item)) notify("This link has no address yet.");
         } else {
-            alert(`Downloading attachment: ${item.label}`);
+            if (!openModuleItemUrl(item)) notify("This attachment has no file yet.");
         }
     };
 
@@ -199,7 +200,7 @@ export default function CourseItemView({ activeCourseId, activeItemId, isStudent
                 <div className="flex items-center gap-2">
                     <button
                         onClick={() => navigate(`/courses/${activeCourseId}/modules${window.location.search}`)}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-gray-200 bg-white hover:bg-gray-50 text-xs font-bold text-gray-600 transition-all cursor-pointer shadow-2xs hover:border-gray-300"
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-gray-200 bg-white hover:bg-gray-50 text-xs font-bold text-gray-600 transition cursor-pointer shadow-2xs hover:border-gray-300"
                     >
                         <ArrowLeft size={13} className="text-gray-500" />
                         <span>Back to Modules</span>
@@ -225,10 +226,10 @@ export default function CourseItemView({ activeCourseId, activeItemId, isStudent
                             }
                         }}
                         disabled={saving}
-                        className={`flex items-center gap-1.5 px-4 py-2 text-xs font-black rounded-xl cursor-pointer shadow-2xs border transition-all disabled:opacity-60 disabled:cursor-not-allowed ${
+                        className={`flex items-center gap-1.5 px-4 py-2 text-xs font-black rounded-xl cursor-pointer shadow-2xs border transition disabled:opacity-60 disabled:cursor-not-allowed ${
                             isEditing 
                             ? "bg-green-600 border-green-700 text-white hover:bg-green-700" 
-                            : "bg-[#3C0078] border-[#2A0054] text-white hover:bg-[#2A0054]"
+                            : "bg-brand border-brand-deep text-white hover:bg-brand-deep"
                         }`}
                     >
                         {isEditing ? (
@@ -254,7 +255,7 @@ export default function CourseItemView({ activeCourseId, activeItemId, isStudent
                         type="text"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
-                        className="text-3xl font-black outline-none border-b border-gray-100 focus:border-[#3C0078]/40 pb-2 mb-6 w-full text-gray-900 transition-colors placeholder:text-gray-300"
+                        className="text-3xl font-black outline-none border-b border-gray-100 focus:border-brand/40 pb-2 mb-6 w-full text-gray-900 transition-colors placeholder:text-gray-300"
                         placeholder="Page Title"
                     />
                 ) : (
@@ -274,13 +275,13 @@ export default function CourseItemView({ activeCourseId, activeItemId, isStudent
                 {prevItem ? (
                     <button
                         onClick={() => handleItemNavigation(prevItem)}
-                        className="flex flex-col text-left items-start gap-1 group py-2.5 px-5 rounded-2xl bg-white border border-gray-200 hover:border-gray-300 hover:shadow-xs transition-all cursor-pointer max-w-[280px] md:max-w-[340px]"
+                        className="flex flex-col text-left items-start gap-1 group py-2.5 px-5 rounded-2xl bg-white border border-gray-200 hover:border-gray-300 hover:shadow-xs transition cursor-pointer max-w-[280px] md:max-w-[340px]"
                     >
-                        <span className="flex items-center gap-1 text-[9px] font-black text-gray-400 uppercase tracking-widest">
+                        <span className="flex items-center gap-1 text-[9px] font-black text-gray-400 uppercase tracking-wider">
                             <ArrowLeft size={10} className="group-hover:-translate-x-0.5 transition-transform" />
                             <span>Previous Item</span>
                         </span>
-                        <span className="text-xs font-bold text-[#3C0078] truncate w-full mt-0.5 group-hover:underline">
+                        <span className="text-xs font-bold text-brand truncate w-full mt-0.5 group-hover:underline">
                             {prevItem.label}
                         </span>
                     </button>
@@ -291,13 +292,13 @@ export default function CourseItemView({ activeCourseId, activeItemId, isStudent
                 {nextItem ? (
                     <button
                         onClick={() => handleItemNavigation(nextItem)}
-                        className="flex flex-col text-right items-end gap-1 group py-2.5 px-5 rounded-2xl bg-white border border-gray-200 hover:border-gray-300 hover:shadow-xs transition-all cursor-pointer max-w-[280px] md:max-w-[340px]"
+                        className="flex flex-col text-right items-end gap-1 group py-2.5 px-5 rounded-2xl bg-white border border-gray-200 hover:border-gray-300 hover:shadow-xs transition cursor-pointer max-w-[280px] md:max-w-[340px]"
                     >
-                        <span className="flex items-center gap-1 text-[9px] font-black text-gray-400 uppercase tracking-widest">
+                        <span className="flex items-center gap-1 text-[9px] font-black text-gray-400 uppercase tracking-wider">
                             <span>Next Item</span>
                             <ArrowRight size={10} className="group-hover:translate-x-0.5 transition-transform" />
                         </span>
-                        <span className="text-xs font-bold text-[#3C0078] truncate w-full mt-0.5 group-hover:underline">
+                        <span className="text-xs font-bold text-brand truncate w-full mt-0.5 group-hover:underline">
                             {nextItem.label}
                         </span>
                     </button>

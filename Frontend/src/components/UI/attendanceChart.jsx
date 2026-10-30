@@ -52,26 +52,26 @@ export default function AttendanceChart({ attended = 38, total = 42, missed = 4,
                         initial={{ scale: 0.5, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         transition={{ delay: 0.5, duration: 0.5 }}
-                        className="text-6xl font-black italic tracking-tighter text-[#3C0078]"
+                        className="text-6xl font-black italic tracking-tighter text-brand"
                     >
                         {percentage}%
                     </motion.span>
-                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 mt-1">{centerLabel}</span>
+                    <span className="text-[10px] font-black uppercase tracking-wider text-gray-400 mt-1">{centerLabel}</span>
                 </div>
             </div>
 
             {/* Floating Stats Layout */}
             <div className="grid grid-cols-3 gap-8 w-full mt-8 border-t border-gray-50 pt-8">
                 <div className="flex flex-col items-center">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">{leftStat}</span>
+                    <span className="text-[10px] font-black uppercase tracking-wider text-gray-400 mb-1">{leftStat}</span>
                     <span className="text-xl font-bold text-gray-900">{leftValue ?? total}</span>
                 </div>
                 <div className="flex flex-col items-center">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-[#87CEFA] mb-1">{midStat}</span>
+                    <span className="text-[10px] font-black uppercase tracking-wider text-sky mb-1">{midStat}</span>
                     <span className="text-xl font-bold text-gray-900">{midValue ?? attended}</span>
                 </div>
                 <div className="flex flex-col items-center">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-[#FF8731] mb-1">{rightStat}</span>
+                    <span className="text-[10px] font-black uppercase tracking-wider text-ember mb-1">{rightStat}</span>
                     <span className="text-xl font-bold text-gray-900">{rightValue ?? missed}</span>
                 </div>
             </div>
@@ -83,7 +83,7 @@ export default function AttendanceChart({ attended = 38, total = 42, missed = 4,
                 className="absolute top-6 right-8 flex items-center gap-2 px-3 py-1 rounded-full bg-green-50 text-green-600 border border-green-100 shadow-sm"
             >
                 <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-[10px] font-black uppercase tracking-widest">On Track</span>
+                <span className="text-[10px] font-black uppercase tracking-wider">On Track</span>
             </motion.div>
         </div>
     );

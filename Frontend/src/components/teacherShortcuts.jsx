@@ -78,7 +78,7 @@ export default function TeacherShortcuts() {
                   value={newLabel}
                   onChange={(e) => setNewLabel(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleAdd()}
-                  className="flex-1 text-sm border border-gray-200 rounded-lg px-3 py-2 outline-none focus:border-[#3C0078] transition-colors"
+                  className="flex-1 text-sm border border-gray-200 rounded-lg px-3 py-2 outline-none focus:border-brand transition-colors"
                 />
               </div>
               <div className="flex items-center gap-2">
@@ -89,7 +89,7 @@ export default function TeacherShortcuts() {
                   value={newUrl}
                   onChange={(e) => setNewUrl(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleAdd()}
-                  className="flex-1 text-sm border border-gray-200 rounded-lg px-3 py-2 outline-none focus:border-[#3C0078] transition-colors"
+                  className="flex-1 text-sm border border-gray-200 rounded-lg px-3 py-2 outline-none focus:border-brand transition-colors"
                 />
               </div>
               <div className="flex gap-2 justify-end">
@@ -101,7 +101,7 @@ export default function TeacherShortcuts() {
                 </button>
                 <button
                   onClick={handleAdd}
-                  className="px-4 py-1.5 text-xs font-bold text-white bg-[#3C0078] rounded-lg hover:bg-[#2a0055] transition-colors"
+                  className="px-4 py-1.5 text-xs font-bold text-white bg-brand rounded-lg hover:bg-brand-deep transition-colors"
                 >
                   Add
                 </button>
@@ -125,7 +125,7 @@ export default function TeacherShortcuts() {
               animate="visible"
               exit="exit"
               layout
-              className="group relative inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 hover:border-[#3C0078]/30 hover:shadow-md hover:bg-[#3C0078]/[0.03] transition-all duration-300 cursor-pointer"
+              className="group relative inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 hover:border-brand/30 hover:shadow-md hover:bg-brand/[0.03] transition duration-300 cursor-pointer"
             >
               {shortcut.label}
               {/* Remove button – appears on hover */}
@@ -135,7 +135,7 @@ export default function TeacherShortcuts() {
                   e.stopPropagation();
                   handleRemove(shortcut.id);
                 }}
-                className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-gray-200 hover:bg-red-400 hover:text-white text-gray-500 items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-all duration-200 hidden group-hover:flex"
+                className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-gray-200 hover:bg-red-400 hover:text-white text-gray-500 items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition duration-200 hidden group-hover:flex"
                 aria-label={`Remove ${shortcut.label}`}
               >
                 <X className="w-3 h-3" />

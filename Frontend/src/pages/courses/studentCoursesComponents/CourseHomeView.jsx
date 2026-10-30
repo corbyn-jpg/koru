@@ -165,12 +165,12 @@ export default function CourseHomeView({ subject, course, loading }) {
 
           {/* Lecturers Grid - Centered & Revamped */}
           <section className="w-full pt-16 pb-12 border-t border-gray-100 flex flex-col items-center mt-12">
-            <h4 className="text-[12px] font-black uppercase tracking-[0.4em] text-gray-400 mb-8 text-center select-none">
+            <h4 className="text-[12px] font-black uppercase tracking-wider text-gray-400 mb-8 text-center select-none">
               Lecturer{lecturers.length > 1 ? "s" : ""}
             </h4>
             <div className="flex flex-wrap justify-center gap-8 w-full max-w-4xl">
               {lecturers.map(lecturer => (
-                <div key={lecturer.id} className="flex items-center gap-4 bg-gray-50/50 hover:bg-gray-50 border border-gray-100 p-4 rounded-2xl transition-all shadow-2xs min-w-[280px]">
+                <div key={lecturer.id} className="flex items-center gap-4 bg-gray-50/50 hover:bg-gray-50 border border-gray-100 p-4 rounded-2xl transition shadow-2xs min-w-[280px]">
                   {/* Profile Image / Initials Fallback */}
                   {lecturer.profileImageUrl ? (
                     <img
@@ -188,12 +188,12 @@ export default function CourseHomeView({ subject, course, loading }) {
                     <span className="text-sm font-black text-gray-900 leading-tight">
                       {lecturer.firstName} {lecturer.lastName}
                     </span>
-                    <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#3C0078] mt-0.5 select-none">
+                    <span className="text-[11px] font-extrabold uppercase tracking-wider text-brand mt-0.5 select-none">
                       Module Head
                     </span>
                     <a
                       href={`mailto:${lecturer.email}`}
-                      className="text-xs text-gray-500 hover:text-[#3C0078] font-semibold mt-1 break-all transition-colors"
+                      className="text-xs text-gray-500 hover:text-brand font-semibold mt-1 break-all transition-colors"
                     >
                       {lecturer.email}
                     </a>

@@ -328,7 +328,7 @@ export default function NovelBlockMenu() {
             {/* Plus button */}
             <button
                 onClick={handleAddBlock}
-                className="p-1 rounded-md text-gray-300 hover:text-gray-600 hover:bg-gray-100 transition-all"
+                className="p-1 rounded-md text-gray-300 hover:text-gray-600 hover:bg-gray-100 transition"
                 title="Add block below"
             >
                 <Plus size={16} />
@@ -343,7 +343,7 @@ export default function NovelBlockMenu() {
                     setMenuOpen(!menuOpen);
                     setSubMenu(null);
                 }}
-                className="p-1 rounded-md text-gray-300 hover:text-gray-600 hover:bg-gray-100 transition-all cursor-grab"
+                className="p-1 rounded-md text-gray-300 hover:text-gray-600 hover:bg-gray-100 transition cursor-grab"
                 title="Block menu"
             >
                 <GripVertical size={16} />
@@ -391,7 +391,7 @@ export default function NovelBlockMenu() {
                         </button>
                         {subMenu === "color" && (
                             <div className="absolute left-full top-0 ml-1 w-48 bg-white rounded-xl border border-gray-200 shadow-2xl py-1 z-50">
-                                <div className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest text-gray-400">Text Color</div>
+                                <div className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-gray-400">Text Color</div>
                                 {TEXT_COLORS.map((c) => (
                                     <button
                                         key={c.label + "-text"}
@@ -403,7 +403,7 @@ export default function NovelBlockMenu() {
                                     </button>
                                 ))}
                                 <div className="border-t border-gray-100 my-1" />
-                                <div className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest text-gray-400">Background</div>
+                                <div className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-gray-400">Background</div>
                                 {BG_COLORS.map((c) => (
                                     <button
                                         key={c.label + "-bg"}

@@ -109,16 +109,16 @@ export default function GoogleAuthButton({
     };
   }, [clientId, onCredential, onError, text]);
 
-  if (!clientId) {
-    return (
-      <div className="rounded-2xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-800">
-        Add your Google Web Client ID in the frontend env or backend app settings to enable Google sign-in.
-      </div>
-    );
-  }
+  // Google sign-in is optional: without a client ID the button (and its "or" divider) simply isn't shown
+  if (!clientId) return null;
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-2">
+      <div className="my-2 flex w-full items-center gap-3 text-xs uppercase tracking-wider text-slate-400">
+        <span className="h-px flex-1 bg-slate-200" />
+        <span>or</span>
+        <span className="h-px flex-1 bg-slate-200" />
+      </div>
       {!isReady ? (
         <div className="flex w-full h-[50px] items-center justify-center gap-3 rounded-2xl border border-slate-100 bg-white px-4 animate-pulse">
           <div className="w-5 h-5 rounded bg-gray-200 shrink-0" />

@@ -83,7 +83,7 @@ export default function CheckInModal({ courseName, onClose }) {
                     ) : (
                         <>
                             <div className="mb-8">
-                                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#3C0078]">Check In</span>
+                                <span className="text-[10px] font-black uppercase tracking-wider text-brand">Check In</span>
                                 <h2 className="text-2xl font-black text-gray-900 mt-1 leading-tight">{courseName}</h2>
                                 <p className="text-sm text-gray-400 mt-1">Enter the 4-digit code from your lecturer</p>
                             </div>
@@ -101,12 +101,12 @@ export default function CheckInModal({ courseName, onClose }) {
                                         onChange={e => handleChange(idx, e.target.value)}
                                         onKeyDown={e => handleKeyDown(idx, e)}
                                         disabled={loading}
-                                        className={`w-16 h-16 text-center text-3xl font-black rounded-2xl border-2 outline-none transition-all
+                                        className={`w-16 h-16 text-center text-3xl font-black rounded-2xl border-2 outline-none transition
                                             ${d
-                                                ? "border-[#3C0078] bg-[#3C0078]/5 text-[#3C0078]"
+                                                ? "border-brand bg-brand/5 text-brand"
                                                 : "border-gray-200 bg-gray-50 text-gray-900"
                                             }
-                                            focus:border-[#3C0078] focus:bg-[#3C0078]/5
+                                            focus:border-brand focus:bg-brand/5
                                             disabled:opacity-50`}
                                     />
                                 ))}
@@ -119,7 +119,7 @@ export default function CheckInModal({ courseName, onClose }) {
                             <button
                                 onClick={() => submit(code)}
                                 disabled={code.length !== 4 || loading}
-                                className="w-full py-4 rounded-2xl bg-[#3C0078] text-white font-bold text-sm hover:bg-[#2A0054] transition-all disabled:opacity-40"
+                                className="w-full py-4 rounded-2xl bg-brand text-white font-bold text-sm hover:bg-brand-deep transition disabled:opacity-40"
                             >
                                 {loading ? "Checking in…" : "Check In"}
                             </button>
