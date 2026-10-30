@@ -19,7 +19,7 @@ const SUBPAGES = ["overview", "students", "groups", "assignments", "grades", "gr
 export default function AdminCourses() {
     const location = useLocation();
     const navigate = useNavigate();
-    const { visibleCourses, loading: ctxLoading, allCourses } = useCourses();
+    const { visibleCourses, loading: ctxLoading } = useCourses();
 
     // Full course objects (with teacher, subject, capacity, etc.) for detail views
     const [fullCourses, setFullCourses] = useState([]);

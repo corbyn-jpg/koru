@@ -177,7 +177,6 @@ export default function AdminCalendar() {
 
   const conflicts = useMemo(() => detectConflicts(classes), [classes]);
   const unscheduled = useMemo(() => classes.filter(c => !c.startTime), [classes]);
-  const conflictIds = useMemo(() => new Set(conflicts.flatMap(c => [c.slot1.id, c.slot2.id])), [conflicts]);
 
   const handleGenerate = async () => {
     setGenerating(true);

@@ -61,7 +61,6 @@ export default function AdminDashboard() {
   // ── Cohort data for selected course ──
   const [courseCohorts, setCourseCohorts] = useState([]);
   const [cohortStudentMap, setCohortStudentMap] = useState({});
-  const [unassignedClassCount, setUnassignedClassCount] = useState(0);
 
   // ── Search state ──
   const [courseSearch, setCourseSearch] = useState("");
@@ -268,13 +267,11 @@ export default function AdminDashboard() {
     Promise.all([
       getCourseCohorts(selectedCourseId).catch(() => []),
       getCourseStudents(selectedCourseId).catch(() => []),
-      classService.getUnassignedByCourse(selectedCourseId).catch(() => []),
-    ]).then(([cohorts, courseStudents, unassignedClasses]) => {
+    ]).then(([cohorts, courseStudents]) => {
       setCourseCohorts(cohorts || []);
       const map = {};
       (courseStudents || []).forEach(s => { map[s.studentId] = s.classGroupId; });
       setCohortStudentMap(map);
-      setUnassignedClassCount((unassignedClasses || []).length);
     });
   }, [selectedCourseId]);
 

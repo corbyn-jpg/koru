@@ -683,7 +683,7 @@ export function AdminCohortsView({ courseId, course }) {
   const handleImportFromEvents = async () => {
     setImporting(true);
     try {
-      const result = await classService.importFromEvents(courseId);
+      await classService.importFromEvents(courseId);
       await load();
       bumpRefresh("unassigned");
     } catch (err) {

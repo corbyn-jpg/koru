@@ -8,7 +8,6 @@ export default function AssignmentItem({
   courseCode = "UX300",
   completed = false,
   uiState = "",
-  onToggle,
   assignmentId,
   courseId,
 }) {

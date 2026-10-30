@@ -89,7 +89,7 @@ using (var scope = app.Services.CreateScope())
     var logger  = services.GetRequiredService<ILogger<Program>>();
     try
     {
-        RealDataSeeder.Seed(context); // swap to DbSeeder.Seed(context) for mock data
+        RealDataSeeder.Seed(context);
     }
     catch (Exception ex)
     {

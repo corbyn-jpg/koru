@@ -63,8 +63,8 @@
     "wait-on": "^8.0.3"
   },
   "build": {
-    "appId": "com.learnonline.app",
-    "productName": "LearnOnline",
+    "appId": "com.koru.app",
+    "productName": "Koru",
     "directories": {
       "output": "dist-electron"
     },
@@ -74,7 +74,7 @@
     ],
     "win": {
       "target": "nsis",
-      "icon": "public/favicon.ico"
+      "icon": "public/fav.png"
     },
     "mac": {
       "target": "dmg"

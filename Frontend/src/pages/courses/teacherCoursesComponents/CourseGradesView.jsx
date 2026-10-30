@@ -174,7 +174,6 @@ export function CourseGradesView({ activeCourseId, subject }) {
     const belowTarget = studentRows.length - aboveTarget;
     const aboveTargetPct = studentRows.length > 0 ? Math.round((aboveTarget / studentRows.length) * 100) : 0;
     const topStudent = studentRows.length > 0 ? studentRows.reduce((a, b) => a.avgGradePct > b.avgGradePct ? a : b) : null;
-    const lowestStudent = studentRows.length > 0 ? studentRows.reduce((a, b) => a.avgGradePct < b.avgGradePct ? a : b) : null;
     const topPerformers = [...studentRows].sort((a, b) => b.avgGradePct - a.avgGradePct).slice(0, 10);
     const gradeBreakdown = [
         { label: "80%+",   count: studentRows.filter(r => r.avgGradePct >= 80).length },

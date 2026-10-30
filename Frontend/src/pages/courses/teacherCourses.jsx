@@ -49,7 +49,6 @@ export default function TeacherCourses() {
     const isItemDetailPage = pathParts[2] === "items" && pathParts.length === 4;
     const activeItemId = isItemDetailPage ? pathParts[3] : null;
 
-    const isHomePage = !isGradesPage && !isAnnouncementsPage && !isAssignmentsPage && !isAttendancePage && !isModulesPage && !isNotesPage && !isItemDetailPage;
 
     const activeSubpageLabel = React.useMemo(() => {
         if (isGradesPage) return "Grades";

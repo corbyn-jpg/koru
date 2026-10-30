@@ -3,7 +3,7 @@ import { Folder, Filter } from "@solar-icons/react";
 import { X, Calendar, CheckCircle2, XCircle, Clock } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import AttendanceChart from "../../../components/UI/attendanceChart";
-import { getCourseAttendance, updateAttendanceRecord } from "../../../services/attendanceService";
+import { getCourseAttendance } from "../../../services/attendanceService";
 import { getCourseCohorts, getCourseStudents } from "../../../services/classGroupService";
 import CohortFilterBar from "../../../components/CohortFilterBar";
 import { staggerContainer, slideUp, scaleIn } from "./constants";
@@ -50,10 +50,6 @@ export function CourseAttendanceView({ activeCourseId, subject }) {
     const [searchQuery, setSearchQuery] = useState("");
     const [statusFilter, setStatusFilter] = useState("All");
 
-    const handleUpdateStatus = async (recordId, newStatus) => {
-        await updateAttendanceRecord(recordId, newStatus);
-        setRecords(prev => prev.map(rec => rec.id === recordId ? { ...rec, status: newStatus } : rec));
-    };
 
     useEffect(() => {
         if (!activeCourseId) return;

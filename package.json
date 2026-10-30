@@ -2,10 +2,5 @@
   "scripts": {
     "test:backend": "dotnet test Backend/LearnOnline.Tests/LearnOnline.Tests.csproj",
     "test:backend:coverage": "dotnet test Backend/LearnOnline.Tests/LearnOnline.Tests.csproj --collect:\"XPlat Code Coverage\" --results-directory reports/backend/raw && dotnet reportgenerator -reports:\"reports/backend/raw/**/coverage.cobertura.xml\" -targetdir:reports/backend/html -reporttypes:Html -classfilters:\"-TodoApi.Migrations.*;-LearnOnline.Data.DbSeeder;-LearnOnline.Data.RealDataSeeder;-Program;-Microsoft.AspNetCore.OpenApi.Generated;-System.Runtime.CompilerServices.*\""
-  },
-  "dependencies": {
-    "@solar-icons/react": "^1.1.0",
-    "canvas-confetti": "^1.9.4",
-    "solar-icon-set": "^2.0.1"
   }
 }
