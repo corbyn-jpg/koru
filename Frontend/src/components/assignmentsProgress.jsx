@@ -121,7 +121,7 @@ export default function AssignmentsProgress() {
   );
 
   return (
-    <div className="w-full h-full flex flex-col bg-white/70 border border-gray-200 rounded-3xl p-4">
+    <div className="w-full h-full flex flex-col bg-white border border-gray-200 shadow-card rounded-3xl p-4">
       <div className="flex items-center justify-between mt-5 mb-5">
         <h2 className="text-2xl font-['Gabarito']">Assignments</h2>
       </div>

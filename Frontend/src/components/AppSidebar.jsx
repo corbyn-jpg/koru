@@ -335,9 +335,9 @@ export default function AppSidebar() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="fixed z-40 flex flex-col pt-6 overflow-hidden transition duration-300
-              md:left-[104px] md:top-4 md:bottom-4 md:w-72 md:bg-white/80 md:border md:border-white/20 md:rounded-[28px] md:shadow-2xl
-              max-md:left-[76px] max-md:top-0 max-md:h-screen max-md:w-72 max-md:bg-white/95 max-md:border-r max-md:border-gray-200/50 max-md:shadow-2xl"
+            className="fixed z-[55] flex flex-col pt-6 overflow-hidden transition duration-300
+              md:left-[104px] md:top-4 md:bottom-4 md:w-72 md:bg-white md:border md:border-white/20 md:rounded-[28px] md:shadow-2xl
+              max-md:left-[76px] max-md:top-0 max-md:h-screen max-md:w-72 max-md:bg-white max-md:border-r max-md:border-gray-200/50 max-md:shadow-2xl"
           >
             {/* Header */}
             <div className="px-5 pb-4 border-b border-gray-200 flex flex-col gap-1">

@@ -318,8 +318,8 @@ export default function TeacherCalendar() {
             </button>
           </div>
 
-          {/* View selector — truly centred */}
-          <div className="absolute left-1/2 -translate-x-1/2">
+          {/* View selector: centred on wide screens, flows inline on narrow ones so it never covers the month */}
+          <div className="xl:absolute xl:left-1/2 xl:-translate-x-1/2">
             <CalendarViewSelector activeView={activeView} onChange={setActiveView} />
           </div>
 

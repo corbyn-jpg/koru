@@ -32,7 +32,7 @@ export default function DashboardStatTile({
     <motion.div
       whileHover={{ y: -1 }}
       transition={{ type: "spring", stiffness: 340, damping: 28 }}
-      className="bg-white/70 border border-gray-200 rounded-2xl px-5 py-4 hover:border-gray-200 transition-colors duration-150"
+      className="bg-white border border-gray-200 shadow-card rounded-2xl px-5 py-4 hover:border-gray-200 transition-colors duration-150"
     >
       {/* Icon + hint row */}
       <div className="flex items-center justify-between mb-3">

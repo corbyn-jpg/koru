@@ -68,7 +68,7 @@ export function StudentColumn({
   }, [hasCohorts, cohorts, filteredStudents, cohortStudentMap]);
 
   return (
-    <div className="flex flex-col bg-white/70 border border-gray-200 rounded-3xl p-4 h-full">
+    <div className="flex flex-col bg-white border border-gray-200 shadow-card rounded-3xl p-4 h-full">
       <div className="flex items-center justify-between mb-3">
         <h2 className="text-2xl font-bold font-['Gabarito']">Students</h2>
         {showAddStudent && (

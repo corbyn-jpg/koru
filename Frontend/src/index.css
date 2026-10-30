@@ -18,6 +18,9 @@
   --color-ember: #ff8731;        /* Koru orange: warnings, due-soon, secondary accent */
   --color-sky: #87cefa;          /* Koru light blue: background glow, info */
   --color-mint: #9be9ea;         /* logo teal */
+  --color-sunken: #f6f5fa;       /* page panel behind cards: a touch darker than white so cards lift off it */
+
+  --shadow-card: 0 1px 2px 0 rgb(42 0 84 / 0.05), 0 1px 3px 0 rgb(42 0 84 / 0.04); /* the smallest lift for cards */
 
   --color-canvas-from: hsl(233 100% 94%);
   --color-canvas-to: #ffffff;
