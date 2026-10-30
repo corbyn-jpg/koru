@@ -1,4 +1,6 @@
 using System.Net.Http.Json;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OtpNet;
@@ -37,6 +39,41 @@ namespace LearnOnline.Controllers
             TwoFactorEnabled = user.TwoFactorEnabled
         };
 
+        // Account settings, passwords and 2FA can only be changed by the account owner (or an admin)
+        private bool IsSelfOrAdmin(string userId) =>
+            User.FindFirstValue(ClaimTypes.NameIdentifier) == userId || User.IsInRole("admin");
+
+        // GET /api/User/{id}/export – POPIA access request: everything Koru stores about one person, as JSON
+        [HttpGet("{id}/export")]
+        public async Task<ActionResult> ExportData(string id)
+        {
+            if (!IsSelfOrAdmin(id)) return Forbid();
+            var user = await _context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == id);
+            if (user == null) return NotFound();
+
+            var isAdmin = User.IsInRole("admin");
+            var submissionIds = await _context.Submissions.Where(s => s.StudentId == id).Select(s => s.Id).ToListAsync();
+
+            return Ok(new
+            {
+                exportedAt = DateTime.UtcNow,
+                profile = ToResponseDto(user),
+                enrollments = await _context.Enrollments.AsNoTracking().Where(e => e.StudentId == id)
+                    .Select(e => new { e.Id, e.CourseId, courseName = e.Course!.Name, courseCode = e.Course.Code, e.EnrolledAt, e.Status })
+                    .ToListAsync(),
+                submissions = await _context.Submissions.AsNoTracking().Where(s => s.StudentId == id)
+                    .Select(s => new { s.Id, s.AssignmentId, assignment = s.Assignment!.Title, s.SubmittedAt, s.FileUrl, s.Status })
+                    .ToListAsync(),
+                // Unreleased marks stay hidden from students until the lecturer publishes them
+                grades = await _context.Grades.AsNoTracking()
+                    .Where(g => submissionIds.Contains(g.SubmissionId) && (g.IsReleased || isAdmin))
+                    .ToListAsync(),
+                attendance = await _context.Attendances.AsNoTracking().Where(a => a.StudentId == id).ToListAsync(),
+                notes = await _context.Notes.AsNoTracking().Where(n => n.StudentId == id).ToListAsync(),
+                todos = await _context.TodoItems.AsNoTracking().Where(t => t.TeacherId == id).ToListAsync(),
+            });
+        }
+
         // GET /api/User – return all users (minus password hashes)
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserResponseDto>>> GetAll()
@@ -54,8 +91,9 @@ namespace LearnOnline.Controllers
             return Ok(ToResponseDto(user));
         }
 
-        // POST /api/User/register – create a new account (admin only via UI)
+        // POST /api/User/register – create a new account (admins only)
         [HttpPost("register")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<UserResponseDto>> Register(CreateUserDto dto)
         {
             var email = dto.Email.Trim().ToLowerInvariant();
@@ -87,6 +125,7 @@ namespace LearnOnline.Controllers
         // POST /api/User/login – authenticate with email + password
         // Returns requiresTwoFactor = true when the account has 2FA enabled
         [HttpPost("login")]
+        [AllowAnonymous]
         public async Task<ActionResult> Login(LoginDto dto)
         {
             var email = dto.Email.Trim().ToLowerInvariant();
@@ -110,12 +149,14 @@ namespace LearnOnline.Controllers
                 lastName = user.LastName,
                 role = user.Role.ToString(),
                 profileImageUrl = user.ProfileImageUrl,
-                twoFactorEnabled = user.TwoFactorEnabled
+                twoFactorEnabled = user.TwoFactorEnabled,
+                token = AuthTokens.Create(user, _configuration["Jwt:Key"]!)
             });
         }
 
         // GET /api/User/google-config – exposes the Google client ID used by the frontend sign-in button
         [HttpGet("google-config")]
+        [AllowAnonymous]
         public ActionResult GetGoogleConfig()
         {
             return Ok(new { clientId = _configuration["GoogleAuth:ClientId"] ?? string.Empty });
@@ -124,6 +165,7 @@ namespace LearnOnline.Controllers
         // POST /api/User/google – sign in with Google
         // Only existing accounts (created by admin) can log in; no auto-registration
         [HttpPost("google")]
+        [AllowAnonymous]
         public async Task<ActionResult> GoogleAuth(GoogleAuthDto dto)
         {
             if (string.IsNullOrWhiteSpace(dto.Credential))
@@ -175,7 +217,8 @@ namespace LearnOnline.Controllers
                 role = user.Role.ToString(),
                 profileImageUrl = user.ProfileImageUrl,
                 twoFactorEnabled = user.TwoFactorEnabled,
-                provider = "Google"
+                provider = "Google",
+                token = AuthTokens.Create(user, _configuration["Jwt:Key"]!)
             });
         }
 
@@ -184,6 +227,7 @@ namespace LearnOnline.Controllers
         [HttpGet("2fa/setup/{userId}")]
         public async Task<ActionResult> Setup2FA(string userId)
         {
+            if (!IsSelfOrAdmin(userId)) return Forbid();
             var user = await _context.Users.FindAsync(userId);
             if (user == null) return NotFound(new { message = "User not found" });
 
@@ -208,6 +252,7 @@ namespace LearnOnline.Controllers
         [HttpPost("2fa/enable")]
         public async Task<ActionResult> Enable2FA(TwoFactorCodeDto dto)
         {
+            if (!IsSelfOrAdmin(dto.UserId)) return Forbid();
             var user = await _context.Users.FindAsync(dto.UserId);
             if (user == null || string.IsNullOrEmpty(user.TwoFactorSecret))
                 return BadRequest(new { message = "2FA setup not initiated. Please start the setup process first." });
@@ -229,6 +274,7 @@ namespace LearnOnline.Controllers
         [HttpPost("2fa/disable")]
         public async Task<ActionResult> Disable2FA(TwoFactorCodeDto dto)
         {
+            if (!IsSelfOrAdmin(dto.UserId)) return Forbid();
             var user = await _context.Users.FindAsync(dto.UserId);
             if (user == null || !user.TwoFactorEnabled || string.IsNullOrEmpty(user.TwoFactorSecret))
                 return BadRequest(new { message = "2FA is not currently enabled." });
@@ -249,6 +295,7 @@ namespace LearnOnline.Controllers
         // POST /api/User/2fa/validate
         // Used during login when 2FA is required; returns the full user session on success
         [HttpPost("2fa/validate")]
+        [AllowAnonymous]
         public async Task<ActionResult> Validate2FA(TwoFactorCodeDto dto)
         {
             var user = await _context.Users.FindAsync(dto.UserId);
@@ -269,7 +316,8 @@ namespace LearnOnline.Controllers
                 lastName = user.LastName,
                 role = user.Role.ToString(),
                 profileImageUrl = user.ProfileImageUrl,
-                twoFactorEnabled = user.TwoFactorEnabled
+                twoFactorEnabled = user.TwoFactorEnabled,
+                token = AuthTokens.Create(user, _configuration["Jwt:Key"]!)
             });
         }
 
@@ -277,6 +325,7 @@ namespace LearnOnline.Controllers
         [HttpPut("profile/{id}")]
         public async Task<ActionResult<UserResponseDto>> UpdateProfile(string id, UpdateUserProfileDto updated)
         {
+            if (!IsSelfOrAdmin(id)) return Forbid();
             var user = await _context.Users.FindAsync(id);
             if (user == null) return NotFound();
 
@@ -299,6 +348,7 @@ namespace LearnOnline.Controllers
         [HttpPost("change-password/{id}")]
         public async Task<ActionResult> ChangePassword(string id, ChangePasswordDto dto)
         {
+            if (!IsSelfOrAdmin(id)) return Forbid();
             var user = await _context.Users.FindAsync(id);
             if (user == null) return NotFound(new { message = "User not found" });
 
@@ -315,6 +365,7 @@ namespace LearnOnline.Controllers
 
         // PUT /api/User/{id} – update a user's profile fields
         [HttpPut("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Update(string id, User updated)
         {
             var user = await _context.Users.FindAsync(id);
@@ -334,6 +385,7 @@ namespace LearnOnline.Controllers
 
         // DELETE /api/User/{id} – permanently remove a user account
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(string id)
         {
             var user = await _context.Users.FindAsync(id);

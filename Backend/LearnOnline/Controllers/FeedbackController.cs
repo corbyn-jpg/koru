@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LearnOnline.Data;
@@ -41,6 +42,7 @@ namespace LearnOnline.Controllers
 
         // POST /api/Feedback – create new feedback on a submission
         [HttpPost]
+        [Authorize(Roles = "teacher,admin")]
         public async Task<ActionResult<Feedback>> Create(Feedback feedback)
         {
             feedback.Id = Guid.NewGuid().ToString();
@@ -52,6 +54,7 @@ namespace LearnOnline.Controllers
 
         // PUT /api/Feedback/{id} – update the feedback content or reassign it
         [HttpPut("{id}")]
+        [Authorize(Roles = "teacher,admin")]
         public async Task<IActionResult> Update(string id, Feedback updated)
         {
             var feedback = await _context.Feedbacks.FindAsync(id);
@@ -67,6 +70,7 @@ namespace LearnOnline.Controllers
 
         // DELETE /api/Feedback/{id} – permanently remove a feedback entry
         [HttpDelete("{id}")]
+        [Authorize(Roles = "teacher,admin")]
         public async Task<IActionResult> Delete(string id)
         {
             var feedback = await _context.Feedbacks.FindAsync(id);

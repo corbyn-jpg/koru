@@ -8,14 +8,26 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Moq;
 using Moq.Protected;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 
 namespace LearnOnline.Tests.Controllers;
 
 public class UserControllerTests
 {
+    private const string TestJwtKey = "test-signing-key-that-is-at-least-32-characters";
+
+    // Controllers read the caller from HttpContext.User; tests act as an admin unless they say otherwise
+    private static UserController SignedIn(UserController controller, string userId = "admin-id", string role = "admin")
+    {
+        var identity = new ClaimsIdentity(new[] { new Claim(ClaimTypes.NameIdentifier, userId), new Claim(ClaimTypes.Role, role) }, "test");
+        controller.ControllerContext = new ControllerContext { HttpContext = new DefaultHttpContext { User = new ClaimsPrincipal(identity) } };
+        return controller;
+    }
+
     private static IConfiguration MakeConfig(string? googleClientId = null)
     {
-        var dict = new Dictionary<string, string?>();
+        var dict = new Dictionary<string, string?> { ["Jwt:Key"] = TestJwtKey };
         if (googleClientId != null) dict["GoogleAuth:ClientId"] = googleClientId;
         return new ConfigurationBuilder().AddInMemoryCollection(dict).Build();
     }
@@ -44,7 +56,7 @@ public class UserControllerTests
         db.Users.Add(TestData.MakeUser(email: "b@x.com"));
         await db.SaveChangesAsync();
 
-        var controller = new UserController(db, MakeHttpClientFactory(), MakeConfig());
+        var controller = SignedIn(new UserController(db, MakeHttpClientFactory(), MakeConfig()));
         var result = await controller.GetAll();
 
         var ok = result.Result as OkObjectResult;
@@ -60,7 +72,7 @@ public class UserControllerTests
         db.Users.Add(user);
         await db.SaveChangesAsync();
 
-        var controller = new UserController(db, MakeHttpClientFactory(), MakeConfig());
+        var controller = SignedIn(new UserController(db, MakeHttpClientFactory(), MakeConfig()));
         var result = await controller.GetById(user.Id);
         var ok = result.Result as OkObjectResult;
         ((UserResponseDto)ok!.Value!).Id.Should().Be(user.Id);
@@ -70,7 +82,7 @@ public class UserControllerTests
     public async Task GetById_Missing_NotFound()
     {
         using var db = TestDbContextFactory.Create();
-        var controller = new UserController(db, MakeHttpClientFactory(), MakeConfig());
+        var controller = SignedIn(new UserController(db, MakeHttpClientFactory(), MakeConfig()));
         (await controller.GetById("missing")).Result.Should().BeOfType<NotFoundResult>();
     }
 
@@ -78,7 +90,7 @@ public class UserControllerTests
     public async Task Register_NewEmail_CreatesUser()
     {
         using var db = TestDbContextFactory.Create();
-        var controller = new UserController(db, MakeHttpClientFactory(), MakeConfig());
+        var controller = SignedIn(new UserController(db, MakeHttpClientFactory(), MakeConfig()));
         var dto = new CreateUserDto { Email = "New@X.com", Password = "p", FirstName = "F", LastName = "L", Role = UserRole.student };
 
         var result = await controller.Register(dto);
@@ -96,7 +108,7 @@ public class UserControllerTests
         db.Users.Add(TestData.MakeUser(email: "dup@x.com"));
         await db.SaveChangesAsync();
 
-        var controller = new UserController(db, MakeHttpClientFactory(), MakeConfig());
+        var controller = SignedIn(new UserController(db, MakeHttpClientFactory(), MakeConfig()));
         var dto = new CreateUserDto { Email = "dup@x.com", Password = "p", FirstName = "F", LastName = "L", Role = UserRole.student };
 
         var result = await controller.Register(dto);
@@ -121,7 +133,7 @@ public class UserControllerTests
         db.Users.Add(user);
         await db.SaveChangesAsync();
 
-        var controller = new UserController(db, MakeHttpClientFactory(), MakeConfig());
+        var controller = SignedIn(new UserController(db, MakeHttpClientFactory(), MakeConfig()));
         var result = await controller.Login(new LoginDto { Email = "Login@X.com", Password = "secret123" });
 
         result.Should().BeOfType<OkObjectResult>();
@@ -144,7 +156,7 @@ public class UserControllerTests
         db.Users.Add(user);
         await db.SaveChangesAsync();
 
-        var controller = new UserController(db, MakeHttpClientFactory(), MakeConfig());
+        var controller = SignedIn(new UserController(db, MakeHttpClientFactory(), MakeConfig()));
         var result = await controller.Login(new LoginDto { Email = "login@x.com", Password = "wrong" });
 
         result.Should().BeOfType<UnauthorizedObjectResult>();
@@ -154,7 +166,7 @@ public class UserControllerTests
     public async Task Login_UnknownEmail_ReturnsUnauthorized()
     {
         using var db = TestDbContextFactory.Create();
-        var controller = new UserController(db, MakeHttpClientFactory(), MakeConfig());
+        var controller = SignedIn(new UserController(db, MakeHttpClientFactory(), MakeConfig()));
         var result = await controller.Login(new LoginDto { Email = "nobody@x.com", Password = "x" });
         result.Should().BeOfType<UnauthorizedObjectResult>();
     }
@@ -166,7 +178,7 @@ public class UserControllerTests
         var user = TestData.MakeUser(email: "inactive@x.com", isActive: false);
         db.Users.Add(user);
         await db.SaveChangesAsync();
-        var controller = new UserController(db, MakeHttpClientFactory(), MakeConfig());
+        var controller = SignedIn(new UserController(db, MakeHttpClientFactory(), MakeConfig()));
         var result = await controller.Login(new LoginDto { Email = "inactive@x.com", Password = "Password123!" });
         result.Should().BeOfType<UnauthorizedObjectResult>();
     }
@@ -175,7 +187,7 @@ public class UserControllerTests
     public void GetGoogleConfig_ReturnsConfiguredClientId()
     {
         using var db = TestDbContextFactory.Create();
-        var controller = new UserController(db, MakeHttpClientFactory(), MakeConfig("client-abc"));
+        var controller = SignedIn(new UserController(db, MakeHttpClientFactory(), MakeConfig("client-abc")));
         var result = controller.GetGoogleConfig() as OkObjectResult;
         result.Should().NotBeNull();
     }
@@ -184,7 +196,7 @@ public class UserControllerTests
     public async Task GoogleAuth_EmptyCredential_ReturnsBadRequest()
     {
         using var db = TestDbContextFactory.Create();
-        var controller = new UserController(db, MakeHttpClientFactory(), MakeConfig());
+        var controller = SignedIn(new UserController(db, MakeHttpClientFactory(), MakeConfig()));
         var result = await controller.GoogleAuth(new GoogleAuthDto { Credential = "" });
         result.Should().BeOfType<BadRequestObjectResult>();
     }
@@ -202,7 +214,7 @@ public class UserControllerTests
             Picture = "pic",
             Audience = "client-abc"
         });
-        var controller = new UserController(db, factory, MakeConfig("client-abc"));
+        var controller = SignedIn(new UserController(db, factory, MakeConfig("client-abc")));
 
         var result = await controller.GoogleAuth(new GoogleAuthDto { Credential = "token", Role = UserRole.student });
 
@@ -220,7 +232,7 @@ public class UserControllerTests
             EmailVerified = "false",
             Audience = "client-abc"
         });
-        var controller = new UserController(db, factory, MakeConfig("client-abc"));
+        var controller = SignedIn(new UserController(db, factory, MakeConfig("client-abc")));
 
         var result = await controller.GoogleAuth(new GoogleAuthDto { Credential = "token" });
         result.Should().BeOfType<UnauthorizedObjectResult>();
@@ -236,7 +248,7 @@ public class UserControllerTests
             EmailVerified = "true",
             Audience = "wrong-aud"
         });
-        var controller = new UserController(db, factory, MakeConfig("client-abc"));
+        var controller = SignedIn(new UserController(db, factory, MakeConfig("client-abc")));
 
         var result = await controller.GoogleAuth(new GoogleAuthDto { Credential = "token" });
         result.Should().BeOfType<UnauthorizedObjectResult>();
@@ -249,7 +261,7 @@ public class UserControllerTests
         var user = TestData.MakeUser(email: "old@x.com");
         db.Users.Add(user);
         await db.SaveChangesAsync();
-        var controller = new UserController(db, MakeHttpClientFactory(), MakeConfig());
+        var controller = SignedIn(new UserController(db, MakeHttpClientFactory(), MakeConfig()));
 
         var result = await controller.UpdateProfile(user.Id, new UpdateUserProfileDto
         {
@@ -267,7 +279,7 @@ public class UserControllerTests
     public async Task UpdateProfile_Missing_NotFound()
     {
         using var db = TestDbContextFactory.Create();
-        var controller = new UserController(db, MakeHttpClientFactory(), MakeConfig());
+        var controller = SignedIn(new UserController(db, MakeHttpClientFactory(), MakeConfig()));
         var result = await controller.UpdateProfile("missing", new UpdateUserProfileDto
         {
             Email = "a@x.com",
@@ -287,7 +299,7 @@ public class UserControllerTests
         db.Users.Add(user);
         await db.SaveChangesAsync();
 
-        var controller = new UserController(db, MakeHttpClientFactory(), MakeConfig());
+        var controller = SignedIn(new UserController(db, MakeHttpClientFactory(), MakeConfig()));
         var result = await controller.UpdateProfile(user.Id, new UpdateUserProfileDto
         {
             Email = "taken@x.com",
@@ -316,7 +328,7 @@ public class UserControllerTests
         db.Users.Add(user);
         await db.SaveChangesAsync();
 
-        var controller = new UserController(db, MakeHttpClientFactory(), MakeConfig());
+        var controller = SignedIn(new UserController(db, MakeHttpClientFactory(), MakeConfig()));
         var result = await controller.ChangePassword(user.Id, new ChangePasswordDto { CurrentPassword = "oldpass", NewPassword = "newpass" });
 
         result.Should().BeOfType<OkObjectResult>();
@@ -340,7 +352,7 @@ public class UserControllerTests
         db.Users.Add(user);
         await db.SaveChangesAsync();
 
-        var controller = new UserController(db, MakeHttpClientFactory(), MakeConfig());
+        var controller = SignedIn(new UserController(db, MakeHttpClientFactory(), MakeConfig()));
         var result = await controller.ChangePassword(user.Id, new ChangePasswordDto { CurrentPassword = "wrong", NewPassword = "x" });
 
         result.Should().BeOfType<UnauthorizedObjectResult>();
@@ -350,7 +362,7 @@ public class UserControllerTests
     public async Task ChangePassword_Missing_NotFound()
     {
         using var db = TestDbContextFactory.Create();
-        var controller = new UserController(db, MakeHttpClientFactory(), MakeConfig());
+        var controller = SignedIn(new UserController(db, MakeHttpClientFactory(), MakeConfig()));
         var result = await controller.ChangePassword("missing", new ChangePasswordDto { CurrentPassword = "a", NewPassword = "b" });
         result.Should().BeOfType<NotFoundObjectResult>();
     }
@@ -363,7 +375,7 @@ public class UserControllerTests
         db.Users.Add(user);
         await db.SaveChangesAsync();
 
-        var controller = new UserController(db, MakeHttpClientFactory(), MakeConfig());
+        var controller = SignedIn(new UserController(db, MakeHttpClientFactory(), MakeConfig()));
         var updated = new User { Email = "U2@X.com", FirstName = "N", LastName = "L", Role = UserRole.teacher, IsActive = true };
         var result = await controller.Update(user.Id, updated);
 
@@ -375,7 +387,7 @@ public class UserControllerTests
     public async Task Update_Missing_NotFound()
     {
         using var db = TestDbContextFactory.Create();
-        var controller = new UserController(db, MakeHttpClientFactory(), MakeConfig());
+        var controller = SignedIn(new UserController(db, MakeHttpClientFactory(), MakeConfig()));
         var result = await controller.Update("missing", new User { Email = "x@x.com", FirstName = "x", LastName = "x", Role = UserRole.student, PasswordHash = "h" });
         result.Should().BeOfType<NotFoundResult>();
     }
@@ -388,7 +400,7 @@ public class UserControllerTests
         db.Users.Add(user);
         await db.SaveChangesAsync();
 
-        var controller = new UserController(db, MakeHttpClientFactory(), MakeConfig());
+        var controller = SignedIn(new UserController(db, MakeHttpClientFactory(), MakeConfig()));
         (await controller.Delete(user.Id)).Should().BeOfType<NoContentResult>();
         db.Users.Should().BeEmpty();
     }
@@ -397,7 +409,69 @@ public class UserControllerTests
     public async Task Delete_Missing_NotFound()
     {
         using var db = TestDbContextFactory.Create();
-        var controller = new UserController(db, MakeHttpClientFactory(), MakeConfig());
+        var controller = SignedIn(new UserController(db, MakeHttpClientFactory(), MakeConfig()));
         (await controller.Delete("missing")).Should().BeOfType<NotFoundResult>();
+    }
+
+    [Fact]
+    public async Task Login_ValidCredentials_ReturnsSignedToken()
+    {
+        using var db = TestDbContextFactory.Create();
+        var user = TestData.MakeUser(email: "token@x.com");
+        db.Users.Add(user);
+        await db.SaveChangesAsync();
+
+        var controller = SignedIn(new UserController(db, MakeHttpClientFactory(), MakeConfig()));
+        var ok = (await controller.Login(new LoginDto { Email = "token@x.com", Password = "Password123!" })).Should().BeOfType<OkObjectResult>().Subject;
+
+        var token = (string)ok.Value!.GetType().GetProperty("token")!.GetValue(ok.Value)!;
+        var jwt = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler().ReadJwtToken(token);
+        jwt.Claims.Should().Contain(c => c.Type == ClaimTypes.NameIdentifier && c.Value == user.Id);
+        jwt.Claims.Should().Contain(c => c.Type == ClaimTypes.Role && c.Value == "student");
+    }
+
+    [Fact]
+    public async Task ChangePassword_ForSomeoneElse_Forbidden()
+    {
+        using var db = TestDbContextFactory.Create();
+        var victim = TestData.MakeUser(email: "victim@x.com");
+        db.Users.Add(victim);
+        await db.SaveChangesAsync();
+
+        var controller = SignedIn(new UserController(db, MakeHttpClientFactory(), MakeConfig()), userId: "attacker-id", role: "student");
+        var result = await controller.ChangePassword(victim.Id, new ChangePasswordDto { CurrentPassword = "Password123!", NewPassword = "owned" });
+
+        result.Should().BeOfType<ForbidResult>();
+    }
+
+    [Fact]
+    public async Task ExportData_Student_GetsOwnDataWithoutUnreleasedGrades()
+    {
+        using var db = TestDbContextFactory.Create();
+        var teacher = TestData.MakeUser(role: UserRole.teacher, email: "t@x.com");
+        var student = TestData.MakeUser(email: "s@x.com");
+        var subject = TestData.MakeSubject();
+        var course = TestData.MakeCourse(subject.Id, teacher.Id);
+        var assignment = new Assignment { Title = "Essay", CourseId = course.Id };
+        var released = new Submission { AssignmentId = assignment.Id, StudentId = student.Id };
+        var pending = new Submission { AssignmentId = assignment.Id, StudentId = student.Id };
+        db.AddRange(teacher, student, subject, course, assignment, released, pending,
+            new Grade { SubmissionId = released.Id, GradedBy = teacher.Id, PointsEarned = 70, IsReleased = true },
+            new Grade { SubmissionId = pending.Id, GradedBy = teacher.Id, PointsEarned = 40, IsReleased = false });
+        await db.SaveChangesAsync();
+
+        var controller = SignedIn(new UserController(db, MakeHttpClientFactory(), MakeConfig()), userId: student.Id, role: "student");
+        var ok = (await controller.ExportData(student.Id)).Should().BeOfType<OkObjectResult>().Subject;
+
+        var grades = (IEnumerable<Grade>)ok.Value!.GetType().GetProperty("grades")!.GetValue(ok.Value)!;
+        grades.Should().ContainSingle().Which.PointsEarned.Should().Be(70);
+    }
+
+    [Fact]
+    public async Task ExportData_SomeoneElse_Forbidden()
+    {
+        using var db = TestDbContextFactory.Create();
+        var controller = SignedIn(new UserController(db, MakeHttpClientFactory(), MakeConfig()), userId: "me", role: "student");
+        (await controller.ExportData("someone-else")).Should().BeOfType<ForbidResult>();
     }
 }

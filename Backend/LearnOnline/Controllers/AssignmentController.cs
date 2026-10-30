@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LearnOnline.Data;
@@ -127,6 +128,7 @@ namespace LearnOnline.Controllers
 
         // POST /api/Assignment/override – create or update a cohort override for an assignment
         [HttpPost("override")]
+        [Authorize(Roles = "teacher,admin")]
         public async Task<ActionResult<AssignmentClassOverride>> CreateOrUpdateOverride(AssignmentClassOverride ovr)
         {
             ovr.DueDate = DateTime.SpecifyKind(ovr.DueDate, DateTimeKind.Utc);
@@ -153,6 +155,7 @@ namespace LearnOnline.Controllers
 
         // DELETE /api/Assignment/override/{id} – delete an assignment cohort override
         [HttpDelete("override/{id}")]
+        [Authorize(Roles = "teacher,admin")]
         public async Task<IActionResult> DeleteOverride(string id)
         {
             var ovr = await _context.AssignmentClassOverrides.FindAsync(id);
@@ -183,6 +186,7 @@ namespace LearnOnline.Controllers
 
         // POST /api/Assignment – create a new assignment for a course
         [HttpPost]
+        [Authorize(Roles = "teacher,admin")]
         public async Task<ActionResult<Assignment>> Create(Assignment assignment)
         {
             assignment.Id = Guid.NewGuid().ToString();
@@ -194,6 +198,7 @@ namespace LearnOnline.Controllers
 
         // PUT /api/Assignment/{id} – update an existing assignment's details
         [HttpPut("{id}")]
+        [Authorize(Roles = "teacher,admin")]
         public async Task<IActionResult> Update(string id, Assignment updated)
         {
             var assignment = await _context.Assignments.FindAsync(id);
@@ -220,6 +225,7 @@ namespace LearnOnline.Controllers
 
         // PATCH /api/Assignment/{id}/close – toggle the closed state of an assignment
         [HttpPatch("{id}/close")]
+        [Authorize(Roles = "teacher,admin")]
         public async Task<IActionResult> Close(string id)
         {
             var assignment = await _context.Assignments.FindAsync(id);
@@ -231,6 +237,7 @@ namespace LearnOnline.Controllers
 
         // DELETE /api/Assignment/{id} – permanently remove an assignment
         [HttpDelete("{id}")]
+        [Authorize(Roles = "teacher,admin")]
         public async Task<IActionResult> Delete(string id)
         {
             var assignment = await _context.Assignments.FindAsync(id);

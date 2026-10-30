@@ -9,11 +9,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace TodoApi.Migrations
+namespace LearnOnline.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260609120038_AddTwoFactorAuth")]
-    partial class AddTwoFactorAuth
+    [Migration("20261030183306_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -100,6 +100,9 @@ namespace TodoApi.Migrations
                     b.Property<bool>("AllowMultipleAttempts")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("ClassGroupId")
+                        .HasColumnType("text");
+
                     b.Property<DateTime?>("CloseDate")
                         .HasColumnType("timestamp with time zone");
 
@@ -143,6 +146,8 @@ namespace TodoApi.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClassGroupId");
 
                     b.HasIndex("CourseId");
 
@@ -347,17 +352,26 @@ namespace TodoApi.Migrations
                     b.Property<string>("DayOfWeek")
                         .HasColumnType("text");
 
+                    b.Property<decimal?>("DurationHours")
+                        .HasColumnType("numeric");
+
                     b.Property<TimeOnly?>("EndTime")
                         .HasColumnType("time without time zone");
 
                     b.Property<bool>("IsGenerated")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
                     b.Property<string>("Room")
                         .HasColumnType("text");
 
                     b.Property<TimeOnly?>("StartTime")
                         .HasColumnType("time without time zone");
+
+                    b.Property<string>("TeacherId")
+                        .HasColumnType("text");
 
                     b.Property<string>("TimetableId")
                         .HasColumnType("text");
@@ -367,6 +381,8 @@ namespace TodoApi.Migrations
                     b.HasIndex("ClassGroupId");
 
                     b.HasIndex("CourseId");
+
+                    b.HasIndex("TeacherId");
 
                     b.HasIndex("TimetableId");
 
@@ -401,6 +417,9 @@ namespace TodoApi.Migrations
                     b.Property<int?>("Capacity")
                         .HasColumnType("integer");
 
+                    b.Property<string>("Code")
+                        .HasColumnType("text");
+
                     b.Property<string>("Content")
                         .HasColumnType("text");
 
@@ -413,8 +432,10 @@ namespace TodoApi.Migrations
                     b.Property<bool>("IsVisible")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
                     b.Property<string>("SubjectId")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("TeacherId")
@@ -788,7 +809,6 @@ namespace TodoApi.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int?>("Year")
@@ -930,11 +950,17 @@ namespace TodoApi.Migrations
 
             modelBuilder.Entity("LearnOnline.Models.Assignment", b =>
                 {
+                    b.HasOne("LearnOnline.Models.ClassGroup", "ClassGroup")
+                        .WithMany()
+                        .HasForeignKey("ClassGroupId");
+
                     b.HasOne("LearnOnline.Models.Course", "Course")
                         .WithMany()
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ClassGroup");
 
                     b.Navigation("Course");
                 });
@@ -1060,6 +1086,10 @@ namespace TodoApi.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("LearnOnline.Models.User", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId");
+
                     b.HasOne("LearnOnline.Models.Timetable", "Timetable")
                         .WithMany()
                         .HasForeignKey("TimetableId");
@@ -1067,6 +1097,8 @@ namespace TodoApi.Migrations
                     b.Navigation("ClassGroup");
 
                     b.Navigation("Course");
+
+                    b.Navigation("Teacher");
 
                     b.Navigation("Timetable");
                 });
@@ -1086,9 +1118,7 @@ namespace TodoApi.Migrations
                 {
                     b.HasOne("LearnOnline.Models.Subject", "Subject")
                         .WithMany()
-                        .HasForeignKey("SubjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SubjectId");
 
                     b.HasOne("LearnOnline.Models.User", "Teacher")
                         .WithMany()
@@ -1258,9 +1288,7 @@ namespace TodoApi.Migrations
                 {
                     b.HasOne("LearnOnline.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });
