@@ -1,3 +1,5 @@
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LearnOnline.Data;
@@ -83,8 +85,39 @@ namespace LearnOnline.Controllers
             return grades;
         }
 
+        // POST /api/Grade/quiz/{submissionId} – mark a quiz on the server from the answers saved on the submission.
+        // Students used to compute their own score in the browser and post it, so anyone could post 100%.
+        [HttpPost("quiz/{submissionId}")]
+        public async Task<ActionResult> GradeQuiz(string submissionId)
+        {
+            var submission = await _context.Submissions.Include(s => s.Assignment).FirstOrDefaultAsync(s => s.Id == submissionId);
+            if (submission?.Assignment?.QuizQuestionsJson == null) return NotFound(new { message = "Quiz submission not found" });
+
+            var callerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (submission.StudentId != callerId && !User.IsInRole("teacher") && !User.IsInRole("admin")) return Forbid();
+
+            var score = QuizMarker.Score(submission.Assignment.QuizQuestionsJson, submission.FileUrl, submission.Assignment.MaxPoints);
+            if (score == null) return BadRequest(new { message = "Quiz answers could not be read" });
+
+            var grade = await _context.Grades.FirstOrDefaultAsync(g => g.SubmissionId == submissionId);
+            if (grade == null)
+            {
+                grade = new Grade { SubmissionId = submissionId, GradedBy = submission.StudentId };
+                _context.Grades.Add(grade);
+            }
+            grade.PointsEarned = score;
+            grade.GradedAt = DateTime.UtcNow;
+            grade.IsReleased = true; // quiz results are shown to the student straight away
+            submission.Status = "Graded";
+
+            await _context.SaveChangesAsync();
+            // Only the result goes back: the full entity would echo the quiz answer key to the student
+            return Ok(new { grade.Id, grade.SubmissionId, grade.PointsEarned, grade.IsReleased, grade.GradedAt });
+        }
+
         // POST /api/Grade – record a new grade for a submission
         [HttpPost]
+        [Authorize(Roles = "teacher,admin")]
         public async Task<ActionResult<Grade>> Create(Grade grade)
         {
             grade.Id = Guid.NewGuid().ToString();
@@ -102,6 +135,7 @@ namespace LearnOnline.Controllers
 
         // PUT /api/Grade/{id} – update a grade (re-grade) and refresh the timestamp
         [HttpPut("{id}")]
+        [Authorize(Roles = "teacher,admin")]
         public async Task<IActionResult> Update(string id, Grade updated)
         {
             var grade = await _context.Grades.FindAsync(id);
@@ -119,6 +153,7 @@ namespace LearnOnline.Controllers
 
         // POST /api/Grade/assignment/{assignmentId}/release – bulk-release all grades for an assignment
         [HttpPost("assignment/{assignmentId}/release")]
+        [Authorize(Roles = "teacher,admin")]
         public async Task<IActionResult> ReleaseByAssignment(string assignmentId)
         {
             var grades = await _context.Grades
@@ -133,6 +168,7 @@ namespace LearnOnline.Controllers
 
         // DELETE /api/Grade/{id} – permanently remove a grade record
         [HttpDelete("{id}")]
+        [Authorize(Roles = "teacher,admin")]
         public async Task<IActionResult> Delete(string id)
         {
             var grade = await _context.Grades.FindAsync(id);

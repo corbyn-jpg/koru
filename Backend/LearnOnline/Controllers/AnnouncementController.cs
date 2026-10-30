@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LearnOnline.Data;
@@ -42,6 +43,7 @@ namespace LearnOnline.Controllers
 
         // POST: api/Announcement
         [HttpPost]
+        [Authorize(Roles = "teacher,admin")]
         public async Task<ActionResult<object>> CreateAnnouncement([FromBody] CreateAnnouncementDto dto)
         {
             if (!ModelState.IsValid)
@@ -158,6 +160,7 @@ namespace LearnOnline.Controllers
 
         // DELETE: api/Announcement/{id}
         [HttpDelete("{id}")]
+        [Authorize(Roles = "teacher,admin")]
         public async Task<ActionResult> DeleteAnnouncement(string id)
         {
             var announcement = await _context.Announcements.FindAsync(id);

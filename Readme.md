@@ -47,6 +47,7 @@ You'll need the [.NET 10 SDK](https://dotnet.microsoft.com/download) and Node.js
    | Key | What it is | Where to get it |
    |---|---|---|
    | `ConnectionStrings:LearnOnlineDb` | PostgreSQL connection string | Ask the team for the shared database details |
+   | `Jwt:Key` | Secret used to sign login tokens (32+ random characters) | Make one up; keep it out of git. If missing, a temporary key is used and everyone is signed out on restart |
    | `GoogleAuth:ClientId` | Google OAuth client ID for "Sign in with Google" | Google Cloud Console → Credentials |
    | `Groq:ApiKey` | API key for the teacher AI assistant (optional) | [console.groq.com](https://console.groq.com) |
 
