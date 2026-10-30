@@ -161,7 +161,7 @@ export default function TeacherTodoProgress() {
   }, [todos]);
 
   return (
-    <div className="w-full h-full flex flex-col bg-white border border-gray-200 shadow-card rounded-3xl p-4">
+    <div className="w-full h-full flex flex-col bg-white border border-gray-200/50 shadow-card rounded-3xl p-4">
       <div className="flex items-center justify-between mt-5 mb-1">
         <h2 className="text-2xl font-['Gabarito']">To Do</h2>
         <button

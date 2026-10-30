@@ -20,7 +20,7 @@
   --color-mint: #9be9ea;         /* logo teal */
   --color-sunken: #f6f5fa;       /* page panel behind cards: a touch darker than white so cards lift off it */
 
-  --shadow-card: 0 1px 2px 0 rgb(42 0 84 / 0.05), 0 1px 3px 0 rgb(42 0 84 / 0.04); /* the smallest lift for cards */
+  --shadow-card: 0 1px 2px 0 rgb(42 0 84 / 0.06), 0 4px 12px -4px rgb(42 0 84 / 0.10); /* soft lift for cards on the sunken panel */
 
   --color-canvas-from: hsl(233 100% 94%);
   --color-canvas-to: #ffffff;
