@@ -161,6 +161,27 @@ select:focus-visible {
   outline-offset: 0;
 }
 
+/* Scrolling panels: content fades into the panel colour at the bottom edge instead of being cut off.
+   An overlay rather than an inset box-shadow, because a shadow is painted underneath the scrolling cards. */
+.scroll-fade-bottom {
+  position: relative;
+}
+
+.scroll-fade-bottom::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 56px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, var(--color-sunken));
+}
+
+@media (width < 48rem) {
+  .scroll-fade-bottom::after {
+    background: linear-gradient(to bottom, transparent, #fff);
+  }
+}
+
 /* Numbers in tables, stats and timers line up instead of jittering */
 table,
 time,
