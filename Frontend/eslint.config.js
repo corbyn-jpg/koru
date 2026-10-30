@@ -23,8 +23,8 @@ export default defineConfig([
       },
     },
     rules: {
-      // motion is used as <motion.div>, which core ESLint can't see without a React plugin
-      'no-unused-vars': ['error', { varsIgnorePattern: '^([A-Z_]|motion$)' }],
+      // Core ESLint can't see JSX element names (<motion.div>, <Icon />) as uses; skip them
+      'no-unused-vars': ['error', { varsIgnorePattern: '^([A-Z_]|motion$)', argsIgnorePattern: '^[A-Z_]' }],
     },
   },
   // Jest test files run in Node with Jest's globals (describe, it, expect, jest)
