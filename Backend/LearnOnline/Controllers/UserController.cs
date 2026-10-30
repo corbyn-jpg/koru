@@ -63,15 +63,18 @@ namespace LearnOnline.Controllers
             if (await _context.Users.AnyAsync(u => u.Email == email))
                 return Conflict(new { message = "Email already registered" });
 
+            var userId = Guid.NewGuid().ToString();
             var user = new User
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = userId,
                 Email = email,
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password),
                 FirstName = dto.FirstName.Trim(),
                 LastName = dto.LastName.Trim(),
                 Role = dto.Role,
-                ProfileImageUrl = dto.ProfileImageUrl,
+                ProfileImageUrl = !string.IsNullOrWhiteSpace(dto.ProfileImageUrl)
+                    ? dto.ProfileImageUrl
+                    : $"https://api.dicebear.com/9.x/thumbs/svg?seed={userId}",
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
             };

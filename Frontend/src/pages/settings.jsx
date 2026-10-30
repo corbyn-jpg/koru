@@ -106,6 +106,20 @@ export default function SettingsPage() {
     role: session?.role?.toLowerCase?.() || "student",
   });
 
+  const [selectedAvatar, setSelectedAvatar] = useState(
+    session?.profileImageUrl ||
+      `https://api.dicebear.com/9.x/thumbs/svg?seed=${session?.userId}`
+  );
+
+  const avatarOptions = useMemo(() => {
+    const seeds = [
+      session?.userId,
+      "aurora", "zenith", "nova", "pixel", "cedar",
+      "solstice", "marble", "harbor", "summit", "quill", "prism",
+    ].filter(Boolean);
+    return seeds.map((s) => `https://api.dicebear.com/9.x/thumbs/svg?seed=${encodeURIComponent(s)}`);
+  }, [session?.userId]);
+
   const [passwordForm, setPasswordForm] = useState({
     currentPassword: "",
     newPassword: "",
@@ -179,11 +193,12 @@ export default function SettingsPage() {
         lastName: profileForm.lastName,
         email: profileForm.email,
         role: profileForm.role,
+        profileImageUrl: selectedAvatar,
       };
 
       if (userId) {
         const updated = await updateUserProfile(userId, payload);
-        updateSession({ ...session, ...updated, role: updated.role || payload.role });
+        updateSession({ ...session, ...updated, role: updated.role || payload.role, profileImageUrl: selectedAvatar });
       } else {
         updateSession({ ...session, ...payload });
       }
@@ -417,6 +432,26 @@ export default function SettingsPage() {
                               </select>
                             </label>
                           )}
+                        </div>
+
+                        <div className="mt-6 border-t border-gray-100 pt-5">
+                          <span className={pageClasses.label}>Profile Picture</span>
+                          <div className="mt-3 flex flex-wrap gap-2.5">
+                            {avatarOptions.map((url, i) => (
+                              <button
+                                key={i}
+                                type="button"
+                                onClick={() => setSelectedAvatar(url)}
+                                className={`rounded-full overflow-hidden transition-all ${
+                                  selectedAvatar === url
+                                    ? "ring-2 ring-[#3C0078] ring-offset-2"
+                                    : "ring-1 ring-gray-200 hover:ring-gray-400"
+                                }`}
+                              >
+                                <img src={url} alt="" className="h-12 w-12 bg-gray-50" />
+                              </button>
+                            ))}
+                          </div>
                         </div>
 
                         {profileError ? <div className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-xs font-semibold text-red-700 shadow-3xs">{profileError}</div> : null}
