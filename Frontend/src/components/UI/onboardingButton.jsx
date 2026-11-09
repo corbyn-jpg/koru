@@ -17,7 +17,8 @@ export default function OnboardingButton({ role, icon, to }) {
   return (
     <Link
       to={destination}
-      className="group flex aspect-square w-[180px] flex-col border-1 border-gray-200 items-center justify-center gap-3 rounded-3xl bg-brand/85 text-white shadow-xl backdrop-blur-md transition duration-200 hover:-translate-y-1 hover:bg-white sm:w-[220px] md:w-[200px]"
+      // White card so the black line-art icons and label stay readable; brand purple marks hover and focus
+      className="group flex aspect-square w-[180px] flex-col items-center justify-center gap-3 rounded-3xl border border-gray-200 bg-white shadow-card transition duration-200 hover:-translate-y-1 hover:border-brand/50 hover:shadow-xl focus-visible:border-brand sm:w-[220px] md:w-[200px]"
     >
       {/* Icon container – keeps the role image centered inside the card */}
       <div className="flex h-25 w-25 items-center justify-center">
@@ -29,7 +30,7 @@ export default function OnboardingButton({ role, icon, to }) {
       </div>
 
       {/* Role label – shown below the icon */}
-      <span className="text-center text-sm font-semibold sm:text-base">
+      <span className="text-center text-sm font-semibold text-gray-900 transition-colors group-hover:text-brand group-focus-visible:text-brand sm:text-base">
         {role}
       </span>
     </Link>
