@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 
+// Uploads are saved under wwwroot/uploads, which git ignores. Static files are only served from a
+// folder that exists when the host starts, so create it first or new uploads would 404 until a restart.
+Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads"));
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Register MVC controllers so ASP.NET can discover our API endpoints

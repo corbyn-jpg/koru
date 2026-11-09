@@ -1,7 +1,21 @@
 const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
 const UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5299/api";
+
+// Without a Cloudinary account configured, files go to the Koru API, which saves them under wwwroot/uploads.
+// Returns a full URL so images and submissions open the same way Cloudinary links do.
+async function apiUpload(file) {
+    const formData = new FormData();
+    formData.append("file", file);
+    const res = await fetch(`${API_BASE}/Submission/upload`, { method: "POST", body: formData });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.message || "Upload failed");
+    return new URL(data.url, API_BASE).href;
+}
 
 async function cloudinaryUpload(file, resourceType = "image") {
+    if (!CLOUD_NAME || !UPLOAD_PRESET) return apiUpload(file);
+
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", UPLOAD_PRESET);
