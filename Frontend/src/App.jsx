@@ -8,22 +8,44 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import AppSidebar from "./components/AppSidebar";
 import { FeedbackHost } from "./components/UI/feedback";
 
-// Pages load on demand so the first screen doesn't wait for every role's code
-const Dashboard = lazy(() => import("./pages/dashboard"));
-const CalendarPage = lazy(() => import("./pages/calendar"));
-const Courses = lazy(() => import("./pages/courses"));
-const Onboarding = lazy(() => import("./pages/onboarding"));
-const Login = lazy(() => import("./pages/login"));
-const SettingsPage = lazy(() => import("./pages/settings"));
-const TeacherAssistant = lazy(() => import("./pages/Assistant/teacherAssistant"));
-const Profile = lazy(() => import("./pages/profile/profile"));
-const AnalyticsPage = lazy(() => import("./pages/analytics"));
-const AdminCourses = lazy(() => import("./pages/courses/adminCourses"));
+// Pages load on demand so the first screen doesn't wait for every page's code
+const pages = {
+  Dashboard: () => import("./pages/dashboard"),
+  CalendarPage: () => import("./pages/calendar"),
+  Courses: () => import("./pages/courses"),
+  Onboarding: () => import("./pages/onboarding"),
+  Login: () => import("./pages/login"),
+  SettingsPage: () => import("./pages/settings"),
+  TeacherAssistant: () => import("./pages/Assistant/teacherAssistant"),
+  Profile: () => import("./pages/profile/profile"),
+  AnalyticsPage: () => import("./pages/analytics"),
+  AdminCourses: () => import("./pages/courses/adminCourses"),
+};
+const Dashboard = lazy(pages.Dashboard);
+const CalendarPage = lazy(pages.CalendarPage);
+const Courses = lazy(pages.Courses);
+const Onboarding = lazy(pages.Onboarding);
+const Login = lazy(pages.Login);
+const SettingsPage = lazy(pages.SettingsPage);
+const TeacherAssistant = lazy(pages.TeacherAssistant);
+const Profile = lazy(pages.Profile);
+const AnalyticsPage = lazy(pages.AnalyticsPage);
+const AdminCourses = lazy(pages.AdminCourses);
+
+// Once the first screen is up, fetch the other pages in the background, one at a time,
+// so moving between pages doesn't pause while that page's code downloads
+function preloadPages() {
+  const queue = Object.values(pages);
+  const next = () => queue.length && queue.shift()().catch(() => {}).then(() => setTimeout(next, 100));
+  setTimeout(next, 1500);
+}
 
 // Root application component – sets up routing and the shared layout
 function App() {
   const { role } = useAuth();
   const isIframeMode = window.self !== window.top;
+
+  useEffect(preloadPages, []);
 
   // Stamp the user role on <body> so CSS can drive role-specific backgrounds
   useEffect(() => {
